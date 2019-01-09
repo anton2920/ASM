@@ -127,7 +127,7 @@ _start:
 	# Final output
 	pushl $format_answer
 	call printf
-	addl $0xF, %esp
+	addl $0x10, %esp
 
 	# Exiting
 	movl $0x1, %eax
