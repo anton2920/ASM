@@ -10,10 +10,10 @@ main: a1.o tasks.o routines.o
 a1.o: a1.s
 	$(ASM) a1.s -o a1.o --32 $(ARGS)
 
-tasks.o:	tasks.s
+tasks.o: tasks.s
 	$(ASM) tasks.s -o tasks.o --32 $(ARGS)
 
-routines.o:
+routines.o: routines.s
 	$(ASM) routines.s -o routines.o --32 $(ARGS)
 
 clean:

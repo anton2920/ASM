@@ -6,7 +6,7 @@ sorted_array:
 	.ascii "Sorted array: \0"
 	.equ len_sorted_array, . - sorted_array
 even_numbers:
-	.ascii "Even numbers: \0"
+	.ascii "Subset of multiples of three: \0"
 	.equ len_even_numbers, . - even_numbers
 newline:
 	.ascii "\n\0"
@@ -14,6 +14,12 @@ newline:
 error_line:
 	.ascii "Error! No elements found!\n\0"
 	.equ len_error_line, . - error_line
+original_array:
+	.ascii "Original array: \0"
+	.equ len_original_array, . - original_array
+separator:
+	.ascii "––––––––––––––––––––––––––––––––––––––\n\0"
+	.equ len_separator, . - separator
 
 .section .bss
 .equ BUFSIZE, 500
@@ -37,9 +43,49 @@ _start:
 	cmpl $0x0, %ecx
 	jle error
 
-sum_elem:
-	# Sum of elements
+initial_output:
+	# Saving registers
+	pushl %eax
+	pushl %ecx
 
+	pushl $len_separator
+	pushl $separator
+	call write
+	addl $0x8, %esp
+
+	pushl $len_original_array
+	pushl $original_array
+	call write
+	addl $0x8, %esp
+
+	# Restoring registers
+	popl %ecx
+	popl %eax
+
+	# Saving registers
+	pushl %eax
+	pushl %ecx
+
+	pushl %ecx
+	pushl %eax
+	call print_arr
+	addl $0x8, %esp
+
+	pushl $len_newline
+	pushl $newline
+	call write
+	addl $0x8, %esp
+
+	pushl $len_separator
+	pushl $separator
+	call write
+	addl $0x8, %esp
+
+	# Restoring registers
+	popl %ecx
+	popl %eax
+
+sum_elem:
 	# Saving registers
 	pushl %eax
 	pushl %ecx
@@ -76,8 +122,6 @@ sum_elem:
 	popl %eax
 
 sorting:
-	# Sort
-
 	# Saving registers
 	pushl %eax
 	pushl %ecx
@@ -121,6 +165,45 @@ sorting:
 	# Restoring registers
 	popl %ecx
 	popl %eax
+
+subset_sect:
+	# Saving registers
+	pushl %eax
+	pushl %ecx
+
+	pushl $len_even_numbers
+	pushl $even_numbers
+	call write
+	addl $0x8, %esp
+
+	# Restoring registers
+	popl %ecx
+	popl %eax
+
+	# Saving registers
+	pushl %eax
+	pushl %ecx
+
+	pushl $BUF
+	pushl %ecx
+	pushl %eax
+	call subset
+	addl $0xC, %esp
+
+	pushl $BUF
+	pushl %eax
+	call print_arr_buf
+	addl $0x8, %esp
+
+	pushl $len_newline
+	pushl $newline
+	call write
+	addl $0x8, %esp
+
+	pushl $len_separator
+	pushl $separator
+	call write
+	addl $0x8, %esp
 
 	jmp exit
 
