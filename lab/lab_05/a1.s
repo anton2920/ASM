@@ -32,7 +32,7 @@ _start:
 	# Initializing stack frame
 	movl %esp, %ebp
 
-	# Main part
+	# Initializing variables
 	.equ ARGC, 0
 	.equ ARGV_1, 8
 
@@ -40,6 +40,7 @@ _start:
 	decl %ecx
 	leal ARGV_1(%ebp), %eax
 
+	# Main part
 	cmpl $0x0, %ecx
 	jle error
 
