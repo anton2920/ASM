@@ -3,7 +3,7 @@
 	[
 		{
 			"path": ".",
-			"file_include_patterns": ["*.c", "*.h", "*.txt", "*.bin", "*.asm", "*.dat", "*.so", "*.s", "*.S"],
+			"file_include_patterns": ["*.c", "*.h", "*.txt", "*.bin", "*.asm", "*.dat", "*.so*", "*.s", "*.S", "Makefile"],
 		}
 	]
 }

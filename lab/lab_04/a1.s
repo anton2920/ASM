@@ -39,6 +39,9 @@ _start:
 	call read
 	addl $0x8, %esp
 
+	movl $buffer1, %ebx
+	movb $0x0, (%ebx, %eax, 1)
+
 	pushl $len_output2
 	pushl $output2
 	call write
@@ -48,6 +51,9 @@ _start:
 	pushl $buffer2
 	call read
 	addl $0x8, %esp
+
+	movl $buffer2, %ebx
+	movb $0x0, (%ebx, %eax, 1)
 
 	# Main part
 	pushl $buffer2
@@ -91,7 +97,7 @@ exit:
 .equ SYS_WRITE, 4
 .equ STDOUT, 1
 write:
-	# Initializing funcntion's stack frame
+	# Initializing function's stack frame
 	pushl %ebp
 	movl %esp, %ebp
 
@@ -132,14 +138,20 @@ strcmp:
 	pushl %ebp
 	movl %esp, %ebp
 
+	# Initializing variables
+	movl 8(%ebp), %eax
+	movl 12(%ebp), %ebx
+
 	# Main part
-	movl $buffer1, %eax
-	movl $buffer2, %ebx
 loop:
-	movl (%eax), %ecx
-	movl (%ebx), %edx
-	cmpl %ecx, %ebx
+	xorl %ecx, %ecx
+	xorl %edx, %edx
+
+	movb (%eax), %cl
+	movb (%ebx), %dl
+	cmpb %cl, %dl
 	jne end_loop
+	jz end_loop
 
 	incl %eax
 	incl %ebx
