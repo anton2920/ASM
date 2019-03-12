@@ -14,11 +14,11 @@ write:
 	movl %esp, %ebp
 
 	# I/O flow
-	movl $SYS_WRITE, %eax
-	movl $STDOUT, %ebx
-	movl 8(%ebp), %ecx
-	movl 12(%ebp), %edx
-	int $0x80 # 0x80's interrupt
+    movl $SYS_WRITE, %eax # Write syscall
+    movl 8(%ebp), %ebx # File descriptor
+    movl 12(%ebp), %ecx # Buffer
+    movl 16(%ebp), %edx # Buffer size
+    int $0x80 # 0x80's interrupt
 
 	# Destroying function's stack frame
 	movl %ebp, %esp
@@ -35,16 +35,54 @@ read:
 	movl %esp, %ebp
 
 	# I/O flow
-	movl $SYS_READ, %eax
-	movl $STDIN, %ebx
-	movl 8(%ebp), %ecx
-	movl 12(%ebp), %edx
-	int $0x80 # 0x80's interrupt
+    movl $SYS_READ, %eax # Read syscall
+    movl 8(%ebp), %ebx # File descriptor
+    movl 12(%ebp), %ecx # Buffer
+    movl 16(%ebp), %edx # Buffer size
+    int $0x80 # 0x80's interrupt
 
 	# Destroying function's stack frame
 	movl %ebp, %esp
 	popl %ebp
 	ret
+
+.globl open
+.type open, @function
+.equ SYS_OPEN, 5
+open:
+    # Initializing function's stack frame
+    pushl %ebp
+    movl %esp, %ebp
+
+    # Syscall
+    movl $SYS_OPEN, %eax # Open syscall
+    movl 8(%ebp), %ebx # File name
+    movl 12(%ebp), %ecx # Mode
+    movl 16(%ebp), %edx # Permissions
+    int $0x80 # 0x80's interrupt
+
+    # Destroying function's stack frame
+    movl %ebp, %esp
+    popl %ebp
+    ret
+
+.globl close
+.type close, @function
+.equ SYS_CLOSE, 6
+close:
+    # Initialzing function's stack frame
+    pushl %ebp
+    movl %esp, %ebp
+
+    # Syscall
+    movl $SYS_CLOSE, %eax # Close syscall
+    movl 8(%ebp), %ebx # File descriptor
+    int $0x80 # 0x80's interrupt
+
+    # Destroying function's stack frame
+    movl %ebp, %esp
+    popl %ebp
+    ret
 
 .globl strcmp
 .type strcmp, @function

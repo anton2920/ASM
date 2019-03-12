@@ -20,10 +20,10 @@ _start:
 	jmp open_exist
 
 create_new:
-
+	call create_database
 
 open_exist:
-
+	#call open_database
 
 exit:
 	movl $0x1, %eax
