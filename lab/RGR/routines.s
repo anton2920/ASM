@@ -1,4 +1,5 @@
-.section .data
+.equ STDOUT, 1
+.equ STDIN, 0
 
 .section .bss 
 .lcomm NUM_BUF, 500
@@ -70,7 +71,7 @@ open:
 .type close, @function
 .equ SYS_CLOSE, 6
 close:
-    # Initialzing function's stack frame
+    # Initializing function's stack frame
     pushl %ebp
     movl %esp, %ebp
 
@@ -225,8 +226,9 @@ iprint_else:
 	imull $0x4, %eax
 	pushl %eax
 	pushl $NUM_BUF
+	pushl $STDOUT
 	call write
-	addl $0x8, %esp
+	addl $0xC, %esp
 	jmp iprint_fin
 
 iprint_print_0:
@@ -286,8 +288,9 @@ putchar:
 
 	pushl %ebx 
 	pushl %eax # &a
+	pushl $STDOUT
 	call write
-	addl $0x8, %esp
+	addl $0xC, %esp
 
 	# Destroying function's stack frame
 	movl %ebp, %esp
