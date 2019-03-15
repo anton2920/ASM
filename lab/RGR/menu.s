@@ -110,8 +110,57 @@ sure_quit:
 	pushl $0x0
 	call read
 	addl $0xC, %esp
-	
 
+	# Saving registers
+	pushl %eax
+
+	call prt_ln
+
+	# Restoring registers
+	popl %eax
+	
+	movl $MENUBUF, %ebx
+
+	xorl %ecx, %ecx
+	movb (%ebx), %cl
+
+	cmpl $0x1, %eax
+	je test_nl
+
+	cmpl $0x2, %eax
+	je test_yn
+
+test_nl:
+	cmpb $'\n', %cl
+	je ret_yes
+
+	jmp ret_nocmd
+
+test_yn:
+	cmpb $'y', %cl
+	je ret_yes
+
+	cmpb $'Y', %cl
+	je ret_yes
+
+	cmpb $'n', %cl
+	je ret_no
+
+	cmpb $'N', %cl
+	je ret_no
+
+	jmp ret_nocmd
+
+ret_yes:
+	movl $0x1, %eax
+	jmp quit_exit
+
+ret_no:
+	xorl %eax, %eax
+	jmp quit_exit
+
+ret_nocmd:
+	movl $-1, %eax
 
 quit_exit:
 	# Destroying function's stack frame
@@ -200,8 +249,14 @@ menu_error:
 call_quit:
 	call quit
 
+	cmpl $0x1, %eax
+	je yes_quit
+
 	cmpl $0x0, %eax
 	je menu_loop
+
+	cmpl $-1, %eax
+	je menu_error
 
 yes_quit:
 	xorl %eax, %eax
