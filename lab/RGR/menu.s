@@ -37,7 +37,7 @@ menu2_line:
 	.ascii "|                                                            |\n\0"
 	.ascii "|  >> Choose one of the following oprions:                   |\n\0"
 	.ascii "|                                                            |\n\0"
-	.ascii "|       1) Show existing record                              |\n\0"
+	.ascii "|       1) Show existing records                             |\n\0"
 	.ascii "|       2) Add new record                                    |\n\0"
 	.ascii "|       3) Delete existing record                            |\n\0"
 	.ascii "|       4) Edit existing record                              |\n\0"
