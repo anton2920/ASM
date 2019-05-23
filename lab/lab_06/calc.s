@@ -37,9 +37,6 @@ _start:
 	leal ARGV_1(%ebp), %eax
 
 	# Main part
-	cmpl $0x0, %ecx
-	jle error
-
 	cmpl $0x3, %ecx
 	jne error
 
