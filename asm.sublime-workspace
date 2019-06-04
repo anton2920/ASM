@@ -652,12 +652,20 @@
 	},
 	"expanded_folders":
 	[
-		"/home/anton/ASM",
-		"/home/anton/ASM/lab",
-		"/home/anton/ASM/training"
+		"/home/anton/ASM"
 	],
 	"file_history":
 	[
+		"/home/anton/Загрузки/example6.asm",
+		"/home/anton/Загрузки/functions.asm",
+		"/home/anton/Загрузки/functions2.asm",
+		"/home/anton/ASM/home/Molch/routines.nasm",
+		"/home/anton/ASM/home/Molch/math.nasm",
+		"/home/anton/ASM/home/Molch/calc.nasm",
+		"/home/anton/Загрузки/example8.asm",
+		"/home/anton/Загрузки/example5.asm",
+		"/home/anton/ASM/asm.sublime-project",
+		"/home/anton/C/c.sublime-project",
 		"/home/anton/ASM/training/polya_rivalry.s",
 		"/home/anton/ASM/lab/lab_C/lab_03/a2.s",
 		"/home/anton/ASM/lab/lab_C/lab_03/a3.s",
@@ -675,7 +683,6 @@
 		"/home/anton/ASM/lab/lab_04/a1.s",
 		"/home/anton/ASM/lab/lab_04/Makefile",
 		"/home/anton/ASM/lab/RGR/Makefile",
-		"/home/anton/ASM/asm.sublime-project",
 		"/home/anton/ASM/lab/lab_05/tasks.s",
 		"/home/anton/ASM/lab/lab_05/a1.s",
 		"/home/anton/ASM/lab/lab_07",
@@ -717,7 +724,6 @@
 		"/home/anton/C/experiments/asm/c4.c",
 		"/home/anton/C/experiments/asm/asm4.asm",
 		"/home/anton/C/home/Max_lab_9/cmake-build-debug/rec.dat",
-		"/home/anton/C/c.sublime-project",
 		"/home/anton/C/lab/lab_13/a1out.bin",
 		"/home/anton/C/lab/lab_17/lab.h",
 		"/home/anton/C/lab/lab_17/rwr.c",
@@ -777,19 +783,11 @@
 		"/home/anton/C/experiments/SanyaEbet/a2.c",
 		"/home/anton/C/experiments/locale/a1.c",
 		"/home/anton/C/lab/lab_07/a1.c",
-		"/home/anton/C/lab/lab_07/a11.c",
-		"/home/anton/C/lab/lab_07/a2.c",
-		"/home/anton/C/lab/lab_07/a3.c",
-		"/home/anton/C/lab/lab_07/a4.c",
-		"/home/anton/C/lab/lab_07/a5.c",
-		"/home/anton/C/lab/lab_07/a51.c",
-		"/home/anton/C/lab/lab_wrong/lab_11/a3.c",
-		"/home/anton/C/lab/lab_wrong/lab_09/a2.c",
-		"/home/anton/C/experiments/ifbool/void.c"
+		"/home/anton/C/lab/lab_07/a11.c"
 	],
 	"find":
 	{
-		"height": 26.0
+		"height": 40.0
 	},
 	"find_in_files":
 	{
@@ -803,6 +801,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"MISMATCH",
 			"%ax",
 			"call write",
 			"pushl $0x0",
