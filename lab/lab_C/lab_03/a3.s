@@ -41,7 +41,7 @@ main_p:
 	fldl LF_VAL
 	fsubp %st(0), %st(1)
 
-	# 2x² - (x - 6)
+	# 2x² * (x - 6)
 	fldl LF_VAL
 	fldl LF_VAL
 	fmulp

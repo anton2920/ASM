@@ -246,4 +246,3 @@ exit:
 	movl $0x1, %eax
 	xorl %ebx, %ebx
 	int $0x80 # 0x80's interrupt
-	
