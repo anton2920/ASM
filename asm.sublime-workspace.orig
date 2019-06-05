@@ -4,6 +4,78 @@
 		"selected_items":
 		[
 			[
+				"for",
+				"format_answer"
+			],
+			[
+				"fo",
+				"format_error"
+			],
+			[
+				"ne",
+				"nextchar"
+			],
+			[
+				"to",
+				"to_base"
+			],
+			[
+				"VA",
+				"VAR_A"
+			],
+			[
+				"forma",
+				"format_answer\t(a2.s)"
+			],
+			[
+				"whi",
+				"while2_end"
+			],
+			[
+				"while",
+				"while2_end"
+			],
+			[
+				"swi",
+				"switch2_end"
+			],
+			[
+				"sw",
+				"switch_end\t(a5.s)"
+			],
+			[
+				"case",
+				"case_spades"
+			],
+			[
+				"n",
+				"n"
+			],
+			[
+				"VAR_",
+				"VAR_B"
+			],
+			[
+				"S",
+				"S"
+			],
+			[
+				"W",
+				"W"
+			],
+			[
+				"push",
+				"pushl"
+			],
+			[
+				"sec",
+				"section"
+			],
+			[
+				"format",
+				"format_input\t(a3.s)"
+			],
+			[
 				"cm",
 				"cmpl"
 			],
@@ -28,20 +100,8 @@
 				"while_not_n"
 			],
 			[
-				"while",
-				"while_not_n"
-			],
-			[
 				"te",
 				"text_cont"
-			],
-			[
-				"S",
-				"STDOUT"
-			],
-			[
-				"fo",
-				"format_answer"
 			],
 			[
 				"in",
@@ -58,22 +118,6 @@
 			[
 				"int",
 				"int_3"
-			],
-			[
-				"sec",
-				"second_branch"
-			],
-			[
-				"for",
-				"format_answer\t(a2.s)"
-			],
-			[
-				"forma",
-				"format_input\t(a2.s)"
-			],
-			[
-				"format",
-				"format_input\t(a1.s)"
 			],
 			[
 				"rest",
@@ -182,10 +226,6 @@
 			[
 				"BU",
 				"buffer2"
-			],
-			[
-				"n",
-				"n"
 			],
 			[
 				"yes",
@@ -316,10 +356,6 @@
 				"print_arr"
 			],
 			[
-				"ne",
-				"len_newline"
-			],
-			[
 				"NU",
 				"NUM_BUF_SIZE"
 			],
@@ -428,10 +464,6 @@
 				"program\tdeclaration"
 			],
 			[
-				"sw",
-				"switch_end"
-			],
-			[
 				"str",
 				"str_winter"
 			],
@@ -482,43 +514,20 @@
 			[
 				"fro",
 				"format_output2"
-			],
-			[
-				"K",
-				"K_VAR"
-			],
-			[
-				"HD",
-				"HD_FLAG_OFFSET"
-			],
-			[
-				"equ",
-				"equals"
-			],
-			[
-				"all",
-				"alloc_here"
-			],
-			[
-				"al",
-				"alloc_next_pos"
-			],
-			[
-				"cu",
-				"current"
-			],
-			[
-				"d",
-				"d"
-			],
-			[
-				"inc",
-				"include"
 			]
 		]
 	},
 	"buffers":
 	[
+		{
+			"file": "lab/lab_C/lab_07/a4.s",
+			"settings":
+			{
+				"buffer_size": 1688,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		}
 	],
 	"build_system": "Packages/C++/C++ Single File.sublime-build",
 	"build_system_choices":
@@ -654,19 +663,34 @@
 	[
 		"/home/anton/ASM",
 		"/home/anton/ASM/lab",
+<<<<<<< HEAD
+		"/home/anton/ASM/lab/lab_C",
+		"/home/anton/ASM/lab/lab_C/lab_07"
+	],
+	"file_history":
+	[
+		"/home/anton/ASM/lab/lab_06/calc.s",
+		"/home/anton/ASM/home/Nastya/a1.s",
+		"/home/anton/ASM/home/Nastya/a2.s",
+		"/home/anton/ASM/lab/lab_C/lab_07/a1.s",
+		"/home/anton/ASM/lab/lab_C/lab_07/a2.s",
+		"/home/anton/ASM/lab/lab_C/lab_07/a3.s",
+		"/home/anton/ASM/lab/lab_C/lab_06/a6.s",
+		"/home/anton/ASM/lab/lab_C/lab_06/a5.s",
+		"/home/anton/ASM/lab/lab_C/lab_03/a3.s",
+=======
 		"/home/anton/ASM/training"
 	],
 	"file_history":
 	[
+>>>>>>> 22618633fafecae6245afb3b1c30df9ea824af6a
 		"/home/anton/ASM/training/polya_rivalry.s",
 		"/home/anton/ASM/lab/lab_C/lab_03/a2.s",
-		"/home/anton/ASM/lab/lab_C/lab_03/a3.s",
 		"/home/anton/ASM/lab/lab_C/lab_05/a3.s",
 		"/home/anton/ASM/lab/lab_C/lab_05/a2.s",
 		"/home/anton/C/experiments/pow/lpow.s",
 		"/home/anton/ASM/training/ivt/a1.nasm",
 		"/home/anton/ASM/lab/lab_06/math.s",
-		"/home/anton/ASM/lab/lab_06/calc.s",
 		"/home/anton/C/lab/lab_15/menu.c",
 		"/home/anton/ASM/lab/lab_05/routines.s",
 		"/home/anton/ASM/lab/RGR/routines.s",
@@ -845,24 +869,24 @@
 	"groups":
 	[
 		{
+			"selected": 0,
 			"sheets":
 			[
-<<<<<<< HEAD
 				{
 					"buffer": 0,
-					"file": "lab/lab_C/lab_03/a2.s",
+					"file": "lab/lab_C/lab_07/a4.s",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 756,
+						"buffer_size": 1688,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								168,
-								168
+								1688,
+								1688
 							]
 						],
 						"settings":
@@ -886,109 +910,41 @@
 							},
 							"bracket_highlighter.clone_regions":
 							[
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
 								"bh_default",
 								"bh_default_center",
 								"bh_default_open",
 								"bh_default_close",
 								"bh_default_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content"
-							],
-							"bracket_highlighter.locations":
-							{
-								"close":
-								{
-									"1":
-									[
-										174,
-										175
-									]
-								},
-								"icon":
-								{
-									"1":
-									[
-										"Packages/BracketHighlighter/icons/double_quote.png",
-										"region.greenish"
-									]
-								},
-								"open":
-								{
-									"1":
-									[
-										120,
-										121
-									]
-								},
-								"unmatched":
-								{
-								}
-							},
-							"bracket_highlighter.regions":
-							[
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
 								"bh_curly",
 								"bh_curly_center",
 								"bh_curly_open",
 								"bh_curly_close",
 								"bh_curly_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
 								"bh_c_define",
 								"bh_c_define_center",
 								"bh_c_define_open",
@@ -1004,312 +960,11 @@
 								"bh_square_open",
 								"bh_square_close",
 								"bh_square_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content"
-							],
-							"open_with_edit": true,
-							"syntax": "Packages/GAS-x86 (or x64) highlighting scheme/Assembly x86 AT&T.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 108.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "lab/lab_C/lab_03/a3.s",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1350,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1349,
-								1349
-							]
-						],
-						"settings":
-						{
-							"bracket_highlighter.busy": false,
-							"bracket_highlighter.clone": -1,
-							"bracket_highlighter.clone_locations":
-							{
-								"close":
-								{
-								},
-								"icon":
-								{
-								},
-								"open":
-								{
-								},
-								"unmatched":
-								{
-								}
-							},
-							"bracket_highlighter.clone_regions":
-							[
 								"bh_tag",
 								"bh_tag_center",
 								"bh_tag_open",
 								"bh_tag_close",
-								"bh_tag_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content"
-							],
-							"bracket_highlighter.locations":
-							{
-								"close":
-								{
-								},
-								"icon":
-								{
-								},
-								"open":
-								{
-								},
-								"unmatched":
-								{
-								}
-							},
-							"bracket_highlighter.regions":
-							[
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content"
-							],
-							"open_with_edit": true,
-							"syntax": "Packages/GAS-x86 (or x64) highlighting scheme/Assembly x86 AT&T.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "lab/lab_C/lab_05/a2.s",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1147,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								606,
-								606
-							]
-						],
-						"settings":
-						{
-							"bracket_highlighter.busy": false,
-							"bracket_highlighter.clone": -1,
-							"bracket_highlighter.clone_locations":
-							{
-								"close":
-								{
-								},
-								"icon":
-								{
-								},
-								"open":
-								{
-								},
-								"unmatched":
-								{
-								}
-							},
-							"bracket_highlighter.clone_regions":
-							[
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content"
+								"bh_tag_content"
 							],
 							"bracket_highlighter.locations":
 							{
@@ -1333,26 +988,46 @@
 								"bh_curly_open",
 								"bh_curly_close",
 								"bh_curly_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
 								"bh_c_define",
 								"bh_c_define_center",
 								"bh_c_define_open",
 								"bh_c_define_close",
 								"bh_c_define_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
 								"bh_double_quote",
 								"bh_double_quote_center",
 								"bh_double_quote_open",
 								"bh_double_quote_close",
 								"bh_double_quote_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
 								"bh_square",
 								"bh_square_center",
 								"bh_square_open",
@@ -1362,46 +1037,24 @@
 								"bh_round_center",
 								"bh_round_open",
 								"bh_round_close",
-								"bh_round_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content"
+								"bh_round_content"
 							],
 							"open_with_edit": true,
 							"syntax": "Packages/GAS-x86 (or x64) highlighting scheme/Assembly x86 AT&T.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 456.0,
+						"translation.y": 1650.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
 					"type": "text"
 				}
-=======
->>>>>>> b10ce849546d47272022b06871ee37a9923e375d
 			]
 		}
 	],
 	"incremental_find":
 	{
-		"height": 26.0
+		"height": 29.0
 	},
 	"input":
 	{
@@ -1446,7 +1099,7 @@
 	"project": "asm.sublime-project",
 	"replace":
 	{
-		"height": 48.0
+		"height": 54.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -1488,7 +1141,7 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 219.0,
+	"side_bar_width": 328.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{
