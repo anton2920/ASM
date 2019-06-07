@@ -4,6 +4,66 @@
 		"selected_items":
 		[
 			[
+				"in",
+				"incl"
+			],
+			[
+				"for",
+				"format_error"
+			],
+			[
+				"w",
+				"while_end"
+			],
+			[
+				"forma",
+				"format_input"
+			],
+			[
+				"er",
+				"error_base"
+			],
+			[
+				"fo",
+				"format_error"
+			],
+			[
+				"whi",
+				"while_to_dec"
+			],
+			[
+				"to",
+				"to_dec"
+			],
+			[
+				"wg",
+				"while_digits_exit"
+			],
+			[
+				"while",
+				"while_digits_end"
+			],
+			[
+				"e",
+				"else"
+			],
+			[
+				"VAR",
+				"VAR_Y"
+			],
+			[
+				"VA",
+				"VAR_X"
+			],
+			[
+				"pr",
+				"printf"
+			],
+			[
+				"va",
+				"VAR_X"
+			],
+			[
 				"cm",
 				"cmpl"
 			],
@@ -28,24 +88,12 @@
 				"while_not_n"
 			],
 			[
-				"while",
-				"while_not_n"
-			],
-			[
 				"te",
 				"text_cont"
 			],
 			[
 				"S",
 				"STDOUT"
-			],
-			[
-				"fo",
-				"format_answer"
-			],
-			[
-				"in",
-				"interrupt\t(a2.s)"
 			],
 			[
 				"fi",
@@ -62,14 +110,6 @@
 			[
 				"sec",
 				"second_branch"
-			],
-			[
-				"for",
-				"format_answer\t(a2.s)"
-			],
-			[
-				"forma",
-				"format_input\t(a2.s)"
 			],
 			[
 				"format",
@@ -170,10 +210,6 @@
 			[
 				"filena",
 				"filename_line"
-			],
-			[
-				"pr",
-				"prt_ln"
 			],
 			[
 				"st",
@@ -360,20 +396,12 @@
 				"inner_loop"
 			],
 			[
-				"e",
-				"edx_addr"
-			],
-			[
 				"out",
 				"outer_loop_end"
 			],
 			[
 				"new",
 				"newline"
-			],
-			[
-				"er",
-				"error_line"
 			],
 			[
 				"an",
@@ -486,45 +514,16 @@
 			[
 				"K",
 				"K_VAR"
-			],
-			[
-				"HD",
-				"HD_FLAG_OFFSET"
-			],
-			[
-				"equ",
-				"equals"
-			],
-			[
-				"all",
-				"alloc_here"
-			],
-			[
-				"al",
-				"alloc_next_pos"
-			],
-			[
-				"cu",
-				"current"
-			],
-			[
-				"d",
-				"d"
-			],
-			[
-				"inc",
-				"include"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "home/Molch/task_3.nasm",
+			"file": "lab/lab_C/lab_08/a1.s",
 			"settings":
 			{
-				"buffer_size": 1944,
-				"encoding": "UTF-8",
+				"buffer_size": 0,
 				"line_ending": "Unix"
 			}
 		}
@@ -663,10 +662,15 @@
 	[
 		"/home/anton/ASM",
 		"/home/anton/ASM/home",
-		"/home/anton/ASM/home/Molch"
+		"/home/anton/ASM/lab",
+		"/home/anton/ASM/lab/lab_C"
 	],
 	"file_history":
 	[
+		"/home/anton/ASM/lab/lab_C/lab_07/a4.s",
+		"/home/anton/ASM/lab/lab_C/lab_07/a5.s",
+		"/home/anton/ASM/lab/lab_C/lab_05/a3.s",
+		"/home/anton/ASM/home/Molch/task_3.nasm",
 		"/home/anton/Загрузки/example6.asm",
 		"/home/anton/Загрузки/functions.asm",
 		"/home/anton/Загрузки/functions2.asm",
@@ -680,7 +684,6 @@
 		"/home/anton/ASM/training/polya_rivalry.s",
 		"/home/anton/ASM/lab/lab_C/lab_03/a2.s",
 		"/home/anton/ASM/lab/lab_C/lab_03/a3.s",
-		"/home/anton/ASM/lab/lab_C/lab_05/a3.s",
 		"/home/anton/ASM/lab/lab_C/lab_05/a2.s",
 		"/home/anton/C/experiments/pow/lpow.s",
 		"/home/anton/ASM/training/ivt/a1.nasm",
@@ -791,10 +794,7 @@
 		"/home/anton/C/experiments/pic/main.c",
 		"/home/anton/C/experiments/pic/main,c",
 		"/home/anton/C/experiments/SanyaEbet/main,c",
-		"/home/anton/C/experiments/SanyaEbet/a2.c",
-		"/home/anton/C/experiments/locale/a1.c",
-		"/home/anton/C/lab/lab_07/a1.c",
-		"/home/anton/C/lab/lab_07/a11.c"
+		"/home/anton/C/experiments/SanyaEbet/a2.c"
 	],
 	"find":
 	{
@@ -860,25 +860,25 @@
 			[
 				{
 					"buffer": 0,
-					"file": "home/Molch/task_3.nasm",
+					"file": "lab/lab_C/lab_08/a1.s",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1944,
+						"buffer_size": 0,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								114,
-								114
+								0,
+								0
 							]
 						],
 						"settings":
 						{
 							"bracket_highlighter.busy": false,
-							"bracket_highlighter.clone": -1,
+							"bracket_highlighter.clone": 34,
 							"bracket_highlighter.clone_locations":
 							{
 								"close":
@@ -896,26 +896,26 @@
 							},
 							"bracket_highlighter.clone_regions":
 							[
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
 								"bh_c_define",
 								"bh_c_define_center",
 								"bh_c_define_open",
@@ -926,31 +926,31 @@
 								"bh_regex_open",
 								"bh_regex_close",
 								"bh_regex_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
 								"bh_square",
 								"bh_square_center",
 								"bh_square_open",
 								"bh_square_close",
 								"bh_square_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content"
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content"
 							],
 							"bracket_highlighter.locations":
 							{
@@ -969,26 +969,26 @@
 							},
 							"bracket_highlighter.regions":
 							[
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
 								"bh_c_define",
 								"bh_c_define_center",
 								"bh_c_define_open",
@@ -999,35 +999,34 @@
 								"bh_regex_open",
 								"bh_regex_close",
 								"bh_regex_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
 								"bh_square",
 								"bh_square_center",
 								"bh_square_open",
 								"bh_square_close",
 								"bh_square_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content"
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content"
 							],
-							"syntax": "Packages/Text/Plain text.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
+							"open_with_edit": true,
+							"syntax": "Packages/GAS-x86 (or x64) highlighting scheme/Assembly x86 AT&T.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
