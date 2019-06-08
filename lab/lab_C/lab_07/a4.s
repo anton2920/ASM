@@ -129,6 +129,7 @@ bad_digits:
 	movl $FALSE, %eax
 
 check_digits_exit:
+	# Destroying function's stack frame
 	movl %ebp, %esp
 	popl %ebp
 	ret
@@ -167,6 +168,7 @@ while_to_dec_end:
 	movl %edi, %eax
 
 to_dec_exit:
+	# Destroying function's stack frame
 	movl %ebp, %esp
 	popl %ebp
 	ret
