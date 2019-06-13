@@ -4,76 +4,96 @@
 		"selected_items":
 		[
 			[
-				"for",
-				"format_answer"
+				"dobu",
+				"double"
 			],
 			[
-				"fo",
-				"format_error"
-			],
-			[
-				"p",
-				"pow"
+				"i",
+				"i"
 			],
 			[
 				"do",
-				"do_while"
+				"do_op"
+			],
+			[
+				"for",
+				"format_line"
 			],
 			[
 				"forma",
-				"format_input"
+				"format_line"
 			],
 			[
-				"forma",
-				"format_answer\t(a2.s)"
-			],
-			[
-				"w",
-				"while_end"
-			],
-			[
-				"er",
-				"error_base"
+				"in",
+				"increment"
 			],
 			[
 				"fo",
-				"format_error"
-			],
-			[
-				"whi",
-				"while_to_dec"
-			],
-			[
-				"to",
-				"to_dec"
+				"format_function"
 			],
 			[
 				"n",
 				"n"
 			],
 			[
-				"while",
-				"while_digits_end"
+				"form",
+				"format_function"
 			],
 			[
-				"e",
-				"else"
+				"ne",
+				"nextchar"
 			],
 			[
-				"VAR",
-				"VAR_Y"
+				"to",
+				"to_base"
 			],
 			[
 				"VA",
-				"VAR_X"
+				"VAR_A"
 			],
 			[
-				"pr",
-				"printf"
+				"whi",
+				"while2_end"
 			],
 			[
-				"va",
-				"VAR_X"
+				"while",
+				"while2_end"
+			],
+			[
+				"swi",
+				"switch2_end"
+			],
+			[
+				"sw",
+				"switch_end\t(a5.s)"
+			],
+			[
+				"case",
+				"case_spades"
+			],
+			[
+				"VAR_",
+				"VAR_B"
+			],
+			[
+				"S",
+				"S"
+			],
+			[
+				"W",
+				"W"
+			],
+			[
+				"push",
+				"pushl"
+			],
+			[
+				"sec",
+				"section"
+			],
+			[
+				"format",
+				"format_input\t(a3.s)"
 			],
 			[
 				"cm",
@@ -104,10 +124,6 @@
 				"text_cont"
 			],
 			[
-				"in",
-				"interrupt\t(a2.s)"
-			],
-			[
 				"fi",
 				"final_output"
 			],
@@ -118,14 +134,6 @@
 			[
 				"int",
 				"int_3"
-			],
-			[
-				"sec",
-				"second_branch"
-			],
-			[
-				"format",
-				"format_input\t(a1.s)"
 			],
 			[
 				"rest",
@@ -224,16 +232,16 @@
 				"filename_line"
 			],
 			[
+				"pr",
+				"prt_ln"
+			],
+			[
 				"st",
 				"strcmp_end_loop"
 			],
 			[
 				"BU",
 				"buffer2"
-			],
-			[
-				"n",
-				"n"
 			],
 			[
 				"yes",
@@ -336,10 +344,6 @@
 				"numlen_loop_end"
 			],
 			[
-				"i",
-				"iprint_else"
-			],
-			[
 				"at",
 				"atoi_main_loop"
 			],
@@ -362,10 +366,6 @@
 			[
 				"prin",
 				"print_arr"
-			],
-			[
-				"ne",
-				"len_newline"
 			],
 			[
 				"NU",
@@ -408,12 +408,20 @@
 				"inner_loop"
 			],
 			[
+				"e",
+				"edx_addr"
+			],
+			[
 				"out",
 				"outer_loop_end"
 			],
 			[
 				"new",
 				"newline"
+			],
+			[
+				"er",
+				"error_line"
 			],
 			[
 				"an",
@@ -468,10 +476,6 @@
 				"program\tdeclaration"
 			],
 			[
-				"sw",
-				"switch_end"
-			],
-			[
 				"str",
 				"str_winter"
 			],
@@ -488,10 +492,6 @@
 				"format_answer\t(a1.s)"
 			],
 			[
-				"form",
-				"format_answer2"
-			],
-			[
 				"if",
 				"if_true"
 			],
@@ -504,30 +504,26 @@
 				"format_input"
 			],
 			[
+				"p",
+				"pushl"
+			],
+			[
 				"0x",
 				"0x8"
 			],
 			[
 				"add",
 				"addl"
-			],
-			[
-				"N",
-				"N"
-			],
-			[
-				"fro",
-				"format_output2"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "lab/lab_C/lab_07/a4.s",
+			"file": "lab/lab_C/lab_09/a2.s",
 			"settings":
 			{
-				"buffer_size": 1688,
+				"buffer_size": 76,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -666,38 +662,34 @@
 	"expanded_folders":
 	[
 		"/home/anton/ASM",
+		"/home/anton/ASM/home",
 		"/home/anton/ASM/lab",
-		"/home/anton/ASM/lab/lab_05",
-		"/home/anton/ASM/lab/lab_C"
+		"/home/anton/ASM/lab/lab_C",
+		"/home/anton/ASM/lab/lab_C/lab_09"
 	],
 	"file_history":
 	[
-		"/home/anton/ASM/lab/lab_C/lab_09/a1.s",
-		"/home/anton/ASM/lab/lab_C/lab_09/a2.s",
-		"/home/anton/ASM/lab/lab_C/lab_08/a2.s",
-		"/home/anton/ASM/lab/lab_C/lab_08/a1.s",
-		"/home/anton/ASM/lab/lab_C/lab_07/a4.s",
-		"/home/anton/ASM/lab/lab_C/lab_07/a5.s",
-		"/home/anton/ASM/lab/lab_C/lab_05/a3.s",
-		"/home/anton/ASM/home/Molch/task_3.nasm",
-		"/home/anton/Загрузки/example6.asm",
-		"/home/anton/Загрузки/functions.asm",
-		"/home/anton/Загрузки/functions2.asm",
-		"/home/anton/ASM/home/Molch/routines.nasm",
-		"/home/anton/ASM/home/Molch/math.nasm",
-		"/home/anton/ASM/home/Molch/calc.nasm",
-		"/home/anton/Загрузки/example8.asm",
-		"/home/anton/Загрузки/example5.asm",
+		"/home/anton/ASM/home/Molch/task_3.s",
+		"/home/anton/ASM/home/Molch/task_3_check.c",
 		"/home/anton/ASM/asm.sublime-project",
 		"/home/anton/C/c.sublime-project",
+		"/home/anton/ASM/lab/lab_C/lab_07/a4.s",
+		"/home/anton/ASM/lab/lab_06/calc.s",
+		"/home/anton/ASM/home/Nastya/a1.s",
+		"/home/anton/ASM/home/Nastya/a2.s",
+		"/home/anton/ASM/lab/lab_C/lab_07/a1.s",
+		"/home/anton/ASM/lab/lab_C/lab_07/a2.s",
+		"/home/anton/ASM/lab/lab_C/lab_07/a3.s",
+		"/home/anton/ASM/lab/lab_C/lab_06/a6.s",
+		"/home/anton/ASM/lab/lab_C/lab_06/a5.s",
+		"/home/anton/ASM/lab/lab_C/lab_03/a3.s",
 		"/home/anton/ASM/training/polya_rivalry.s",
 		"/home/anton/ASM/lab/lab_C/lab_03/a2.s",
-		"/home/anton/ASM/lab/lab_C/lab_03/a3.s",
+		"/home/anton/ASM/lab/lab_C/lab_05/a3.s",
 		"/home/anton/ASM/lab/lab_C/lab_05/a2.s",
 		"/home/anton/C/experiments/pow/lpow.s",
 		"/home/anton/ASM/training/ivt/a1.nasm",
 		"/home/anton/ASM/lab/lab_06/math.s",
-		"/home/anton/ASM/lab/lab_06/calc.s",
 		"/home/anton/C/lab/lab_15/menu.c",
 		"/home/anton/ASM/lab/lab_05/routines.s",
 		"/home/anton/ASM/lab/RGR/routines.s",
@@ -804,10 +796,7 @@
 		"/home/anton/C/experiments/pic/main,c",
 		"/home/anton/C/experiments/SanyaEbet/main,c",
 		"/home/anton/C/experiments/SanyaEbet/a2.c",
-		"/home/anton/C/experiments/locale/a1.c",
-		"/home/anton/C/lab/lab_07/a1.c",
-		"/home/anton/C/lab/lab_07/a11.c",
-		"/home/anton/C/lab/lab_07/a2.c"
+		"/home/anton/C/experiments/locale/a1.c"
 	],
 	"find":
 	{
@@ -825,7 +814,6 @@
 		"case_sensitive": false,
 		"find_history":
 		[
-			"MISMATCH",
 			"%ax",
 			"call write",
 			"pushl $0x0",
@@ -868,23 +856,24 @@
 	"groups":
 	[
 		{
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "lab/lab_C/lab_07/a4.s",
+					"file": "lab/lab_C/lab_09/a2.s",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1688,
+						"buffer_size": 76,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1688,
-								1688
+								59,
+								59
 							]
 						],
 						"settings":
@@ -908,36 +897,11 @@
 							},
 							"bracket_highlighter.clone_regions":
 							[
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
 								"bh_curly",
 								"bh_curly_center",
 								"bh_curly_open",
 								"bh_curly_close",
 								"bh_curly_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
 								"bh_single_quote",
 								"bh_single_quote_center",
 								"bh_single_quote_open",
@@ -948,21 +912,46 @@
 								"bh_c_define_open",
 								"bh_c_define_close",
 								"bh_c_define_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
 								"bh_square",
 								"bh_square_center",
 								"bh_square_open",
 								"bh_square_close",
 								"bh_square_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content"
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content"
 							],
 							"bracket_highlighter.locations":
 							{
@@ -991,11 +980,6 @@
 								"bh_single_quote_open",
 								"bh_single_quote_close",
 								"bh_single_quote_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
 								"bh_c_define",
 								"bh_c_define_center",
 								"bh_c_define_open",
@@ -1011,37 +995,41 @@
 								"bh_double_quote_open",
 								"bh_double_quote_close",
 								"bh_double_quote_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
 								"bh_square",
 								"bh_square_center",
 								"bh_square_open",
 								"bh_square_close",
 								"bh_square_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content"
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content"
 							],
-							"open_with_edit": true,
 							"syntax": "Packages/GAS-x86 (or x64) highlighting scheme/Assembly x86 AT&T.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 1650.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -1139,7 +1127,7 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 219.0,
+	"side_bar_width": 328.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{
