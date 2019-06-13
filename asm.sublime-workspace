@@ -4,12 +4,40 @@
 		"selected_items":
 		[
 			[
+				"dobu",
+				"double"
+			],
+			[
+				"i",
+				"i"
+			],
+			[
+				"do",
+				"do_op"
+			],
+			[
 				"for",
-				"format_answer"
+				"format_line"
+			],
+			[
+				"forma",
+				"format_line"
+			],
+			[
+				"in",
+				"increment"
 			],
 			[
 				"fo",
-				"format_error"
+				"format_function"
+			],
+			[
+				"n",
+				"n"
+			],
+			[
+				"form",
+				"format_function"
 			],
 			[
 				"ne",
@@ -22,10 +50,6 @@
 			[
 				"VA",
 				"VAR_A"
-			],
-			[
-				"forma",
-				"format_answer\t(a2.s)"
 			],
 			[
 				"whi",
@@ -46,10 +70,6 @@
 			[
 				"case",
 				"case_spades"
-			],
-			[
-				"n",
-				"n"
 			],
 			[
 				"VAR_",
@@ -102,10 +122,6 @@
 			[
 				"te",
 				"text_cont"
-			],
-			[
-				"in",
-				"interrupt\t(a2.s)"
 			],
 			[
 				"fi",
@@ -328,10 +344,6 @@
 				"numlen_loop_end"
 			],
 			[
-				"i",
-				"iprint_else"
-			],
-			[
 				"at",
 				"atoi_main_loop"
 			],
@@ -480,10 +492,6 @@
 				"format_answer\t(a1.s)"
 			],
 			[
-				"form",
-				"format_answer2"
-			],
-			[
 				"if",
 				"if_true"
 			],
@@ -506,24 +514,19 @@
 			[
 				"add",
 				"addl"
-			],
-			[
-				"N",
-				"N"
-			],
-			[
-				"fro",
-				"format_output2"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "lab/lab_C/lab_07/a4.s",
+			"contents": ".section .rodata\nformat_output:\n\t.asciz \"Welcome to assemply floating-point\\n   value's function tabulator!\\n\\n\"\nformat_table:\n\t.asciz \"|\\t%.1lf\\t|\\t%lf\\t|\\n\"\nformat_table_head:\n\t.asciz \"|\\tx\\t|\\t   f(x)\\t\\t|\\n\"\nformat_function:\n\t.asciz \"\\nf(x) = sin(x) + cos(x / 2) * x\\n\\n\"\nformat_line:\n\t.asciz \" ----------------------------------------\\n\"\n\n.section .data\nVAR_X:\n\t.double -1.0\nincrement:\n\t.double 0.1\nint_2:\n\t.long 2\n\n.section .text\n.globl _start\n_start:\n\t# Initializing stack frame\n\tmovl %esp, %ebp\n\n\t# I/O flow\n\tpushl $format_output\n\tcall printf\n\taddl $0x4, %esp\n\n\tpushl $format_function\n\tcall printf\n\taddl $0x4, %esp\n\n\tpushl $format_line\n\tcall printf\n\taddl $0x4, %esp\n\n\tpushl $format_table_head\n\tcall printf\n\taddl $0x4, %esp\n\n\tpushl $format_line\n\tcall printf\n\taddl $0x4, %esp\n\n\t# Main part. FPU\n\tfinit\n\tfldl VAR_X\n\ndo_while_loop:\n\n\t# cos(x / 2)\n\tfld %st(0)\n\tfidiv int_2\n\tfcos\n\n\t# cos (x / 2) * x\n\tfld %st(1)\n\tfmulp\n\n\t# sin(x)\n\tfld %st(1)\n\tfsin\n\n\t# sin(x) + cos(x / 2) * x\n\tfaddp\n\n\t# Printing\n\tsubl $0x8, %esp\n\tfstpl (%esp)\n\n\tsubl $0x8, %esp\n\tfstl (%esp)\n\n\tpushl $format_table\n\tcall printf\n\taddl $0x14, %esp\n\n\tpushl $format_line\n\tcall printf\n\taddl $0x4, %esp\n\n\tfld1\n\tfcomip %st(1)\n\tjc exit\n\n\tfaddl increment\n\n\tjmp do_while_loop\n\ndo_while_end:\nexit:\n\t# Exiting\n\txorl %eax, %eax\n\tincl %eax\n\txorl %ebx, %ebx\n\tint $0x80 # 0x80's interrupt\n",
+			"file": "home/Molch/task_3.s",
+			"file_size": 1340,
+			"file_write_time": 132042091930220512,
 			"settings":
 			{
-				"buffer_size": 1688,
+				"buffer_size": 1340,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -662,12 +665,18 @@
 	"expanded_folders":
 	[
 		"/home/anton/ASM",
+		"/home/anton/ASM/home",
+		"/home/anton/ASM/home/Molch",
 		"/home/anton/ASM/lab",
-		"/home/anton/ASM/lab/lab_05",
-		"/home/anton/ASM/lab/lab_C"
+		"/home/anton/ASM/lab/lab_C",
+		"/home/anton/ASM/lab/lab_C/lab_03"
 	],
 	"file_history":
 	[
+		"/home/anton/ASM/home/Molch/task_3_check.c",
+		"/home/anton/ASM/asm.sublime-project",
+		"/home/anton/C/c.sublime-project",
+		"/home/anton/ASM/lab/lab_C/lab_07/a4.s",
 		"/home/anton/ASM/lab/lab_06/calc.s",
 		"/home/anton/ASM/home/Nastya/a1.s",
 		"/home/anton/ASM/home/Nastya/a2.s",
@@ -692,7 +701,6 @@
 		"/home/anton/ASM/lab/lab_04/a1.s",
 		"/home/anton/ASM/lab/lab_04/Makefile",
 		"/home/anton/ASM/lab/RGR/Makefile",
-		"/home/anton/ASM/asm.sublime-project",
 		"/home/anton/ASM/lab/lab_05/tasks.s",
 		"/home/anton/ASM/lab/lab_05/a1.s",
 		"/home/anton/ASM/lab/lab_07",
@@ -734,7 +742,6 @@
 		"/home/anton/C/experiments/asm/c4.c",
 		"/home/anton/C/experiments/asm/asm4.asm",
 		"/home/anton/C/home/Max_lab_9/cmake-build-debug/rec.dat",
-		"/home/anton/C/c.sublime-project",
 		"/home/anton/C/lab/lab_13/a1out.bin",
 		"/home/anton/C/lab/lab_17/lab.h",
 		"/home/anton/C/lab/lab_17/rwr.c",
@@ -793,13 +800,11 @@
 		"/home/anton/C/experiments/SanyaEbet/main,c",
 		"/home/anton/C/experiments/SanyaEbet/a2.c",
 		"/home/anton/C/experiments/locale/a1.c",
-		"/home/anton/C/lab/lab_07/a1.c",
-		"/home/anton/C/lab/lab_07/a11.c",
-		"/home/anton/C/lab/lab_07/a2.c"
+		"/home/anton/C/lab/lab_07/a1.c"
 	],
 	"find":
 	{
-		"height": 29.0
+		"height": 31.0
 	},
 	"find_in_files":
 	{
@@ -860,19 +865,19 @@
 			[
 				{
 					"buffer": 0,
-					"file": "lab/lab_C/lab_07/a4.s",
+					"file": "home/Molch/task_3.s",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1688,
+						"buffer_size": 1340,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1688,
-								1688
+								1242,
+								1242
 							]
 						],
 						"settings":
@@ -896,11 +901,21 @@
 							},
 							"bracket_highlighter.clone_regions":
 							[
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
 								"bh_curly",
 								"bh_curly_center",
 								"bh_curly_open",
@@ -911,46 +926,36 @@
 								"bh_regex_open",
 								"bh_regex_close",
 								"bh_regex_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
 								"bh_double_quote",
 								"bh_double_quote_center",
 								"bh_double_quote_open",
 								"bh_double_quote_close",
 								"bh_double_quote_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
 								"bh_unmatched",
 								"bh_unmatched_center",
 								"bh_unmatched_open",
 								"bh_unmatched_close",
 								"bh_unmatched_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
 								"bh_single_quote",
 								"bh_single_quote_center",
 								"bh_single_quote_open",
 								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content"
+								"bh_single_quote_content"
 							],
 							"bracket_highlighter.locations":
 							{
@@ -969,26 +974,31 @@
 							},
 							"bracket_highlighter.regions":
 							[
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
 								"bh_c_define",
 								"bh_c_define_center",
 								"bh_c_define_open",
 								"bh_c_define_close",
 								"bh_c_define_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
 								"bh_tag",
 								"bh_tag_center",
 								"bh_tag_open",
@@ -999,37 +1009,32 @@
 								"bh_double_quote_open",
 								"bh_double_quote_close",
 								"bh_double_quote_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
 								"bh_unmatched",
 								"bh_unmatched_center",
 								"bh_unmatched_open",
 								"bh_unmatched_close",
 								"bh_unmatched_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content"
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content"
 							],
 							"open_with_edit": true,
 							"syntax": "Packages/GAS-x86 (or x64) highlighting scheme/Assembly x86 AT&T.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 1650.0,
+						"translation.y": 1380.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -1040,7 +1045,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 29.0
+		"height": 31.0
 	},
 	"input":
 	{
@@ -1085,7 +1090,7 @@
 	"project": "asm.sublime-project",
 	"replace":
 	{
-		"height": 54.0
+		"height": 58.0
 	},
 	"save_all_on_build": true,
 	"select_file":
