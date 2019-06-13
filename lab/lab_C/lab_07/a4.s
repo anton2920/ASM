@@ -12,6 +12,8 @@ format_answer:
 	.asciz "The number %d (base-%d) equals to %d (in base-10)\n"
 format_error:
 	.asciz "Error! Digits must be less than base!\n"
+format_error_2:
+	.asciz "Error! Wrong base!\n"
 
 .section .bss
 
@@ -25,9 +27,9 @@ _start:
 	.equ VAR_B, -8
 
 do_while:
-	# I/O flow
+	# I/O flow && VarCheck
 	pushl $format_output_2
-	call print
+	call printf
 	addl $0x4, %esp
 
 	leal VAR_B(%ebp), %eax
@@ -36,8 +38,11 @@ do_while:
 	call scanf
 	addl $0x8, %esp
 
+	cmpl $0x9, VAR_B(%ebp)
+	jg error_base
+
 	pushl $format_output_1
-	call print
+	call printf
 	addl $0x4, %esp
 
 	leal VAR_A(%ebp), %eax
@@ -78,6 +83,13 @@ error_digits:
 
 	jmp do_while
 
+error_base:
+	pushl $format_error_2
+	call printf
+	add $0x4, %esp
+
+	jmp do_while
+
 exit:
 	xorl %eax, %eax
 	incl %eax
@@ -105,9 +117,58 @@ while_digits:
 	idivl %esi
 
 	cmpl %ebx, %edx # if (digit >= base)
-	jge 
+	jge bad_digits
 
 	jmp while_digits
 
+while_digits_end:
+	movl $TRUE, %eax
+	jmp check_digits_exit
+
 bad_digits:
+	movl $FALSE, %eax
+
+check_digits_exit:
+	# Destroying function's stack frame
+	movl %ebp, %esp
+	popl %ebp
+	ret
 	
+
+.type to_dec, @function
+to_dec:
+	# Initializing function's stack frame
+	pushl %ebp
+	movl %esp, %ebp
+
+	# Initializing variables
+	movl 8(%ebp), %eax # number
+	movl 12(%ebp), %ebx # base
+	xorl %ecx, %ecx
+	incl %ecx
+	movl $0xA, %esi
+	xorl %edi, %edi
+
+	# Main part
+while_to_dec:
+	cmpl $0x0, %eax
+	jle while_to_dec_end
+
+	xorl %edx, %edx
+	idivl %esi
+
+	imull %ecx, %edx
+	addl %edx, %edi
+
+	imull %ebx, %ecx
+
+	jmp while_to_dec
+
+while_to_dec_end:
+	movl %edi, %eax
+
+to_dec_exit:
+	# Destroying function's stack frame
+	movl %ebp, %esp
+	popl %ebp
+	ret
