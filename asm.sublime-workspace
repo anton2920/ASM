@@ -4,24 +4,44 @@
 		"selected_items":
 		[
 			[
+				"for",
+				"for_1\tabc"
+			],
+			[
+				"form",
+				"format_answer\tabc"
+			],
+			[
+				"big",
+				"biggest_num\tabc"
+			],
+			[
+				"va",
+				"var_b\tabc"
+			],
+			[
+				"var",
+				"var_b\tabc"
+			],
+			[
+				"do",
+				"do_while_2\tabc"
+			],
+			[
+				"forma",
+				"format_input\tabc"
+			],
+			[
+				"format_p",
+				"format_output_1"
+			],
+			[
 				"dobu",
 				"double"
 			],
 			[
 				"i",
 				"i"
-			],
-			[
-				"do",
-				"do_op"
-			],
-			[
-				"for",
-				"format_line"
-			],
-			[
-				"forma",
-				"format_line"
 			],
 			[
 				"in",
@@ -34,10 +54,6 @@
 			[
 				"n",
 				"n"
-			],
-			[
-				"form",
-				"format_function"
 			],
 			[
 				"ne",
@@ -498,41 +514,25 @@
 			[
 				"fp",
 				"format_input"
-			],
-			[
-				"f",
-				"format_input"
-			],
-			[
-				"p",
-				"pushl"
-			],
-			[
-				"0x",
-				"0x8"
-			],
-			[
-				"add",
-				"addl"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "home/Molch/exam.nasm",
+			"file": "lab/lab_C/lab_10/a1.s",
 			"settings":
 			{
-				"buffer_size": 769,
+				"buffer_size": 1724,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "home/Molch/calc.nasm",
+			"file": "lab/lab_C/lab_10/a2.s",
 			"settings":
 			{
-				"buffer_size": 4347,
+				"buffer_size": 752,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -671,14 +671,13 @@
 	"expanded_folders":
 	[
 		"/home/anton/ASM",
-		"/home/anton/ASM/home",
-		"/home/anton/ASM/home/Molch",
 		"/home/anton/ASM/lab",
 		"/home/anton/ASM/lab/lab_C",
-		"/home/anton/ASM/lab/lab_C/lab_09"
+		"/home/anton/ASM/lab/lab_C/lab_10"
 	],
 	"file_history":
 	[
+		"/home/anton/ASM/home/Molch/exam.nasm",
 		"/home/anton/ASM/home/Molch/calc.nasm",
 		"/home/anton/ASM/lab/lab_C/lab_09/a2.s",
 		"/home/anton/ASM/home/Molch/task_3.s",
@@ -805,8 +804,7 @@
 		"/home/anton/C/experiments/SanyaEbet/shoulders.c",
 		"/home/anton/C/experiments/SanyaEbet/main.c",
 		"/home/anton/C/experiments/pic/main.c",
-		"/home/anton/C/experiments/pic/main,c",
-		"/home/anton/C/experiments/SanyaEbet/main,c"
+		"/home/anton/C/experiments/pic/main,c"
 	],
 	"find":
 	{
@@ -866,24 +864,24 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "home/Molch/exam.nasm",
+					"file": "lab/lab_C/lab_10/a1.s",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 769,
+						"buffer_size": 1724,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								541,
-								541
+								1457,
+								1457
 							]
 						],
 						"settings":
@@ -907,11 +905,36 @@
 							},
 							"bracket_highlighter.clone_regions":
 							[
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
 								"bh_square",
 								"bh_square_center",
 								"bh_square_open",
 								"bh_square_close",
 								"bh_square_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
 								"bh_double_quote",
 								"bh_double_quote_center",
 								"bh_double_quote_open",
@@ -922,46 +945,21 @@
 								"bh_round_open",
 								"bh_round_close",
 								"bh_round_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
 								"bh_unmatched",
 								"bh_unmatched_center",
 								"bh_unmatched_open",
 								"bh_unmatched_close",
 								"bh_unmatched_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
 								"bh_angle",
 								"bh_angle_center",
 								"bh_angle_open",
 								"bh_angle_close",
-								"bh_angle_content"
+								"bh_angle_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content"
 							],
 							"bracket_highlighter.locations":
 							{
@@ -980,11 +978,36 @@
 							},
 							"bracket_highlighter.regions":
 							[
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
 								"bh_square",
 								"bh_square_center",
 								"bh_square_open",
 								"bh_square_close",
 								"bh_square_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
 								"bh_double_quote",
 								"bh_double_quote_center",
 								"bh_double_quote_open",
@@ -995,78 +1018,53 @@
 								"bh_round_open",
 								"bh_round_close",
 								"bh_round_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
 								"bh_unmatched",
 								"bh_unmatched_center",
 								"bh_unmatched_open",
 								"bh_unmatched_close",
 								"bh_unmatched_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
 								"bh_angle",
 								"bh_angle_center",
 								"bh_angle_open",
 								"bh_angle_close",
-								"bh_angle_content"
+								"bh_angle_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content"
 							],
 							"open_with_edit": true,
-							"syntax": "Packages/Text/Plain text.tmLanguage"
+							"syntax": "Packages/GAS-x86 (or x64) highlighting scheme/Assembly x86 AT&T.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 342.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "home/Molch/calc.nasm",
-					"semi_transient": true,
+					"file": "lab/lab_C/lab_10/a2.s",
+					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4347,
+						"buffer_size": 752,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								604,
+								604
 							]
 						],
 						"settings":
 						{
 							"bracket_highlighter.busy": false,
-							"bracket_highlighter.clone": 20,
+							"bracket_highlighter.clone": -1,
 							"bracket_highlighter.clone_locations":
 							{
 								"close":
@@ -1084,11 +1082,36 @@
 							},
 							"bracket_highlighter.clone_regions":
 							[
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
 								"bh_square",
 								"bh_square_center",
 								"bh_square_open",
 								"bh_square_close",
 								"bh_square_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
 								"bh_double_quote",
 								"bh_double_quote_center",
 								"bh_double_quote_open",
@@ -1099,46 +1122,21 @@
 								"bh_round_open",
 								"bh_round_close",
 								"bh_round_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
 								"bh_unmatched",
 								"bh_unmatched_center",
 								"bh_unmatched_open",
 								"bh_unmatched_close",
 								"bh_unmatched_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
 								"bh_angle",
 								"bh_angle_center",
 								"bh_angle_open",
 								"bh_angle_close",
-								"bh_angle_content"
+								"bh_angle_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content"
 							],
 							"bracket_highlighter.locations":
 							{
@@ -1155,15 +1153,72 @@
 								{
 								}
 							},
-							"syntax": "Packages/Text/Plain text.tmLanguage",
-							"tab_size": 8,
-							"translate_tabs_to_spaces": true
+							"bracket_highlighter.regions":
+							[
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content"
+							],
+							"open_with_edit": true,
+							"syntax": "Packages/GAS-x86 (or x64) highlighting scheme/Assembly x86 AT&T.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 402.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 0,
 					"type": "text"
 				}
 			]
