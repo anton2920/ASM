@@ -1,9 +1,13 @@
 .equ window_width, 366
 .equ window_height, 391
+
 .equ NULL, 0x0
 .equ SDL_INIT_VIDEO, 0x00000020
 .equ SDL_WINDOWPOS_CENTERED_MASK, 0x2FFF0000
 .equ SDL_WINDOW_SHOWN, 0x00000004
+
+.equ sizeof_int, 4
+.equ sizeof_void_p, 4
 
 .equ first_arg, 8
 .equ second_arg, 12
@@ -48,7 +52,7 @@ Init_window_renderer:
 	pushl $SDL_WINDOWPOS_CENTERED_MASK
 	pushl $title
 	call SDL_CreateWindow
-	addl $0x18, %esp
+	addl $sizeof_int + sizeof_int + sizeof_int + sizeof_int + sizeof_int + sizeof_void_p, %esp
 
 	cmpl $NULL, %eax
 	jz em1_exit
@@ -60,7 +64,7 @@ Init_window_renderer:
 	pushl $-1
 	pushl %eax
 	call SDL_CreateRenderer
-	addl $0xC, %esp
+	addl $sizeof_int + sizeof_int + sizeof_void_p, %esp
 
 	cmpl $NULL, %eax
 	jz em1_exit
@@ -92,17 +96,18 @@ Get_texture:
 	# Main part
 	pushl %eax
 	call IMG_Load
-	addl $0x4, %esp
+	addl $sizeof_void_p, %esp
 
 	cmpl $NULL, %eax
 	jz em2_exit
 
 	pushl %eax
+
 	pushl %eax
 	movl first_arg(%ebp), %eax
 	pushl %eax
 	call SDL_CreateTextureFromSurface
-	addl $0xC, %esp
+	addl $sizeof_void_p + sizeof_void_p, %esp
 
 	cmpl $NULL, %eax
 	je em2_exit
@@ -112,7 +117,7 @@ Get_texture:
 
 	pushl %ebx
 	call SDL_FreeSurface
-	addl $0x4, %esp
+	addl $sizeof_void_p, %esp
 
 	popl %eax
 
