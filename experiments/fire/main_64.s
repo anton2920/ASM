@@ -1,6 +1,9 @@
 .equ run_time, 30000
 .equ delay_time, 40
+
 .equ sizeof_void_p, 8
+.equ sizeof_int, 4
+
 .equ pic_inc, 366
 .equ pic_max, 4758
 
@@ -22,17 +25,17 @@ pic_path:
 main:
 	# Initializing stack frame
 	movq %rsp, %rbp
-	.equ num_of_vars, 16
+	.equ num_of_vars, sizeof_void_p + sizeof_void_p
 	.equ window, -8 # SDL_Window *
 	.equ renderer, -16 # SDL_Renderer * 
 	subq $num_of_vars, %rsp
 
-	.equ draw_rect, -32
-	.equ curr_rect, -48
+	.equ draw_rect, -32 # SDL_Rect
+	.equ curr_rect, -48 # SDL_Rect
 	subq $sizeof_sdl_rect, %rsp
 	subq $sizeof_sdl_rect, %rsp
 
-	.equ fire_texture, -56
+	.equ fire_texture, -56 # SDL_Texture *
 	subq $sizeof_void_p, %rsp
 
 	# Initializing variables
@@ -49,17 +52,13 @@ main:
 	callq SDL_init_all # Initializing SDL2
 
 	# Initializing windows and attaching renderer to it
-	leaq renderer(%rbp), %rax
-	pushq %rax
-	leaq window(%rbp), %rax
-	pushq %rax
+	leaq renderer(%rbp), %rsi
+	leaq window(%rbp), %rdi
 	callq Init_window_renderer
-	addq $0x10, %rsp
 
-	pushq $pic_path
-	pushq renderer(%rbp)
+	movq $pic_path, %rsi
+	movq renderer(%rbp), %rdi
 	callq Get_texture
-	addq $0x10, %rsp
 
 	movq %rax, fire_texture(%rbp) # Saving texture to variable
 
@@ -68,16 +67,14 @@ main_while:
 	cmpq $run_time, %rax # if (ticks > run_time)
 	jae main_while_end
 
-	leaq draw_rect(%rbp), %rax
-	pushq %rax
-	leaq curr_rect(%rbp), %rax
-	pushq %rax
-	movq fire_texture(%rbp), %rax
-	pushq %rax
-	movq renderer(%rbp), %rax
-	pushq %rax
+	movq renderer(%rbp), %rdi
+	call SDL_RenderClear
+
+	leaq draw_rect(%rbp), %rcx
+	leaq curr_rect(%rbp), %rdx
+	movq fire_texture(%rbp), %rsi
+	movq renderer(%rbp), %rdi
 	callq SDL_RenderCopy
-	addq $0x20, %rsp
 
 	xorq %rcx, %rcx
 
@@ -87,26 +84,23 @@ main_while:
 	cmovg %rcx, %rax
 	movq %rax, curr_rect + rect_x(%rbp)
 
-	pushq $delay_time
+	movq renderer(%rbp), %rdi
+	call SDL_RenderPresent
+
+	movl $delay_time, %edi
 	callq SDL_Delay
-	addq $0x8, %rsp
+
 	jmp main_while
 
 main_while_end:
-	movq fire_texture(%rbp), %rax
-	pushq %rax
+	movq fire_texture(%rbp), %rdi
 	callq SDL_DestroyTexture
-	addq $0x8, %rsp
 
-	movq renderer(%rbp), %rax
-	pushq %rax
+	movq renderer(%rbp), %rdi
 	callq SDL_DestroyRenderer
-	addq $0x8, %rsp
 
-	movq window(%rbp), %rax
-	pushq %rax
+	movq window(%rbp), %rdi
 	callq SDL_DestroyWindow
-	addq $0x8, %rsp
 
 exit:
 	# Exiting

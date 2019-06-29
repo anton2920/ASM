@@ -5,8 +5,10 @@
 .equ SDL_WINDOWPOS_CENTERED_MASK, 0x2FFF0000
 .equ SDL_WINDOW_SHOWN, 0x00000004
 
-.equ first_arg, 16
-.equ second_arg, 24
+# .equ first_arg, 16
+# .equ second_arg, 24
+.equ first_arg, -16
+.equ second_arg, -8
 
 .section .rodata
 title:
@@ -21,12 +23,10 @@ SDL_init_all:
 	movq %rsp, %rbp
 
 	# Initializing variables
-	movq $SDL_INIT_VIDEO, %rax
+	movl $SDL_INIT_VIDEO, %edi
 
 	# Main part
-	pushq %rax
 	callq SDL_Init
-	addq $0x8, %rax
 
 	# Destroying function's stack frame
 	movq %rbp, %rsp
@@ -39,28 +39,29 @@ Init_window_renderer:
 	# Initializing function's stack frame
 	pushq %rbp
 	movq %rsp, %rbp
+	pushq %rsi # Second parameter
+	pushq %rdi # First parameter
 
 	# Main part
-	pushq $SDL_WINDOW_SHOWN
-	pushq $window_height
-	pushq $window_width
-	pushq $SDL_WINDOWPOS_CENTERED_MASK
-	pushq $SDL_WINDOWPOS_CENTERED_MASK
-	pushq $title
+	movl $SDL_WINDOW_SHOWN, %r9d
+	movl $window_height, %r8d
+	movl $window_width, %ecx
+	movl $SDL_WINDOWPOS_CENTERED_MASK, %edx
+	movl $SDL_WINDOWPOS_CENTERED_MASK, %esi
+	movq $title, %rdi
 	callq SDL_CreateWindow
-	addq $0x30, %rsp
 
+rend:
 	cmpq $NULL, %rax
 	jz em1_exit
 
 	movq first_arg(%rbp), %rbx
 	movq %rax, (%rbx) # Saving window *
 
-	pushq $0x0
-	pushq $-1
-	pushq %rax
+	xorq %rdx, %rdx
+	movq $-1, %rsi
+	movq %rax, %rdi
 	callq SDL_CreateRenderer
-	addq $0x18, %rsp
 
 	cmpq $NULL, %rax
 	jz em1_exit
@@ -84,24 +85,23 @@ Get_texture:
 	# Initializing function's stack frame
 	pushq %rbp
 	movq %rsp, %rbp
+	pushq %rsi # Second parameter
+	pushq %rdi # First parameter
 
 	# Initializing variables
-	movq second_arg(%rbp), %rax
+	movq second_arg(%rbp), %rdi
 
 	# Main part
-	pushq %rax
 	callq IMG_Load
-	addq $0x8, %rsp
 
 	cmpq $NULL, %rax
 	jz em2_exit
 
 	pushq %rax
-	pushq %rax
-	movq first_arg(%rbp), %rax
-	pushq %rax
+
+	movq %rax, %rsi
+	movq first_arg(%rbp), %rdi
 	callq SDL_CreateTextureFromSurface
-	addq $0x18, %rsp
 
 	cmpq $NULL, %rax
 	je em2_exit
@@ -109,9 +109,8 @@ Get_texture:
 	popq %rbx
 	pushq %rax
 
-	pushq %rbx
+	movq %rbx, %rdi
 	callq SDL_FreeSurface
-	addq $0x8, %rsp
 
 	popq %rax
 
