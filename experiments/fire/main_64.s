@@ -10,6 +10,7 @@
 # struct SDL_Rect {
 #	int x, y, w, h;
 #}
+
 .equ sizeof_sdl_rect, 16
 .equ rect_x, 0
 .equ rect_y, 4
@@ -21,8 +22,8 @@ pic_path:
 	.asciz "giphy.png"
 
 .section .text
-.globl main
-main:
+.globl _start
+_start:
 	# Initializing stack frame
 	movq %rsp, %rbp
 	.equ num_of_vars, sizeof_void_p + sizeof_void_p
@@ -37,6 +38,8 @@ main:
 
 	.equ fire_texture, -56 # SDL_Texture *
 	subq $sizeof_void_p, %rsp
+
+	subq $sizeof_void_p, %rsp # For stack alingment
 
 	# Initializing variables
 	movq $0x0, draw_rect + rect_x(%rbp)
@@ -76,16 +79,16 @@ main_while:
 	movq renderer(%rbp), %rdi
 	callq SDL_RenderCopy
 
+	movq renderer(%rbp), %rdi
+	call SDL_RenderPresent
+
 	xorq %rcx, %rcx
 
 	movq curr_rect + rect_x(%rbp), %rax
 	addq $pic_inc, %rax
 	cmpq $pic_max, %rax
-	cmovg %rcx, %rax
+	cmovz %rcx, %rax
 	movq %rax, curr_rect + rect_x(%rbp)
-
-	movq renderer(%rbp), %rdi
-	call SDL_RenderPresent
 
 	movl $delay_time, %edi
 	callq SDL_Delay

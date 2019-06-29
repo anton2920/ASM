@@ -1,12 +1,16 @@
 .equ run_time, 30000
 .equ delay_time, 40
+
+.equ sizeof_int, 4
 .equ sizeof_void_p, 4
+
 .equ pic_inc, 366
 .equ pic_max, 4758
 
 # struct SDL_Rect {
 #	int x, y, w, h;
 #}
+
 .equ sizeof_sdl_rect, 16
 .equ rect_x, 0
 .equ rect_y, 4
@@ -22,17 +26,17 @@ pic_path:
 main:
 	# Initializing stack frame
 	movl %esp, %ebp
-	.equ num_of_vars, 8
-	.equ window, -4
-	.equ renderer, -8
+	.equ num_of_vars, sizeof_void_p + sizeof_void_p
+	.equ window, -4 # SDL_Window *
+	.equ renderer, -8 # SDL_Renderer *
 	subl $num_of_vars, %esp
 
-	.equ draw_rect, -24
-	.equ curr_rect, -40
+	.equ draw_rect, -24 # SDL_Rect
+	.equ curr_rect, -40 # SDL_Rect
 	subl $sizeof_sdl_rect, %esp
 	subl $sizeof_sdl_rect, %esp
 
-	.equ fire_texture, -44
+	.equ fire_texture, -44 # SDL_Texture *
 	subl $sizeof_void_p, %esp
 
 	# Initializing variables
@@ -54,12 +58,12 @@ main:
 	leal window(%ebp), %eax
 	pushl %eax
 	call Init_window_renderer
-	addl $0x8, %esp
+	addl $sizeof_void_p + sizeof_void_p, %esp
 
 	pushl $pic_path
 	pushl renderer(%ebp)
 	call Get_texture
-	addl $0x8, %esp
+	addl $sizeof_void_p + sizeof_void_p, %esp
 
 	movl %eax, fire_texture(%ebp) # Saving texture to variable
 
@@ -67,6 +71,11 @@ main_while:
 	call SDL_GetTicks
 	cmpl $run_time, %eax # if (ticks > run_time)
 	jae main_while_end
+
+	movl renderer(%ebp), %eax
+	pushl %eax
+	call SDL_RenderClear
+	addl $sizeof_void_p, %esp
 
 	leal draw_rect(%ebp), %eax
 	pushl %eax
@@ -77,36 +86,41 @@ main_while:
 	movl renderer(%ebp), %eax
 	pushl %eax
 	call SDL_RenderCopy
-	addl $0x10, %esp
+	addl $sizeof_void_p + sizeof_void_p + sizeof_void_p + sizeof_void_p, %esp
+
+	movl renderer(%ebp), %eax
+	pushl %eax
+	call SDL_RenderPresent
+	addl $sizeof_void_p, %esp
 
 	xorl %ecx, %ecx
 
 	movl curr_rect + rect_x(%ebp), %eax
 	addl $pic_inc, %eax
 	cmpl $pic_max, %eax
-	cmovg %ecx, %eax
+	cmovz %ecx, %eax
 	movl %eax, curr_rect + rect_x(%ebp)
 
 	pushl $delay_time
 	call SDL_Delay
-	addl $0x4, %esp
+	addl $sizeof_int, %esp
 	jmp main_while
 
 main_while_end:
 	movl fire_texture(%ebp), %eax
 	pushl %eax
 	call SDL_DestroyTexture
-	addl $0x4, %esp
+	addl $sizeof_void_p, %esp
 
 	movl renderer(%ebp), %eax
 	pushl %eax
 	call SDL_DestroyRenderer
-	addl $0x4, %esp
+	addl $sizeof_void_p, %esp
 
 	movl window(%ebp), %eax
 	pushl %eax
 	call SDL_DestroyWindow
-	addl $0x4, %esp
+	addl $sizeof_void_p, %esp
 
 exit:
 	# Exiting

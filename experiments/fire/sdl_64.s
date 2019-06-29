@@ -1,12 +1,11 @@
 .equ window_width, 366
 .equ window_height, 391
+
 .equ NULL, 0x0
 .equ SDL_INIT_VIDEO, 0x00000020
 .equ SDL_WINDOWPOS_CENTERED_MASK, 0x2FFF0000
 .equ SDL_WINDOW_SHOWN, 0x00000004
 
-# .equ first_arg, 16
-# .equ second_arg, 24
 .equ first_arg, -16
 .equ second_arg, -8
 
@@ -51,7 +50,6 @@ Init_window_renderer:
 	movq $title, %rdi
 	callq SDL_CreateWindow
 
-rend:
 	cmpq $NULL, %rax
 	jz em1_exit
 
