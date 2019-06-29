@@ -8,10 +8,12 @@ DEBUG = -g
 
 # Main part
 all: main.o sdl.o
-	$(link) main.o sdl.o -o main $(DEBUG) $(LDFLAGS)
+	# $(link) main.o sdl.o -o main $(DEBUG) $(LDFLAGS)
+	gcc main.o sdl.o -o main -lSDL2 -lSDL2_image $(DEBUG) -m32
 
 x86-64: main_64.o sdl_64.o
-	$(link) main_64.o sdl_64.o -o main_64 $(DEBUG) $(LDFLAGS_64)
+	# $(link) main_64.o sdl_64.o -o main64 $(DEBUG) $(LDFLAGS_64)
+	gcc main_64.o sdl_64.o -o main64 -lSDL2 -lSDL2_image $(DEBUG)
 
 main.o: main.s
 	$(asm) main.s -o main.o $(ASFLAGS) $(DEBUG)

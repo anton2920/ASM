@@ -17,6 +17,10 @@
 .equ rect_w, 8
 .equ rect_h, 12
 
+.equ sizeof_sdl_event, 56
+.equ event_type, 0
+.equ SDL_QUIT, 0x100
+
 .section .rodata
 pic_path:
 	.asciz "giphy.png"
@@ -38,6 +42,12 @@ main:
 
 	.equ fire_texture, -44 # SDL_Texture *
 	subl $sizeof_void_p, %esp
+
+	.equ event, -100 # SDL_Event
+	subl $sizeof_sdl_event, %esp
+
+	.equ quit_flag, -104 # int
+	subl $sizeof_int, %esp
 
 	# Initializing variables
 	movl $0x0, draw_rect + rect_x(%ebp)
@@ -68,10 +78,25 @@ main:
 	movl %eax, fire_texture(%ebp) # Saving texture to variable
 
 main_while:
-	call SDL_GetTicks
-	cmpl $run_time, %eax # if (ticks > run_time)
-	jae main_while_end
+	cmpl $0x0, quit_flag(%ebp) # if (flag)
+	jnz main_while_end
 
+event_loop:
+	leal event(%ebp), %eax
+	pushl %eax
+	call SDL_PollEvent
+	addl $sizeof_void_p, %esp
+
+	cmpl $0x0, %eax
+	jz event_loop_end
+
+	movl event + event_type(%ebp), %eax
+	cmpl $SDL_QUIT, %eax
+	jnz event_loop
+
+	movl %eax, quit_flag(%ebp)
+
+event_loop_end:
 	movl renderer(%ebp), %eax
 	pushl %eax
 	call SDL_RenderClear

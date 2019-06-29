@@ -1,4 +1,3 @@
-.equ run_time, 30000
 .equ delay_time, 40
 
 .equ sizeof_void_p, 8
@@ -17,13 +16,17 @@
 .equ rect_w, 8
 .equ rect_h, 12
 
+.equ sizeof_sdl_event, 56
+.equ event_type, 0
+.equ SDL_QUIT, 0x100
+
 .section .rodata
 pic_path:
 	.asciz "giphy.png"
 
 .section .text
-.globl _start
-_start:
+.globl main
+main:
 	# Initializing stack frame
 	movq %rsp, %rbp
 	.equ num_of_vars, sizeof_void_p + sizeof_void_p
@@ -39,7 +42,13 @@ _start:
 	.equ fire_texture, -56 # SDL_Texture *
 	subq $sizeof_void_p, %rsp
 
-	subq $sizeof_void_p, %rsp # For stack alingment
+	.equ event, -112 # SDL_Event
+	subq $sizeof_sdl_event, %rsp
+
+	.equ quit_flag, -116 # int
+	subq $sizeof_int, %rsp
+
+	subq $0xC, %rsp # For stack alingment
 
 	# Initializing variables
 	movq $0x0, draw_rect + rect_x(%rbp)
@@ -66,10 +75,23 @@ _start:
 	movq %rax, fire_texture(%rbp) # Saving texture to variable
 
 main_while:
-	callq SDL_GetTicks
-	cmpq $run_time, %rax # if (ticks > run_time)
-	jae main_while_end
+	cmpl $0x0, quit_flag(%rbp) # if (flag)
+	jnz main_while_end
 
+event_loop:
+	leaq event(%rbp), %rdi
+	callq SDL_PollEvent
+
+	cmpq $0x0, %rax
+	jz event_loop_end
+
+	movl event + event_type(%rbp), %eax
+	cmpl $SDL_QUIT, %eax
+	jnz event_loop
+
+	movl %eax, quit_flag(%rbp)
+
+event_loop_end:
 	movq renderer(%rbp), %rdi
 	call SDL_RenderClear
 
