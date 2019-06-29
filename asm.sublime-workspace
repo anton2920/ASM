@@ -4,6 +4,42 @@
 		"selected_items":
 		[
 			[
+				"sdl",
+				"sdl_64.o\tabc"
+			],
+			[
+				"main",
+				"main_64.o\tabc"
+			],
+			[
+				"ev",
+				"event\tabc"
+			],
+			[
+				"event",
+				"event_loop_end\tabc"
+			],
+			[
+				"eve",
+				"event_loop\tabc"
+			],
+			[
+				"si",
+				"sizeof_int\tabc"
+			],
+			[
+				"SDL_Re",
+				"SDL_Rect\tabc"
+			],
+			[
+				"sie",
+				"sizeof_void_p\tabc"
+			],
+			[
+				"siz",
+				"sizeof_void_p\tabc"
+			],
+			[
 				"em",
 				"em1_exit\tabc"
 			],
@@ -46,10 +82,6 @@
 			[
 				"fir",
 				"fire_texture\tabc"
-			],
-			[
-				"main",
-				"main_while\tabc"
 			],
 			[
 				"SDL_WINDOW",
@@ -96,10 +128,6 @@
 				"size_x\tabc"
 			],
 			[
-				"siz",
-				"size_x\tabc"
-			],
-			[
 				"col",
 				"colon_main_part\tabc"
 			],
@@ -114,10 +142,6 @@
 			[
 				"left",
 				"left_bracket_main\tabc"
-			],
-			[
-				"re",
-				"registers\tabc"
 			],
 			[
 				"edi",
@@ -144,10 +168,6 @@
 				"format_table\tabc"
 			],
 			[
-				"main",
-				"main_do_while_end\tabc"
-			],
-			[
 				"main_do",
 				"main_do_while_cnt\tabc"
 			],
@@ -158,10 +178,6 @@
 			[
 				"forma",
 				"format_input\tabc"
-			],
-			[
-				"ex",
-				"extincton\tabc"
 			],
 			[
 				"w",
@@ -498,66 +514,34 @@
 			[
 				"ato",
 				"atoi_main_loop"
-			],
-			[
-				"popl",
-				"popl"
-			],
-			[
-				"pro",
-				"print_arr_loop_end"
-			],
-			[
-				"prin",
-				"print_arr"
-			],
-			[
-				"NU",
-				"NUM_BUF_SIZE"
-			],
-			[
-				"sum",
-				"sum_of_elem"
-			],
-			[
-				"ar",
-				"argv"
-			],
-			[
-				"Res",
-				"Restoring"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "lab/lab_C/lab_10/a2.s",
+			"file": "experiments/fire/Makefile",
 			"settings":
 			{
-				"buffer_size": 7951,
+				"buffer_size": 791,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "lab/lab_C/lab_10/a3.s",
+			"file": "experiments/fire/main_64.s",
 			"settings":
 			{
-				"buffer_size": 1914,
+				"buffer_size": 2540,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"contents": ".text\n.globl main\nmain:\n\txor %ecx,  %ecx\n\tmov $32,   %edx    ;//Depth\n\tmov $600,  %esi    ;//Height\n\tmov $800,  %edi    ;//Width\n\tcall SDL_SetVideoMode\n\tmov %rax,     %r12  ;// Save surface to %r12\n\tmov 32(%rax), %rbx ;// Save pointer to pixels\n\tlea .L8(%rip), %r14\n\tfninit\n    fild    .L6(%rip)\n    fld1\n    fld     %st(0)\n    fdiv    %st,%st(2)\n    mov\t$600,%r13  ;//Height\n.L5:    fld     %st(1)  ;// Vertical loop\n    mov     $800,%ecx ;//Width\n.L4:    fld     %st(1)  ;// Horizontal loop\n    fld     %st(1)\n    mov     $4, %ax ;// Limit for test whether it escaped\n    xor\t%edx, %edx\n.L2:    fld     %st(1)\n    fmul    %st,%st(2)\n    fld     %st(1)\n    fmul    %st,%st(2)\n    fmulp   %st,%st(1)\n    fld     %st(2)\n    fadd    %st(2),%st\n    fistp   (%r14)\n    fadd    %st,%st(0)\n    fadd    %st(4),%st\n    fxch    %st(2)\n    fsubrp  %st(1)\n    cmp     %ax, (%r14)\n    jnbe    .L1\n    fadd    %st(2),%st\n    inc\t%dl\n    jnz     .L2\n.L1:    imul\t$0x030507, %edx, %edx\n    mov\t%edx, (%rbx)\n    add\t$4, %rbx\n    fstp    %st(0)\n    fstp    %st(0)\n    fsub    %st(3),%st\n    loop    .L4       ;// Horizontal loop\n    fstp    %st(0)\n    fsub    %st(2),%st\n\n    mov\t%r12, %rdi\n    call\tSDL_Flip\n\n    dec\t%r13\n    jnz\t.L5\t;// Vertical loop\n    \n.L9:    lea .Lev(%rip), %rdi\n    call SDL_WaitEvent\n    cmpb $2, .Lev(%rip)\n    jne .L9\n    ret\n\n.L6:\t.word 312\n\n.lcomm .L8,  2\n.lcomm .Lev,24\n",
-			"file": "experiments/fracts/fract.s",
-			"file_size": 1384,
-			"file_write_time": 132060555014162865,
+			"file": "experiments/fire/sdl_64.s",
 			"settings":
 			{
-				"buffer_size": 1384,
-				"encoding": "UTF-8",
+				"buffer_size": 2062,
 				"line_ending": "Unix"
 			}
 		}
@@ -696,17 +680,15 @@
 	[
 		"/home/anton/ASM",
 		"/home/anton/ASM/experiments",
-		"/home/anton/ASM/experiments/fracts",
-		"/home/anton/ASM/home",
-		"/home/anton/ASM/lab",
-		"/home/anton/ASM/lab/lab_C",
-		"/home/anton/ASM/lab/lab_C/lab_09",
-		"/home/anton/ASM/lab/lab_C/lab_10"
+		"/home/anton/ASM/experiments/fire"
 	],
 	"file_history":
 	[
 		"/home/anton/ASM/experiments/fire/main.s",
+		"/home/anton/ASM/experiments/fire/Makefile",
+		"/home/anton/ASM/experiments/fire/main_64.s",
 		"/home/anton/ASM/experiments/fire/sdl.s",
+		"/home/anton/ASM/experiments/fire/sdl_64.s",
 		"/home/anton/ASM/lab/lab_C/lab_10/a2.s",
 		"/home/anton/ASM/lab/lab_C/lab_10/a3.s",
 		"/home/anton/ASM/experiments/fracts/fract.s",
@@ -829,15 +811,7 @@
 		"/home/anton/C/lab/lab_09/a1.c",
 		"/home/anton/C/lab/lab_09/a2.c",
 		"/home/anton/C/lab/lab_09/a3.c",
-		"/home/anton/C/lab/lab.sublime-project",
-		"/home/anton/C/lab/lab_wrong/lab_11/a1.c",
-		"/home/anton/C/lab/lab_wrong/lab_11/a2.c",
-		"/home/anton/C/experiments/SanyaEbet/shoulders.h",
-		"/home/anton/C/experiments/SanyaEbet/shoulders.c",
-		"/home/anton/C/experiments/SanyaEbet/main.c",
-		"/home/anton/C/experiments/pic/main.c",
-		"/home/anton/C/experiments/pic/main,c",
-		"/home/anton/C/experiments/SanyaEbet/main,c"
+		"/home/anton/C/lab/lab.sublime-project"
 	],
 	"find":
 	{
@@ -931,24 +905,24 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "lab/lab_C/lab_10/a2.s",
+					"file": "experiments/fire/Makefile",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 7951,
+						"buffer_size": 791,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								7951,
-								7951
+								374,
+								374
 							]
 						],
 						"settings":
@@ -972,46 +946,16 @@
 							},
 							"bracket_highlighter.clone_regions":
 							[
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
 								"bh_unmatched",
 								"bh_unmatched_center",
 								"bh_unmatched_open",
 								"bh_unmatched_close",
 								"bh_unmatched_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
 								"bh_default",
 								"bh_default_center",
 								"bh_default_open",
@@ -1026,7 +970,37 @@
 								"bh_single_quote_center",
 								"bh_single_quote_open",
 								"bh_single_quote_close",
-								"bh_single_quote_content"
+								"bh_single_quote_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content"
 							],
 							"bracket_highlighter.locations":
 							{
@@ -1045,46 +1019,16 @@
 							},
 							"bracket_highlighter.regions":
 							[
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
 								"bh_unmatched",
 								"bh_unmatched_center",
 								"bh_unmatched_open",
 								"bh_unmatched_close",
 								"bh_unmatched_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
 								"bh_default",
 								"bh_default_center",
 								"bh_default_open",
@@ -1099,13 +1043,42 @@
 								"bh_single_quote_center",
 								"bh_single_quote_open",
 								"bh_single_quote_close",
-								"bh_single_quote_content"
+								"bh_single_quote_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content"
 							],
-							"syntax": "Packages/GAS-x86 (or x64) highlighting scheme/Assembly x86 AT&T.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/Makefile/Makefile.sublime-syntax"
 						},
 						"translation.x": 0.0,
-						"translation.y": 9027.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
@@ -1113,19 +1086,19 @@
 				},
 				{
 					"buffer": 1,
-					"file": "lab/lab_C/lab_10/a3.s",
+					"file": "experiments/fire/main_64.s",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1914,
+						"buffer_size": 2540,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1436,
-								1436
+								1803,
+								1803
 							]
 						],
 						"settings":
@@ -1149,61 +1122,61 @@
 							},
 							"bracket_highlighter.clone_regions":
 							[
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
 								"bh_round",
 								"bh_round_center",
 								"bh_round_open",
 								"bh_round_close",
 								"bh_round_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
 								"bh_curly",
 								"bh_curly_center",
 								"bh_curly_open",
 								"bh_curly_close",
 								"bh_curly_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
 								"bh_regex",
 								"bh_regex_center",
 								"bh_regex_open",
 								"bh_regex_close",
 								"bh_regex_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
 								"bh_square",
 								"bh_square_center",
 								"bh_square_open",
 								"bh_square_close",
 								"bh_square_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content"
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content"
 							],
 							"bracket_highlighter.locations":
 							{
@@ -1222,26 +1195,51 @@
 							},
 							"bracket_highlighter.regions":
 							[
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
 								"bh_default",
 								"bh_default_center",
 								"bh_default_open",
 								"bh_default_close",
 								"bh_default_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
 								"bh_square",
 								"bh_square_center",
 								"bh_square_open",
@@ -1251,209 +1249,7 @@
 								"bh_double_quote_center",
 								"bh_double_quote_open",
 								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content"
-							],
-							"open_with_edit": true,
-							"syntax": "Packages/GAS-x86 (or x64) highlighting scheme/Assembly x86 AT&T.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 918.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "experiments/fracts/fract.s",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1384,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1384,
-								1384
-							]
-						],
-						"settings":
-						{
-							"bracket_highlighter.busy": false,
-							"bracket_highlighter.clone": -1,
-							"bracket_highlighter.clone_locations":
-							{
-								"close":
-								{
-								},
-								"icon":
-								{
-								},
-								"open":
-								{
-								},
-								"unmatched":
-								{
-								}
-							},
-							"bracket_highlighter.clone_regions":
-							[
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content"
-							],
-							"bracket_highlighter.locations":
-							{
-								"close":
-								{
-								},
-								"icon":
-								{
-								},
-								"open":
-								{
-								},
-								"unmatched":
-								{
-								}
-							},
-							"bracket_highlighter.regions":
-							[
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content"
+								"bh_double_quote_content"
 							],
 							"syntax": "Packages/GAS-x86 (or x64) highlighting scheme/Assembly x86 AT&T.tmLanguage",
 							"translate_tabs_to_spaces": false
@@ -1463,6 +1259,183 @@
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "experiments/fire/sdl_64.s",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2062,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.clone": -1,
+							"bracket_highlighter.clone_locations":
+							{
+								"close":
+								{
+								},
+								"icon":
+								{
+								},
+								"open":
+								{
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.clone_regions":
+							[
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content"
+							],
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+								},
+								"icon":
+								{
+								},
+								"open":
+								{
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content"
+							],
+							"syntax": "Packages/GAS-x86 (or x64) highlighting scheme/Assembly x86 AT&T.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
 					"type": "text"
 				}
 			]
