@@ -17,7 +17,7 @@
 
 .section .rodata
 error_msg:
-	.asciz "| wavp: error! Argument problem! Consider using only .wav filename\n"
+	.asciz "\n| wavp: error! Argument problem! Consider using only .wav filename\n"
 	.equ len_error_msg, . - error_msg
 hello:
 	.asciz "| This is the simplest .wav player ever possible!\n| Enjoy your shitty music :)\n"
@@ -28,7 +28,7 @@ currently_playing:
 device:
 	.asciz "/dev/dsp3"
 un_err:
-	.asciz "wavp: unexpected error occurs!\n"
+	.asciz "\n| wavp: unexpected error occurs!\n"
 	.equ len_un_err, . - un_err
 play_again:
 	.asciz "\n| Do you want to play this file again? [y/N]: "
@@ -57,6 +57,7 @@ _start:
 
 	# Initializing variables
 	movl (%ebp), %ecx
+	
 	cmpl $0x2, %ecx
 	jnz arg_fault
 
