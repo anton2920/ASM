@@ -1,0 +1,1 @@
+modprobe snd-pcm-oss
