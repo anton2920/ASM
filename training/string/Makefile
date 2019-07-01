@@ -8,7 +8,7 @@ DEBUG = -g
 
 # Main part
 all: main.o routines.o
-	$(link) main.o routines.o -o wavp $(DEBUG) -m elf_i386 # $(LDFLAGS)
+	$(link) main.o routines.o -o strings $(DEBUG) $(LDFLAGS)
 
 main.o: main.s
 	$(asm) main.s -o main.o $(DEBUG) $(ASFLAGS)

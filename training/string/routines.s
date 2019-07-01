@@ -47,21 +47,25 @@ read:
 	popl %ebp
 	retl
 
-.globl strlen
-.type strlen, @function's
-strlen:
+.globl lstrlen
+.type lstrlen, @function
+lstrlen:
 	# Initializing function's stack frame
 	pushl %ebp
 	movl %esp, %ebp
 
+	# Saving registers
+	pushl %esi
+	pushl %edi
+
 	# Initializing variables
-	movl first_arg(%ebp), %esi
+	movl first_arg(%ebp), %edi
 	xorl %eax, %eax
-	cld
 	movl $0xFFFF, %ecx
 
 	# Main part
-	repne scasb
+	cld
+	repnz scasb
 	jne notfound
 
 	subw $0xFFFF, %cx
@@ -70,12 +74,102 @@ strlen:
 
 	movl %ecx, %eax
 
-	jmp strlen_fin
+	jmp lstrlen_fin
 
 notfound:
 	movl $-1, %eax
 
-strlen_fin:
+lstrlen_fin:
+	# Restoring registers
+	popl %edi
+	popl %esi
+
+	# Destroying function's stack frame
+	movl %ebp, %esp
+	popl %ebp
+	retl
+
+.globl lstrcmp
+.type lstrcmp, @function
+lstrcmp:
+	# Initializing function's stack frame
+	pushl %ebp
+	movl %esp, %ebp
+
+	# Saving registers
+	pushl %esi
+	pushl %edi
+	pushl %ebx
+
+	# Initializing variables
+	movl first_arg(%ebp), %esi
+	movl second_arg(%ebp), %edi
+
+	# Main part
+	pushl %esi
+	call lstrlen
+	addl $0x4, %esp
+
+	movl %eax, %ecx
+
+	movl $0x1, %ebx
+	movl $-1, %edx
+	xorl %eax, %eax
+
+	cld
+	repz cmpsb
+
+	cmovgl %ebx, %eax
+	cmovll %edx, %eax
+
+lstrcmp_exit:
+	# Restoring registers
+	popl %ebx
+	popl %edi
+	popl %esi
+
+	# Destroying function's stack frame
+	movl %ebp, %esp
+	popl %ebp
+	retl
+
+.globl lstrcpy
+.type lstrcpy, @function
+lstrcpy:
+	# Initializing function's stack frame
+	pushl %ebp
+	movl %esp, %ebp
+
+	# Saving registers
+	pushl %esi
+	pushl %edi
+
+	# Initializing variables
+	movl first_arg(%ebp), %edi
+	movl second_arg(%ebp), %esi
+
+	# Main part
+	pushl %esi
+	call lstrlen
+	addl $0x4, %esp
+
+	movl %eax, %ecx
+	sarl $0x2, %ecx
+	cld
+	rep movsl
+
+	movl %eax, %ecx
+	andl $0x3, %ecx
+	rep movsb
+
+	# Returning value
+	movl %edi, %eax
+
+	# Restoring registers
+	popl %ebx
+	popl %edi
+	popl %esi
+
 	# Destroying function's stack frame
 	movl %ebp, %esp
 	popl %ebp
