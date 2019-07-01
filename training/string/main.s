@@ -65,8 +65,6 @@ _start:
 	movl %eax, len_buf1
 	leal buf1, %esi
 
-	movb $0x0, (%esi, %eax, 1) # Make it a zero-terminated string
-
 	pushl $len_output_2
 	pushl $output_2
 	pushl $STDOUT
@@ -81,8 +79,6 @@ _start:
 
 	movl %eax, len_buf2
 	leal buf2, %esi
-
-	movb $0x0, (%esi, %eax, 1) # Make it a zero-terminated string
 
 	# Main part
 
