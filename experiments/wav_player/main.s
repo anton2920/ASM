@@ -3,6 +3,7 @@
 .equ STDERR, 2
 .equ O_RDWR, 02
 .equ O_RDONLY, 00
+.equ PERMS, 0644
 
 # Audio info
 .equ RATE, 44100 # The sampling rate
@@ -17,29 +18,19 @@
 
 .section .rodata
 error_msg:
-	.asciz "\n| wavp: error! Argument problem! Consider using only .wav filename\n"
+	.asciz "| wavp: error! Argument problem! Consider using only .wav filename\n"
 	.equ len_error_msg, . - error_msg
 hello:
 	.asciz "| This is the simplest .wav player ever possible!\n| Enjoy your shitty music :)\n"
 	.equ len_hello, . - hello
-currently_playing:
-	.asciz "\n| Currently playing: "
-	.equ len_currently_playing, . - currently_playing
 device:
 	.asciz "/dev/dsp3"
 un_err:
 	.asciz "\n| wavp: unexpected error occurs!\n"
 	.equ len_un_err, . - un_err
-play_again:
-	.asciz "\n| Do you want to play this file again? [y/N]: "
-	.equ len_play_again, . - play_again
-play_again_err:
-	.asciz "| wavp: error! No such command!\n"
-	.equ len_play_again_err, . - play_again_err
 
 .section .bss
-.equ menubuf_len, 100
-.lcomm menubuf, menubuf_len
+.lcomm const_product, 4
 
 .section .text
 .globl _start
@@ -51,9 +42,14 @@ _start:
 	.equ file, -12 # int
 	subl $0xC, %esp # Acquiring space for three variables
 
-	.equ sizeof_buf, 176400 # void *
-	.equ buf, -176412
-	subl $sizeof_buf, %esp
+	# .equ sizeof_buf, 176400 # void *
+	# .equ buf, -176412
+	# subl $sizeof_buf, %esp
+
+	# mmap approach
+	.equ file_map, -16
+	.equ file_size, -20
+	subl $0x8, %esp
 
 	# Initializing variables
 	movl (%ebp), %ecx
@@ -69,16 +65,18 @@ _start:
 	addl $0xC, %esp
 
 	# Main part
+	pushl $PERMS
 	pushl $O_RDWR
 	pushl $device
 	call open
-	addl $0x8, %esp
+	addl $0xC, %esp
 
-	cmpl $0x0, %eax # If file isn't opened :(
-	jle error
+	test %eax, %eax
+	js error # If file isn't opened :(
 
 	movl %eax, fd(%ebp)
 
+	# Tune device
 	movl $SIZE, arg(%ebp)
 	leal arg(%ebp), %eax
 	pushl %eax
@@ -124,81 +122,68 @@ _start:
 	cmpl $RATE, arg(%ebp)
 	jnz error
 
-	movl 8(%ebp), %eax
-	pushl %eax
+	pushl $CHANNELS
+	pushl $SIZE
+	pushl $RATE
+	call print_dev_info
+	addl $0xC, %esp
 
-	pushl $O_RDONLY
-	pushl %eax
+	movl $CHANNELS, %eax
+	movl $SIZE, %ebx
+	movl $RATE, %ecx
+	imull %ebx, %eax
+	imull %ecx, %eax
+	shrl $0x3, %eax
+	movl %eax, const_product
+
+	# Open .wav file
+	pushl $PERMS
+	pushl $0102
+	pushl 8(%ebp)
 	call open
-	addl $0x8, %esp
+	addl $0xC, %esp
 
-	cmpl $0x0, %eax
-	jle error
+	test %eax, %eax
+	js error
 
 	movl %eax, file(%ebp)
 
+	pushl file(%ebp)
+	call find_size
+	addl $0x4, %esp
+
+	movl %eax, file_size(%ebp)
+
+mmap_call:
+	# Syscall
+	pushl $0x0
+	pushl file(%ebp)
+	pushl $0x2 # Map private
+	pushl $0x1 # Prot read-only
+	pushl file_size(%ebp)
+	pushl $0x0
+	movl %esp, %ebx
+	movl $90, %eax
+	int $0x80 # 0x80's interrupt
+	addl $0x18, %esp
+
+	movl %eax, file_map(%ebp)
+
 replay_cont:
-	pushl $len_currently_playing
-	pushl $currently_playing
-	pushl $STDOUT
-	call write
-	addl $0xC, %esp
-
-	popl %eax
-	pushl %eax
-
-	pushl %eax
-	call lstrlen
+	pushl 8(%ebp)
+	call print_cur_play
 	addl $0x4, %esp
 
-	popl %ebx
-	pushl %eax
-	pushl %ebx
-	pushl $STDOUT
+	pushl file_size(%ebp)
+	pushl const_product
+	call print_file_info
+	addl $0x8, %esp
+
+	pushl file_size(%ebp)
+	pushl file_map(%ebp)
+	pushl fd(%ebp)
 	call write
 	addl $0xC, %esp
-
-	movl $0xA, %eax
-	pushl %eax
-	call lputchar
-	addl $0x4, %esp
-
-main_while:
-	pushl $sizeof_buf
-	leal buf(%ebp), %eax
-	pushl %eax
-	movl file(%ebp), %eax
-	pushl %eax
-	call read
-	addl $0xC, %esp
-
-	cmpl $sizeof_buf, %eax
-	jnz main_while_end
-
-	pushl $sizeof_buf
-	leal buf(%ebp), %eax
-	pushl %eax
-	movl fd(%ebp), %eax
-	pushl %eax
-	call write
-	addl $0xC, %esp
-
-	cmpl $sizeof_buf, %eax
-	jnz main_while_end
-
-	# pushl $0x0
-	# pushl $SOUND_PCM_SYNC
-	# movl fd(%ebp), %eax
-	# pushl %eax
-	# call ioctl
-	# addl $0xC, %esp
-
-	cmpl $-1, %eax
-	jz main_while_end
-
-	jmp main_while
-
-main_while_end:
 
 	call play_more
 
@@ -222,6 +207,12 @@ closing:
 	pushl %eax
 	call close
 	addl $0x4, %esp
+
+	# Syscall
+	pushl file_map(%ebp)
+	pushl file_size(%ebp)
+	movl $91, %eax
+	int $0x80 # 0x80's interrupt
 
 	movl file(%ebp), %eax
 	pushl %eax
@@ -252,81 +243,3 @@ exit:
 	incl %eax
 	xorl %ebx, %ebx
 	int $0x80 # 0x80's interrupt
-
-.type play_more, @function
-play_more:
-	# Initializing function's stack frame
-	pushl %ebp
-	movl %esp, %ebp
-
-	# I/O flow
-play_more_begin:
-	pushl $len_play_again
-	pushl $play_again
-	pushl $STDOUT
-	call write
-	addl $0xC, %esp
-
-	pushl $menubuf_len
-	pushl $menubuf
-	pushl $STDIN
-	call read
-	addl $0xC, %esp
-
-	leal menubuf, %ebx
-
-	xorl %ecx, %ecx
-	movb (%ebx), %cl
-
-	cmpl $0x1, %eax
-	jz test_nl
-
-	cmpl $0x2, %eax
-	jz test_yn
-
-test_nl:
-	cmpb $'\n', %cl
-	jz ans_no
-
-	jmp no_cmd
-
-test_yn:
-	cmpb $'Y', %cl
-	jz ans_yes
-
-	cmpb $'y', %cl
-	jz ans_yes
-
-	cmpb $'N', %cl
-	jz ans_no
-
-	cmpb $'n', %cl
-	jz ans_no
-
-	jmp no_cmd
-
-ans_yes:
-	xorl %eax, %eax
-	incl %eax
-
-	jmp play_more_exit
-
-ans_no:
-	xorl %eax, %eax
-
-	jmp play_more_exit
-
-no_cmd:
-	pushl $len_play_again_err
-	pushl $play_again_err
-	pushl $STDERR
-	call write
-	addl $0xC, %esp
-
-	jmp play_more_begin
-
-play_more_exit:
-	# Destroying function's stack frame
-	movl %ebp, %esp
-	popl %ebp
-	ret
