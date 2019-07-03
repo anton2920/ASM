@@ -4,6 +4,134 @@
 		"selected_items":
 		[
 			[
+				"str",
+				"string_size\tabc"
+			],
+			[
+				"mov",
+				"movupd\tabc"
+			],
+			[
+				"st",
+				"string_size\tabc"
+			],
+			[
+				"sec",
+				"second_arg\tabc"
+			],
+			[
+				"lstr",
+				"lstrlen_done\tabc"
+			],
+			[
+				"sie",
+				"sizeof_int\tabc"
+			],
+			[
+				"lst",
+				"lstrlen\tabc"
+			],
+			[
+				"for",
+				"format_answer\tabc"
+			],
+			[
+				"WRI",
+				"write"
+			],
+			[
+				"STD",
+				"STDOUT\tabc"
+			],
+			[
+				"info",
+				"info_kib\tabc"
+			],
+			[
+				"len",
+				"len_info_bits\tabc"
+			],
+			[
+				"pu",
+				"putchar\t(routines.s)"
+			],
+			[
+				"siz",
+				"siezeof_int\tabc"
+			],
+			[
+				"pri",
+				"print_info.o\tabc"
+			],
+			[
+				"pr",
+				"print_file_info\t(print_info.s)"
+			],
+			[
+				"file",
+				"file_size\tabc"
+			],
+			[
+				"prin",
+				"print_cur_play\t(print_info.s)"
+			],
+			[
+				"len_",
+				"len_info_file_duration\tabc"
+			],
+			[
+				"fo",
+				"fourth_param\tabc"
+			],
+			[
+				"info_fi",
+				"info_file_size\tabc"
+			],
+			[
+				"len_info",
+				"len_info_file_size\tabc"
+			],
+			[
+				"size",
+				"siezeof_int\tabc"
+			],
+			[
+				"thi",
+				"third_param\tabc"
+			],
+			[
+				"en",
+				"end_if_chan\tabc"
+			],
+			[
+				"len_inf_",
+				"len_info_channels_stereo\tabc"
+			],
+			[
+				"len_inf",
+				"len_info_channels_mono\tabc"
+			],
+			[
+				"th",
+				"third_param\tabc"
+			],
+			[
+				"fi",
+				"first_param\tabc"
+			],
+			[
+				"len_in",
+				"len_info_rate\tabc"
+			],
+			[
+				"info_fil",
+				"info_file_duration\tabc"
+			],
+			[
+				"fil",
+				"file_size\tabc"
+			],
+			[
 				"lstrc",
 				"lstrcpy\tabc"
 			],
@@ -20,16 +148,8 @@
 				"first_arg\tabc"
 			],
 			[
-				"STD",
-				"STDOUT\tabc"
-			],
-			[
 				"out",
 				"output_fin\tabc"
-			],
-			[
-				"len",
-				"len_output_fin\tabc"
 			],
 			[
 				"output",
@@ -44,20 +164,12 @@
 				"buf3\tabc"
 			],
 			[
-				"fo",
-				"format_result_of_cmp\tabc"
-			],
-			[
 				"forma",
 				"format_length_2\tabc"
 			],
 			[
 				"le",
 				"len_buf2\tabc"
-			],
-			[
-				"for",
-				"format_length_1\tabc"
 			],
 			[
 				"outp",
@@ -70,14 +182,6 @@
 			[
 				"second",
 				"second_string\tabc"
-			],
-			[
-				"sec",
-				"len_second_string"
-			],
-			[
-				"st",
-				"strlen_fin\tabc"
 			],
 			[
 				"re",
@@ -120,10 +224,6 @@
 				"test_nl\tabc"
 			],
 			[
-				"mov",
-				"movb\t(menu.s)"
-			],
-			[
 				"men",
 				"menubuf_len\tabc"
 			],
@@ -138,10 +238,6 @@
 			[
 				"main",
 				"main_while\tabc"
-			],
-			[
-				"size",
-				"sizeof_buf"
 			],
 			[
 				"seco",
@@ -234,14 +330,6 @@
 			[
 				"SDL_Re",
 				"SDL_Rect\tabc"
-			],
-			[
-				"sie",
-				"sizeof_void_p\tabc"
-			],
-			[
-				"siz",
-				"sizeof_void_p\tabc"
 			],
 			[
 				"em",
@@ -426,108 +514,11 @@
 			[
 				"push",
 				"pushl"
-			],
-			[
-				"format",
-				"format_input\t(a3.s)"
-			],
-			[
-				"pu",
-				"putchar"
-			],
-			[
-				"mo",
-				"movb"
-			],
-			[
-				"while_",
-				"while_not_n"
-			],
-			[
-				"fi",
-				"final_output"
-			],
-			[
-				"fdi",
-				"fdivp\t(a3.s)"
-			],
-			[
-				"int",
-				"int_3"
-			],
-			[
-				"rest",
-				"registers\t(menu.s)"
-			],
-			[
-				"MEN",
-				"MENUBUF_LEN"
-			],
-			[
-				"err",
-				"error_open"
-			],
-			[
-				"op",
-				"open_database_exit"
-			],
-			[
-				"open",
-				"open_database"
-			],
-			[
-				"cre",
-				"create_database_change_name"
-			],
-			[
-				"file",
-				"file_exists"
-			],
-			[
-				"loo",
-				"lookout_for_cr"
-			],
-			[
-				"cr",
-				"create_database_exit"
-			],
-			[
-				"crea",
-				"create_database_exit"
-			],
-			[
-				"cha",
-				"change_name"
-			],
-			[
-				"erro",
-				"error_creating"
-			],
-			[
-				"qui",
-				"quit_sure"
-			],
-			[
-				"data",
-				"create_database_create"
-			],
-			[
-				"call",
-				"call_quit"
 			]
 		]
 	},
 	"buffers":
 	[
-		{
-			"file": "experiments/wav_player/main.s",
-			"settings":
-			{
-				"buffer_size": 4933,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		}
 	],
 	"build_system": "Packages/C++/C++ Single File.sublime-build",
 	"build_system_choices":
@@ -663,20 +654,25 @@
 	[
 		"/home/anton/ASM",
 		"/home/anton/ASM/experiments",
-		"/home/anton/ASM/experiments/wav_player"
+		"/home/anton/ASM/experiments/sse_strcpy",
+		"/home/anton/ASM/lab"
 	],
 	"file_history":
 	[
-		"/home/anton/ASM/training/string/main.s",
+		"/home/anton/ASM/experiments/sse_strcpy/main.s",
+		"/home/anton/ASM/experiments/sse_strcpy/Makefile",
+		"/home/anton/ASM/experiments/wav_player/routines.s",
+		"/home/anton/ASM/experiments/wav_player/print_info.s",
 		"/home/anton/ASM/experiments/wav_player/main.s",
+		"/home/anton/ASM/experiments/wav_player/Makefile",
+		"/home/anton/ASM/lab/lab_06/routines.s",
+		"/home/anton/ASM/training/string/main.s",
 		"/home/anton/ASM/training/string/routines.s",
 		"/home/anton/ASM/training/string/Makefile",
-		"/home/anton/ASM/experiments/wav_player/Makefile",
 		"/home/anton/ASM/experiments/wav_player/info",
 		"/home/anton/ASM/experiments/wav_player/test",
 		"/home/anton/ASM/experiments/wav_player/test.c",
 		"/home/anton/ASM/experiments/wav_player/DNCE  -  Kissing Strangers.wav",
-		"/home/anton/ASM/experiments/wav_player/routines.s",
 		"/home/anton/ASM/experiments/fire/Makefile",
 		"/home/anton/ASM/experiments/fire/sdl_64.s",
 		"/home/anton/ASM/experiments/fire/main_64.s",
@@ -790,11 +786,7 @@
 		"/home/anton/C/lab/lab_13/tobin.c",
 		"/home/anton/C/lab/lab_13/a1in.txt",
 		"/home/anton/C/lab/lab_13/a1in.bin",
-		"/home/anton/C/lab/lab_13/a1out.txt",
-		"/home/anton/C/experiments/dialog.c",
-		"/home/anton/C/experiments/clock.c",
-		"/home/anton/.config/sublime-text-3/Packages/QuickThemes/QuickThemes.sublime-settings",
-		"/home/anton/C/lab/lab_10/a22.c"
+		"/home/anton/C/lab/lab_13/a1out.txt"
 	],
 	"find":
 	{
@@ -812,6 +804,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"putchar",
+			"siezeof_int",
 			"second_string",
 			"first_string",
 			"8(%ebp)",
@@ -856,6 +850,8 @@
 		"regex": false,
 		"replace_history":
 		[
+			"lputchar",
+			"sizeof_int",
 			"output_2",
 			"output_1",
 			"first_param(%ebp)",
@@ -897,201 +893,8 @@
 	"groups":
 	[
 		{
-			"selected": 0,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "experiments/wav_player/main.s",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4933,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								416,
-								416
-							]
-						],
-						"settings":
-						{
-							"bracket_highlighter.busy": false,
-							"bracket_highlighter.clone": -1,
-							"bracket_highlighter.clone_locations":
-							{
-								"close":
-								{
-								},
-								"icon":
-								{
-								},
-								"open":
-								{
-								},
-								"unmatched":
-								{
-								}
-							},
-							"bracket_highlighter.clone_regions":
-							[
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content"
-							],
-							"bracket_highlighter.locations":
-							{
-								"close":
-								{
-									"1":
-									[
-										484,
-										485
-									]
-								},
-								"icon":
-								{
-									"1":
-									[
-										"Packages/BracketHighlighter/icons/double_quote.png",
-										"region.greenish"
-									]
-								},
-								"open":
-								{
-									"1":
-									[
-										415,
-										416
-									]
-								},
-								"unmatched":
-								{
-								}
-							},
-							"bracket_highlighter.regions":
-							[
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content"
-							],
-							"syntax": "Packages/GAS-x86 (or x64) highlighting scheme/Assembly x86 AT&T.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				}
 			]
 		}
 	],
