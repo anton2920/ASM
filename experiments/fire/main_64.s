@@ -27,6 +27,8 @@ pic_path:
 .section .text
 .globl main
 main:
+# .globl _start
+# _start:
 	# Initializing stack frame
 	movq %rsp, %rbp
 	.equ num_of_vars, sizeof_void_p + sizeof_void_p
@@ -68,7 +70,7 @@ main:
 	leaq window(%rbp), %rdi
 	callq Init_window_renderer
 
-	movq $pic_path, %rsi
+	leaq pic_path(%rip), %rsi
 	movq renderer(%rbp), %rdi
 	callq Get_texture
 
@@ -80,7 +82,7 @@ main_while:
 
 event_loop:
 	leaq event(%rbp), %rdi
-	callq SDL_PollEvent
+	callq SDL_PollEvent@PLT
 
 	cmpq $0x0, %rax
 	jz event_loop_end
@@ -99,7 +101,7 @@ event_loop_end:
 	leaq curr_rect(%rbp), %rdx
 	movq fire_texture(%rbp), %rsi
 	movq renderer(%rbp), %rdi
-	callq SDL_RenderCopy
+	callq SDL_RenderCopy@PLT
 
 	movq renderer(%rbp), %rdi
 	call SDL_RenderPresent
@@ -119,13 +121,13 @@ event_loop_end:
 
 main_while_end:
 	movq fire_texture(%rbp), %rdi
-	callq SDL_DestroyTexture
+	callq SDL_DestroyTexture@PLT
 
 	movq renderer(%rbp), %rdi
-	callq SDL_DestroyRenderer
+	callq SDL_DestroyRenderer@PLT
 
 	movq window(%rbp), %rdi
-	callq SDL_DestroyWindow
+	callq SDL_DestroyWindow@PLT
 
 exit:
 	# Exiting
