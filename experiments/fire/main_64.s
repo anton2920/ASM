@@ -63,7 +63,7 @@ main:
 	movq $391, curr_rect + rect_h(%rbp)
 
 	# Main part. SDL2	
-	callq SDL_init_all # Initializing SDL2
+	callq SDL_all # Initializing SDL2
 
 	# Initializing windows and attaching renderer to it
 	leaq renderer(%rbp), %rsi
@@ -76,7 +76,7 @@ main:
 
 	movq %rax, fire_texture(%rbp) # Saving texture to variable
 
-main_while:
+main_while_loop:
 	cmpl $0x0, quit_flag(%rbp) # if (flag)
 	jnz main_while_end
 
@@ -117,7 +117,7 @@ event_loop_end:
 	movl $delay_time, %edi
 	callq SDL_Delay
 
-	jmp main_while
+	jmp main_while_loop
 
 main_while_end:
 	movq fire_texture(%rbp), %rdi

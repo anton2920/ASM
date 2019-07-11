@@ -13,7 +13,7 @@ all: main.o sdl.o
 
 x86-64: main_64.o sdl_64.o
 	# $(link) main_64.o sdl_64.o -o main64 $(DEBUG) $(LDFLAGS_64)
-	gcc main_64.o sdl_64.o -o main64 -lSDL2 -lSDL2_image -lGL $(DEBUG)
+	gcc main_64.o sdl_64.o -o main64 -lSDL2 -lSDL2_image $(DEBUG)
 
 main.o: main.s
 	$(asm) main.s -o main.o $(ASFLAGS) $(DEBUG)
@@ -22,10 +22,10 @@ sdl.o: sdl.s
 	$(asm) sdl.s -o sdl.o $(ASFLAGS) $(DEBUG)
 
 main_64.o: main_64.s
-	$(asm) main_64.s -o main_64.o -gstabs
+	$(asm) main_64.s -o main_64.o $(DEBUG)
 
 sdl_64.o: sdl_64.s
-	$(asm) sdl_64.s -o sdl_64.o -gstabs
+	$(asm) sdl_64.s -o sdl_64.o $(DEBUG)
 
 clean:
 	rm -f *.o main

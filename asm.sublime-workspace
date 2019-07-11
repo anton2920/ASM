@@ -523,7 +523,7 @@
 			"file": "experiments/fire/Makefile",
 			"settings":
 			{
-				"buffer_size": 796,
+				"buffer_size": 793,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -532,7 +532,7 @@
 			"file": "experiments/fire/main_64.s",
 			"settings":
 			{
-				"buffer_size": 2591,
+				"buffer_size": 2596,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -541,7 +541,7 @@
 			"file": "experiments/fire/sdl_64.s",
 			"settings":
 			{
-				"buffer_size": 2090,
+				"buffer_size": 2085,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -690,7 +690,6 @@
 	[
 		"/home/anton/ASM",
 		"/home/anton/ASM/experiments",
-		"/home/anton/ASM/experiments/fire",
 		"/home/anton/ASM/lab"
 	],
 	"file_history":
@@ -826,7 +825,7 @@
 	],
 	"find":
 	{
-		"height": 28.0
+		"height": 26.0
 	},
 	"find_in_files":
 	{
@@ -929,7 +928,7 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 0,
 			"sheets":
 			[
 				{
@@ -938,15 +937,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 796,
+						"buffer_size": 793,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								796,
-								796
+								521,
+								521
 							]
 						],
 						"settings":
@@ -957,7 +956,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
@@ -966,44 +965,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2591,
+						"buffer_size": 2596,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								964,
-								964
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/GAS-x86 (or x64) highlighting scheme/Assembly x86 AT&T.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 408.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "experiments/fire/sdl_64.s",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2090,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								479,
-								479
+								831,
+								831
 							]
 						],
 						"settings":
@@ -1015,7 +985,36 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "experiments/fire/sdl_64.s",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2085,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								490,
+								490
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/GAS-x86 (or x64) highlighting scheme/Assembly x86 AT&T.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
@@ -1052,7 +1051,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 28.0
+		"height": 26.0
 	},
 	"input":
 	{
@@ -1097,7 +1096,7 @@
 	"project": "asm.sublime-project",
 	"replace":
 	{
-		"height": 52.0
+		"height": 48.0
 	},
 	"save_all_on_build": true,
 	"select_file":

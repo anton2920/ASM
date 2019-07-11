@@ -10,13 +10,13 @@
 .equ second_arg, -8
 
 .section .rodata
-title:
+prog_title:
 	.asciz "Assemly and SDL2 fire sh**t"
 
 .section .text
-.type SDL_init_all, @function
-.globl SDL_init_all
-SDL_init_all:
+.type SDL_all, @function
+.globl SDL_all
+SDL_all:
 	# Initializing function's stack frame
 	pushq %rbp
 	movq %rsp, %rbp
@@ -47,7 +47,7 @@ Init_window_renderer:
 	movl $window_width, %ecx
 	movl $SDL_WINDOWPOS_CENTERED_MASK, %edx
 	movl $SDL_WINDOWPOS_CENTERED_MASK, %esi
-	leaq title(%rip), %rdi
+	leaq prog_title(%rip), %rdi
 	callq SDL_CreateWindow@PLT
 
 	cmpq $NULL, %rax
