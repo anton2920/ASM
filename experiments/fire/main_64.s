@@ -62,8 +62,8 @@ main:
 	movq $316, curr_rect + rect_w(%rbp)
 	movq $391, curr_rect + rect_h(%rbp)
 
-	# Main part. SDL2	
-	callq SDL_all # Initializing SDL2
+	# Main part. SDL2
+	callq SDL_init_all@PLT # Initializing SDL2
 
 	# Initializing windows and attaching renderer to it
 	leaq renderer(%rbp), %rsi

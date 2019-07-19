@@ -14,9 +14,9 @@ prog_title:
 	.asciz "Assemly and SDL2 fire sh**t"
 
 .section .text
-.type SDL_all, @function
-.globl SDL_all
-SDL_all:
+.type SDL_init_all, @function
+.globl SDL_init_all
+SDL_init_all:
 	# Initializing function's stack frame
 	pushq %rbp
 	movq %rsp, %rbp

@@ -1,11 +1,21 @@
+.equ LIBC_ENABLED, 1
+
 .equ STD_PERMS, 0666
 .equ O_RDONLY, 0
+
 .equ STDOUT, 1
 .equ STDIN, 0
+
+.equ sizeof_int, 4
+.equ first_arg, sizeof_int + sizeof_int
+
+.equ SEEK_SET, 0
 
 .section .data
 quit_line:
 	.ascii "quit\n\0"
+back_line:
+	.asciz "back\n"
 line:
 	.ascii " ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––\n\0"
 	.equ len_line, . - line
@@ -42,6 +52,7 @@ menu2_line:
 	.ascii "|       3) Delete existing record                            |\n\0"
 	.ascii "|       4) Edit existing record                              |\n\0"
 	.ascii "|                                                            |\n\0"
+	.ascii "|       >> Type \"back\" to go to the previous menu <<         |\n\0"
 	.ascii "|       >> Type \"quit\" to terminate this program <<          |\n\0"
 	.ascii "|                                                            |\n\0"
 
@@ -72,6 +83,22 @@ lookout_for_cr:
 error_open:
 	.ascii "| database: error with opening database                      |\n\0"
 	.equ len_error_open, . - error_open
+enter_pass:
+	.asciz "| Type password: "
+	.equ len_enter_pass, . - enter_pass
+minus_one:
+	.long -1
+error_pass:
+	.asciz "| database: paswords mismatch                                |\n"
+	.equ len_error_pass, . - error_pass
+pass_too_many:
+	.asciz "| database: too many incorrect password attempts             |\n"
+	.equ len_pass_too_many, . - pass_too_many
+back_sure:
+	.asciz "| Are you sure you want to close this database? [Y/n]: "
+	.equ len_back_sure, . - back_sure
+int_zero:
+	.long 0
 
 .section .bss
 .equ MENUBUF_LEN, 500
@@ -80,7 +107,10 @@ error_open:
 .equ FILENAME_LEN, 500
 .lcomm FILENAME, FILENAME_LEN
 
+.lcomm hash_sum, sizeof_int
+
 .section .text
+.globl prt_ln
 .type prt_ln, @function
 prt_ln:
 	# Initializing function's stack frame
@@ -99,17 +129,21 @@ prt_ln:
 	popl %ebp
 	ret
 
+.globl quit
 .type quit, @function
 quit:
 	# Initializing function's stack frame
 	pushl %ebp
 	movl %esp, %ebp
 
+	# Saving registers
+	pushl %ebx
+
+sure_quit:
 	# Initializing variables
 	movl 8(%ebp), %eax
 	movl 12(%ebp), %ebx
 
-sure_quit:
 	# I/O flow
 	pushl %ebx
 	pushl %eax
@@ -118,7 +152,7 @@ sure_quit:
 	addl $0xC, %esp
 
 	pushl $MENUBUF_LEN
-	push $MENUBUF
+	pushl $MENUBUF
 	pushl $0x0
 	call read
 	addl $0xC, %esp
@@ -177,6 +211,9 @@ ret_nocmd:
 	jmp sure_quit
 
 quit_exit:
+	# Restoring registers
+	popl %ebx
+
 	# Destroying function's stack frame
 	movl %ebp, %esp
 	popl %ebp
@@ -188,6 +225,9 @@ menu:
 	# Initializing function's stack frame
 	pushl %ebp
 	movl %esp, %ebp
+
+	# Saving registers
+	pushl %ebx
 
 menu_loop:
 	# I/O flow
@@ -205,7 +245,7 @@ menu_loop:
 
 	pushl $MENUBUF_LEN
 	pushl $MENUBUF
-	pushl $0x0
+	pushl $STDIN
 	call read
 	addl $0xC, %esp
 
@@ -235,14 +275,14 @@ check_quit:
 	call strcmp
 	addl $0x8, %esp
 
-	cmpl $0x0, %eax
-	je call_quit
+	test %eax, %eax
+	jz call_quit
 
 check_num:
 	cmpb $'1', (%ebx)
 	je yes_one
 
-	cmpl $'2', (%ebx)
+	cmpb $'2', (%ebx)
 	je yes_two
 
 menu_error:
@@ -258,10 +298,10 @@ call_quit:
 	pushl $len_quit_sure
 	pushl $quit_sure
 	call quit
-	addl $0xC, %esp
+	addl $0x8, %esp
 
-	cmpl $0x0, %eax
-	je menu_loop
+	test %eax, %eax
+	jz menu_loop
 
 	call prt_ln
 
@@ -278,12 +318,15 @@ yes_two:
 	jmp menu_end
 
 menu_end:
+	# Restoring registers
+	popl %ebx
+
 	# Destroying function's stack frame
 	movl %ebp, %esp
 	popl %ebp
 
 	# Returning
-	ret
+	retl
 
 .globl create_database
 .type create_database, @function
@@ -291,6 +334,11 @@ create_database:
 	# Initializing function's stack frame
 	pushl %ebp
 	movl %esp, %ebp
+	.equ fd, -4
+	subl $0x4, %esp # Acquiring space in fd(%ebp)
+
+	# Saving registers
+	pushl %ebx
 
 create_database_loop:
 	# I/O flow
@@ -324,30 +372,95 @@ create_database_loop:
 	jmp create_database_fileexists
 
 create_database_create:
-	movl $0x1, %eax
-	orl $0x40, %eax
-	orl $0x200, %eax
-
 	pushl $STD_PERMS
-	pushl %eax
 	pushl $FILENAME
-	call open
+	call creat
+	addl $0x8, %esp
+
+	test %eax, %eax
+	jle create_database_err
+
+	# Saving registers
+	movl %eax, fd(%ebp)
+
+	# Ask for pass
+	pushl $len_enter_pass
+	pushl $enter_pass
+	pushl $STDOUT
+	call write
+	addl $0xC, %esp
+
+.if LIBC_ENABLED == 1
+	pushl $0x0
+	call turn_echo
+	addl $0x4, %esp
+.endif
+
+	pushl $MENUBUF_LEN
+	pushl $MENUBUF
+	pushl $STDIN
+	call read
 	addl $0xC, %esp
 
 	# Saving registers
 	pushl %eax
 
-	cmpl $0x0, %eax
-	jle create_database_err
+.if LIBC_ENABLED == 1
+	pushl $0x1
+	call turn_echo
+	addl $0x4, %esp
+
+	pushl $'\n'
+	call lputchar
+	addl $0x4, %esp
+.endif
+
+	call prt_ln
+
+	# Restoring registers
+	popl %eax
+
+	pushl $sizeof_int
+
+	cmpl $0x1, %eax
+	jne make_hash_sum
+
+	pushl $minus_one
+
+	jmp create_database_lookout
+
+make_hash_sum:
+	pushl $MENUBUF
+	call djb2
+	addl $0x4, %esp
+
+	movl %eax, hash_sum
+	pushl $hash_sum
 
 create_database_lookout:
+	pushl fd(%ebp)
+	call write
+	addl $0xC, %esp
+
+	pushl $sizeof_int
+	pushl $int_zero
+	pushl fd(%ebp)
+	call write
+	addl $0xC, %esp
+
+	pushl $SEEK_SET
+	pushl $0x0
+	pushl fd(%ebp)
+	call lseek
+	addl $0xC, %esp
+
 	pushl $len_lookout_for_cr
 	pushl $lookout_for_cr
 	call quit
 	addl $0x8, %esp
 
-	cmpl $0x0, %eax
-	je create_database_exit_1
+	test %eax, %eax
+	jz create_database_exit_1
 
 	cmpl $0x1, %eax
 	je create_database_exit_2
@@ -395,33 +508,45 @@ create_database_change_name:
 create_database_exit_1:
 	call prt_ln
 
+	pushl fd(%ebp)
+	call close
+	addl $0x4, %esp
+
 	xorl %eax, %eax
 	jmp create_database_exit
 
 create_database_exit_2:
-	# Restoring registers
-	popl %eax
+	# Returning value
+	movl fd(%ebp), %eax
 
 create_database_exit:
+	# Restoring registers
+	popl %ebx
+
 	# Destroying function's stack frame
 	movl %ebp, %esp
 	popl %ebp
 
 	# Returning
-	ret
+	retl
 
 .globl open_database
 .type open_database, @function
+.equ PASS_ERR, -1
+.equ LIM_ATT, 3
 open_database:
 	# Initializing function's stack frame
 	pushl %ebp
 	movl %esp, %ebp
+	.equ fd, -4
+	.equ nattempts, -8
+	subl $0x8, %esp # Acquiring space for two variables
 
-	# Initializing vatiables
-	movl 8(%ebp), %eax # a = fd
+	# Saving registers
+	pushl %ebx
 
-	cmpl $0x0, %eax
-	jne open_database_exit
+	# Initializing variables
+	movl $0x0, nattempts(%ebp)
 
 open_database_loop:
 	# I/O flow
@@ -449,10 +574,10 @@ open_database_open:
 	addl $0xC, %esp
 
 	# Saving registers
-	pushl %eax
+	movl %eax, fd(%ebp)
 
 	cmpl $0x0, %eax
-	jg open_database_exit_2
+	jg open_database_pass
 
 open_database_err:
 	call prt_ln
@@ -485,21 +610,107 @@ open_database_change_name:
 	cmpl $0x1, %eax
 	je open_database_loop
 
+open_database_pass:
+	call prt_ln
+
+	pushl $sizeof_int
+	pushl $hash_sum
+	pushl fd(%ebp)
+	call read
+	addl $0xC, %esp
+
+	cmpl $-1, hash_sum
+	jz open_database_exit_2
+
+	pushl $len_enter_pass
+	pushl $enter_pass
+	pushl $STDOUT
+	call write
+	addl $0xC, %esp
+
+.if LIBC_ENABLED == 1
+	pushl $0x0
+	call turn_echo
+	addl $0x4, %esp
+.endif
+
+	pushl $MENUBUF_LEN
+	pushl $MENUBUF
+	pushl $STDIN
+	call read
+	addl $0xC, %esp
+
+.if LIBC_ENABLED
+	pushl $0x1
+	call turn_echo
+	addl $0x4, %esp
+
+	pushl $'\n'
+	call lputchar
+	addl $0x4, %esp
+.endif
+
+	pushl $MENUBUF
+	call djb2
+	addl $0x4, %esp
+
+	cmpl %eax, hash_sum
+	jz open_database_exit_2
+
+	call prt_ln
+
+	addl $0x1, nattempts(%ebp)
+
+	cmpl $LIM_ATT, nattempts(%ebp)
+	jg open_database_exit_error_pass
+
+	pushl $len_error_pass
+	pushl $error_pass
+	pushl $STDOUT
+	call write
+	addl $0xC, %esp
+
+	jmp open_database_pass
+
 open_database_exit_1:
 	xorl %eax, %eax
-	jmp create_database_exit
+	jmp open_database_exit
+
+open_database_exit_error_pass:
+	pushl $len_pass_too_many
+	pushl $pass_too_many
+	pushl $STDOUT
+	call write
+	addl $0xC, %esp
+
+	pushl fd(%ebp)
+	call close
+	addl $0x4, %esp
+
+	movl $PASS_ERR, %eax
+
+	jmp open_database_exit
 
 open_database_exit_2:
-	# Restoring registers
-	popl %eax
+	pushl $SEEK_SET
+	pushl $0x0
+	pushl fd(%ebp)
+	call lseek
+	addl $0xC, %esp
+
+	# Returning value
+	movl fd(%ebp), %eax
 
 open_database_exit:
+	# Restoring registers
+	popl %ebx
+
 	# Destroying function's stack frame
 	movl %ebp, %esp
 	popl %ebp
 
 	# Returning
-	ret
+	retl
 
 .globl menu2
 .type menu2, @function
@@ -507,6 +718,9 @@ menu2:
 	# Initializing function's stack frame
 	pushl %ebp
 	movl %esp, %ebp
+
+	# Saving registers
+	pushl %ebx
 
 menu2_loop:
 	# I/O flow
@@ -554,8 +768,16 @@ menu2_check_quit:
 	call strcmp
 	addl $0x8, %esp
 
-	cmpl $0x0, %eax
-	je call_quit
+	test %eax, %eax
+	jz menu2_call_quit
+
+	pushl $back_line
+	pushl $MENUBUF
+	call strcmp
+	addl $0x8, %esp
+
+	test %eax, %eax
+	jz menu2_call_back
 
 menu2_check_num:
 	cmpb $'1', (%ebx)
@@ -585,14 +807,27 @@ menu2_call_quit:
 	call quit
 	addl $0xC, %esp
 
-	cmpl $0x0, %eax
-	je menu2_loop
+	test %eax, %eax
+	jz menu2_loop
 
 	call prt_ln
 
 menu2_yes_quit:
 	xorl %eax, %eax
 	jmp menu2_end
+
+menu2_call_back:
+	pushl $len_back_sure
+	pushl $back_sure
+	call quit
+	addl $0x8, %esp
+
+	test %eax, %eax
+	jz menu2_loop
+
+menu2_yes_back:
+	movl $-1, %eax
+	jmp menu_end
 
 menu2_yes_one:
 	movl $0x1, %eax
@@ -610,9 +845,12 @@ menu2_yes_four:
 	movl $0x4, %eax
 
 menu2_end:
+	# Restoring registers
+	popl %ebx
+
 	# Destroying function's stack frame
 	movl %ebp, %esp
 	popl %ebp
 
 	# Returning
-	ret
+	retl
