@@ -4,13 +4,5 @@
 
 main() {
 
-	auto char a[20];
-
-	printf("Type pass: ");
-	system("stty -echo");
-	scanf("%20s", a);
-
-	printf("Type pass: ");
-	system("stty echo");
-	scanf("%20s", a);
+	printf("%d, %d, %d\n", SEEK_SET, SEEK_CUR, SEEK_END);
 }

@@ -1,4 +1,4 @@
-.equ PASS_ERR, -1
+.include "constants.s"
 
 .section .text
 .globl _start
@@ -39,8 +39,8 @@ open_exist:
 	test %eax, %eax
 	jz menu_l
 
-	cmpl $PASS_ERR, %eax
-	jz menu_l
+	# cmpl $PASS_ERR, %eax
+	# jz menu_l
 
 	movl %eax, fd(%ebp)
 
@@ -74,6 +74,10 @@ menu2_1:
 	jmp menu2_ret_back
 
 menu2_2:
+	pushl fd(%ebp)
+	call add_records
+	addl $0x4, %esp
+	
 	jmp menu2_ret_back
 
 menu2_3:

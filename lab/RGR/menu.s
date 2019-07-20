@@ -1,21 +1,10 @@
-.equ LIBC_ENABLED, 1
+.include "constants.s"
 
-.equ STD_PERMS, 0666
-.equ O_RDONLY, 0
-
-.equ STDOUT, 1
-.equ STDIN, 0
-
-.equ sizeof_int, 4
-.equ first_arg, sizeof_int + sizeof_int
-
-.equ SEEK_SET, 0
-
-.section .data
+.section .rodata
 quit_line:
-	.ascii "quit\n\0"
+	.asciz "quit"
 back_line:
-	.asciz "back\n"
+	.asciz "back"
 line:
 	.ascii " ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––\n\0"
 	.equ len_line, . - line
@@ -63,51 +52,13 @@ quit_sure:
 quit_err:
 	.ascii "| menu: type \"y\" or \"n\"                                      |\n\0"
 	.equ len_quit_err, . - quit_err
-
-filename_line:
-	.ascii "| Type filename: \0"
-	.equ len_filename_line, . - filename_line
-
-file_exists:
-	.ascii "| database: file already exists                              |\n\0"
-	.equ len_file_exists, . - file_exists
-change_name:
-	.ascii "| Would you like to change filename? [Y/n]: \0"
-	.equ len_change_name, . - change_name
-error_creating:
-	.ascii "| database: error with creating database                     |\n\0"
-	.equ len_error_creating, . - error_creating
-lookout_for_cr:
-	.ascii "| database: created successfully. Lookout for creation? [Y/n]: \0"
-	.equ len_lookout_for_cr, . - lookout_for_cr
-error_open:
-	.ascii "| database: error with opening database                      |\n\0"
-	.equ len_error_open, . - error_open
-enter_pass:
-	.asciz "| Type password: "
-	.equ len_enter_pass, . - enter_pass
-minus_one:
-	.long -1
-error_pass:
-	.asciz "| database: paswords mismatch                                |\n"
-	.equ len_error_pass, . - error_pass
-pass_too_many:
-	.asciz "| database: too many incorrect password attempts             |\n"
-	.equ len_pass_too_many, . - pass_too_many
 back_sure:
 	.asciz "| Are you sure you want to close this database? [Y/n]: "
 	.equ len_back_sure, . - back_sure
-int_zero:
-	.long 0
 
 .section .bss
 .equ MENUBUF_LEN, 500
 .lcomm MENUBUF, MENUBUF_LEN
-
-.equ FILENAME_LEN, 500
-.lcomm FILENAME, FILENAME_LEN
-
-.lcomm hash_sum, sizeof_int
 
 .section .text
 .globl prt_ln
@@ -259,7 +210,7 @@ menu_loop:
 
 	# Main part
 	movl $MENUBUF, %ebx
-	movb $0x0, -1(%ebx, %eax, 1)
+	movb $0x0, -1(%ebx, %eax)
 
 	cmpl $0x5, %eax
 	je check_quit
@@ -272,7 +223,7 @@ menu_loop:
 check_quit:
 	pushl $quit_line
 	pushl $MENUBUF
-	call strcmp
+	call lstrcmp
 	addl $0x8, %esp
 
 	test %eax, %eax
@@ -318,390 +269,6 @@ yes_two:
 	jmp menu_end
 
 menu_end:
-	# Restoring registers
-	popl %ebx
-
-	# Destroying function's stack frame
-	movl %ebp, %esp
-	popl %ebp
-
-	# Returning
-	retl
-
-.globl create_database
-.type create_database, @function
-create_database: 
-	# Initializing function's stack frame
-	pushl %ebp
-	movl %esp, %ebp
-	.equ fd, -4
-	subl $0x4, %esp # Acquiring space in fd(%ebp)
-
-	# Saving registers
-	pushl %ebx
-
-create_database_loop:
-	# I/O flow
-	pushl $len_filename_line
-	pushl $filename_line
-	pushl $STDOUT
-	call write
-	addl $0xC, %esp
-
-	pushl $FILENAME_LEN
-	pushl $FILENAME
-	pushl $0x0
-	call read
-	addl $0xC, %esp
-
-	movl $FILENAME, %ebx
-	movb $0x0, -1(%ebx, %eax, 1)
-
-	call prt_ln
-
-	# Main part
-	pushl $STD_PERMS
-	pushl $O_RDONLY
-	pushl $FILENAME
-	call open
-	addl $0xC, %esp
-
-	cmpl $0x0, %eax
-	jle create_database_create
-
-	jmp create_database_fileexists
-
-create_database_create:
-	pushl $STD_PERMS
-	pushl $FILENAME
-	call creat
-	addl $0x8, %esp
-
-	test %eax, %eax
-	jle create_database_err
-
-	# Saving registers
-	movl %eax, fd(%ebp)
-
-	# Ask for pass
-	pushl $len_enter_pass
-	pushl $enter_pass
-	pushl $STDOUT
-	call write
-	addl $0xC, %esp
-
-.if LIBC_ENABLED == 1
-	pushl $0x0
-	call turn_echo
-	addl $0x4, %esp
-.endif
-
-	pushl $MENUBUF_LEN
-	pushl $MENUBUF
-	pushl $STDIN
-	call read
-	addl $0xC, %esp
-
-	# Saving registers
-	pushl %eax
-
-.if LIBC_ENABLED == 1
-	pushl $0x1
-	call turn_echo
-	addl $0x4, %esp
-
-	pushl $'\n'
-	call lputchar
-	addl $0x4, %esp
-.endif
-
-	call prt_ln
-
-	# Restoring registers
-	popl %eax
-
-	pushl $sizeof_int
-
-	cmpl $0x1, %eax
-	jne make_hash_sum
-
-	pushl $minus_one
-
-	jmp create_database_lookout
-
-make_hash_sum:
-	pushl $MENUBUF
-	call djb2
-	addl $0x4, %esp
-
-	movl %eax, hash_sum
-	pushl $hash_sum
-
-create_database_lookout:
-	pushl fd(%ebp)
-	call write
-	addl $0xC, %esp
-
-	pushl $sizeof_int
-	pushl $int_zero
-	pushl fd(%ebp)
-	call write
-	addl $0xC, %esp
-
-	pushl $SEEK_SET
-	pushl $0x0
-	pushl fd(%ebp)
-	call lseek
-	addl $0xC, %esp
-
-	pushl $len_lookout_for_cr
-	pushl $lookout_for_cr
-	call quit
-	addl $0x8, %esp
-
-	test %eax, %eax
-	jz create_database_exit_1
-
-	cmpl $0x1, %eax
-	je create_database_exit_2
-
-create_database_fileexists:
-	pushl $len_file_exists
-	pushl $file_exists
-	pushl $STDOUT
-	call write
-	addl $0xC, %esp
-
-	call prt_ln
-
-	jmp create_database_change_name
-
-create_database_err:
-	pushl len_error_creating
-	pushl $error_creating
-	pushl $STDOUT
-	call write
-	addl $0xC, %esp
-
-	call prt_ln
-
-create_database_change_name:
-	pushl $len_change_name
-	pushl $change_name
-	call quit
-	addl $0x8, %esp
-
-	# Saving registers
-	pushl %eax
-
-	call prt_ln
-
-	# Restoring registers
-	popl %eax
-
-	cmpl $0x0, %eax
-	je create_database_exit_1
-
-	cmpl $0x1, %eax
-	je create_database_loop
-
-create_database_exit_1:
-	call prt_ln
-
-	pushl fd(%ebp)
-	call close
-	addl $0x4, %esp
-
-	xorl %eax, %eax
-	jmp create_database_exit
-
-create_database_exit_2:
-	# Returning value
-	movl fd(%ebp), %eax
-
-create_database_exit:
-	# Restoring registers
-	popl %ebx
-
-	# Destroying function's stack frame
-	movl %ebp, %esp
-	popl %ebp
-
-	# Returning
-	retl
-
-.globl open_database
-.type open_database, @function
-.equ PASS_ERR, -1
-.equ LIM_ATT, 3
-open_database:
-	# Initializing function's stack frame
-	pushl %ebp
-	movl %esp, %ebp
-	.equ fd, -4
-	.equ nattempts, -8
-	subl $0x8, %esp # Acquiring space for two variables
-
-	# Saving registers
-	pushl %ebx
-
-	# Initializing variables
-	movl $0x0, nattempts(%ebp)
-
-open_database_loop:
-	# I/O flow
-	pushl $len_filename_line
-	pushl $filename_line
-	pushl $STDOUT
-	call write
-	addl $0xC, %esp
-
-	pushl $FILENAME_LEN
-	pushl $FILENAME
-	pushl $0x0
-	call read
-	addl $0xC, %esp
-
-	movl $FILENAME, %ebx
-	movb $0x0, -1(%ebx, %eax, 1)
-
-open_database_open:
-	# Main part
-	pushl $STD_PERMS
-	pushl $0x2
-	pushl $FILENAME
-	call open
-	addl $0xC, %esp
-
-	# Saving registers
-	movl %eax, fd(%ebp)
-
-	cmpl $0x0, %eax
-	jg open_database_pass
-
-open_database_err:
-	call prt_ln
-
-	pushl $len_error_open
-	pushl $error_open
-	pushl $STDOUT
-	call write
-	addl $0xC, %esp
-
-	call prt_ln
-
-open_database_change_name:
-	pushl $len_change_name
-	pushl $change_name
-	call quit
-	addl $0x8, %esp
-
-	# Saving registers
-	pushl %eax
-
-	call prt_ln
-
-	# Restoring registers
-	popl %eax
-
-	cmpl $0x0, %eax
-	je open_database_exit_1
-
-	cmpl $0x1, %eax
-	je open_database_loop
-
-open_database_pass:
-	call prt_ln
-
-	pushl $sizeof_int
-	pushl $hash_sum
-	pushl fd(%ebp)
-	call read
-	addl $0xC, %esp
-
-	cmpl $-1, hash_sum
-	jz open_database_exit_2
-
-	pushl $len_enter_pass
-	pushl $enter_pass
-	pushl $STDOUT
-	call write
-	addl $0xC, %esp
-
-.if LIBC_ENABLED == 1
-	pushl $0x0
-	call turn_echo
-	addl $0x4, %esp
-.endif
-
-	pushl $MENUBUF_LEN
-	pushl $MENUBUF
-	pushl $STDIN
-	call read
-	addl $0xC, %esp
-
-.if LIBC_ENABLED
-	pushl $0x1
-	call turn_echo
-	addl $0x4, %esp
-
-	pushl $'\n'
-	call lputchar
-	addl $0x4, %esp
-.endif
-
-	pushl $MENUBUF
-	call djb2
-	addl $0x4, %esp
-
-	cmpl %eax, hash_sum
-	jz open_database_exit_2
-
-	call prt_ln
-
-	addl $0x1, nattempts(%ebp)
-
-	cmpl $LIM_ATT, nattempts(%ebp)
-	jg open_database_exit_error_pass
-
-	pushl $len_error_pass
-	pushl $error_pass
-	pushl $STDOUT
-	call write
-	addl $0xC, %esp
-
-	jmp open_database_pass
-
-open_database_exit_1:
-	xorl %eax, %eax
-	jmp open_database_exit
-
-open_database_exit_error_pass:
-	pushl $len_pass_too_many
-	pushl $pass_too_many
-	pushl $STDOUT
-	call write
-	addl $0xC, %esp
-
-	pushl fd(%ebp)
-	call close
-	addl $0x4, %esp
-
-	movl $PASS_ERR, %eax
-
-	jmp open_database_exit
-
-open_database_exit_2:
-	pushl $SEEK_SET
-	pushl $0x0
-	pushl fd(%ebp)
-	call lseek
-	addl $0xC, %esp
-
-	# Returning value
-	movl fd(%ebp), %eax
-
-open_database_exit:
 	# Restoring registers
 	popl %ebx
 
@@ -765,7 +332,7 @@ menu2_loop:
 menu2_check_quit:
 	pushl $quit_line
 	pushl $MENUBUF
-	call strcmp
+	call lstrcmp
 	addl $0x8, %esp
 
 	test %eax, %eax
@@ -773,7 +340,7 @@ menu2_check_quit:
 
 	pushl $back_line
 	pushl $MENUBUF
-	call strcmp
+	call lstrcmp
 	addl $0x8, %esp
 
 	test %eax, %eax

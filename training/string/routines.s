@@ -111,6 +111,7 @@ lstrcmp:
 	addl $0x4, %esp
 
 	movl %eax, %ecx
+	incl %ecx
 
 	movl $0x1, %ebx
 	movl $-1, %edx
