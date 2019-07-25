@@ -1,5 +1,19 @@
-.equ STDOUT, 1
-.equ STDIN, 0
+.include "constants.s"
+
+.section .rodata
+.if LIBC_ENABLED == 1
+stty_arg_on:
+	.asciz "stty echo"
+stty_arg_off:
+	.asciz "stty -echo"
+#.else
+#stty_name:
+#	.asciz "stty"
+#stty_arg_on:
+#	.asciz "echo"
+#stty_arg_off:
+#	.asciz "-echo"
+.endif
 
 .section .bss 
 .lcomm NUM_BUF, 500
@@ -14,12 +28,18 @@ write:
 	pushl %ebp
 	movl %esp, %ebp
 
+	# Saving registers
+	pushl %ebx
+
 	# I/O flow
     movl $SYS_WRITE, %eax # Write syscall
-    movl 8(%ebp), %ebx # File descriptor
-    movl 12(%ebp), %ecx # Buffer
-    movl 16(%ebp), %edx # Buffer size
+    movl first_arg(%ebp), %ebx # File descriptor
+    movl second_arg(%ebp), %ecx # Buffer
+    movl third_arg(%ebp), %edx # Buffer size
     int $0x80 # 0x80's interrupt
+
+    # Restoring registers
+    popl %ebx
 
 	# Destroying function's stack frame
 	movl %ebp, %esp
@@ -35,12 +55,18 @@ read:
 	pushl %ebp
 	movl %esp, %ebp
 
+	# Saving registers
+	pushl %ebx
+
 	# I/O flow
     movl $SYS_READ, %eax # Read syscall
-    movl 8(%ebp), %ebx # File descriptor
-    movl 12(%ebp), %ecx # Buffer
-    movl 16(%ebp), %edx # Buffer size
+    movl first_arg(%ebp), %ebx # File descriptor
+    movl second_arg(%ebp), %ecx # Buffer
+    movl third_arg(%ebp), %edx # Buffer size
     int $0x80 # 0x80's interrupt
+
+    # Restoring registers
+    popl %ebx
 
 	# Destroying function's stack frame
 	movl %ebp, %esp
@@ -55,17 +81,45 @@ open:
     pushl %ebp
     movl %esp, %ebp
 
+    # Saving registers
+    pushl %ebx
+
     # Syscall
     movl $SYS_OPEN, %eax # Open syscall
-    movl 8(%ebp), %ebx # File name
-    movl 12(%ebp), %ecx # Mode
-    movl 16(%ebp), %edx # Permissions
+    movl first_arg(%ebp), %ebx # File name
+    movl second_arg(%ebp), %ecx # Mode
+    movl third_arg(%ebp), %edx # Permissions
     int $0x80 # 0x80's interrupt
+
+    # Restoring registers
+    popl %ebx
 
     # Destroying function's stack frame
     movl %ebp, %esp
     popl %ebp
     ret
+
+.globl creat
+.type creat, @function
+creat:
+	# Initializing function's stack frame
+	pushl %ebp
+	movl %esp, %ebp
+
+	# Initializing variables
+	movl $0x241, %eax
+
+	# Main part
+	pushl second_arg(%ebp)
+	pushl %eax
+	pushl first_arg(%ebp)
+	call open
+	addl $0xC, %esp
+
+	# Destroying function's stack frame
+	movl %ebp, %esp
+	popl %ebp
+	retl
 
 .globl close
 .type close, @function
@@ -75,44 +129,79 @@ close:
     pushl %ebp
     movl %esp, %ebp
 
+    # Saving registers
+    pushl %ebx
+
     # Syscall
     movl $SYS_CLOSE, %eax # Close syscall
-    movl 8(%ebp), %ebx # File descriptor
+    movl first_arg(%ebp), %ebx # File descriptor
     int $0x80 # 0x80's interrupt
+
+    # Restoring registers
+    popl %ebx
 
     # Destroying function's stack frame
     movl %ebp, %esp
     popl %ebp
-    ret
+    retl
 
-.globl strcmp
-.type strcmp, @function
-strcmp:
+.globl lseek
+.type lseek, @function
+.equ SYS_LSEEK, 19
+lseek:
+	# Initializing function's stack frame
+	pushl %ebp
+	movl %esp, %ebp
+
+	# Saving registers
+	pushl %ebx
+
+	# Syscall
+	movl $SYS_LSEEK, %eax
+	movl first_arg(%ebp), %ebx
+	movl second_arg(%ebp), %ecx
+	movl third_arg(%ebp), %edx
+	int $0x80 # 0x80's interrupt
+
+	# Restoring registers
+	popl %ebx
+
+	# Destroying function's stack frame
+	movl %ebp, %esp
+	popl %ebp
+	retl
+
+.globl lstrcmp
+.type lstrcmp, @function
+lstrcmp:
 	# Initializing function's stack frame
 	pushl %ebp
 	movl %esp, %ebp
 
 	# Initializing variables
-	movl 8(%ebp), %eax
-	movl 12(%ebp), %ebx
+	movl first_arg(%ebp), %eax
+	movl second_arg(%ebp), %ebx
 
 	# Main part
-strcmp_loop:
-	xorl %ecx, %ecx # c = 0
-	xorl %edx, %edx # d = 0
+lstrcmp_loop:
+	xorl %ecx, %ecx
+	xorl %edx, %edx
 
 	movb (%eax), %cl
 	movb (%ebx), %dl
-	cmpb %dl, %cl # if (*c != *d)
-	jne strcmp_end_loop
-	jz strcmp_end_loop
+
+	testb %cl, %dl
+	jnz lstrcmp_end_loop
+
+	testb %cl, %cl
+	jz lstrcmp_end_loop
 
 	incl %eax
 	incl %ebx
-	jmp strcmp_loop
+	jmp lstrcmp_loop
 	
-strcmp_end_loop:
-	subl %edx, %ecx # c -= d
+lstrcmp_end_loop:
+	subl %edx, %ecx
 	movl %ecx, %eax
 
 	# Destroying function's stack frame
@@ -129,6 +218,9 @@ atoi:
 	.equ sign, -4
 	subl $0x4, %esp # Acquiring space in sign(%ebp) — minus sign
 	movl $0x1, sign(%ebp)
+
+	# Saving registers
+	pushl %ebx
 
 	# Initializing variables
 	.equ req_str, 8
@@ -174,6 +266,9 @@ atoi_main_loop_end:
 	movl sign(%ebp), %edx
 	imull %edx, %eax
 
+	# Restoring registers
+	popl %ebx
+
 	# Destroying function's stack frame
 	movl %ebp, %esp
 	popl %ebp
@@ -187,7 +282,7 @@ iprint:
 	movl %esp, %ebp
 
 	# Initializing variables
-	movl 8(%ebp), %eax # Number
+	movl first_arg(%ebp), %eax # Number
 
 	# Main part
 iprint_if:
@@ -201,7 +296,7 @@ iprint_then:
 	pushl %eax
 	movl $'-', %edx
 	pushl %edx
-	call putchar
+	call lputchar
 	addl $0x4, %esp
 	popl %eax
 
@@ -214,11 +309,11 @@ iprint_else:
 	call numlen
 	addl $0x4, %esp
 
-	popl %ebx
+	popl %ecx
 	pushl %eax
 
 	pushl %eax
-	pushl %ebx
+	pushl %ecx
 	call reverse
 	addl $0x8, %esp
 
@@ -234,7 +329,7 @@ iprint_else:
 iprint_print_0:
 	movl $'0', %edx
 	pushl %edx
-	call putchar
+	call lputchar
 	addl $0x4, %esp
 
 iprint_fin:
@@ -249,9 +344,12 @@ reverse:
 	pushl %ebp
 	movl %esp, %ebp
 
+	# Saving registers
+	pushl %ebx
+
 	# Initializing variables
-	movl 8(%ebp), %eax # Number
-	movl 12(%ebp), %ebx # Position
+	movl first_arg(%ebp), %eax # Number
+	movl second_arg(%ebp), %ebx # Position
 	decl %ebx
 	movl $0xA, %ecx
 	movl $NUM_BUF, %edi
@@ -271,22 +369,26 @@ reverse_main_loop:
 	jmp reverse_main_loop
 
 reverse_main_loop_end:
+	# Restoring registers
+	popl %ebx
+
 	# Destroying function's stack frame
 	movl %ebp, %esp
 	popl %ebp
 	ret
 
-.type putchar, @function
-putchar:
+.globl lputchar
+.type lputchar, @function
+lputchar:
 	# Initializing function's stack frame
 	pushl %ebp
 	movl %esp, %ebp
 
 	# I/O flow
-	leal 8(%ebp), %eax
-	movl $0x1, %ebx
+	leal first_arg(%ebp), %eax
+	movl $0x1, %ecx
 
-	pushl %ebx 
+	pushl %ecx 
 	pushl %eax # &a
 	pushl $STDOUT
 	call write
@@ -303,8 +405,11 @@ numlen:
 	pushl %ebp
 	movl %esp, %ebp
 
+	# Saving registers
+	pushl %ebx
+
 	# Main part
-	movl 8(%ebp), %eax # Number
+	movl first_arg(%ebp), %eax # Number
 	xorl %ebx, %ebx # Len
 	movl $0xA, %ecx
 
@@ -322,7 +427,109 @@ numlen_loop:
 numlen_loop_end:
 	movl %ebx, %eax
 
+	# Restoring registers
+	popl %ebx
+
 	# Destroying function's stack frame
 	movl %ebp, %esp
 	popl %ebp
-	ret
+	retl
+
+.globl turn_echo
+.type turn_echo, @function
+.equ SYS_FORK, 2
+.equ SYS_EXECVE, 11
+turn_echo:
+	# Initializing function's stack frame
+	pushl %ebp
+	movl %esp, %ebp
+
+	# Saving registers
+	pushl %ebx
+
+.if LIBC_ENABLED == 1
+	# Initializing variables
+	movl first_arg(%ebp), %eax
+
+	# Main part
+	test %eax, %eax
+	jz turn_echo_off
+
+turn_echo_on:
+	pushl $stty_arg_on
+	
+	jmp turn_echo_do
+
+turn_echo_off:
+	pushl $stty_arg_off
+
+turn_echo_do:
+	call system
+	addl $0x4, %esp
+#.else
+#	# Main part
+#	movl $SYS_FORK, %eax
+#	int $0x80 # 0x80's interrupt
+#
+#	movl first_arg(%ebp), %eax
+#
+#	test %eax, %eax
+#	jz turn_echo_off
+#
+#turn_echo_on:
+#	movl $stty_arg_on, %ecx
+#	
+#	jmp turn_echo_do
+#
+#turn_echo_off:
+#	movl $stty_arg_off, %ecx
+#
+#turn_echo_do:
+#	movl $stty_name, %ebx
+#	movl $SYS_EXECVE, %eax
+#	int $0x80 # 0x80's interrupt
+.endif
+
+	# Restoring registers
+	popl %ebx
+
+	# Destroying function's stack frame
+	movl %ebp, %esp
+	popl %ebp
+	retl
+
+.globl find_size
+.type find_size, @function
+.equ SYS_LLSEEK, 140
+find_size:
+	# Initializing function's stack frame
+	pushl %ebp
+	movl %esp, %ebp
+	subl $0x8, %esp
+
+	# Saving registers
+	pushl %esi
+	pushl %edi
+	pushl %ebx
+
+	# Syscall
+	movl $SYS_LLSEEK, %eax
+	movl first_arg(%ebp), %ebx
+	xorl %ecx, %ecx
+	xorl %edx, %edx
+	leal -8(%ebp), %esi
+	movl $0x2, %edi
+	int $0x80 # 0x80's interrupt
+
+	# Returning value
+	movl -8(%ebp), %eax
+
+	# Restoring registers
+	popl %ebx
+	popl %edi
+	popl %esi
+
+	# Destroying function's stack frame
+	movl %ebp, %esp
+	popl %ebp
+	retl

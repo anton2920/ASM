@@ -27,6 +27,8 @@ pic_path:
 .section .text
 .globl main
 main:
+# .globl _start
+# _start:
 	# Initializing stack frame
 	movq %rsp, %rbp
 	.equ num_of_vars, sizeof_void_p + sizeof_void_p
@@ -60,27 +62,27 @@ main:
 	movq $316, curr_rect + rect_w(%rbp)
 	movq $391, curr_rect + rect_h(%rbp)
 
-	# Main part. SDL2	
-	callq SDL_init_all # Initializing SDL2
+	# Main part. SDL2
+	callq SDL_init_all@PLT # Initializing SDL2
 
 	# Initializing windows and attaching renderer to it
 	leaq renderer(%rbp), %rsi
 	leaq window(%rbp), %rdi
 	callq Init_window_renderer
 
-	movq $pic_path, %rsi
+	leaq pic_path(%rip), %rsi
 	movq renderer(%rbp), %rdi
 	callq Get_texture
 
 	movq %rax, fire_texture(%rbp) # Saving texture to variable
 
-main_while:
+main_while_loop:
 	cmpl $0x0, quit_flag(%rbp) # if (flag)
 	jnz main_while_end
 
 event_loop:
 	leaq event(%rbp), %rdi
-	callq SDL_PollEvent
+	callq SDL_PollEvent@PLT
 
 	cmpq $0x0, %rax
 	jz event_loop_end
@@ -99,7 +101,7 @@ event_loop_end:
 	leaq curr_rect(%rbp), %rdx
 	movq fire_texture(%rbp), %rsi
 	movq renderer(%rbp), %rdi
-	callq SDL_RenderCopy
+	callq SDL_RenderCopy@PLT
 
 	movq renderer(%rbp), %rdi
 	call SDL_RenderPresent
@@ -115,17 +117,17 @@ event_loop_end:
 	movl $delay_time, %edi
 	callq SDL_Delay
 
-	jmp main_while
+	jmp main_while_loop
 
 main_while_end:
 	movq fire_texture(%rbp), %rdi
-	callq SDL_DestroyTexture
+	callq SDL_DestroyTexture@PLT
 
 	movq renderer(%rbp), %rdi
-	callq SDL_DestroyRenderer
+	callq SDL_DestroyRenderer@PLT
 
 	movq window(%rbp), %rdi
-	callq SDL_DestroyWindow
+	callq SDL_DestroyWindow@PLT
 
 exit:
 	# Exiting

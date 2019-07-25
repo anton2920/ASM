@@ -2,15 +2,15 @@
 .equ window_height, 391
 
 .equ NULL, 0x0
-.equ SDL_INIT_VIDEO, 0x00000020
+.equ SDL_INIT_EVERYTHING, 0xf231
 .equ SDL_WINDOWPOS_CENTERED_MASK, 0x2FFF0000
-.equ SDL_WINDOW_SHOWN, 0x00000004
+.equ SDL_WINDOW_SHOWN, 0x4
 
 .equ first_arg, -16
 .equ second_arg, -8
 
 .section .rodata
-title:
+prog_title:
 	.asciz "Assemly and SDL2 fire sh**t"
 
 .section .text
@@ -22,10 +22,10 @@ SDL_init_all:
 	movq %rsp, %rbp
 
 	# Initializing variables
-	movl $SDL_INIT_VIDEO, %edi
+	movl $SDL_INIT_EVERYTHING, %edi
 
 	# Main part
-	callq SDL_Init
+	callq SDL_Init@PLT
 
 	# Destroying function's stack frame
 	movq %rbp, %rsp
@@ -47,8 +47,8 @@ Init_window_renderer:
 	movl $window_width, %ecx
 	movl $SDL_WINDOWPOS_CENTERED_MASK, %edx
 	movl $SDL_WINDOWPOS_CENTERED_MASK, %esi
-	movq $title, %rdi
-	callq SDL_CreateWindow
+	leaq prog_title(%rip), %rdi
+	callq SDL_CreateWindow@PLT
 
 	cmpq $NULL, %rax
 	jz em1_exit
@@ -59,7 +59,7 @@ Init_window_renderer:
 	xorq %rdx, %rdx
 	movq $-1, %rsi
 	movq %rax, %rdi
-	callq SDL_CreateRenderer
+	callq SDL_CreateRenderer@PLT
 
 	cmpq $NULL, %rax
 	jz em1_exit
@@ -90,7 +90,7 @@ Get_texture:
 	movq second_arg(%rbp), %rdi
 
 	# Main part
-	callq IMG_Load
+	callq IMG_Load@PLT
 
 	cmpq $NULL, %rax
 	jz em2_exit
@@ -99,7 +99,7 @@ Get_texture:
 
 	movq %rax, %rsi
 	movq first_arg(%rbp), %rdi
-	callq SDL_CreateTextureFromSurface
+	callq SDL_CreateTextureFromSurface@PLT
 
 	cmpq $NULL, %rax
 	je em2_exit
@@ -108,7 +108,7 @@ Get_texture:
 	pushq %rax
 
 	movq %rbx, %rdi
-	callq SDL_FreeSurface
+	callq SDL_FreeSurface@PLT
 
 	popq %rax
 

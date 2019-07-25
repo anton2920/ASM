@@ -151,6 +151,8 @@ loop:
 	movb (%ebx), %dl
 	cmpb %cl, %dl
 	jne end_loop
+
+	cmpb $0x0, %cl
 	jz end_loop
 
 	incl %eax
