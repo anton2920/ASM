@@ -46,7 +46,6 @@ open_exist:
 
 menu2_l:
 	call menu2
-	addl $0x4, %esp
 
 	test %eax, %eax
 	jz close_l

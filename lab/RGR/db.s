@@ -77,9 +77,10 @@ vert_line:
 vert_line_tab:
 	.asciz " |\t\t"
 	.equ len_vert_line_tab, . - vert_line_tab
-table_fd:
-	.asciz "| Table fD: "
-	.equ len_table_fd, . - table_fd
+number_of_recs:
+	.asciz "| Total number of records: "
+	.equ len_number_of_recs, . - number_of_recs
+
 
 # Add records
 add_type_name:
@@ -576,13 +577,24 @@ show_recs:
 	subl $STRUCT_SIZE, %esp # Acquiring space for struct group
 
 	# I/O flow
-	pushl $len_table_fd
-	pushl $table_fd
+	pushl $len_number_of_recs
+	pushl $number_of_recs
 	pushl $STDOUT
 	call write
 	addl $0xC, %esp
 
 	pushl first_arg(%ebp)
+	call find_size
+	addl $0x4, %esp
+
+	subl $HEADER_SIZE, %eax
+
+	xorl %edx, %edx
+	movl $STRUCT_SIZE, %ebx
+
+	idivl %ebx
+
+	pushl %eax
 	call iprint
 	addl $0x4, %esp
 
@@ -684,8 +696,6 @@ show_recs_print_fin:
 	jmp show_recs_loop
 
 show_recs_loop_end:
-
-
 	# Destroying function's stack frame
 	movl %ebp, %esp
 	popl %ebp

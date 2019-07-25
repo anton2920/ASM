@@ -4,7 +4,8 @@ LINKER = ld
 DEBUG = -g
 ASFLAGS = --32
 MODE = -m elf_i386
-LDFLAGS = -dynamic-linker /usr/lib/ld-linux.so.2 -lc
+# LDFLAGS = -dynamic-linker /usr/lib/ld-linux.so.2 -lc
+LDFLAGS = -dynamic-linker /lib32/ld-linux.so.2 -lc
 
 all: rgr
 

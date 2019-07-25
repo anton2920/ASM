@@ -346,6 +346,8 @@ menu2_check_quit:
 	test %eax, %eax
 	jz menu2_call_back
 
+	jmp menu2_error
+
 menu2_check_num:
 	cmpb $'1', (%ebx)
 	je menu2_yes_one
