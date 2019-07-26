@@ -19,6 +19,30 @@
 
 # .equ PASS_ERR, -1
 
+# Database
+# struct db {
+#	int hash; /* header */
+#	int lastId; /* header */
+#	struct group grList[];
+# }
+
+.equ HEADER_SIZE, sizeof_int + sizeof_int
+
+.equ STRUCT_SIZE, 21
+.equ NAME_SIZE, 8
+.equ iD, 0
+.equ NAME, iD + sizeof_int
+.equ YEAR, NAME + NAME_SIZE
+.equ QUANT, YEAR + sizeof_int
+.equ FLAG, QUANT + sizeof_int
+# struct group {
+#	int id;
+#	char NAME[NAME_SIZE];
+#	int YEAR;
+#	int QUANT;
+#	bool FLAG;
+# };
+
 .equ sizeof_bool, 1
 .equ false, 0
 .equ true, 1
@@ -26,3 +50,10 @@
 #	false,
 #	true	
 # } bool;
+
+.equ INT_MAX_LEN, 10
+.equ YEAR_MAX_LEN, 5
+.equ GR_SIZE_MAX_LEN, 3
+
+.equ SYS_MMAP, 90
+.equ SYS_MUNMAP, 91

@@ -83,6 +83,10 @@ menu2_3:
 	jmp menu2_ret_back
 
 menu2_4:
+	pushl fd(%ebp)
+	call edit_record
+	addl $0x4, %esp
+
 	jmp menu2_ret_back
 
 menu2_ret_back:

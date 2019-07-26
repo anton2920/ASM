@@ -62,7 +62,7 @@ exit:
 	xorl %ebx, %ebx
 	int $0x80 # 0x80's interrupt
 
-.type lstrcpy, @function
+.type lstrncpy, @function
 lstrncpy:
 	# Initializing function's stack frame
 	pushl %ebp
@@ -79,7 +79,7 @@ lstrncpy:
 	movl %ecx, %edx # Save size
 
 	# Main part. SSE (SSE2)
-	sarl $0x4, %ecx # Shift length by four (dib by 16)
+	sarl $0x4, %ecx # Shift length by four (div by 16)
 
 while:
 	test %ecx, %ecx
@@ -98,7 +98,8 @@ while:
 while_end:
 	movl %edx, %ecx
 	andl $0xF, %ecx
-
+	
+	cld
 	rep movsl
 
 	movl %edx, %ecx
@@ -107,7 +108,7 @@ while_end:
 	rep movsb
 
 	# Returning value
-	movl %edi, %eax
+	movl first_arg(%ebp), %eax
 
 	# Restoring registers
 	popl %edi
