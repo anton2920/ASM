@@ -5,6 +5,18 @@
 		[
 			[
 <<<<<<< HEAD
+				"ST",
+				"STRUCT_SIZE\tabc"
+			],
+			[
+				"file",
+				"file_size\tabc"
+			],
+			[
+				"num",
+				"number_of_recs\tabc"
+			],
+			[
 				"rdi",
 				"rdi"
 			],
@@ -59,7 +71,195 @@
 			[
 				"do",
 				"do_while_2\tabc"
+			],
+			[
+				"forma",
+				"format_input\tabc"
+			],
+			[
+				"format_p",
+				"format_output_1"
+			],
+			[
+				"dobu",
+				"double"
+			],
+			[
+				"i",
+				"i"
+			],
+			[
+				"in",
+				"increment"
+			],
+			[
+				"fo",
+				"format_function"
+			],
+			[
+				"n",
+				"n"
+			],
+			[
+				"ne",
+				"nextchar"
+			],
+			[
+				"to",
+				"to_base"
+			],
+			[
+				"VA",
+				"VAR_A"
+			],
+			[
+				"whi",
+				"while2_end"
+			],
+			[
+				"while",
+				"while2_end"
+			],
+			[
+				"swi",
+				"switch2_end"
+			],
+			[
+				"sw",
+				"switch_end\t(a5.s)"
+			],
+			[
+				"case",
+				"case_spades"
+			],
+			[
+				"VAR_",
+				"VAR_B"
+			],
+			[
+				"S",
+				"S"
+			],
+			[
+				"W",
+				"W"
+			],
+			[
+				"push",
+				"pushl"
+			],
+			[
+				"sec",
+				"section"
+			],
+			[
+				"format",
+				"format_input\t(a3.s)"
+			],
+			[
+				"cm",
+				"cmpl"
+			],
+			[
+				"STD",
+				"STDIN"
+			],
+			[
+				"pu",
+				"putchar"
+			],
+			[
+				"le",
+				"len_special_set"
+			],
+			[
+				"mo",
+				"movb"
+			],
+			[
+				"while_",
+				"while_not_n"
+			],
+			[
+				"te",
+				"text_cont"
+			],
+			[
+				"fi",
+				"final_output"
+			],
+			[
+				"fdi",
+				"fdivp\t(a3.s)"
 =======
+				"R",
+				"Restoring\tabc"
+			],
+			[
+				"dele",
+				"delete_more_records\tabc"
+			],
+			[
+				"delete",
+				"delete_record\tabc"
+			],
+			[
+				"curr",
+				"curr_mfile_pos\tabc"
+			],
+			[
+				"cur",
+				"curr_mfile_pos\tabc"
+			],
+			[
+				"edit",
+				"edit_record\t(db.s)"
+			],
+			[
+				"lstr",
+				"lstrncpy\t(routines.s)"
+			],
+			[
+				"edit_recor",
+				"edit_record\tabc"
+			],
+			[
+				"len_edit",
+				"len_edit_retype_number\tabc"
+			],
+			[
+				"len_ed",
+				"len_edit_invalid_id\tabc"
+			],
+			[
+				"edit_record_se",
+				"edit_record_search_for_id_error\tabc"
+			],
+			[
+				"ST",
+				"STRUCT_SIZE\tabc"
+			],
+			[
+				"edi",
+				"edit_record_do_while_1_end\tabc"
+			],
+			[
+				"len_in",
+				"len_edit_invalid_id\tabc"
+			],
+			[
+				"edit_",
+				"edit_record\tabc"
+			],
+			[
+				"len_edi",
+				"len_edit_type_number\tabc"
+			],
+			[
+				"YEA",
+				"YEAR_MAX_LEN\tabc"
+			],
+			[
 				"ve",
 				"vert_line_tab\tabc"
 			],
@@ -160,10 +360,6 @@
 				"len_add_type_year\tabc"
 			],
 			[
-				"ST",
-				"STRUCT_SIZE\tabc"
-			],
-			[
 				"siez",
 				"sizeof_int\tabc"
 			],
@@ -184,10 +380,6 @@
 				"PASSBUF_LEN\tabc"
 			],
 			[
-				"lstr",
-				"lstrlen\tabc"
-			],
-			[
 				"stt",
 				"stty_name\tabc"
 			],
@@ -206,17 +398,12 @@
 			[
 				"tu",
 				"turn_echo_off\tabc"
->>>>>>> 81e10fc04262fe5b6b4cd97ca10bc4a87405e51f
 			],
 			[
 				"tur",
 				"turn_echo_do\tabc"
 			],
 			[
-<<<<<<< HEAD
-				"format_p",
-				"format_output_1"
-=======
 				"st",
 				"stty_arg_on\tabc"
 			],
@@ -227,7 +414,6 @@
 			[
 				"menu",
 				"menu_l\tabc"
->>>>>>> 81e10fc04262fe5b6b4cd97ca10bc4a87405e51f
 			],
 			[
 				"clo",
@@ -252,12 +438,25 @@
 			[
 				"create_database_l",
 				"create_database_lookout\tabc"
+>>>>>>> 76ec83edbea771abd22a778848e77a03a3a187d0
 			],
 			[
-				"create",
-				"create_database\tabc"
+				"int",
+				"int_3"
 			],
 			[
+<<<<<<< HEAD
+				"rest",
+				"registers\t(menu.s)"
+			],
+			[
+				"MEN",
+				"MENUBUF_LEN"
+			],
+			[
+				"err",
+				"error_open"
+=======
 				"op",
 				"open_database_exit_error_pass\tabc"
 			],
@@ -268,331 +467,243 @@
 			[
 				"data",
 				"database\tabc"
+>>>>>>> 76ec83edbea771abd22a778848e77a03a3a187d0
 			],
 			[
-				"len_error",
-				"len_error_pass\tabc"
+				"op",
+				"open_database_exit"
 			],
 			[
-				"erro",
-				"error_pass\tabc"
-			],
-			[
-				"va",
-				"value\tabc"
-			],
-			[
-				"R",
-				"Returning\tabc"
+				"open",
+				"open_database"
 			],
 			[
 				"ope",
-				"open_database_exit\tabc"
-			],
-			[
-				"has",
-				"hash_sum\tabc"
-			],
-			[
-				"ha",
-				"hash_sum\tabc"
-			],
-			[
-				"ME",
-				"MENUBUF\tabc"
-			],
-			[
-				"en",
-				"enter_pass\tabc"
-			],
-			[
-				"Re",
-				"Restoring\tabc"
-			],
-			[
-				"re",
-				"registers\tabc"
-			],
-			[
-				"hash",
-				"hash(%ebp\tabc"
-			],
-			[
-				"djb2",
-				"djb2_while_end\tabc"
-			],
-			[
-				"SIZE",
-				"NAME_SIZE"
-			],
-			[
-				"pu",
-				"putchar\tabc"
-			],
-			[
-				"size",
-				"sizeof_int\tabc"
-			],
-			[
-				"func",
-				"function's\t(menu.s)"
-			],
-			[
-				"AS",
-				"ASFLAGS\tabc"
-			],
-			[
-				"sh",
-				"show_recs_loop"
-			],
-			[
-				"mov",
-				"movupd\tabc"
-			],
-			[
-				"sec",
-				"second_arg\tabc"
-			],
-			[
-				"sie",
-				"sizeof_int\tabc"
-			],
-			[
-				"for",
-				"format_answer\tabc"
-			],
-			[
-				"WRI",
-				"write"
-			],
-			[
-				"info",
-				"info_kib\tabc"
-			],
-			[
-				"siz",
-				"siezeof_int\tabc"
-			],
-			[
-				"file",
-				"file_size\tabc"
-			],
-			[
-				"prin",
-				"print_cur_play\t(print_info.s)"
-			],
-			[
-				"len_",
-				"len_info_file_duration\tabc"
-			],
-			[
-				"fo",
-				"fourth_param\tabc"
-			],
-			[
-				"info_fi",
-				"info_file_size\tabc"
-			],
-			[
-				"len_info",
-				"len_info_file_size\tabc"
-			],
-			[
-				"len_inf_",
-				"len_info_channels_stereo\tabc"
-			],
-			[
-				"len_inf",
-				"len_info_channels_mono\tabc"
-			],
-			[
-				"th",
-				"third_param\tabc"
-			],
-			[
-				"fi",
-				"first_param\tabc"
-			],
-			[
-				"len_in",
-				"len_info_rate\tabc"
-			],
-			[
-				"info_fil",
-				"info_file_duration\tabc"
-			],
-			[
-				"fil",
-				"file_size\tabc"
-			],
-			[
-				"lstrc",
-				"lstrcpy\tabc"
-			],
-			[
-				"lsr",
-				"lstrcmp_exit\tabc"
-			],
-			[
-				"ls",
-				"lstrcmp_exit\tabc"
-			],
-			[
-				"out",
-				"output_fin\tabc"
-			],
-			[
-				"output",
-				"output_fin\tabc"
-			],
-			[
-				"n",
-				"n"
-			],
-			[
-				"buf",
-				"buf3\tabc"
-			],
-			[
-				"forma",
-				"format_length_2\tabc"
-			],
-			[
-				"le",
-				"len_buf2\tabc"
-			],
-			[
-				"outp",
-				"output_1\tabc"
-			],
-			[
-				"firs",
-				"first_string\tabc"
-			],
-			[
-				"second",
-				"second_string\tabc"
-			],
-			[
-				"stdin",
-				"stdin_l\tabc"
-			],
-			[
-				"play_more_",
-				"play_more_begin\tabc"
-			],
-			[
-				"pla",
-				"play_more\tabc"
-			],
-			[
-				"len_pla",
-				"len_play_again_err\tabc"
-			],
-			[
-				"ans",
-				"ans_no\tabc"
-			],
-			[
-				"cmp",
-				"cmpb\tabc"
+				"open_database"
 			],
 			[
 <<<<<<< HEAD
+				"cre",
+				"create_database_change_name"
+			],
+			[
+				"len",
+				"len_file_exists"
+=======
+				"ope",
+				"open_database_exit\tabc"
+>>>>>>> 76ec83edbea771abd22a778848e77a03a3a187d0
+			],
+			[
+				"loo",
+				"lookout_for_cr"
+			],
+			[
+				"lo",
+				"lookout_for_cr"
+			],
+			[
+				"cr",
+				"create_database_exit"
+			],
+			[
+				"crea",
+				"create_database_exit"
+			],
+			[
+				"cha",
+				"change_name"
+			],
+			[
+				"erro",
+				"error_creating"
+			],
+			[
+				"qui",
+				"quit_sure"
+			],
+			[
+				"data",
+				"create_database_create"
+			],
+			[
+				"men",
+				"menu_loop"
+			],
+			[
+				"call",
+				"call_quit"
+			],
+			[
+				"ME",
+				"MENUBUF"
+			],
+			[
+				"fil",
+				"file_exists"
+			],
+			[
+				"F",
+				"FILENAME_LEN"
+			],
+			[
+				"filena",
+				"filename_line"
+			],
+			[
+				"pr",
+				"prt_ln"
+			],
+			[
+				"st",
+				"strcmp_end_loop"
+			],
+			[
+				"BU",
+				"buffer2"
+			],
+			[
+				"yes",
+				"yes_two"
+			],
+			[
+				"me",
+				"menu_end"
+			],
+			[
+				"check",
+				"check_num"
+			],
+			[
+				"menu_",
+				"menu_error"
+			],
+			[
+				"qu",
+				"quit_line"
+			],
+			[
+				"a",
+				"answer"
+			],
+			[
+				"len_ans",
+				"len_answer1\t(a1.s)"
+			],
+			[
+				"ans",
+				"answer1\t(a1.s)"
+			],
+			[
+				"no",
+				"no_cmd"
+			],
+			[
+				"ASM",
+				"ASM_ARGS"
+			],
+			[
+				"ro",
+				"routines.o"
+			],
+			[
+				"AS",
+				"ASM_ARGS"
+			],
+			[
+				"A",
+				"ARGS"
+			],
+			[
 				"main",
 				"main.o"
 			],
 			[
+<<<<<<< HEAD
 				"ma",
 				"main.s"
+			],
+			[
+				"sub",
+				"subset_if"
 =======
-				"test_",
-				"test_yn\tabc"
->>>>>>> 81e10fc04262fe5b6b4cd97ca10bc4a87405e51f
+				"info_fil",
+				"info_file_duration\tabc"
+>>>>>>> 76ec83edbea771abd22a778848e77a03a3a187d0
 			],
 			[
-				"cm",
-				"cmpb\t(menu.s)"
+				"subs",
+				"subset_else"
 			],
 			[
-				"te",
-				"test_nl\tabc"
+				"ip",
+				"iprint_print_0"
 			],
 			[
-				"men",
-				"menubuf_len\tabc"
+				"ipr",
+				"iprint_fin"
 			],
 			[
-				"play",
-				"play_again\tabc"
+				"pri",
+				"print_arr_buf_loop_end"
 			],
 			[
-				"main",
-				"main_while\tabc"
+				"su",
+				"subset_main_loop_end"
 			],
 			[
-				"seco",
-				"second_param\tabc"
+				"subse",
+				"subset_main_loop"
 			],
 			[
-				"write",
-				"write_write\tabc"
+				"B",
+				"BUF"
 			],
 			[
-				"read",
-				"read_write\tabc"
+				"numle",
+				"numlen_loop"
 			],
 			[
-				"Read",
-				"read_write"
+				"nu",
+				"numlen_loop_end"
 			],
 			[
-				"lo",
-				"loop_again\tabc"
+				"at",
+				"atoi_main_loop"
 			],
 			[
-				"e",
-				"error\tabc"
+				"ato",
+				"atoi_main_loop"
 			],
 			[
-				"ar",
-				"arg\tabc"
+				"popl",
+				"popl"
 			],
 			[
-				"un",
-				"un_err\tabc"
-			],
-			[
-<<<<<<< HEAD
 				"re",
 				"registers"
 			],
 			[
 				"pro",
 				"print_arr_loop_end"
-=======
-				"O",
-				"O_RDWR\tabc"
->>>>>>> 81e10fc04262fe5b6b4cd97ca10bc4a87405e51f
 			],
 			[
-				"File",
-				"filename"
+				"prin",
+				"print_arr"
 			],
 			[
-				"arg",
-				"arg_fault\tabc"
+				"NU",
+				"NUM_BUF_SIZE"
 			],
 			[
-				"si",
-				"siezeof_int\tabc"
+				"sum",
+				"sum_of_elem"
 			],
 			[
-				"ro",
-				"routines.o\tabc"
+				"ar",
+				"argv"
 			],
 			[
-<<<<<<< HEAD
 				"Res",
 				"Restoring"
 			],
@@ -621,6 +732,7 @@
 				"inner_loop"
 			],
 			[
+<<<<<<< HEAD
 				"e",
 				"edx_addr"
 			],
@@ -675,44 +787,58 @@
 			[
 				"co",
 				"count"
-			],
-			[
-				"arr",
-				"array1"
 =======
-				"routin",
-				"routines.s\tabc"
->>>>>>> 81e10fc04262fe5b6b4cd97ca10bc4a87405e51f
+				"seco",
+				"second_param\tabc"
+>>>>>>> 76ec83edbea771abd22a778848e77a03a3a187d0
 			]
 		]
 	},
 	"buffers":
 	[
+		{
 <<<<<<< HEAD
-=======
-		{
-			"file": "lab/RGR/Makefile",
-			"settings":
-			{
-				"buffer_size": 539,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "lab/RGR/constants.s",
-			"settings":
-			{
-				"buffer_size": 438,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
 			"file": "lab/RGR/main.s",
 			"settings":
 			{
-				"buffer_size": 1259,
+				"buffer_size": 1242,
+=======
+			"file": "lab/RGR/Makefile",
+			"settings":
+			{
+				"buffer_size": 592,
+>>>>>>> 76ec83edbea771abd22a778848e77a03a3a187d0
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+<<<<<<< HEAD
+			"file": "lab/RGR/menu.s",
+			"settings":
+			{
+				"buffer_size": 7269,
+=======
+			"file": "lab/RGR/constants.s",
+			"settings":
+			{
+				"buffer_size": 954,
+>>>>>>> 76ec83edbea771abd22a778848e77a03a3a187d0
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+<<<<<<< HEAD
+			"file": "lab/RGR/db.s",
+			"settings":
+			{
+				"buffer_size": 16112,
+=======
+			"file": "lab/RGR/main.s",
+			"settings":
+			{
+				"buffer_size": 1330,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -721,34 +847,39 @@
 			"file": "lab/RGR/menu.s",
 			"settings":
 			{
-				"buffer_size": 7251,
+				"buffer_size": 7269,
+>>>>>>> 76ec83edbea771abd22a778848e77a03a3a187d0
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "lab/RGR/db.s",
-			"settings":
-			{
-				"buffer_size": 15940,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "lab/RGR/test1.dat",
-			"settings":
-			{
-				"buffer_size": 177,
-				"encoding": "Hexadecimal",
-				"line_ending": "Unix"
-			}
-		},
-		{
+<<<<<<< HEAD
 			"file": "lab/RGR/routines.s",
 			"settings":
 			{
 				"buffer_size": 8298,
+=======
+			"file": "lab/RGR/db.s",
+			"settings":
+			{
+				"buffer_size": 25137,
+>>>>>>> 76ec83edbea771abd22a778848e77a03a3a187d0
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+<<<<<<< HEAD
+			"file": "lab/RGR/Makefile",
+			"settings":
+			{
+				"buffer_size": 592,
+=======
+			"file": "lab/RGR/routines.s",
+			"settings":
+			{
+				"buffer_size": 8900,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -758,13 +889,13 @@
 			"settings":
 			{
 				"buffer_size": 125,
+>>>>>>> 76ec83edbea771abd22a778848e77a03a3a187d0
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		}
->>>>>>> 81e10fc04262fe5b6b4cd97ca10bc4a87405e51f
 	],
-	"build_system": "Packages/C++/C++ Single File.sublime-build",
+	"build_system": "Packages/Makefile/Make.sublime-build",
 	"build_system_choices":
 	[
 		[
@@ -781,6 +912,22 @@
 			[
 				"Packages/C++/C++ Single File.sublime-build",
 				"Run"
+			]
+		],
+		[
+			[
+				[
+					"Packages/Makefile/Make.sublime-build",
+					""
+				],
+				[
+					"Packages/Makefile/Make.sublime-build",
+					"Clean"
+				]
+			],
+			[
+				"Packages/Makefile/Make.sublime-build",
+				""
 			]
 		],
 		[
@@ -896,26 +1043,20 @@
 	},
 	"expanded_folders":
 	[
-<<<<<<< HEAD
-		"/home/anton/ASM"
+		"/home/anton/ASM",
+		"/home/anton/ASM/lab",
+		"/home/anton/ASM/lab/RGR"
 	],
 	"file_history":
 	[
+<<<<<<< HEAD
 		"/home/anton/ASM/experiments/fire/sdl_64.s",
 		"/home/anton/ASM/experiments/fire/Makefile",
 		"/home/anton/ASM/experiments/fire/main_64.s",
 		"/home/anton/ASM/lab/lab_C/lab_10/a1.s",
 =======
-		"/home/anton/ASM",
-		"/home/anton/ASM/experiments",
-		"/home/anton/ASM/experiments/wav_player",
-		"/home/anton/ASM/lab",
-		"/home/anton/ASM/lab/RGR",
-		"/home/anton/ASM/training",
-		"/home/anton/ASM/training/string"
-	],
-	"file_history":
-	[
+		"/home/anton/ASM/lab/RGR/test1.dat",
+		"/home/anton/ASM/experiments/sse_strcpy/main.s",
 		"/home/anton/ASM/experiments/fire/main.s",
 		"/home/anton/ASM/training/string/routines.s",
 		"/home/anton/ASM/training/string/main.s",
@@ -927,7 +1068,6 @@
 		"/home/anton/ProCalc/src/libs/main_menu.cpp",
 		"/home/anton/C/lab/lab_15/menu.c",
 		"/home/anton/ASM/lab/RGR/test.c",
-		"/home/anton/ASM/lab/RGR/test1.dat",
 		"/home/anton/ASM/lab/RGR/menu.s",
 		"/home/anton/ASM/lab/RGR/rgr",
 		"/home/anton/ASM/lab/RGR/test.dat",
@@ -937,7 +1077,6 @@
 		"/home/anton/ASM/experiments/fire/test.c",
 		"/home/anton/ASM/experiments/fire/sdl_64.s",
 		"/home/anton/C/lab/lab_23/source.s",
-		"/home/anton/ASM/experiments/sse_strcpy/main.s",
 		"/home/anton/ASM/experiments/sse_strcpy/Makefile",
 		"/home/anton/ASM/experiments/wav_player/routines.s",
 		"/home/anton/ASM/experiments/wav_player/print_info.s",
@@ -950,7 +1089,7 @@
 		"/home/anton/ASM/experiments/wav_player/test.c",
 		"/home/anton/ASM/experiments/wav_player/DNCE  -  Kissing Strangers.wav",
 		"/home/anton/ASM/experiments/fire/sdl.s",
->>>>>>> 81e10fc04262fe5b6b4cd97ca10bc4a87405e51f
+>>>>>>> 76ec83edbea771abd22a778848e77a03a3a187d0
 		"/home/anton/ASM/lab/lab_C/lab_10/a2.s",
 		"/home/anton/ASM/home/Molch/exam.nasm",
 		"/home/anton/ASM/home/Molch/calc.nasm",
@@ -976,8 +1115,12 @@
 		"/home/anton/C/experiments/pow/lpow.s",
 		"/home/anton/ASM/training/ivt/a1.nasm",
 		"/home/anton/ASM/lab/lab_06/math.s",
+		"/home/anton/C/lab/lab_15/menu.c",
 		"/home/anton/ASM/lab/lab_05/routines.s",
+		"/home/anton/ASM/lab/RGR/routines.s",
+		"/home/anton/ASM/lab/RGR/menu.s",
 		"/home/anton/ASM/lab/RGR/main.s",
+		"/home/anton/ASM/lab/lab_04/a1.s",
 		"/home/anton/ASM/lab/lab_04/Makefile",
 		"/home/anton/ASM/lab/RGR/Makefile",
 		"/home/anton/ASM/lab/lab_05/tasks.s",
@@ -1072,13 +1215,17 @@
 		"/home/anton/C/lab/lab.sublime-project",
 		"/home/anton/C/lab/lab_wrong/lab_11/a1.c",
 		"/home/anton/C/lab/lab_wrong/lab_11/a2.c"
-=======
-		"/home/anton/C/lab/lab_15/a1in.txt"
->>>>>>> 81e10fc04262fe5b6b4cd97ca10bc4a87405e51f
 	],
 	"find":
 	{
-		"height": 29.0
+		"height": 42.0
+=======
+		"/home/anton/C/lab/lab_15/a1in.txt"
+	],
+	"find":
+	{
+		"height": 40.0
+>>>>>>> 76ec83edbea771abd22a778848e77a03a3a187d0
 	},
 	"find_in_files":
 	{
@@ -1092,45 +1239,6 @@
 		"case_sensitive": false,
 		"find_history":
 		[
-<<<<<<< HEAD
-=======
-			"break_pt",
-			"PASSBUF",
-			"MENUBUF",
-			"MENUBUF_LEN",
-			"strcmp",
-			"putchar",
-			"quit_sure",
-			"minus_one",
-			"hs",
-			"16(%ebp)",
-			"12(%ebp)",
-			"8(%ebp)",
-			"vatiables",
-			"putchar",
-			"siezeof_int",
-			"second_string",
-			"first_string",
-			"8(%ebp)",
-			"16(%ebp)",
-			"12(%ebp)",
-			"8(%ebp)",
-			"16(%rbp)",
-			"8(%rbp)",
-			"popl",
-			"ret",
-			"addl",
-			"call",
-			"cmpl",
-			"movl",
-			"pushl",
-			"%ebx",
-			"%esp",
-			"%eax",
-			"%ebp",
-			"%esp",
-			"%eax",
->>>>>>> 81e10fc04262fe5b6b4cd97ca10bc4a87405e51f
 			"%ax",
 			"call write",
 			"pushl $0x0",
@@ -1154,42 +1262,6 @@
 		"regex": false,
 		"replace_history":
 		[
-<<<<<<< HEAD
-=======
-			"PASSBUF2",
-			"PASSBUF1",
-			"PASSBUF_LEN",
-			"lstrcmp",
-			"lputchar",
-			"zero",
-			"third_arg(%ebp)",
-			"second_arg(%ebp)",
-			"first_arg(%ebp)",
-			"lputchar",
-			"sizeof_int",
-			"output_2",
-			"output_1",
-			"first_param(%ebp)",
-			"third_param(%ebp)",
-			"second_param(%ebp)",
-			"second_arg(%ebp)",
-			"first_arg(%ebp)",
-			"second_arg(%rbp)",
-			"first_arg(%rbp)",
-			"popq",
-			"retq",
-			"addq",
-			"callq",
-			"cmpq",
-			"movq",
-			"pushq",
-			"%rbx",
-			"%rsp",
-			"%rax",
-			"%rbp",
-			"%rsp",
-			"%rax",
->>>>>>> 81e10fc04262fe5b6b4cd97ca10bc4a87405e51f
 			"%al",
 			"pushl $STDIN",
 			"pushl $STDOUT",
@@ -1210,35 +1282,201 @@
 	[
 		{
 <<<<<<< HEAD
-			"sheets":
-			[
+			"selected": 2,
 =======
-			"selected": 5,
+			"selected": 4,
+>>>>>>> 76ec83edbea771abd22a778848e77a03a3a187d0
 			"sheets":
 			[
 				{
 					"buffer": 0,
+<<<<<<< HEAD
+					"file": "lab/RGR/main.s",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1242,
+=======
 					"file": "lab/RGR/Makefile",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 539,
+						"buffer_size": 592,
+>>>>>>> 76ec83edbea771abd22a778848e77a03a3a187d0
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								101,
-								101
+<<<<<<< HEAD
+								579,
+								579
+=======
+								0,
+								0
+>>>>>>> 76ec83edbea771abd22a778848e77a03a3a187d0
 							]
 						],
 						"settings":
 						{
+<<<<<<< HEAD
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.clone": -1,
+							"bracket_highlighter.clone_locations":
+							{
+								"close":
+								{
+								},
+								"icon":
+								{
+								},
+								"open":
+								{
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.clone_regions":
+							[
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content"
+							],
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+								},
+								"icon":
+								{
+								},
+								"open":
+								{
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content"
+							],
+							"syntax": "Packages/GAS-x86 (or x64) highlighting scheme/Assembly x86 AT&T.tmLanguage",
+							"translate_tabs_to_spaces": false
+=======
 							"syntax": "Packages/Makefile/Makefile.sublime-syntax"
+>>>>>>> 76ec83edbea771abd22a778848e77a03a3a187d0
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 348.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 5,
@@ -1246,30 +1484,193 @@
 				},
 				{
 					"buffer": 1,
+<<<<<<< HEAD
+					"file": "lab/RGR/menu.s",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 7269,
+=======
 					"file": "lab/RGR/constants.s",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 438,
+						"buffer_size": 954,
+>>>>>>> 76ec83edbea771abd22a778848e77a03a3a187d0
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								152,
-								152
+<<<<<<< HEAD
+								7115,
+								7115
+=======
+								346,
+								346
+>>>>>>> 76ec83edbea771abd22a778848e77a03a3a187d0
 							]
 						],
 						"settings":
 						{
+<<<<<<< HEAD
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.clone": -1,
+							"bracket_highlighter.clone_locations":
+							{
+								"close":
+								{
+								},
+								"icon":
+								{
+								},
+								"open":
+								{
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.clone_regions":
+							[
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content"
+							],
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+								},
+								"icon":
+								{
+								},
+								"open":
+								{
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content"
+							],
+=======
 							"syntax": "Packages/GAS-x86 (or x64) highlighting scheme/Assembly x86 AT&T.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
@@ -1278,56 +1679,240 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1259,
+						"buffer_size": 1330,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								421,
-								421
+								974,
+								974
 							]
 						],
 						"settings":
 						{
+>>>>>>> 76ec83edbea771abd22a778848e77a03a3a187d0
 							"syntax": "Packages/GAS-x86 (or x64) highlighting scheme/Assembly x86 AT&T.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 408.0,
+<<<<<<< HEAD
+						"translation.y": 5502.0,
+=======
+						"translation.y": 969.0,
+>>>>>>> 76ec83edbea771abd22a778848e77a03a3a187d0
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
+<<<<<<< HEAD
+					"buffer": 2,
+					"file": "lab/RGR/db.s",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 16112,
+=======
 					"buffer": 3,
 					"file": "lab/RGR/menu.s",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 7251,
+						"buffer_size": 7269,
+>>>>>>> 76ec83edbea771abd22a778848e77a03a3a187d0
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2511,
-								2511
+<<<<<<< HEAD
+								9906,
+								9906
+=======
+								1637,
+								1637
+>>>>>>> 76ec83edbea771abd22a778848e77a03a3a187d0
 							]
 						],
 						"settings":
 						{
+<<<<<<< HEAD
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.clone": -1,
+							"bracket_highlighter.clone_locations":
+							{
+								"close":
+								{
+									"1":
+									[
+										2077,
+										2078
+									]
+								},
+								"icon":
+								{
+									"1":
+									[
+										"Packages/BracketHighlighter/icons/double_quote.png",
+										"region.greenish"
+									]
+								},
+								"open":
+								{
+									"1":
+									[
+										2049,
+										2050
+									]
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.clone_regions":
+							[
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content"
+							],
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+								},
+								"icon":
+								{
+								},
+								"open":
+								{
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content"
+							],
+=======
 							"syntax": "Packages/GAS-x86 (or x64) highlighting scheme/Assembly x86 AT&T.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 408.0,
+						"translation.y": 315.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
@@ -1336,88 +1921,335 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 15940,
+						"buffer_size": 25137,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2837,
-								2837
+								25137,
+								25137
 							]
 						],
 						"settings":
 						{
+>>>>>>> 76ec83edbea771abd22a778848e77a03a3a187d0
 							"syntax": "Packages/GAS-x86 (or x64) highlighting scheme/Assembly x86 AT&T.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 14843.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "lab/RGR/test1.dat",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 177,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								177,
-								177
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
+<<<<<<< HEAD
+						"translation.y": 11208.0,
+=======
+						"translation.y": 24892.0,
+>>>>>>> 76ec83edbea771abd22a778848e77a03a3a187d0
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
 					"type": "text"
 				},
 				{
-					"buffer": 6,
+<<<<<<< HEAD
+					"buffer": 3,
+=======
+					"buffer": 5,
+>>>>>>> 76ec83edbea771abd22a778848e77a03a3a187d0
 					"file": "lab/RGR/routines.s",
 					"semi_transient": false,
 					"settings":
 					{
+<<<<<<< HEAD
 						"buffer_size": 8298,
+=======
+						"buffer_size": 8900,
+>>>>>>> 76ec83edbea771abd22a778848e77a03a3a187d0
+						"regions":
+						{
+						},
+						"selection":
+						[
+<<<<<<< HEAD
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.clone": -1,
+							"bracket_highlighter.clone_locations":
+							{
+								"close":
+								{
+								},
+								"icon":
+								{
+								},
+								"open":
+								{
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.clone_regions":
+							[
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content"
+							],
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+								},
+								"icon":
+								{
+								},
+								"open":
+								{
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content"
+							],
+							"syntax": "Packages/GAS-x86 (or x64) highlighting scheme/Assembly x86 AT&T.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 9957.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "lab/RGR/Makefile",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 592,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2817,
-								2817
+								178,
+								178
+=======
+							[
+								8675,
+								8675
+>>>>>>> 76ec83edbea771abd22a778848e77a03a3a187d0
 							]
 						],
 						"settings":
 						{
+<<<<<<< HEAD
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.clone": -1,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+								},
+								"icon":
+								{
+								},
+								"open":
+								{
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content"
+							],
+							"syntax": "Packages/Makefile/Makefile.sublime-syntax"
+=======
 							"syntax": "Packages/GAS-x86 (or x64) highlighting scheme/Assembly x86 AT&T.tmLanguage",
 							"translate_tabs_to_spaces": false
+>>>>>>> 76ec83edbea771abd22a778848e77a03a3a187d0
 						},
 						"translation.x": 0.0,
-						"translation.y": 2335.0,
+						"translation.y": 8996.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
-					"buffer": 7,
+					"buffer": 6,
 					"file": "lab/RGR/test.c",
 					"semi_transient": false,
 					"settings":
@@ -1441,10 +2273,9 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 7,
+					"stack_index": 6,
 					"type": "text"
 				}
->>>>>>> 81e10fc04262fe5b6b4cd97ca10bc4a87405e51f
 			]
 		}
 	],
@@ -1491,7 +2322,7 @@
 	{
 		"height": 0.0
 	},
-	"pinned_build_system": "Packages/C++/C++ Single File.sublime-build",
+	"pinned_build_system": "Packages/Makefile/Make.sublime-build",
 	"project": "asm.sublime-project",
 	"replace":
 	{

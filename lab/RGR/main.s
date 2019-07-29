@@ -80,9 +80,15 @@ menu2_2:
 	jmp menu2_ret_back
 
 menu2_3:
+	pushl fd(%ebp)
+	call delete_record
 	jmp menu2_ret_back
 
 menu2_4:
+	pushl fd(%ebp)
+	call edit_record
+	addl $0x4, %esp
+
 	jmp menu2_ret_back
 
 menu2_ret_back:

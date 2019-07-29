@@ -533,3 +533,43 @@ find_size:
 	movl %ebp, %esp
 	popl %ebp
 	retl
+
+.globl lstrncpy
+.type lstrncpy, @function
+lstrncpy:
+	# Initializing function's stack frame
+	pushl %ebp
+	movl %esp, %ebp
+
+	# Saving registers
+	pushl %esi
+	pushl %edi
+
+	# Initializing variables
+	movl first_arg(%ebp), %edi
+	movl second_arg(%ebp), %esi
+	movl third_arg(%ebp), %ecx
+	movl %ecx, %edx # Save size
+
+	# Main part
+	sarl $0x2, %ecx # Shift length by four (div by 4)
+
+	cld
+	rep movsl
+
+	movl %edx, %ecx
+	andl $0x3, %ecx
+
+	rep movsb
+
+	# Returning value
+	movl first_arg(%ebp), %eax
+
+	# Restoring registers
+	popl %edi
+	popl %esi
+
+	# Destroying function's stack frame
+	movl %ebp, %esp
+	popl %ebp
+	retl

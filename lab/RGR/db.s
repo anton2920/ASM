@@ -1,29 +1,5 @@
 .include "constants.s"
 
-# Database
-# struct db {
-#	int hash; /* header */
-#	int lastId; /* header */
-#	struct group grList[];
-# }
-
-.equ HEADER_SIZE, sizeof_int + sizeof_int
-
-.equ STRUCT_SIZE, 21
-.equ NAME_SIZE, 8
-.equ iD, 0
-.equ NAME, iD + sizeof_int
-.equ YEAR, NAME + NAME_SIZE
-.equ QUANT, YEAR + sizeof_int
-.equ FLAG, QUANT + sizeof_int
-# struct group {
-#	int id;
-#	char NAME[NAME_SIZE];
-#	int YEAR;
-#	int QUANT;
-#	bool FLAG;
-# };
-
 .section .rodata
 # Create and open database
 filename_line:
@@ -102,6 +78,28 @@ add_more_records:
 	.asciz "| Would you like to add another record? [Y/n]: "
 	.equ len_add_more_records, . - add_more_records
 
+# Edit records
+edit_type_number:
+	.asciz "| Type the iD of a record to edit: "
+	.equ len_edit_type_number, . - edit_type_number
+edit_invalid_id:
+	.asciz "| database: couldn't find a record with that iD              |\n"
+	.equ len_edit_invalid_id, . - edit_invalid_id
+edit_retype_number:
+	.asciz "| Would you like to change the iD? [Y/n]: "
+	.equ len_edit_retype_number, . - edit_retype_number
+edit_more_records:
+	.asciz "| Would you like to edit another record? [Y/n]: "
+	.equ len_edit_more_records, . - edit_more_records
+
+# Delete records
+delete_type_number:
+	.asciz "| Type the iD of a record to delete: "
+	.equ len_delete_type_number, . - delete_type_number
+delete_more_records:
+	.asciz "| Would you like to delete another record? [Y/n]: "
+	.equ len_delete_more_records, . - delete_more_records
+
 .section .bss
 .equ FILENAME_LEN, 500
 .lcomm FILENAME, FILENAME_LEN
@@ -112,8 +110,6 @@ add_more_records:
 
 .equ ADD_REC_LEN, 30
 .lcomm ADD_REC_BUF, ADD_REC_LEN
-
-.lcomm mappedfile, sizeof_int
 
 .section .text
 .globl create_database
@@ -747,7 +743,6 @@ djb2_while_end:
 
 .globl add_records
 .type add_records, @function
-.equ INT_MAX_LEN, 10
 add_records:
 	# Initializing function's stack frame
 	pushl %ebp
@@ -800,11 +795,15 @@ add_records_read_do_while_0:
 	cmpl $NAME_SIZE - 1, %eax
 	jle add_records_read_do_while_0_end
 
+	call prt_ln
+
 	pushl $len_add_invalid
 	pushl $add_invalid
 	pushl $STDOUT
 	call write
 	addl $0xC, %esp
+
+	call prt_ln
 
 	jmp add_records_read_do_while_0
 
@@ -827,14 +826,18 @@ add_records_read_do_while_1:
 	movl $ADD_REC_BUF, %edx
 	movb $0x0, -1(%edx, %eax)
 
-	cmpl $INT_MAX_LEN, %eax
+	cmpl $YEAR_MAX_LEN, %eax
 	jle add_records_read_do_while_1_end
+
+	call prt_ln
 
 	pushl $len_add_invalid
 	pushl $add_invalid
 	pushl $STDOUT
 	call write
 	addl $0xC, %esp
+
+	call prt_ln
 
 	jmp add_records_read_do_while_1
 
@@ -861,14 +864,18 @@ add_records_read_do_while_2:
 	movl $ADD_REC_BUF, %edx
 	movb $0x0, -1(%edx, %eax)
 
-	cmpl $INT_MAX_LEN, %eax
+	cmpl $GR_SIZE_MAX_LEN, %eax
 	jle add_records_read_do_while_2_end
+
+	call prt_ln
 
 	pushl $len_add_invalid
 	pushl $add_invalid
 	pushl $STDOUT
 	call write
 	addl $0xC, %esp
+
+	call prt_ln
 
 	jmp add_records_read_do_while_2
 
@@ -898,12 +905,14 @@ add_records_read_do_while_2_end:
 	pushl $len_add_more_records
 	pushl $add_more_records
 	call quit
-	addl $0x4, %esp
+	addl $0x8, %esp
 
 	testl %eax, %eax
 	jz add_records_read_end
 
 	call prt_ln
+
+	jmp add_records_read
 
 add_records_read_end:
 	pushl st_gr + iD(%ebp)
@@ -917,14 +926,13 @@ add_records_read_end:
 	retl
 
 .type fix_last_id, @function
-.equ SYS_MMAP, 90
-.equ SYS_MUNMAP, 91
 fix_last_id:
 	# Initializing function's stack frame
 	pushl %ebp
 	movl %esp, %ebp
 	.equ file_size, -4
-	subl $0x4, %esp # Acquiring space in file_size(%ebp)
+	.equ mappedfile, -8
+	subl $0x8, %esp # Acquiring space for two variables
 
 	# Saving registers
 	pushl %ebx
@@ -948,15 +956,15 @@ fix_last_id:
 	int $0x80 # 0x80's interrupt
 	addl $0x18, %esp
 
-	movl %eax, mappedfile
+	movl %eax, mappedfile(%ebp)
 
 	movl second_arg(%ebp), %ecx
-	movl mappedfile, %edx
+	movl mappedfile(%ebp), %edx
 	movl %ecx, sizeof_int(%edx)
 
 	# Syscall
 	movl file_size(%ebp), %ecx
-	movl mappedfile, %ebx
+	movl mappedfile(%ebp), %ebx
 	movl $SYS_MUNMAP, %eax
 	int $0x80 # 0x80's interrupt
 
@@ -986,6 +994,515 @@ print_vert_line:
 	pushl $STDOUT
 	call write
 	addl $0xC, %esp
+
+	# Destroying function's stack frame
+	movl %ebp, %esp
+	popl %ebp
+	retl
+
+.globl edit_record
+.type edit_record, @function
+edit_record:
+	# Initializing function's stack frame
+	pushl %ebp
+	movl %esp, %ebp
+	.equ file_size, -4
+	.equ mappedfile, -8
+	.equ curr_id, -12
+	.equ last_id, -16
+	.equ ed_stGr, -STRUCT_SIZE + last_id
+	addl $ed_stGr, %esp
+
+	.equ curr_mfile_pos, ed_stGr - sizeof_int
+	subl $sizeof_int, %esp
+
+	# Saving registers
+	pushl %ebx
+
+	# Initializing variables
+	movl $0x0, ed_stGr + iD(%ebp)
+	movl $0x0, ed_stGr + NAME(%ebp)
+	movl $0x0, ed_stGr + NAME + sizeof_int(%ebp)
+	
+	# Main part	
+	pushl first_arg(%ebp)
+	call find_size
+	addl $0x4, %esp
+
+	movl %eax, file_size(%ebp)
+
+	# Syscall
+	pushl $0x0
+	pushl first_arg(%ebp)
+	pushl $0x1 # Map shared
+	pushl $0x3 # Prot read/write
+	pushl file_size(%ebp)
+	pushl $0x0
+	movl %esp, %ebx
+	movl $SYS_MMAP, %eax
+	int $0x80 # 0x80's interrupt
+	addl $0x18, %esp
+
+	movl %eax, mappedfile(%ebp)
+
+edit_record_start:
+edit_record_do_while_1:
+	pushl $len_edit_type_number
+	pushl $edit_type_number
+	pushl $STDOUT
+	call write
+	addl $0xC, %esp
+
+	pushl $ADD_REC_LEN
+	pushl $ADD_REC_BUF
+	pushl $STDIN
+	call read
+	addl $0xC, %esp
+
+	movl $ADD_REC_BUF, %edx
+	movb $0x0, -1(%eax, %edx)
+
+	cmpl $INT_MAX_LEN, %eax
+	jle edit_record_do_while_1_end
+
+	call prt_ln
+
+	pushl $len_edit_invalid_id
+	pushl $edit_invalid_id
+	pushl $STDOUT
+	call write
+	addl $0xC, %esp
+
+	call prt_ln
+
+edit_record_do_while_1_end:
+	call prt_ln
+
+	pushl $ADD_REC_BUF
+	call atoi
+	addl $0x4, %esp
+
+	movl %eax, curr_id(%ebp)
+
+	movl mappedfile(%ebp), %ebx
+	addl $HEADER_SIZE, %ebx
+	movl -sizeof_int(%ebx), %ecx
+	movl %ecx, last_id(%ebp)
+
+	cmpl %ecx, curr_id(%ebp)
+	jg edit_record_search_for_id_error
+
+edit_record_search_for_id:
+	movl curr_id(%ebp), %ecx
+	cmpl %ecx, iD(%ebx)
+	jz edit_record_search_for_id_found
+
+	movl last_id(%ebp), %ecx
+	cmpl %ecx, iD(%ebx)
+	jz edit_record_search_for_id_error
+
+	addl $STRUCT_SIZE, %ebx
+
+	jmp edit_record_search_for_id
+
+edit_record_search_for_id_error:
+	pushl $len_edit_invalid_id
+	pushl $edit_invalid_id
+	pushl $STDOUT
+	call write
+	addl $0xC, %esp
+
+	call prt_ln
+
+	pushl $len_edit_retype_number
+	pushl $edit_retype_number
+	call quit
+	addl $0x8, %esp
+
+	# Saving registers
+	pushl %eax
+
+	call prt_ln
+
+	# Restoring registers
+	popl %eax
+
+	test %eax, %eax
+	jz edit_record_exit
+
+	jmp edit_record_do_while_1
+
+edit_record_search_for_id_found:
+	movl %ebx, curr_mfile_pos(%ebp)
+	movl curr_id(%ebp), %ecx
+	movl %ecx, ed_stGr + iD(%ebp)
+
+edit_records_read_do_while_0:
+	pushl $len_add_type_name
+	pushl $add_type_name
+	pushl $STDOUT
+	call write
+	addl $0xC, %esp
+
+	pushl $NAME_SIZE
+	leal ed_stGr + NAME(%ebp), %eax
+	pushl %eax
+	pushl $STDIN
+	call read
+	addl $0xC, %esp
+
+	cmpl $NAME_SIZE - 1, %eax
+	jle edit_records_read_do_while_0_end
+
+	call prt_ln
+
+	pushl $len_add_invalid
+	pushl $add_invalid
+	pushl $STDOUT
+	call write
+	addl $0xC, %esp
+
+	call prt_ln
+
+	jmp edit_records_read_do_while_0
+
+edit_records_read_do_while_0_end:
+	movb $0x0, ed_stGr + NAME - 1(%ebp, %eax)
+
+edit_records_read_do_while_1:
+	pushl $len_add_type_year
+	pushl $add_type_year
+	pushl $STDOUT
+	call write
+	addl $0xC, %esp
+
+	pushl $ADD_REC_LEN
+	pushl $ADD_REC_BUF
+	pushl $STDIN
+	call read
+	addl $0xC, %esp
+
+	movl $ADD_REC_BUF, %edx
+	movb $0x0, -1(%edx, %eax)
+
+	cmpl $YEAR_MAX_LEN, %eax
+	jle edit_records_read_do_while_1_end
+
+	call prt_ln
+
+	pushl $len_add_invalid
+	pushl $add_invalid
+	pushl $STDOUT
+	call write
+	addl $0xC, %esp
+
+	call prt_ln
+
+	jmp edit_records_read_do_while_1
+
+edit_records_read_do_while_1_end:
+	pushl $ADD_REC_BUF
+	call atoi
+	addl $0x4, %esp
+
+	movl %eax, ed_stGr + YEAR(%ebp)
+
+edit_records_read_do_while_2:
+	pushl $len_add_type_number
+	pushl $add_type_number
+	pushl $STDOUT
+	call write
+	addl $0xC, %esp
+
+	pushl $ADD_REC_LEN
+	pushl $ADD_REC_BUF
+	pushl $STDIN
+	call read
+	addl $0xC, %esp
+
+	movl $ADD_REC_BUF, %edx
+	movb $0x0, -1(%edx, %eax)
+
+	cmpl $GR_SIZE_MAX_LEN, %eax
+	jle edit_records_read_do_while_2_end
+
+	call prt_ln
+
+	pushl $len_add_invalid
+	pushl $add_invalid
+	pushl $STDOUT
+	call write
+	addl $0xC, %esp
+
+	call prt_ln
+
+	jmp edit_records_read_do_while_2
+
+edit_records_read_do_while_2_end:
+	pushl $ADD_REC_BUF
+	call atoi
+	addl $0x4, %esp
+
+	movl %eax, ed_stGr + QUANT(%ebp)
+
+	pushl $len_add_type_grad
+	pushl $add_type_grad
+	call quit
+	addl $0x8, %esp
+
+	movb %al, ed_stGr + FLAG(%ebp)
+
+	call prt_ln
+
+	pushl $len_edit_more_records
+	pushl $edit_more_records
+	call quit
+	addl $0x8, %esp
+
+	testl %eax, %eax
+	jz edit_record_exit
+
+	call prt_ln
+
+	jmp edit_record_start
+
+edit_record_exit:
+	pushl $STRUCT_SIZE
+	leal ed_stGr(%ebp), %eax
+	pushl %eax
+	pushl curr_mfile_pos(%ebp)
+	call lstrncpy
+	addl $0xC, %esp
+
+	# Syscall
+	movl file_size(%ebp), %ecx
+	movl mappedfile(%ebp), %ebx
+	movl $SYS_MUNMAP, %eax
+	int $0x80 # 0x80's interrupt
+
+	pushl $SEEK_SET
+	pushl $0x0
+	pushl first_arg(%ebp)
+	call lseek
+	addl $0xC, %esp
+
+	# Restoring registers
+	popl %ebx
+
+	# Destroying function's stack frame
+	movl %ebp, %esp
+	popl %ebp
+	retl
+
+.globl delete_record
+.type delete_record, @function
+.equ SYS_FTRUNCATE, 93
+delete_record:
+	# Initializing function's stack frame
+	pushl %ebp
+	movl %esp, %ebp
+	.equ file_size, -4
+	.equ mappedfile, -8
+	.equ curr_id, -12
+	.equ last_id, -16
+	.equ ed_stGr, -STRUCT_SIZE + last_id
+	addl $ed_stGr, %esp
+
+	.equ curr_mfile_pos, ed_stGr - sizeof_int
+	subl $sizeof_int, %esp
+
+	.equ nrecs_del, curr_mfile_pos - sizeof_int
+	subl $sizeof_int, %esp
+
+	# Saving registers
+	pushl %ebx
+
+	# Initializing variables
+	movl $0x0, ed_stGr + iD(%ebp)
+	movl $0x0, ed_stGr + NAME(%ebp)
+	movl $0x0, ed_stGr + NAME + sizeof_int(%ebp)
+	movl $0x0, nrecs_del(%ebp)
+	
+	# Main part	
+	pushl first_arg(%ebp)
+	call find_size
+	addl $0x4, %esp
+
+	movl %eax, file_size(%ebp)
+
+	# Syscall
+	pushl $0x0
+	pushl first_arg(%ebp)
+	pushl $0x1 # Map shared
+	pushl $0x3 # Prot read/write
+	pushl file_size(%ebp)
+	pushl $0x0
+	movl %esp, %ebx
+	movl $SYS_MMAP, %eax
+	int $0x80 # 0x80's interrupt
+	addl $0x18, %esp
+
+	movl %eax, mappedfile(%ebp)
+
+delete_record_start:
+delete_record_do_while_1:
+	pushl $len_delete_type_number
+	pushl $delete_type_number
+	pushl $STDOUT
+	call write
+	addl $0xC, %esp
+
+	pushl $ADD_REC_LEN
+	pushl $ADD_REC_BUF
+	pushl $STDIN
+	call read
+	addl $0xC, %esp
+
+	movl $ADD_REC_BUF, %edx
+	movb $0x0, -1(%eax, %edx)
+
+	cmpl $INT_MAX_LEN, %eax
+	jle delete_record_do_while_1_end
+
+	call prt_ln
+
+	pushl $len_edit_invalid_id
+	pushl $edit_invalid_id
+	pushl $STDOUT
+	call write
+	addl $0xC, %esp
+
+	call prt_ln
+
+delete_record_do_while_1_end:
+	call prt_ln
+
+	pushl $ADD_REC_BUF
+	call atoi
+	addl $0x4, %esp
+
+	movl %eax, curr_id(%ebp)
+
+	movl mappedfile(%ebp), %ebx
+	addl $HEADER_SIZE, %ebx
+	movl -sizeof_int(%ebx), %ecx
+	movl %ecx, last_id(%ebp)
+
+	cmpl %ecx, curr_id(%ebp)
+	jg delete_record_search_for_id_error
+
+delete_record_search_for_id:
+	movl curr_id(%ebp), %ecx
+	cmpl %ecx, iD(%ebx)
+	jz delete_record_search_for_id_found
+
+	movl last_id(%ebp), %ecx
+	cmpl %ecx, iD(%ebx)
+	jz delete_record_search_for_id_error
+
+	addl $STRUCT_SIZE, %ebx
+
+	jmp delete_record_search_for_id
+
+delete_record_search_for_id_error:
+	pushl $len_edit_invalid_id
+	pushl $edit_invalid_id
+	pushl $STDOUT
+	call write
+	addl $0xC, %esp
+
+	call prt_ln
+
+	pushl $len_edit_retype_number
+	pushl $edit_retype_number
+	call quit
+	addl $0x8, %esp
+
+	# Saving registers
+	pushl %eax
+
+	call prt_ln
+
+	# Restoring registers
+	popl %eax
+
+	test %eax, %eax
+	jz delete_record_exit
+
+	jmp delete_record_do_while_1
+
+delete_record_search_for_id_found:
+	# Deleting record
+
+delete_record_move_data:
+	movl curr_id(%ebp), %ecx
+	cmpl %ecx, last_id(%ebp)
+	jz delete_record_ask
+
+	addl $STRUCT_SIZE, %ebx
+	movl %ebx, curr_mfile_pos(%ebp)	
+
+	subl mappedfile(%ebp), %ebx
+	subl file_size(%ebp), %ebx
+	negl %ebx
+
+	pushl %ebx
+	pushl curr_mfile_pos(%ebp)
+	subl $STRUCT_SIZE, curr_mfile_pos(%ebp)
+	pushl curr_mfile_pos(%ebp)
+	call lstrncpy
+	addl $0xC, %esp
+
+delete_record_ask:
+	addl $0x1, nrecs_del(%ebp)
+
+	pushl $len_delete_more_records
+	pushl $delete_more_records
+	call quit
+	addl $0x8, %esp
+
+	# Saving registers
+	pushl %eax
+
+	call prt_ln
+	
+	# Restoring registers
+	popl %eax
+
+	testl %eax, %eax
+	jnz delete_record_start
+
+delete_record_exit:
+	# Syscall
+	movl file_size(%ebp), %ecx
+	movl mappedfile(%ebp), %ebx
+	movl $SYS_MUNMAP, %eax
+	int $0x80 # 0x80's interrupt
+
+	pushl $SEEK_SET
+	pushl $0x0
+	pushl first_arg(%ebp)
+	call lseek
+	addl $0xC, %esp
+
+delete_record_if:
+	cmpl $0x0, nrecs_del(%ebp)
+	jz delete_record_exit_2
+
+delete_record_exit_1:
+	movl nrecs_del(%ebp), %eax
+	imull $STRUCT_SIZE, %eax
+	subl %eax, file_size(%ebp)
+
+	# Syscall
+	movl $SYS_FTRUNCATE, %eax
+	movl first_arg(%ebp), %ebx
+	movl file_size(%ebp), %ecx
+	int $0x80 # 0x80's interrupt
+
+delete_record_exit_2:
+	# Restoring registers
+	popl %ebx
 
 	# Destroying function's stack frame
 	movl %ebp, %esp
