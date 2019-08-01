@@ -573,3 +573,42 @@ lstrncpy:
 	movl %ebp, %esp
 	popl %ebp
 	retl
+
+.globl check_number
+.type check_number, @function
+check_number:
+	# Initializing function's stack frame
+	pushl %ebp
+	movl %esp, %ebp
+
+	# Iniitializing variables
+	movl first_arg(%ebp), %eax
+
+	# Main part
+check_number_loop:
+	cmpb $'\0', (%eax)
+	jz check_number_ok
+
+	cmpb $'0', (%eax)
+	jl check_number_fail
+
+	cmpb $'9', (%eax)
+	jg check_number_fail
+
+	incl %eax
+
+	jmp check_number_loop
+
+check_number_ok:
+	movl $true, %eax
+
+	jmp check_number_exit
+
+check_number_fail:
+	xorl %eax, %eax # false
+
+check_number_exit:
+	# Destroying function's stack frame
+	movl %esp, %ebp
+	popl %ebp
+	retl

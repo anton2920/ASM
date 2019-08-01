@@ -827,8 +827,16 @@ add_records_read_do_while_1:
 	movb $0x0, -1(%edx, %eax)
 
 	cmpl $YEAR_MAX_LEN, %eax
-	jle add_records_read_do_while_1_end
+	jg add_records_read_do_while_1_err
 
+	pushl $ADD_REC_BUF
+	call check_number
+	addl $0x4, %esp
+
+	testl %eax, %eax
+	jnz add_records_read_do_while_1_end
+
+add_records_read_do_while_1_err:
 	call prt_ln
 
 	pushl $len_add_invalid
@@ -865,8 +873,16 @@ add_records_read_do_while_2:
 	movb $0x0, -1(%edx, %eax)
 
 	cmpl $GR_SIZE_MAX_LEN, %eax
-	jle add_records_read_do_while_2_end
+	jg add_records_read_do_while_2_err
 
+	pushl $ADD_REC_BUF
+	call check_number
+	addl $0x4, %esp
+
+	testl %eax, %eax
+	jnz add_records_read_do_while_2_end
+
+add_records_read_do_while_2_err:
 	call prt_ln
 
 	pushl $len_add_invalid
@@ -1063,8 +1079,16 @@ edit_record_do_while_1:
 	movb $0x0, -1(%eax, %edx)
 
 	cmpl $INT_MAX_LEN, %eax
-	jle edit_record_do_while_1_end
+	jg edit_record_do_while_1_err
 
+	pushl $ADD_REC_BUF
+	call check_number
+	addl $0x4, %esp
+
+	testl %eax, %eax
+	jnz edit_record_do_while_1_end
+
+edit_record_do_while_1_err:
 	call prt_ln
 
 	pushl $len_edit_invalid_id
@@ -1186,8 +1210,16 @@ edit_records_read_do_while_1:
 	movb $0x0, -1(%edx, %eax)
 
 	cmpl $YEAR_MAX_LEN, %eax
-	jle edit_records_read_do_while_1_end
+	jg edit_records_read_do_while_1_err
 
+	pushl $ADD_REC_BUF
+	call check_number
+	addl $0x4, %esp
+
+	testl %eax, %eax
+	jnz edit_records_read_do_while_1_end
+
+edit_records_read_do_while_1_err:
 	call prt_ln
 
 	pushl $len_add_invalid
@@ -1224,8 +1256,16 @@ edit_records_read_do_while_2:
 	movb $0x0, -1(%edx, %eax)
 
 	cmpl $GR_SIZE_MAX_LEN, %eax
-	jle edit_records_read_do_while_2_end
+	jg edit_records_read_do_while_2_err
 
+	pushl $ADD_REC_BUF
+	call check_number
+	addl $0x4, %esp
+
+	testl %eax, %eax
+	jnz edit_records_read_do_while_2_end
+
+edit_records_read_do_while_2_err:
 	call prt_ln
 
 	pushl $len_add_invalid
@@ -1362,8 +1402,16 @@ delete_record_do_while_1:
 	movb $0x0, -1(%eax, %edx)
 
 	cmpl $INT_MAX_LEN, %eax
-	jle delete_record_do_while_1_end
+	jg delete_record_do_while_1_err
 
+	pushl $ADD_REC_BUF
+	call check_number
+	addl $0x4, %esp
+
+	testl %eax, %eax
+	jnz delete_record_do_while_1_end
+
+delete_record_do_while_1_err:
 	call prt_ln
 
 	pushl $len_edit_invalid_id
