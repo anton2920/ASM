@@ -190,8 +190,8 @@ lstrcmp_loop:
 	movb (%eax), %cl
 	movb (%ebx), %dl
 
-	testb %cl, %dl
-	jnz lstrcmp_end_loop
+	cmpb %cl, %dl
+	jne lstrcmp_end_loop
 
 	testb %cl, %cl
 	jz lstrcmp_end_loop
@@ -386,9 +386,8 @@ lputchar:
 
 	# I/O flow
 	leal first_arg(%ebp), %eax
-	movl $0x1, %ecx
 
-	pushl %ecx 
+	pushl $0x1
 	pushl %eax # &a
 	pushl $STDOUT
 	call write
@@ -397,7 +396,7 @@ lputchar:
 	# Destroying function's stack frame
 	movl %ebp, %esp
 	popl %ebp
-	ret
+	retl
 
 .type numlen, @function
 numlen:
@@ -586,8 +585,8 @@ check_number:
 
 	# Main part
 check_number_loop:
-	cmpb $'\0', (%eax)
-	jz check_number_ok
+	cmpb $0x0, (%eax)
+	je check_number_ok
 
 	cmpb $'0', (%eax)
 	jl check_number_fail

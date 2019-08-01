@@ -78,7 +78,7 @@ prt_ln:
 	# Destroying function's stack frame
 	movl %ebp, %esp
 	popl %ebp
-	ret
+	retl
 
 .globl quit
 .type quit, @function
@@ -92,8 +92,8 @@ quit:
 
 sure_quit:
 	# Initializing variables
-	movl 8(%ebp), %eax
-	movl 12(%ebp), %ebx
+	movl first_arg(%ebp), %eax
+	movl second_arg(%ebp), %ebx
 
 	# I/O flow
 	pushl %ebx
@@ -168,7 +168,7 @@ quit_exit:
 	# Destroying function's stack frame
 	movl %ebp, %esp
 	popl %ebp
-	ret
+	retl
 
 .globl menu
 .type menu, @function
@@ -226,7 +226,7 @@ check_quit:
 	call lstrcmp
 	addl $0x8, %esp
 
-	test %eax, %eax
+	testl %eax, %eax
 	jz call_quit
 
 check_num:
@@ -251,7 +251,7 @@ call_quit:
 	call quit
 	addl $0x8, %esp
 
-	test %eax, %eax
+	testl %eax, %eax
 	jz menu_loop
 
 	call prt_ln
@@ -266,7 +266,6 @@ yes_one:
 
 yes_two:
 	movl $0x2, %eax
-	jmp menu_end
 
 menu_end:
 	# Restoring registers
@@ -275,8 +274,6 @@ menu_end:
 	# Destroying function's stack frame
 	movl %ebp, %esp
 	popl %ebp
-
-	# Returning
 	retl
 
 .globl menu2
@@ -335,7 +332,7 @@ menu2_check_quit:
 	call lstrcmp
 	addl $0x8, %esp
 
-	test %eax, %eax
+	testl %eax, %eax
 	jz menu2_call_quit
 
 	pushl $back_line
@@ -343,7 +340,7 @@ menu2_check_quit:
 	call lstrcmp
 	addl $0x8, %esp
 
-	test %eax, %eax
+	testl %eax, %eax
 	jz menu2_call_back
 
 	jmp menu2_error
@@ -374,9 +371,9 @@ menu2_call_quit:
 	pushl $len_quit_sure
 	pushl $quit_sure
 	call quit
-	addl $0xC, %esp
+	addl $0x8, %esp
 
-	test %eax, %eax
+	testl %eax, %eax
 	jz menu2_loop
 
 	call prt_ln
@@ -391,7 +388,7 @@ menu2_call_back:
 	call quit
 	addl $0x8, %esp
 
-	test %eax, %eax
+	testl %eax, %eax
 	jz menu2_loop
 
 menu2_yes_back:
@@ -420,6 +417,4 @@ menu2_end:
 	# Destroying function's stack frame
 	movl %ebp, %esp
 	popl %ebp
-
-	# Returning
 	retl

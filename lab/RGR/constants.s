@@ -17,8 +17,6 @@
 .equ SEEK_CUR, 1
 .equ SEEK_END, 2
 
-# .equ PASS_ERR, -1
-
 # Database
 # struct db {
 #	int hash; /* header */

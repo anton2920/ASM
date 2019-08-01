@@ -15,7 +15,7 @@ _start:
 menu_l:
 	call menu
 
-	test %eax, %eax
+	testl %eax, %eax
 	jz exit
 
 	cmpl $0x1, %eax
@@ -39,9 +39,6 @@ open_exist:
 	test %eax, %eax
 	jz menu_l
 
-	# cmpl $PASS_ERR, %eax
-	# jz menu_l
-
 	movl %eax, fd(%ebp)
 
 menu2_l:
@@ -51,7 +48,7 @@ menu2_l:
 	jz close_l
 
 	cmpl $-1, %eax
-	jz close_and_back
+	je close_and_back
 
 	cmpl $0x1, %eax
 	je menu2_1
@@ -82,6 +79,8 @@ menu2_2:
 menu2_3:
 	pushl fd(%ebp)
 	call delete_record
+	addl $0x4, %esp
+
 	jmp menu2_ret_back
 
 menu2_4:

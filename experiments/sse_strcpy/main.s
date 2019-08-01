@@ -81,9 +81,9 @@ lstrncpy:
 	# Main part. SSE (SSE2)
 	sarl $0x4, %ecx # Shift length by four (div by 16)
 
-while:
+lstrncpy_while:
 	test %ecx, %ecx
-	jz while_end
+	jz lstrncpy_while_end
 
 	movupd (%esi), %xmm0
 	movupd %xmm0, (%edi)
@@ -95,7 +95,7 @@ while:
 
 	jmp while
 
-while_end:
+lstrncpy_while_end:
 	movl %edx, %ecx
 	andl $0xF, %ecx
 	

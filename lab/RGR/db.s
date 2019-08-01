@@ -140,7 +140,7 @@ create_database_loop:
 	addl $0xC, %esp
 
 	movl $FILENAME, %ebx
-	movb $0x0, -1(%ebx, %eax, 1)
+	movb $0x0, -1(%ebx, %eax)
 
 	call prt_ln
 
@@ -151,8 +151,8 @@ create_database_loop:
 	call open
 	addl $0xC, %esp
 
-	cmpl $0x0, %eax
-	jle create_database_create
+	testl %eax, %eax
+	js create_database_create
 
 	pushl %eax
 	call close
@@ -166,8 +166,8 @@ create_database_create:
 	call creat
 	addl $0x8, %esp
 
-	test %eax, %eax
-	jle create_database_err
+	testl %eax, %eax
+	js create_database_err
 
 	# Saving registers
 	pushl %eax
@@ -258,20 +258,34 @@ create_database_pass:
 
 	call prt_ln
 
-	pushl $PASSBUF1
 	pushl $PASSBUF2
+	pushl $PASSBUF1
 	call lstrcmp
 	addl $0x8, %esp
 
-	test %eax, %eax
-	jnz create_database_pass_err
+	testl %eax, %eax
+	jz create_database_pass_ok
 
+	pushl $len_error_pass
+	pushl $error_pass
+	pushl $STDOUT
+	call write
+	addl $0xC, %esp
+
+	call prt_ln
+
+	jmp create_database_pass
+
+create_database_pass_ok:
 	# Restoring registers
 	popl %eax
 
 	pushl $sizeof_int
 
 	cmpl $0x1, %eax
+	jne make_hash_sum
+
+	cmpl $'\n', (%eax)
 	jne make_hash_sum
 
 	pushl $minus_one
@@ -298,18 +312,12 @@ create_database_lookout:
 	call write
 	addl $0xC, %esp
 
-	pushl $SEEK_SET
-	pushl $0x0
-	pushl fd(%ebp)
-	call lseek
-	addl $0xC, %esp
-
 	pushl $len_lookout_for_cr
 	pushl $lookout_for_cr
 	call quit
 	addl $0x8, %esp
 
-	test %eax, %eax
+	testl %eax, %eax
 	jz create_database_exit_1
 
 	jmp create_database_exit_2
@@ -347,17 +355,6 @@ create_database_change_name:
 
 	jmp create_database_loop
 
-create_database_pass_err:
-	pushl $len_error_pass
-	pushl $error_pass
-	pushl $STDOUT
-	call write
-	addl $0xC, %esp
-
-	call prt_ln
-
-	jmp create_database_pass
-
 create_database_exit_1:
 	call prt_ln
 
@@ -369,6 +366,12 @@ create_database_exit_1:
 	jmp create_database_exit
 
 create_database_exit_2:
+	pushl $SEEK_SET
+	pushl $0x0
+	pushl fd(%ebp)
+	call lseek
+	addl $0xC, %esp
+
 	# Returning value
 	movl fd(%ebp), %eax
 
@@ -379,13 +382,10 @@ create_database_exit:
 	# Destroying function's stack frame
 	movl %ebp, %esp
 	popl %ebp
-
-	# Returning
 	retl
 
 .globl open_database
 .type open_database, @function
-.equ PASS_ERR, -1
 .equ LIM_ATT, 3
 open_database:
 	# Initializing function's stack frame
@@ -393,7 +393,7 @@ open_database:
 	movl %esp, %ebp
 	.equ fd, -4
 	.equ nattempts, -8
-	.equ hs, -12
+	.equ hash_sum, -12
 	subl $0xC, %esp # Acquiring space for three variables
 
 	# Saving registers
@@ -430,8 +430,8 @@ open_database_open:
 	# Saving registers
 	movl %eax, fd(%ebp)
 
-	cmpl $0x0, %eax
-	jg open_database_pass
+	testl %eax, %eax
+	jns open_database_pass
 
 open_database_err:
 	call prt_ln
@@ -450,8 +450,8 @@ open_database_change_name:
 	call quit
 	addl $0x8, %esp
 
-	test %eax, %eax
-	je open_database_exit_1
+	testl %eax, %eax
+	jz open_database_exit_1
 
 	call prt_ln
 
@@ -468,8 +468,9 @@ open_database_pass:
 	addl $0xC, %esp
 
 	cmpl $-1, hash_sum(%ebp)
-	jz open_database_exit_2
+	je open_database_exit_2
 
+open_database_pass_read:
 	pushl $len_enter_pass
 	pushl $enter_pass
 	pushl $STDOUT
@@ -491,7 +492,7 @@ open_database_pass:
 	movl $PASSBUF1, %ebx
 	movb $0x0, -1(%ebx, %eax)
 
-.if LIBC_ENABLED
+.if LIBC_ENABLED == 1
 	pushl $0x1
 	call turn_echo
 	addl $0x4, %esp
@@ -506,14 +507,14 @@ open_database_pass:
 	addl $0x4, %esp
 
 	cmpl %eax, hash_sum(%ebp)
-	jz open_database_exit_2
+	je open_database_exit_2
 
 	call prt_ln
 
-	addl $0x1, nattempts(%ebp)
+	incl nattempts(%ebp)
 
 	cmpl $LIM_ATT, nattempts(%ebp)
-	jz open_database_exit_error_pass
+	jge open_database_exit_error_pass
 
 	pushl $len_error_pass
 	pushl $error_pass
@@ -521,11 +522,9 @@ open_database_pass:
 	call write
 	addl $0xC, %esp
 
-	jmp open_database_pass
+	call prt_ln
 
-open_database_exit_1:
-	xorl %eax, %eax
-	jmp open_database_exit
+	jmp open_database_pass_read
 
 open_database_exit_error_pass:
 	pushl $len_pass_too_many
@@ -538,9 +537,9 @@ open_database_exit_error_pass:
 	call close
 	addl $0x4, %esp
 
-	# movl $PASS_ERR, %eax
-
-	jmp open_database_exit_1
+open_database_exit_1:
+	xorl %eax, %eax
+	jmp open_database_exit
 
 open_database_exit_2:
 	pushl $SEEK_SET
@@ -559,8 +558,6 @@ open_database_exit:
 	# Destroying function's stack frame
 	movl %ebp, %esp
 	popl %ebp
-
-	# Returning
 	retl
 
 .globl show_recs
@@ -827,7 +824,7 @@ add_records_read_do_while_1:
 	movb $0x0, -1(%edx, %eax)
 
 	cmpl $YEAR_MAX_LEN, %eax
-	jg add_records_read_do_while_1_err
+	jnz add_records_read_do_while_1_err
 
 	pushl $ADD_REC_BUF
 	call check_number
@@ -853,6 +850,9 @@ add_records_read_do_while_1_end:
 	pushl $ADD_REC_BUF
 	call atoi
 	addl $0x4, %esp
+
+	cmpl $0x0, %eax
+	jle add_records_read_do_while_1_err
 
 	movl %eax, st_gr + YEAR(%ebp)
 
@@ -899,6 +899,9 @@ add_records_read_do_while_2_end:
 	pushl $ADD_REC_BUF
 	call atoi
 	addl $0x4, %esp
+
+	cmpl $0x0, %eax
+	jle add_records_read_do_while_2_err
 
 	movl %eax, st_gr + QUANT(%ebp)
 
@@ -1210,7 +1213,7 @@ edit_records_read_do_while_1:
 	movb $0x0, -1(%edx, %eax)
 
 	cmpl $YEAR_MAX_LEN, %eax
-	jg edit_records_read_do_while_1_err
+	jnz edit_records_read_do_while_1_err
 
 	pushl $ADD_REC_BUF
 	call check_number
@@ -1236,6 +1239,9 @@ edit_records_read_do_while_1_end:
 	pushl $ADD_REC_BUF
 	call atoi
 	addl $0x4, %esp
+
+	cmpl $0x0, %eax
+	jle edit_records_read_do_while_1_err
 
 	movl %eax, ed_stGr + YEAR(%ebp)
 
@@ -1282,6 +1288,9 @@ edit_records_read_do_while_2_end:
 	pushl $ADD_REC_BUF
 	call atoi
 	addl $0x4, %esp
+
+	cmpl $0x0, %eax
+	jle edit_records_read_do_while_2_err
 
 	movl %eax, ed_stGr + QUANT(%ebp)
 
@@ -1436,6 +1445,7 @@ delete_record_do_while_1_end:
 	movl -sizeof_int(%ebx), %ecx
 	movl %ecx, last_id(%ebp)
 
+	# Questionable (???)
 	cmpl %ecx, curr_id(%ebp)
 	jg delete_record_search_for_id_error
 

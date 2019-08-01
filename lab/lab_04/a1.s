@@ -149,10 +149,11 @@ loop:
 
 	movb (%eax), %cl
 	movb (%ebx), %dl
+
 	cmpb %cl, %dl
 	jne end_loop
 
-	cmpb $0x0, %cl
+	testb %cl, %cl
 	jz end_loop
 
 	incl %eax
