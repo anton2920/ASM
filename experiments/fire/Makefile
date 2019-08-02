@@ -2,8 +2,8 @@
 asm = as
 ASFLAGS = --32
 link = ld
-LDFLAGS = -m elf_i386 -dynamic-linker /lib32/ld-linux.so.2 -lSDL2 -lSDL2_image -lc
-LDFLAGS_64 = -dynamic-linker /lib64/ld-linux_x86-64.so.2 -lSDL2 -lSDL2_image -lc
+LDFLAGS = -m elf_i386 -dynamic-linker /lib32/ld-linux.so.2 -lc -lSDL2 -lSDL2_image
+LDFLAGS_64 = -dynamic-linker /lib64/ld-linux_x86-64.so.2 -lc -lSDL2 -lSDL2_image
 DEBUG = -g
 
 # Main part
@@ -28,4 +28,4 @@ sdl_64.o: sdl_64.s
 	$(asm) sdl_64.s -o sdl_64.o $(DEBUG)
 
 clean:
-	rm -f *.o main
+	rm -f *.o main main64

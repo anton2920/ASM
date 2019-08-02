@@ -22,10 +22,11 @@ SDL_init_all:
 	movq %rsp, %rbp
 
 	# Initializing variables
+	xorq %rdi, %rdi
 	movl $SDL_INIT_EVERYTHING, %edi
 
 	# Main part
-	callq SDL_Init@PLT
+	callq SDL_Init
 
 	# Destroying function's stack frame
 	movq %rbp, %rsp
@@ -48,7 +49,7 @@ Init_window_renderer:
 	movl $SDL_WINDOWPOS_CENTERED_MASK, %edx
 	movl $SDL_WINDOWPOS_CENTERED_MASK, %esi
 	leaq prog_title(%rip), %rdi
-	callq SDL_CreateWindow@PLT
+	callq SDL_CreateWindow
 
 	cmpq $NULL, %rax
 	jz em1_exit
@@ -59,7 +60,7 @@ Init_window_renderer:
 	xorq %rdx, %rdx
 	movq $-1, %rsi
 	movq %rax, %rdi
-	callq SDL_CreateRenderer@PLT
+	callq SDL_CreateRenderer
 
 	cmpq $NULL, %rax
 	jz em1_exit
@@ -90,7 +91,7 @@ Get_texture:
 	movq second_arg(%rbp), %rdi
 
 	# Main part
-	callq IMG_Load@PLT
+	callq IMG_Load
 
 	cmpq $NULL, %rax
 	jz em2_exit
@@ -99,7 +100,7 @@ Get_texture:
 
 	movq %rax, %rsi
 	movq first_arg(%rbp), %rdi
-	callq SDL_CreateTextureFromSurface@PLT
+	callq SDL_CreateTextureFromSurface
 
 	cmpq $NULL, %rax
 	je em2_exit
@@ -108,7 +109,7 @@ Get_texture:
 	pushq %rax
 
 	movq %rbx, %rdi
-	callq SDL_FreeSurface@PLT
+	callq SDL_FreeSurface
 
 	popq %rax
 

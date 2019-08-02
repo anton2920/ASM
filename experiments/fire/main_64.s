@@ -41,16 +41,20 @@ main:
 	subq $sizeof_sdl_rect, %rsp
 	subq $sizeof_sdl_rect, %rsp
 
-	.equ fire_texture, -56 # SDL_Texture *
+	subq $0x8, %rsp # For stack alignment
+
+	.equ fire_texture, -64 # SDL_Texture *
 	subq $sizeof_void_p, %rsp
 
-	.equ event, -112 # SDL_Event
+	subq $0x8, %rsp # For stack alignment
+
+	.equ event, -128 # SDL_Event
 	subq $sizeof_sdl_event, %rsp
 
-	.equ quit_flag, -116 # int
-	subq $sizeof_int, %rsp
+	subq $0xC, %rsp # For stack alignment
 
-	subq $0xC, %rsp # For stack alingment
+	.equ quit_flag, -144 # int
+	subq $sizeof_int, %rsp
 
 	# Initializing variables
 	movq $0x0, draw_rect + rect_x(%rbp)
@@ -63,7 +67,7 @@ main:
 	movq $391, curr_rect + rect_h(%rbp)
 
 	# Main part. SDL2
-	callq SDL_init_all@PLT # Initializing SDL2
+	callq SDL_init_all # Initializing SDL2
 
 	# Initializing windows and attaching renderer to it
 	leaq renderer(%rbp), %rsi
@@ -82,7 +86,7 @@ main_while_loop:
 
 event_loop:
 	leaq event(%rbp), %rdi
-	callq SDL_PollEvent@PLT
+	callq SDL_PollEvent
 
 	cmpq $0x0, %rax
 	jz event_loop_end
@@ -101,7 +105,7 @@ event_loop_end:
 	leaq curr_rect(%rbp), %rdx
 	movq fire_texture(%rbp), %rsi
 	movq renderer(%rbp), %rdi
-	callq SDL_RenderCopy@PLT
+	callq SDL_RenderCopy
 
 	movq renderer(%rbp), %rdi
 	call SDL_RenderPresent
@@ -121,14 +125,14 @@ event_loop_end:
 
 main_while_end:
 	movq fire_texture(%rbp), %rdi
-	callq SDL_DestroyTexture@PLT
+	callq SDL_DestroyTexture
 
 	movq renderer(%rbp), %rdi
-	callq SDL_DestroyRenderer@PLT
+	callq SDL_DestroyRenderer
 
 	movq window(%rbp), %rdi
-	callq SDL_DestroyWindow@PLT
-
+	callq SDL_DestroyWindow
+	
 exit:
 	# Exiting
 	movq $60, %rax
