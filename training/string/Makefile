@@ -17,4 +17,4 @@ routines.o: routines.s
 	$(asm) routines.s -o routines.o $(DEBUG) $(ASFLAGS)
 
 clean:
-	rm -f *.o wavp
+	rm -f *.o strings

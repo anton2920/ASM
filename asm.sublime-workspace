@@ -4,6 +4,106 @@
 		"selected_items":
 		[
 			[
+				"delete_",
+				"delete_success\tabc"
+			],
+			[
+				"che",
+				"checking_integrity"
+			],
+			[
+				"check",
+				"checking_fix\tabc"
+			],
+			[
+				"len_che",
+				"len_checking_fix\tabc"
+			],
+			[
+				"fix",
+				"fix_last_id\tabc"
+			],
+			[
+				"chef",
+				"checking_fail\tabc"
+			],
+			[
+				"len_chec",
+				"len_checking_fail\tabc"
+			],
+			[
+				"checking",
+				"checking_integrity\tabc"
+			],
+			[
+				"chec",
+				"checking_integrity\tabc"
+			],
+			[
+				"checki",
+				"checking_ok\tabc"
+			],
+			[
+				"checkin",
+				"checking_check\tabc"
+			],
+			[
+				"SEEK",
+				"SEEK_END\t(constants.s)"
+			],
+			[
+				"va",
+				"variables\tabc"
+			],
+			[
+				"curr",
+				"curr_id\tabc"
+			],
+			[
+				"as",
+				"asciz"
+			],
+			[
+				"Check",
+				"checking_integrity"
+			],
+			[
+				"le",
+				"length\tabc"
+			],
+			[
+				"al",
+				"al"
+			],
+			[
+				"PROT",
+				"PROT_RDWR\t(constants.s)"
+			],
+			[
+				"check_num",
+				"check_number\tabc"
+			],
+			[
+				"test",
+				"testb\tabc"
+			],
+			[
+				"NAME",
+				"NAME_SIZE\t(constants.s)"
+			],
+			[
+				"lstr",
+				"lstrlen\t(routines.s)"
+			],
+			[
+				"sho",
+				"show_recs_loop\tabc"
+			],
+			[
+				"show",
+				"show_recs_continue\tabc"
+			],
+			[
 				"edit_record_re",
 				"edit_records_read_do_while_1"
 			],
@@ -28,20 +128,12 @@
 				"delete_record\tabc"
 			],
 			[
-				"curr",
-				"curr_mfile_pos\tabc"
-			],
-			[
 				"cur",
 				"curr_mfile_pos\tabc"
 			],
 			[
 				"edit",
 				"edit_record\t(db.s)"
-			],
-			[
-				"lstr",
-				"lstrncpy\t(routines.s)"
 			],
 			[
 				"edit_recor",
@@ -88,10 +180,6 @@
 				"vert_line_tab\tabc"
 			],
 			[
-				"sho",
-				"show_recs_print_fin\tabc"
-			],
-			[
 				"pr",
 				"print_vert_line\tabc"
 			],
@@ -102,10 +190,6 @@
 			[
 				"len",
 				"len_vert_line\tabc"
-			],
-			[
-				"NAME",
-				"NAME\tabc"
 			],
 			[
 				"str",
@@ -162,10 +246,6 @@
 			[
 				"len_add_t",
 				"len_add_type_number\tabc"
-			],
-			[
-				"SEEK",
-				"SEEK_SET"
 			],
 			[
 				"new",
@@ -252,10 +332,6 @@
 				"MENUBUF\tabc"
 			],
 			[
-				"as",
-				"ascii"
-			],
-			[
 				"create_database_l",
 				"create_database_lookout\tabc"
 			],
@@ -282,10 +358,6 @@
 			[
 				"erro",
 				"error_pass\tabc"
-			],
-			[
-				"va",
-				"value\tabc"
 			],
 			[
 				"ope",
@@ -442,137 +514,11 @@
 			[
 				"output",
 				"output_fin\tabc"
-			],
-			[
-				"n",
-				"n"
-			],
-			[
-				"buf",
-				"buf3\tabc"
-			],
-			[
-				"forma",
-				"format_length_2\tabc"
-			],
-			[
-				"le",
-				"len_buf2\tabc"
-			],
-			[
-				"outp",
-				"output_1\tabc"
-			],
-			[
-				"firs",
-				"first_string\tabc"
-			],
-			[
-				"second",
-				"second_string\tabc"
-			],
-			[
-				"stdin",
-				"stdin_l\tabc"
-			],
-			[
-				"play_more_",
-				"play_more_begin\tabc"
-			],
-			[
-				"pla",
-				"play_more\tabc"
-			],
-			[
-				"len_pla",
-				"len_play_again_err\tabc"
-			],
-			[
-				"ans",
-				"ans_no\tabc"
-			],
-			[
-				"cmp",
-				"cmpb\tabc"
-			],
-			[
-				"test_",
-				"test_yn\tabc"
-			],
-			[
-				"cm",
-				"cmpb\t(menu.s)"
-			],
-			[
-				"te",
-				"test_nl\tabc"
-			],
-			[
-				"men",
-				"menubuf_len\tabc"
-			],
-			[
-				"play",
-				"play_again\tabc"
 			]
 		]
 	},
 	"buffers":
 	[
-		{
-			"file": "lab/RGR/Makefile",
-			"settings":
-			{
-				"buffer_size": 592,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "lab/RGR/constants.s",
-			"settings":
-			{
-				"buffer_size": 933,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "lab/RGR/main.s",
-			"settings":
-			{
-				"buffer_size": 1311,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "lab/RGR/menu.s",
-			"settings":
-			{
-				"buffer_size": 7251,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "lab/RGR/db.s",
-			"settings":
-			{
-				"buffer_size": 26232,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "lab/RGR/routines.s",
-			"settings":
-			{
-				"buffer_size": 9459,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		}
 	],
 	"build_system": "Packages/Makefile/Make.sublime-build",
 	"build_system_choices":
@@ -722,33 +668,31 @@
 	},
 	"expanded_folders":
 	[
-		"/home/anton/ASM",
-		"/home/anton/ASM/experiments",
-		"/home/anton/ASM/experiments/fire",
-		"/home/anton/ASM/lab",
-		"/home/anton/ASM/lab/lab_04",
-		"/home/anton/ASM/lab/RGR"
+		"/home/anton/ASM"
 	],
 	"file_history":
 	[
+		"/home/anton/ASM/training/string/main.s",
+		"/home/anton/ASM/training/string/routines.s",
+		"/home/anton/ASM/training/string/Makefile",
+		"/home/anton/ASM/lab/RGR/Makefile",
+		"/home/anton/ASM/lab/RGR/constants.s",
+		"/home/anton/ASM/lab/RGR/main.s",
+		"/home/anton/ASM/lab/RGR/routines.s",
+		"/home/anton/ASM/lab/RGR/menu.s",
+		"/home/anton/ASM/lab/RGR/test1.dat",
+		"/home/anton/ASM/lab/RGR/db.s",
 		"/home/anton/ASM/lab/lab_04/a1.s",
 		"/home/anton/ASM/lab/RGR/test3.dat",
 		"/home/anton/ASM/lab/RGR/test.c",
 		"/home/anton/ASM/experiments/sse_strcpy/main.s",
-		"/home/anton/ASM/lab/RGR/test1.dat",
 		"/home/anton/ASM/experiments/fire/main.s",
-		"/home/anton/ASM/training/string/routines.s",
-		"/home/anton/ASM/training/string/main.s",
-		"/home/anton/ASM/lab/RGR/routines.s",
-		"/home/anton/ASM/lab/RGR/constants.s",
 		"/home/anton/ASM/lab/RGR/test.s",
 		"/home/anton/ProCalc/src/libs/Combinatorics_menu.cpp",
 		"/home/anton/ProCalc/src/libs/main_menu.cpp",
 		"/home/anton/C/lab/lab_15/menu.c",
-		"/home/anton/ASM/lab/RGR/menu.s",
 		"/home/anton/ASM/lab/RGR/rgr",
 		"/home/anton/ASM/lab/RGR/test.dat",
-		"/home/anton/ASM/lab/RGR/db.s",
 		"/home/anton/ASM/experiments/fire/Makefile",
 		"/home/anton/ASM/experiments/fire/main_64.s",
 		"/home/anton/ASM/experiments/fire/test.c",
@@ -760,7 +704,6 @@
 		"/home/anton/ASM/experiments/wav_player/main.s",
 		"/home/anton/ASM/experiments/wav_player/Makefile",
 		"/home/anton/ASM/lab/lab_06/routines.s",
-		"/home/anton/ASM/training/string/Makefile",
 		"/home/anton/ASM/experiments/wav_player/info",
 		"/home/anton/ASM/experiments/wav_player/test",
 		"/home/anton/ASM/experiments/wav_player/test.c",
@@ -793,9 +736,7 @@
 		"/home/anton/ASM/training/ivt/a1.nasm",
 		"/home/anton/ASM/lab/lab_06/math.s",
 		"/home/anton/ASM/lab/lab_05/routines.s",
-		"/home/anton/ASM/lab/RGR/main.s",
 		"/home/anton/ASM/lab/lab_04/Makefile",
-		"/home/anton/ASM/lab/RGR/Makefile",
 		"/home/anton/ASM/lab/lab_05/tasks.s",
 		"/home/anton/ASM/lab/lab_05/a1.s",
 		"/home/anton/ASM/lab/lab_07",
@@ -987,181 +928,8 @@
 	"groups":
 	[
 		{
-			"selected": 4,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "lab/RGR/Makefile",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 592,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Makefile/Makefile.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "lab/RGR/constants.s",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 933,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								324,
-								324
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/GAS-x86 (or x64) highlighting scheme/Assembly x86 AT&T.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "lab/RGR/main.s",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1311,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1224,
-								1224
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/GAS-x86 (or x64) highlighting scheme/Assembly x86 AT&T.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 204.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "lab/RGR/menu.s",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 7251,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3020,
-								3020
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/GAS-x86 (or x64) highlighting scheme/Assembly x86 AT&T.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 1020.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "lab/RGR/db.s",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 26232,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								9777,
-								9777
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/GAS-x86 (or x64) highlighting scheme/Assembly x86 AT&T.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 8775.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "lab/RGR/routines.s",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 9459,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								6323,
-								6323
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/GAS-x86 (or x64) highlighting scheme/Assembly x86 AT&T.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 8124.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				}
 			]
 		}
 	],

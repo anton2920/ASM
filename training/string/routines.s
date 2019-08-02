@@ -91,6 +91,8 @@ lstrlen_fin:
 
 .globl lstrcmp
 .type lstrcmp, @function
+.equ LESS_THAN, -1
+.equ GREATER_THAN, 1
 lstrcmp:
 	# Initializing function's stack frame
 	pushl %ebp
@@ -113,8 +115,8 @@ lstrcmp:
 	movl %eax, %ecx
 	incl %ecx
 
-	movl $0x1, %ebx
-	movl $-1, %edx
+	movl $GREATER_THAN, %ebx
+	movl $LESS_THAN, %edx
 	xorl %eax, %eax
 
 	cld
@@ -123,7 +125,6 @@ lstrcmp:
 	cmovgl %ebx, %eax
 	cmovll %edx, %eax
 
-lstrcmp_exit:
 	# Restoring registers
 	popl %ebx
 	popl %edi
