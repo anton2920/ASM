@@ -41,6 +41,10 @@ open_exist:
 
 	movl %eax, fd(%ebp)
 
+	pushl %eax
+	call checking_integrity
+	addl $0x4, %esp
+
 menu2_l:
 	call menu2
 

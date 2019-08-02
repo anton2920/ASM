@@ -96,9 +96,26 @@ edit_more_records:
 delete_type_number:
 	.asciz "| Type the iD of a record to delete: "
 	.equ len_delete_type_number, . - delete_type_number
+delete_success:
+	.asciz "| database: record has been deleted successfully             |\n"
+	.equ len_delete_success, . - delete_success
 delete_more_records:
 	.asciz "| Would you like to delete another record? [Y/n]: "
 	.equ len_delete_more_records, . - delete_more_records
+
+# Checking integrity
+checking_check:
+	.asciz "| database: checking integrity... "
+	.equ len_checking_check, . - checking_check
+checking_ok:
+	.asciz "OK                         |\n"
+	.equ len_checking_ok, . - checking_ok
+checking_fail:
+	.asciz "FAIL                       |\n"
+	.equ len_checking_fail, . - checking_fail
+checking_fix:
+	.asciz "| database: all issues have been fixed                       |\n"
+	.equ len_checking_fix, . - checking_fix
 
 .section .bss
 .equ FILENAME_LEN, 500
@@ -1552,6 +1569,14 @@ delete_record_move_data:
 delete_record_ask:
 	addl $0x1, nrecs_del(%ebp)
 
+	pushl $len_delete_success
+	pushl $delete_success
+	pushl $STDOUT
+	call write
+	addl $0xC, %esp
+
+	call prt_ln
+
 	pushl $len_delete_more_records
 	pushl $delete_more_records
 	call quit
@@ -1599,6 +1624,97 @@ delete_record_exit_1:
 delete_record_exit_2:
 	# Restoring registers
 	popl %ebx
+
+	# Destroying function's stack frame
+	movl %ebp, %esp
+	popl %ebp
+	retl
+
+.globl checking_integrity
+.type checking_integrity, @function
+checking_integrity:
+	# Initializing function's stack frame
+	pushl %ebp
+	movl %esp, %ebp
+	.equ auto_id, -4
+	.equ llast_id, -8
+	subl $0x8, %esp # Acquiring space for two variables
+
+	# Main part
+	pushl $len_checking_check
+	pushl $checking_check
+	pushl $STDOUT
+	call write
+	addl $0xC, %esp
+
+	pushl $SEEK_SET
+	pushl $sizeof_int
+	pushl first_arg(%ebp)
+	call lseek
+	addl $0xC, %esp
+
+	pushl $sizeof_int
+	leal auto_id(%ebp), %eax
+	pushl %eax
+	pushl first_arg(%ebp)
+	call read
+	addl $0xC, %esp
+
+	pushl $SEEK_END
+	pushl $-STRUCT_SIZE
+	pushl first_arg(%ebp)
+	call lseek
+	addl $0xC, %esp
+
+	pushl $sizeof_int
+	leal llast_id(%ebp), %eax
+	pushl %eax
+	pushl first_arg(%ebp)
+	call read
+	addl $0xC, %esp
+
+	movl auto_id(%ebp), %eax
+
+	cmpl %eax, llast_id(%ebp) # if (last <= auto)
+	jle checking_integrity_ok
+
+checking_integrity_fail:
+	pushl $len_checking_fail
+	pushl $checking_fail
+	pushl $STDOUT
+	call write
+	addl $0xC, %esp
+
+	call prt_ln
+
+	pushl llast_id(%ebp)
+	pushl first_arg(%ebp)
+	call fix_last_id
+	addl $0x8, %esp
+
+	pushl $len_checking_fix
+	pushl $checking_fix
+	pushl $STDOUT
+	call write
+	addl $0xC, %esp
+
+	jmp checking_integrity_exit
+
+checking_integrity_ok:
+	pushl $len_checking_ok
+	pushl $checking_ok
+	pushl $STDOUT
+	call write
+	addl $0xC, %esp
+
+checking_integrity_exit:
+	call prt_ln
+
+	pushl $SEEK_SET
+	pushl $0x0
+	pushl first_arg(%ebp)
+	call lseek
+	addl $0xC, %esp
 
 	# Destroying function's stack frame
 	movl %ebp, %esp
