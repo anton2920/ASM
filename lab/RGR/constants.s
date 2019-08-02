@@ -55,3 +55,13 @@
 
 .equ SYS_MMAP, 90
 .equ SYS_MUNMAP, 91
+
+.equ PROT_NONE, 0x0
+.equ PROT_READ, 0x1
+.equ PROT_WRITE, 0x2
+.equ PROT_EXEC, 0x4
+
+.equ PROT_RDWR, 0x3 # PROT_READ | PROT_WRITE
+
+.equ MAP_SHARE, 0x1
+.equ MAP_PRIVATE, 0x2

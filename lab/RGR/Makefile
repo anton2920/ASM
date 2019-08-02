@@ -20,6 +20,7 @@ menu.o: menu.s
 
 routines.o: routines.s
 	$(ASM) $(DEBUG) routines.s -o routines.o $(ASFLAGS)
+	
 db.o: db.s
 	$(ASM) $(DEBUG) db.s -o db.o $(ASFLAGS)
 

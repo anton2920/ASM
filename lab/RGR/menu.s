@@ -9,7 +9,7 @@ line:
 	.ascii " ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––\n\0"
 	.equ len_line, . - line
 no_cmd:
-	.ascii "| menu: no such command!                                     |\n\0"
+	.ascii "| menu: no such command                                      |\n\0"
 	.equ len_no_cmd, . - no_cmd
 menu_line:
 	.ascii " –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––– \n\0"

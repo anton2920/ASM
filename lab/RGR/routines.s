@@ -22,7 +22,6 @@ stty_arg_off:
 .globl write
 .type write, @function
 .equ SYS_WRITE, 4
-.equ STDOUT, 1
 write:
 	# Initializing function's stack frame
 	pushl %ebp
@@ -44,12 +43,11 @@ write:
 	# Destroying function's stack frame
 	movl %ebp, %esp
 	popl %ebp
-	ret
+	retl
 
 .globl read
 .type read, @function
 .equ SYS_READ, 3
-.equ STDIN, 0
 read:
 	# Initializing function's stack frame
 	pushl %ebp
@@ -71,7 +69,7 @@ read:
 	# Destroying function's stack frame
 	movl %ebp, %esp
 	popl %ebp
-	ret
+	retl
 
 .globl open
 .type open, @function
@@ -97,7 +95,7 @@ open:
     # Destroying function's stack frame
     movl %ebp, %esp
     popl %ebp
-    ret
+    retl
 
 .globl creat
 .type creat, @function
@@ -207,7 +205,7 @@ lstrcmp_end_loop:
 	# Destroying function's stack frame
 	movl %ebp, %esp
 	popl %ebp
-	ret
+	retl
 
 .globl atoi
 .type atoi, @function
@@ -217,62 +215,66 @@ atoi:
 	movl %esp, %ebp
 	.equ sign, -4
 	subl $0x4, %esp # Acquiring space in sign(%ebp) — minus sign
-	movl $0x1, sign(%ebp)
 
 	# Saving registers
+	pushl %esi
 	pushl %ebx
 
 	# Initializing variables
-	.equ req_str, 8
-	movl req_str(%ebp), %ebx
+	movl first_arg(%ebp), %esi
 	xorl %ecx, %ecx # offset
-	xorl %eax, %eax # res
+	xorl %ebx, %ebx # res
+	movl $0x1, sign(%ebp)
 
 	# Main part
 atoi_if:
-	xorl %edx, %edx
-	movb (%ebx), %dl
-	cmpb $'-', %dl # if (d == '-')
+	xorl %eax, %eax
+	cld
+	lodsb
+
+	cmpb $'-', %al # if (d == '-')
 	jne atoi_if_2
 
 atoi_then:
-	movl $-1, sign(%ebp) # sign = 
-	incl %ecx
+	movl $-1, sign(%ebp) # sign = -1
 	jmp atoi_main_loop
 
 atoi_if_2:
-	cmpb $'+', %dl # if (d == '+')
-	jne atoi_main_loop
+	cmpb $'+', %al # if (d == '+')
+	je atoi_main_loop
 
 atoi_then_2:
-	movl $0x1, sign(%ebp)
-	incl %ecx
+	decl %esi
 
 atoi_main_loop:
-	xorl %edx, %edx
-	movb (%ebx, %ecx, 1), %dl
-	cmpb $0x0, %dl
-	je atoi_main_loop_end
+	xorl %eax, %eax
+	cld
+	lodsb
 
-	subb $'0', %dl
-	imull $0xA, %eax
-	addl %edx, %eax
+	testb %al, %al
+	jz atoi_main_loop_end
 
-	incl %ecx
+	subb $'0', %al
+	imull $0xA, %ebx
+	addl %eax, %ebx
 
 	jmp atoi_main_loop
 
 atoi_main_loop_end:
 	movl sign(%ebp), %edx
-	imull %edx, %eax
+	imull %edx, %ebx
+
+	# Returning value
+	movl %ebx, %eax
 
 	# Restoring registers
 	popl %ebx
+	popl %esi
 
 	# Destroying function's stack frame
 	movl %ebp, %esp
 	popl %ebp
-	ret
+	retl
 	
 .globl iprint
 .type iprint, @function
@@ -290,53 +292,64 @@ iprint_if:
 	jg iprint_else
 
 iprint_then:
-	cmpl $0x0, %eax
-	je iprint_print_0
-	
-	pushl %eax
-	movl $'-', %edx
-	pushl %edx
-	call lputchar
-	addl $0x4, %esp
-	popl %eax
+	testl %eax, %eax
+	jnz iprint_print_not_0
 
-	imull $-1, %eax
-
-iprint_else:
-	pushl %eax
-
-	pushl %eax
-	call numlen
-	addl $0x4, %esp
-
-	popl %ecx
-	pushl %eax
-
-	pushl %eax
-	pushl %ecx
-	call reverse
-	addl $0x8, %esp
-
-	popl %eax
-	imull $0x4, %eax
-	pushl %eax
-	pushl $NUM_BUF
-	pushl $STDOUT
-	call write
-	addl $0xC, %esp
-	jmp iprint_fin
-
-iprint_print_0:
 	movl $'0', %edx
 	pushl %edx
 	call lputchar
 	addl $0x4, %esp
 
+	jmp iprint_fin
+	
+iprint_print_not_0:
+	# Saving registers
+	pushl %eax
+
+	pushl $'-'
+	call lputchar
+	addl $0x4, %esp
+
+	# Restoring registers
+	popl %eax
+
+	negl %eax
+
+iprint_else:
+	# Saving registers
+	pushl %eax # Number
+
+	pushl %eax
+	call numlen
+	addl $0x4, %esp
+
+	# Restoring registers
+	popl %ecx # Number
+
+	# Saving registers
+	pushl %eax # Length
+
+	pushl %eax # Length
+	pushl %ecx # Number
+	call reverse
+	addl $0x8, %esp
+
+	# Restoring registers
+	popl %eax # Length
+
+	imull $0x4, %eax
+
+	pushl %eax
+	pushl $NUM_BUF
+	pushl $STDOUT
+	call write
+	addl $0xC, %esp
+
 iprint_fin:
 	# Destroying function's stack frame
 	movl %ebp, %esp
 	popl %ebp
-	ret
+	retl
 
 .type reverse, @function # int and char *
 reverse:
@@ -345,6 +358,7 @@ reverse:
 	movl %esp, %ebp
 
 	# Saving registers
+	pushl %edi
 	pushl %ebx
 
 	# Initializing variables
@@ -356,8 +370,8 @@ reverse:
 
 	# Main part
 reverse_main_loop:
-	cmpl $0x0, %ebx
-	jl reverse_main_loop_end
+	testl %ebx, %ebx
+	js reverse_main_loop_end
 
 	xorl %edx, %edx
 	idivl %ecx
@@ -371,11 +385,12 @@ reverse_main_loop:
 reverse_main_loop_end:
 	# Restoring registers
 	popl %ebx
+	popl %edi
 
 	# Destroying function's stack frame
 	movl %ebp, %esp
 	popl %ebp
-	ret
+	retl
 
 .globl lputchar
 .type lputchar, @function
@@ -384,9 +399,10 @@ lputchar:
 	pushl %ebp
 	movl %esp, %ebp
 
-	# I/O flow
+	# Initializing variables
 	leal first_arg(%ebp), %eax
 
+	# I/O flow
 	pushl $0x1
 	pushl %eax # &a
 	pushl $STDOUT
@@ -413,8 +429,8 @@ numlen:
 	movl $0xA, %ecx
 
 numlen_loop:
-	cmpl $0x0, %eax
-	je numlen_loop_end
+	testl %eax, %eax
+	jz numlen_loop_end
 
 	xorl %edx, %edx
 	idivl %ecx
@@ -504,7 +520,8 @@ find_size:
 	# Initializing function's stack frame
 	pushl %ebp
 	movl %esp, %ebp
-	subl $0x8, %esp
+	.equ ret_str, -8
+	subl $0x8, %esp # Acquiring space for llseek return value
 
 	# Saving registers
 	pushl %esi
@@ -516,12 +533,12 @@ find_size:
 	movl first_arg(%ebp), %ebx
 	xorl %ecx, %ecx
 	xorl %edx, %edx
-	leal -8(%ebp), %esi
+	leal ret_str(%ebp), %esi
 	movl $0x2, %edi
 	int $0x80 # 0x80's interrupt
 
 	# Returning value
-	movl -8(%ebp), %eax
+	movl ret_str(%ebp), %eax
 
 	# Restoring registers
 	popl %ebx
@@ -551,7 +568,7 @@ lstrncpy:
 	movl %ecx, %edx # Save size
 
 	# Main part
-	sarl $0x2, %ecx # Shift length by four (div by 4)
+	sarl $0x2, %ecx # Shift length by two (div by 4)
 
 	cld
 	rep movsl
@@ -580,21 +597,26 @@ check_number:
 	pushl %ebp
 	movl %esp, %ebp
 
-	# Iniitializing variables
-	movl first_arg(%ebp), %eax
+	# Saving registers
+	pushl %esi
+
+	# Initializing variables
+	movl first_arg(%ebp), %esi
 
 	# Main part
 check_number_loop:
-	cmpb $0x0, (%eax)
-	je check_number_ok
+	xorl %eax, %eax
+	cld
+	lodsb
 
-	cmpb $'0', (%eax)
+	testb %al, %al
+	jz check_number_ok
+
+	cmpb $'0', %al
 	jl check_number_fail
 
-	cmpb $'9', (%eax)
+	cmpb $'9', %al
 	jg check_number_fail
-
-	incl %eax
 
 	jmp check_number_loop
 
@@ -607,7 +629,52 @@ check_number_fail:
 	xorl %eax, %eax # false
 
 check_number_exit:
+	# Restoring registers
+	popl %esi
+
 	# Destroying function's stack frame
 	movl %esp, %ebp
+	popl %ebp
+	retl
+
+.globl lstrlen
+.type lstrlen, @function
+lstrlen:
+	# Initializing function's stack frame
+	pushl %ebp
+	movl %esp, %ebp
+
+	# Saving registers
+	pushl %esi
+	pushl %edi
+
+	# Initializing variables
+	movl first_arg(%ebp), %edi
+	xorl %eax, %eax
+	movl $0xFFFF, %ecx
+
+	# Main part
+	cld
+	repnz scasb
+	jne notfound
+
+	subw $0xFFFF, %cx
+	negw %cx
+	decw %cx
+
+	movl %ecx, %eax
+
+	jmp lstrlen_fin
+
+notfound:
+	movl $-1, %eax
+
+lstrlen_fin:
+	# Restoring registers
+	popl %edi
+	popl %esi
+
+	# Destroying function's stack frame
+	movl %ebp, %esp
 	popl %ebp
 	retl
