@@ -55,7 +55,6 @@ lstrlen:
 	movl %esp, %ebp
 
 	# Saving registers
-	pushl %esi
 	pushl %edi
 
 	# Initializing variables
@@ -82,7 +81,6 @@ notfound:
 lstrlen_fin:
 	# Restoring registers
 	popl %edi
-	popl %esi
 
 	# Destroying function's stack frame
 	movl %ebp, %esp
