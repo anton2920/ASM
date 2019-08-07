@@ -26,10 +26,12 @@ pic_path:
 
 .section .text
 .globl main
+.type main, @function
 main:
 # .globl _start
 # _start:
-	# Initializing stack frame
+	# Initializing function's stack frame
+	pushq %rbp
 	movq %rsp, %rbp
 	.equ num_of_vars, sizeof_void_p + sizeof_void_p
 	.equ window, -8 # SDL_Window *
@@ -65,6 +67,7 @@ main:
 	movq $0x0, curr_rect + rect_y(%rbp)
 	movq $316, curr_rect + rect_w(%rbp)
 	movq $391, curr_rect + rect_h(%rbp)
+	movl $0x0, quit_flag(%rbp)
 
 	# Main part. SDL2
 	callq SDL_init_all # Initializing SDL2
@@ -133,9 +136,8 @@ main_while_end:
 
 	movq window(%rbp), %rdi
 	callq SDL_DestroyWindow
-	
-exit:
-	# Exiting
-	movq $60, %rax
-	xorq %rdi, %rdi
-	syscall
+
+	# Destroying function's stack frame
+	movq %rbp, %rsp
+	popq %rbp
+	retq
