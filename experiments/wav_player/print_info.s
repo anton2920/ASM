@@ -387,12 +387,18 @@ break:
 	fistpl (%esp)
 
 	movl (%esp), %ecx
+	movl %ecx, %edx
+	subl %ecx, %edx
 	addl $0x4, %esp
 
 	xorl %eax, %eax
 	movb hash, %al
 
 	cld
+	rep stosb
+
+	movb $' ', %al
+	movl %edx, %ecx
 	rep stosb
 
 	pushl $len_prog_bar

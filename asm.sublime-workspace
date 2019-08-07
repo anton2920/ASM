@@ -532,7 +532,7 @@
 			"file": "experiments/wav_player/print_info.s",
 			"settings":
 			{
-				"buffer_size": 6749,
+				"buffer_size": 6828,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -823,7 +823,7 @@
 	],
 	"find":
 	{
-		"height": 56.0
+		"height": 26.0
 	},
 	"find_in_files":
 	{
@@ -953,7 +953,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -969,8 +969,8 @@
 						"selection":
 						[
 							[
-								3171,
-								3171
+								3131,
+								3131
 							]
 						],
 						"settings":
@@ -979,10 +979,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 2780.0,
+						"translation.y": 2627.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
@@ -991,15 +991,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 6749,
+						"buffer_size": 6828,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4715,
-								4715
+								6501,
+								6501
 							]
 						],
 						"settings":
@@ -1008,10 +1008,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 3957.0,
+						"translation.y": 6099.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 0,
 					"type": "text"
 				}
 			]
@@ -1064,7 +1064,7 @@
 	"project": "asm.sublime-project",
 	"replace":
 	{
-		"height": 103.0
+		"height": 48.0
 	},
 	"save_all_on_build": true,
 	"select_file":
