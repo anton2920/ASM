@@ -62,6 +62,7 @@ Init_window_renderer:
 	movq %rax, (%rbx) # Saving window *
 
 	movl $SDL_RENDERER_SOFTWARE, %edx
+	# movl $SDL_RENDERER_ACCELERATED, %edx
 	movq $-1, %rsi
 	movq %rax, %rdi
 	callq SDL_CreateRenderer
