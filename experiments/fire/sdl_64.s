@@ -3,8 +3,12 @@
 
 .equ NULL, 0x0
 .equ SDL_INIT_EVERYTHING, 0xf231
+
 .equ SDL_WINDOWPOS_CENTERED_MASK, 0x2FFF0000
 .equ SDL_WINDOW_SHOWN, 0x4
+
+.equ SDL_RENDERER_SOFTWARE, 0x1
+.equ SDL_RENDERER_ACCELERATED, 0x2
 
 .equ first_arg, -16
 .equ second_arg, -8
@@ -57,7 +61,7 @@ Init_window_renderer:
 	movq first_arg(%rbp), %rbx
 	movq %rax, (%rbx) # Saving window *
 
-	xorq %rdx, %rdx
+	movl $SDL_RENDERER_SOFTWARE, %edx
 	movq $-1, %rsi
 	movq %rax, %rdi
 	callq SDL_CreateRenderer
