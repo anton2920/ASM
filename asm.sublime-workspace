@@ -514,11 +514,45 @@
 			[
 				"func",
 				"function's\t(menu.s)"
+			],
+			[
+				"AS",
+				"ASFLAGS\tabc"
+			],
+			[
+				"sh",
+				"show_recs_loop"
+			],
+			[
+				"mov",
+				"movupd\tabc"
+			],
+			[
+				"for",
+				"format_answer\tabc"
 			]
 		]
 	},
 	"buffers":
 	[
+		{
+			"file": "experiments/wav_player/main.s",
+			"settings":
+			{
+				"buffer_size": 4385,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "experiments/wav_player/print_info.s",
+			"settings":
+			{
+				"buffer_size": 6828,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		}
 	],
 	"build_system": "Packages/Makefile/Make.sublime-build",
 	"build_system_choices":
@@ -670,7 +704,7 @@
 	[
 		"/home/anton/ASM",
 		"/home/anton/ASM/experiments",
-		"/home/anton/ASM/experiments/fire"
+		"/home/anton/ASM/experiments/wav_player"
 	],
 	"file_history":
 	[
@@ -706,9 +740,12 @@
 		"/home/anton/C/lab/lab_15/menu.c",
 		"/home/anton/ASM/lab/RGR/rgr",
 		"/home/anton/ASM/lab/RGR/test.dat",
+		"/home/anton/ASM/experiments/fire/test.c",
 		"/home/anton/C/lab/lab_23/source.s",
 		"/home/anton/ASM/experiments/sse_strcpy/Makefile",
 		"/home/anton/ASM/experiments/wav_player/routines.s",
+		"/home/anton/ASM/experiments/wav_player/print_info.s",
+		"/home/anton/ASM/experiments/wav_player/main.s",
 		"/home/anton/ASM/lab/lab_06/routines.s",
 		"/home/anton/ASM/experiments/wav_player/info",
 		"/home/anton/ASM/experiments/wav_player/test",
@@ -801,7 +838,9 @@
 		"/home/anton/C/lab/lab_15/a1.c",
 		"/home/anton/C/lab/lab_15/a1.h",
 		"/home/anton/C/lab/lab_15/struct.c",
-		"/home/anton/C/training/8lowlevel/read.c"
+		"/home/anton/C/training/8lowlevel/read.c",
+		"/home/anton/C/experiments/IntVarCheck/input.c",
+		"/home/anton/C/experiments/IntVarCheck/test.c"
 	],
 	"find":
 	{
@@ -935,8 +974,67 @@
 	"groups":
 	[
 		{
+			"selected": 1,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "experiments/wav_player/main.s",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4385,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3131,
+								3131
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/GAS-x86 (or x64) highlighting scheme/Assembly x86 AT&T.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 2627.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "experiments/wav_player/print_info.s",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6828,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								6501,
+								6501
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/GAS-x86 (or x64) highlighting scheme/Assembly x86 AT&T.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 6099.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
 			]
 		}
 	],
