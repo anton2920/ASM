@@ -4,6 +4,118 @@
 		"selected_items":
 		[
 			[
+				"seco",
+				"second_var\tabc"
+			],
+			[
+				"pri",
+				"print_file_info_cont\tabc"
+			],
+			[
+				"minu",
+				"minute_var\tabc"
+			],
+			[
+				"mu",
+				"minute_var\tabc"
+			],
+			[
+				"fr",
+				"frndint\tabc"
+			],
+			[
+				"fil",
+				"fild\tabc"
+			],
+			[
+				"l",
+				"lputchar\tabc"
+			],
+			[
+				"sec",
+				"second_param\tabc"
+			],
+			[
+				"pro",
+				"prog_bar\tabc"
+			],
+			[
+				"sie",
+				"sizeof_buf\tabc"
+			],
+			[
+				"pla",
+				"play_loop\tabc"
+			],
+			[
+				"si",
+				"sizeof_buf\tabc"
+			],
+			[
+				"info",
+				"info_byte\tabc"
+			],
+			[
+				"len_in",
+				"len_info_byte\tabc"
+			],
+			[
+				"inf",
+				"info_byte\tabc"
+			],
+			[
+				"pr",
+				"proper_size\tabc"
+			],
+			[
+				"proper_size_gib",
+				"proper_size_gib_ok\tabc"
+			],
+			[
+				"prope",
+				"proper_size_mib\tabc"
+			],
+			[
+				"lst",
+				"lstrlen_exit\tabc"
+			],
+			[
+				"lsr",
+				"lstrlen\tabc"
+			],
+			[
+				"ans",
+				"answer1\tabc"
+			],
+			[
+				"len",
+				"len_answer1\tabc"
+			],
+			[
+				"len_ans",
+				"len_answer2\tabc"
+			],
+			[
+				"gre",
+				"greater_than\tabc"
+			],
+			[
+				"buff",
+				"buffer1\tabc"
+			],
+			[
+				"STD",
+				"STDOUT\tabc"
+			],
+			[
+				"out",
+				"output2\tabc"
+			],
+			[
+				"len_p",
+				"len_output1\tabc"
+			],
+			[
 				"delete_",
 				"delete_success\tabc"
 			],
@@ -160,10 +272,6 @@
 				"edit_record_do_while_1_end\tabc"
 			],
 			[
-				"len_in",
-				"len_edit_invalid_id\tabc"
-			],
-			[
 				"edit_",
 				"edit_record\tabc"
 			],
@@ -178,18 +286,6 @@
 			[
 				"ve",
 				"vert_line_tab\tabc"
-			],
-			[
-				"pr",
-				"print_vert_line\tabc"
-			],
-			[
-				"pri",
-				"print_vert_line\tabc"
-			],
-			[
-				"len",
-				"len_vert_line\tabc"
 			],
 			[
 				"str",
@@ -236,10 +332,6 @@
 				"add_records_read\tabc"
 			],
 			[
-				"STD",
-				"STDOUT\t(constants.s)"
-			],
-			[
 				"add_typ",
 				"add_type_number\tabc"
 			],
@@ -270,10 +362,6 @@
 			[
 				"PASS",
 				"PASSBUF1\tabc"
-			],
-			[
-				"lst",
-				"lstrcmp_loop\tabc"
 			],
 			[
 				"PAS",
@@ -424,124 +512,27 @@
 				"movupd\tabc"
 			],
 			[
-				"sec",
-				"second_arg\tabc"
-			],
-			[
-				"sie",
-				"sizeof_int\tabc"
-			],
-			[
 				"for",
 				"format_answer\tabc"
-			],
-			[
-				"WRI",
-				"write"
-			],
-			[
-				"info",
-				"info_kib\tabc"
-			],
-			[
-				"siz",
-				"siezeof_int\tabc"
-			],
-			[
-				"file",
-				"file_size\tabc"
-			],
-			[
-				"prin",
-				"print_cur_play\t(print_info.s)"
-			],
-			[
-				"len_",
-				"len_info_file_duration\tabc"
-			],
-			[
-				"fo",
-				"fourth_param\tabc"
-			],
-			[
-				"info_fi",
-				"info_file_size\tabc"
-			],
-			[
-				"len_info",
-				"len_info_file_size\tabc"
-			],
-			[
-				"len_inf_",
-				"len_info_channels_stereo\tabc"
-			],
-			[
-				"len_inf",
-				"len_info_channels_mono\tabc"
-			],
-			[
-				"th",
-				"third_param\tabc"
-			],
-			[
-				"fi",
-				"first_param\tabc"
-			],
-			[
-				"info_fil",
-				"info_file_duration\tabc"
-			],
-			[
-				"fil",
-				"file_size\tabc"
-			],
-			[
-				"lstrc",
-				"lstrcpy\tabc"
-			],
-			[
-				"lsr",
-				"lstrcmp_exit\tabc"
-			],
-			[
-				"ls",
-				"lstrcmp_exit\tabc"
-			],
-			[
-				"out",
-				"output_fin\tabc"
-			],
-			[
-				"output",
-				"output_fin\tabc"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "experiments/fire/Makefile",
+			"file": "experiments/wav_player/main.s",
 			"settings":
 			{
-				"buffer_size": 800,
+				"buffer_size": 4385,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "experiments/fire/main_64.s",
+			"file": "experiments/wav_player/print_info.s",
 			"settings":
 			{
-				"buffer_size": 2661,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "experiments/fire/sdl_64.s",
-			"settings":
-			{
-				"buffer_size": 2093,
+				"buffer_size": 6749,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -697,13 +688,19 @@
 	[
 		"/home/anton/ASM",
 		"/home/anton/ASM/experiments",
-		"/home/anton/ASM/experiments/fire"
+		"/home/anton/ASM/experiments/wav_player"
 	],
 	"file_history":
 	[
+		"/home/anton/ASM/experiments/wav_player/Makefile",
+		"/home/anton/ASM/lab/lab_04/a1.s",
+		"/home/anton/ASM/lab/lab_04/Makefile",
+		"/home/anton/ASM/training/string/routines.s",
+		"/home/anton/ASM/experiments/fire/Makefile",
+		"/home/anton/ASM/experiments/fire/sdl_64.s",
+		"/home/anton/ASM/experiments/fire/main_64.s",
 		"/home/anton/ASM/experiments/sse.s",
 		"/home/anton/ASM/training/string/main.s",
-		"/home/anton/ASM/training/string/routines.s",
 		"/home/anton/ASM/training/string/Makefile",
 		"/home/anton/ASM/lab/RGR/Makefile",
 		"/home/anton/ASM/lab/RGR/constants.s",
@@ -712,7 +709,6 @@
 		"/home/anton/ASM/lab/RGR/menu.s",
 		"/home/anton/ASM/lab/RGR/test1.dat",
 		"/home/anton/ASM/lab/RGR/db.s",
-		"/home/anton/ASM/lab/lab_04/a1.s",
 		"/home/anton/ASM/lab/RGR/test3.dat",
 		"/home/anton/ASM/lab/RGR/test.c",
 		"/home/anton/ASM/experiments/sse_strcpy/main.s",
@@ -723,16 +719,12 @@
 		"/home/anton/C/lab/lab_15/menu.c",
 		"/home/anton/ASM/lab/RGR/rgr",
 		"/home/anton/ASM/lab/RGR/test.dat",
-		"/home/anton/ASM/experiments/fire/Makefile",
-		"/home/anton/ASM/experiments/fire/main_64.s",
 		"/home/anton/ASM/experiments/fire/test.c",
-		"/home/anton/ASM/experiments/fire/sdl_64.s",
 		"/home/anton/C/lab/lab_23/source.s",
 		"/home/anton/ASM/experiments/sse_strcpy/Makefile",
 		"/home/anton/ASM/experiments/wav_player/routines.s",
 		"/home/anton/ASM/experiments/wav_player/print_info.s",
 		"/home/anton/ASM/experiments/wav_player/main.s",
-		"/home/anton/ASM/experiments/wav_player/Makefile",
 		"/home/anton/ASM/lab/lab_06/routines.s",
 		"/home/anton/ASM/experiments/wav_player/info",
 		"/home/anton/ASM/experiments/wav_player/test",
@@ -766,7 +758,6 @@
 		"/home/anton/ASM/training/ivt/a1.nasm",
 		"/home/anton/ASM/lab/lab_06/math.s",
 		"/home/anton/ASM/lab/lab_05/routines.s",
-		"/home/anton/ASM/lab/lab_04/Makefile",
 		"/home/anton/ASM/lab/lab_05/tasks.s",
 		"/home/anton/ASM/lab/lab_05/a1.s",
 		"/home/anton/ASM/lab/lab_07",
@@ -832,7 +823,7 @@
 	],
 	"find":
 	{
-		"height": 40.0
+		"height": 56.0
 	},
 	"find_in_files":
 	{
@@ -846,6 +837,9 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			":\n",
+			"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+			"###########                   ",
 			"break_pt",
 			"PASSBUF",
 			"MENUBUF",
@@ -905,6 +899,8 @@
 		"regex": false,
 		"replace_history":
 		[
+			"                              ",
+			"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
 			"PASSBUF2",
 			"PASSBUF1",
 			"PASSBUF_LEN",
@@ -962,27 +958,28 @@
 			[
 				{
 					"buffer": 0,
-					"file": "experiments/fire/Makefile",
+					"file": "experiments/wav_player/main.s",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 800,
+						"buffer_size": 4385,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								800,
-								800
+								3171,
+								3171
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Makefile/Makefile.sublime-syntax"
+							"syntax": "Packages/GAS-x86 (or x64) highlighting scheme/Assembly x86 AT&T.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 2780.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -990,19 +987,19 @@
 				},
 				{
 					"buffer": 1,
-					"file": "experiments/fire/main_64.s",
+					"file": "experiments/wav_player/print_info.s",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2661,
+						"buffer_size": 6749,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								497,
-								497
+								4715,
+								4715
 							]
 						],
 						"settings":
@@ -1011,36 +1008,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "experiments/fire/sdl_64.s",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2093,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								692,
-								692
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/GAS-x86 (or x64) highlighting scheme/Assembly x86 AT&T.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 3957.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
@@ -1096,7 +1064,7 @@
 	"project": "asm.sublime-project",
 	"replace":
 	{
-		"height": 48.0
+		"height": 103.0
 	},
 	"save_all_on_build": true,
 	"select_file":

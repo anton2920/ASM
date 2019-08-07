@@ -35,9 +35,19 @@ info_hz:
 info_bits:
 	.asciz " bits\n"
 	.equ len_info_bits, . - info_bits
+info_byte:
+	.asciz " B\n"
+	.equ len_info_byte, . - info_byte
+hash:
+	.ascii "#"
+
+.section .data
 info_kib:
-	.asciz " kiB ("
+	.asciz " xiB ("
 	.equ len_info_kib, . - info_kib
+prog_bar:
+	.ascii "\r| Progress: [                              ] "
+	.equ len_prog_bar, . - prog_bar
 
 .section .text
 .globl print_dev_info
@@ -142,12 +152,17 @@ print_file_info:
 	# Initializing function's stack frame
 	pushl %ebp
 	movl %esp, %ebp
+	.equ hour_var, -4
+	.equ minute_var, -8
+	.equ second_var, -12
+	subl $0xC, %esp
 
 	# Saving registers
 	pushl %ebx
 
 	# Initializing variables
 	movl first_param(%ebp), %ebx
+	movl $0x0, hour_var(%ebp)
 
 	# Main part
 	movl second_param(%ebp), %eax # file_size
@@ -157,19 +172,32 @@ print_file_info:
 	xorl %edx, %edx
 	movl $60, %ebx
 	idivl %ebx # eax - minutes, edx - seconds
+	movl %eax, minute_var(%ebp)
+	movl %edx, second_var(%ebp)
 
-	# Saving registers
-	pushl %edx
-	pushl %eax
+	xorl %edx, %edx
+	idivl %ebx
 
+	testl %eax, %eax
+	jz print_file_info_no_hr
+
+	movl %eax, hour_var(%ebp)
+	movl %edx, minute_var(%ebp)
+
+print_file_info_no_hr:
 	pushl $len_info_file_size
 	pushl $info_file_size
 	pushl $STDOUT
 	call write
 	addl $0xC, %esp
 
-	movl second_param(%ebp), %eax
-	shrl $0xA, %eax
+	pushl second_param(%ebp)
+	call proper_size
+	addl $0x4, %esp
+
+	testl %eax, %eax
+	js print_file_info_byte
+
 	pushl %eax
 	call iprint
 	addl $0x4, %esp
@@ -191,14 +219,44 @@ print_file_info:
 	call lputchar
 	addl $0x8, %esp
 
+	jmp print_file_info_cont
+
+print_file_info_byte:
+	pushl second_param(%ebp)
+	call iprint
+	addl $0x4, %esp
+
+	pushl $len_info_byte
+	pushl $info_byte
+	pushl $STDOUT
+	call write
+	addl $0xC, %esp
+	
+print_file_info_cont:
 	pushl $len_info_file_duration
 	pushl $info_file_duration
 	pushl $STDOUT
 	call write
 	addl $0xC, %esp
 
-	popl %eax
-	pushl %eax
+	cmpl $0x0, hour_var(%ebp)
+	je print_file_info_cont_cont
+	
+	pushl hour_var(%ebp)
+	call iprint
+
+	pushl $'h'
+	call lputchar
+
+	pushl $' '
+	call lputchar
+	addl $0xC, %esp
+
+print_file_info_cont_cont:
+	cmpl $0x0, minute_var(%ebp)
+	je print_file_info_cont_cont_cont
+
+	pushl minute_var(%ebp)
 	call iprint
 
 	pushl $'m'
@@ -208,8 +266,8 @@ print_file_info:
 	call lputchar
 	addl $0xC, %esp
 
-	popl %eax
-	pushl %eax
+print_file_info_cont_cont_cont:
+	pushl second_var(%ebp)
 	call iprint
 
 	pushl $'s'
@@ -221,6 +279,139 @@ print_file_info:
 
 	# Restoring registers
 	popl %ebx
+
+	# Destroying function's stack frame
+	movl %ebp, %esp
+	popl %ebp
+	retl
+
+.type proper_size, @function
+proper_size:
+	# Initializing function's stack frame
+	pushl %ebp
+	movl %esp, %ebp
+
+	# Initializing variables
+	movl first_param(%ebp), %eax
+	leal info_kib, %edx
+
+	# Main part
+proper_size_kib:
+	shrl $0xA, %eax # div by 1024
+
+	testl %eax, %eax
+	jnz proper_size_mib
+
+	xorl %eax, %eax
+	decl %eax
+
+	jmp proper_size_exit
+
+proper_size_mib:
+	shrl $0xA, %eax
+
+	testl %eax, %eax
+	jnz proper_size_gib
+
+	movb $'k', 1(%edx)
+
+	movl first_param(%ebp), %eax
+	shrl $0xA, %eax
+
+	jmp proper_size_exit
+
+proper_size_gib:
+	shrl $0xA, %eax
+
+	testl %eax, %eax
+	jnz proper_size_gib_ok
+
+	movb $'M', 1(%edx)
+
+	movl first_param(%ebp), %eax
+	shrl $0x14, %eax
+
+	jmp proper_size_exit
+
+proper_size_gib_ok:
+	movb $'G', 1(%edx)
+
+proper_size_exit:
+	# Destroying function's stack frame
+	movl %ebp, %esp
+	popl %ebp
+	retl
+
+.globl print_progress_bar
+.type print_progress_bar, @function
+print_progress_bar:
+	# Initializing function's stack frame
+	pushl %ebp
+	movl %esp, %ebp
+	.equ percent, -4
+	subl $0x4, %esp # Acquiring space in percent(%ebp)
+
+	# Saving registers
+	pushl %edi
+	pushl %ebx
+
+	# Initializing variables
+	movl first_param(%ebp), %eax
+	movl second_param(%ebp), %ebx
+	xorl %edx, %edx
+	leal prog_bar, %edi
+	addl $0xE, %edi
+
+	# Main part
+break:
+	fildl first_param(%ebp)
+	fildl second_param(%ebp)
+	fdivrp
+
+	fst %st(1)
+
+	subl $0x4, %esp
+	movl $100, (%esp)
+
+	fildl (%esp)
+	fmulp # * 100%
+
+	movl $0x1E, (%esp)
+	fildl (%esp)
+	fmulp %st(2) # * 30
+
+	frndint
+	fistpl percent(%ebp)
+
+	frndint
+	fistpl (%esp)
+
+	movl (%esp), %ecx
+	addl $0x4, %esp
+
+	xorl %eax, %eax
+	movb hash, %al
+
+	cld
+	rep stosb
+
+	pushl $len_prog_bar
+	pushl $prog_bar
+	pushl $STDOUT
+	call write
+	addl $0xC, %esp
+
+	pushl percent(%ebp)
+	call iprint
+	addl $0x4, %esp
+
+	pushl $'%'
+	call lputchar
+	addl $0x4, %esp
+
+	# Restoring registers
+	popl %ebx
+	popl %edi
 
 	# Destroying function's stack frame
 	movl %ebp, %esp

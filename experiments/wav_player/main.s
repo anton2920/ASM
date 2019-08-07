@@ -11,9 +11,9 @@
 .equ CHANNELS, 2 # 1 — Mono, 2 — Stereo
 
 # linux/soundcard.h
-.equ SOUND_PCM_WRITE_BITS, 0xc0045005
-.equ SOUND_PCM_WRITE_CHANNELS, 0xc0045006
-.equ SOUND_PCM_WRITE_RATE, 0xc0045002
+.equ SOUND_PCM_WRITE_BITS, 0xC0045005
+.equ SOUND_PCM_WRITE_CHANNELS, 0xC0045006
+.equ SOUND_PCM_WRITE_RATE, 0xC0045002
 .equ SOUND_PCM_SYNC, 0x5001
 
 .section .rodata
@@ -28,6 +28,8 @@ device:
 un_err:
 	.asciz "\n| wavp: unexpected error occurs!\n"
 	.equ len_un_err, . - un_err
+presicion:
+	.byte 0x7F, 0x02
 
 .section .bss
 .lcomm const_product, 4
@@ -42,7 +44,7 @@ _start:
 	.equ file, -12 # int
 	subl $0xC, %esp # Acquiring space for three variables
 
-	# .equ sizeof_buf, 176400 # void *
+	.equ sizeof_buf, 176400 # void *
 	# .equ buf, -176412
 	# subl $sizeof_buf, %esp
 
@@ -64,14 +66,17 @@ _start:
 	call write
 	addl $0xC, %esp
 
-	# Main part
+	# Main part. FPU
+	finit
+	fldcw presicion
+
 	pushl $PERMS
 	pushl $O_RDWR
 	pushl $device
 	call open
 	addl $0xC, %esp
 
-	test %eax, %eax
+	testl %eax, %eax
 	js error # If file isn't opened :(
 
 	movl %eax, fd(%ebp)
@@ -179,11 +184,49 @@ replay_cont:
 	call print_file_info
 	addl $0x8, %esp
 
-	pushl file_size(%ebp)
-	pushl file_map(%ebp)
+	pushl $'\n'
+	call lputchar
+	addl $0x4, %esp
+
+	xorl %ecx, %ecx
+
+play_loop:
+	cmpl %ecx, file_size(%ebp)
+	jl play_loop_end
+
+	# Saving registers
+	pushl %ecx
+
+	pushl $sizeof_buf
+	movl file_map(%ebp), %edx
+	leal (%edx, %ecx), %eax
+	pushl %eax
 	pushl fd(%ebp)
 	call write
 	addl $0xC, %esp
+
+	# Restoring registers
+	popl %ecx
+
+	# Saving registers
+	pushl %ecx
+
+	pushl file_size(%ebp)
+	pushl %ecx
+	call print_progress_bar
+	addl $0x8, %esp
+
+	# Restoring registers
+	popl %ecx
+
+	addl $sizeof_buf, %ecx
+
+	jmp play_loop
+
+play_loop_end:
+	pushl $'\n'
+	call lputchar
+	addl $0x4, %esp
 
 	call play_more
 

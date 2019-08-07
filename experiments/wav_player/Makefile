@@ -2,8 +2,7 @@
 asm = as
 ASFLAGS = --32
 link = ld
-LDFLAGS = -m elf_i386 -dynamic-linker /lib32/ld-linux.so.2 -lc
-LDFLAGS_64 = -dynamic-linker /lib/ld-linux_x86-64.so.2 -lc
+# LDFLAGS = -m elf_i386 -dynamic-linker /lib32/ld-linux.so.2 -lc
 DEBUG = -g
 
 # Main part
