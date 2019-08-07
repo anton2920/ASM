@@ -69,6 +69,7 @@ main:
 	# Main part. SDL2
 	callq SDL_init_all # Initializing SDL2
 
+break_pt:
 	# Initializing windows and attaching renderer to it
 	leaq renderer(%rbp), %rsi
 	leaq window(%rbp), %rdi

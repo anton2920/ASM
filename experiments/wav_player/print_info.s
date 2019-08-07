@@ -388,7 +388,8 @@ break:
 
 	movl (%esp), %ecx
 	movl %ecx, %edx
-	subl %ecx, %edx
+	subl $0x1E, %edx
+	negl %edx
 	addl $0x4, %esp
 
 	xorl %eax, %eax
@@ -399,6 +400,7 @@ break:
 
 	movb $' ', %al
 	movl %edx, %ecx
+
 	rep stosb
 
 	pushl $len_prog_bar

@@ -24,7 +24,7 @@ hello:
 	.asciz "| This is the simplest .wav player ever possible!\n| Enjoy your shitty music :)\n"
 	.equ len_hello, . - hello
 device:
-	.asciz "/dev/dsp2"
+	.asciz "/dev/dsp"
 un_err:
 	.asciz "\n| wavp: unexpected error occurs!\n"
 	.equ len_un_err, . - un_err
