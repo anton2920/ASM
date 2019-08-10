@@ -10,11 +10,7 @@
 .equ SIZE, 16 # Sample size: 8 or 16 bits
 .equ CHANNELS, 2 # 1 — Mono, 2 — Stereo
 
-# linux/soundcard.h
-.equ SOUND_PCM_WRITE_BITS, 0xC0045005
-.equ SOUND_PCM_WRITE_CHANNELS, 0xC0045006
-.equ SOUND_PCM_WRITE_RATE, 0xC0045002
-.equ SOUND_PCM_SYNC, 0x5001
+.equ WAV_HEADER_SIZE, 44
 
 .section .rodata
 error_msg:
@@ -31,33 +27,46 @@ un_err:
 presicion:
 	.byte 0x7F, 0x02
 
-.section .bss
-.lcomm const_product, 4
-
 .section .text
 .globl _start
 _start:
 	# Initializing stack frame
 	movl %esp, %ebp
 	.equ fd, -4 # int
-	.equ arg, -8 # int
-	.equ file, -12 # int
-	subl $0xC, %esp # Acquiring space for three variables
+	.equ file, -8 # int
+	subl $0x8, %esp # Acquiring space for three variables
 
 	.equ sizeof_buf, 176400 # void *
 	# .equ buf, -176412
 	# subl $sizeof_buf, %esp
 
 	# mmap approach
-	.equ file_map, -16
-	.equ file_size, -20
+	.equ file_map, -12 # void *
+	.equ file_size, -16 # size_t
 	subl $0x8, %esp
 
+	.equ rate, -20 # int
+	.equ size, -24 # int
+	.equ chan, -28 # int
+	subl $0xC, %esp
+
+	subl $0x4, %esp # For 8-byte stack alignment
+
+	.equ sec_off, -36
+	subl $0x4, %esp
+
 	# Initializing variables
+	movl $0x0, rate(%ebp)
+	movl $0x0, size(%ebp)
+	movl $0x0, chan(%ebp)
+	movl $0x0, sec_off(%ebp)
 	movl (%ebp), %ecx
 	
 	cmpl $0x2, %ecx
-	jnz arg_fault
+	jl arg_fault
+
+	cmpl $0x3, %ecx
+	jg arg_fault
 
 	# I/O flow
 	pushl $len_hello
@@ -81,66 +90,6 @@ _start:
 
 	movl %eax, fd(%ebp)
 
-	# Tune device
-	movl $SIZE, arg(%ebp)
-	leal arg(%ebp), %eax
-	pushl %eax
-	pushl $SOUND_PCM_WRITE_BITS
-	movl fd(%ebp), %eax
-	pushl %eax
-	call ioctl
-	addl $0xC, %esp
-
-	cmpl $-1, %eax
-	jz error
-
-	cmpl $SIZE, arg(%ebp)
-	jnz error
-
-	movl $CHANNELS, arg(%ebp)
-	leal arg(%ebp), %eax
-	pushl %eax
-	pushl $SOUND_PCM_WRITE_CHANNELS
-	movl fd(%ebp), %eax
-	pushl %eax
-	call ioctl
-	addl $0xC, %esp
-
-	cmpl $-1, %eax
-	jz error
-
-	cmpl $CHANNELS, arg(%ebp)
-	jnz error
-
-	movl $RATE, arg(%ebp)
-	leal arg(%ebp), %eax
-	pushl %eax
-	pushl $SOUND_PCM_WRITE_RATE
-	movl fd(%ebp), %eax
-	pushl %eax
-	call ioctl
-	addl $0xC, %esp
-
-	cmpl $-1, %eax
-	jz error
-
-	cmpl $RATE, arg(%ebp)
-	jnz error
-
-	pushl $CHANNELS
-	pushl $SIZE
-	pushl $RATE
-	call print_dev_info
-	addl $0xC, %esp
-
-	movl $CHANNELS, %eax
-	movl $SIZE, %ebx
-	movl $RATE, %ecx
-	imull %ebx, %eax
-	imull %ecx, %eax
-	shrl $0x3, %eax
-	movl %eax, const_product
-
 	# Open .wav file
 	pushl $PERMS
 	pushl $0102
@@ -148,7 +97,7 @@ _start:
 	call open
 	addl $0xC, %esp
 
-	test %eax, %eax
+	testl %eax, %eax
 	js error
 
 	movl %eax, file(%ebp)
@@ -174,13 +123,52 @@ mmap_call:
 
 	movl %eax, file_map(%ebp)
 
+	# Tune device
+	leal chan(%ebp), %eax
+	pushl %eax
+	leal size(%ebp), %eax
+	pushl %eax
+	leal rate(%ebp), %eax
+	pushl %eax
+	pushl file_map(%ebp)
+	call get_wav_info
+	addl $0x10, %esp
+
+	pushl fd(%ebp)
+	pushl rate(%ebp)
+	pushl chan(%ebp)
+	pushl size(%ebp)
+	call tune_device
+	addl $0x10, %esp
+
+	testl %eax, %eax
+	js error
+
+	pushl chan(%ebp)
+	pushl size(%ebp)
+	pushl rate(%ebp)
+	call print_dev_info
+	addl $0xC, %esp
+
+	cmpl $0x2, (%ebp)
+	jz replay_cont
+
+	movl file_map(%ebp), %eax
+	pushl 28(%eax) # const_product
+	pushl 12(%ebp)
+	call get_proper_offset
+	addl $0x8, %esp
+
+	movl %eax, sec_off(%ebp)
+
 replay_cont:
 	pushl 8(%ebp)
 	call print_cur_play
 	addl $0x4, %esp
 
 	pushl file_size(%ebp)
-	pushl const_product
+	movl file_map(%ebp), %eax
+	pushl 28(%eax) # const_product
 	call print_file_info
 	addl $0x8, %esp
 
@@ -188,7 +176,9 @@ replay_cont:
 	call lputchar
 	addl $0x4, %esp
 
-	xorl %ecx, %ecx
+	movl sec_off(%ebp), %ecx
+
+	subl $WAV_HEADER_SIZE, file_size(%ebp)
 
 play_loop:
 	cmpl %ecx, file_size(%ebp)
@@ -199,7 +189,7 @@ play_loop:
 
 	pushl $sizeof_buf
 	movl file_map(%ebp), %edx
-	leal (%edx, %ecx), %eax
+	leal WAV_HEADER_SIZE(%edx, %ecx), %eax
 	pushl %eax
 	pushl fd(%ebp)
 	call write
@@ -224,6 +214,8 @@ play_loop:
 	jmp play_loop
 
 play_loop_end:
+	movl $0x0, sec_off(%ebp)
+
 	pushl $'\n'
 	call lputchar
 	addl $0x4, %esp
@@ -250,6 +242,8 @@ closing:
 	pushl %eax
 	call close
 	addl $0x4, %esp
+
+	addl $WAV_HEADER_SIZE, file_size(%ebp)
 
 	# Syscall
 	pushl file_map(%ebp)

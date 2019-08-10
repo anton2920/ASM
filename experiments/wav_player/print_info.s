@@ -39,7 +39,9 @@ info_byte:
 	.asciz " B\n"
 	.equ len_info_byte, . - info_byte
 hash:
-	.ascii "#"
+	.ascii "="
+hash2:
+	.ascii "-"
 
 .section .data
 info_kib:
@@ -90,7 +92,7 @@ print_dev_info:
 	call write
 	addl $0xC, %esp
 
-	movl third_param(%ebp), %eax
+	movl second_param + 2(%ebp), %eax
 	cmpl $0x1, %eax
 	jnz stereo_chan
 
@@ -363,7 +365,6 @@ print_progress_bar:
 	addl $0xE, %edi
 
 	# Main part
-break:
 	fildl first_param(%ebp)
 	fildl second_param(%ebp)
 	fdivrp
@@ -398,7 +399,7 @@ break:
 	cld
 	rep stosb
 
-	movb $' ', %al
+	movb hash2, %al
 	movl %edx, %ecx
 
 	rep stosb

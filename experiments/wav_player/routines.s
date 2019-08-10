@@ -6,6 +6,13 @@
 .equ first_param, sizeof_int + sizeof_int
 .equ second_param, first_param + sizeof_int
 .equ third_param, second_param + sizeof_int
+.equ fourth_param, third_param + sizeof_int
+
+# linux/soundcard.h
+.equ SOUND_PCM_WRITE_BITS, 0xC0045005
+.equ SOUND_PCM_WRITE_CHANNELS, 0xC0045006
+.equ SOUND_PCM_WRITE_RATE, 0xC0045002
+.equ SOUND_PCM_SYNC, 0x5001
 
 .section .rodata
 play_again:
@@ -458,6 +465,213 @@ numlen_loop:
 
 numlen_loop_end:
 	movl %ebx, %eax
+
+	# Destroying function's stack frame
+	movl %ebp, %esp
+	popl %ebp
+	retl
+
+.globl get_wav_info
+.type get_wav_info, @function
+get_wav_info:
+	# Initializing function's stack frame
+	pushl %ebp
+	movl %esp, %ebp
+
+	# Saving registers
+	pushl %edi
+	pushl %esi
+
+	# Initializing variables
+	movl first_param(%ebp), %eax # file
+	movl second_param(%ebp), %ecx # rate
+	movl third_param(%ebp), %edx # size
+	movl fourth_param(%ebp), %edi # channels
+
+	# Main part
+	movl 24(%eax), %esi
+	movl %esi, (%ecx)
+
+	xorl %esi, %esi
+	movw 34(%eax), %si
+	movl $0x0, (%edx)
+	movw %si, (%edx)
+
+	xorl %esi, %esi
+	movw 22(%eax), %si
+	movl $0x0, (%edi)
+	movw %si, (%edi)
+
+	# Restoring registers
+	popl %esi
+	popl %edi
+
+	# Destroying function's stack frame
+	movl %ebp, %esp
+	popl %ebp
+	retl
+
+.globl tune_device
+.type tune_device, @function
+tune_device:
+	# Initializing function's stack frame
+	pushl %ebp
+	movl %esp, %ebp
+	.equ arg, -4 # int
+	subl $0x4, %esp # Acquiring space in arg(%ebp)
+
+	# Initializing variables
+	movl $0x0, arg(%ebp)
+	movl first_param(%ebp), %eax # size
+
+	# Main part
+	movl %eax, arg(%ebp)
+	leal arg(%ebp), %eax
+	pushl %eax
+	pushl $SOUND_PCM_WRITE_BITS
+	pushl fourth_param(%ebp)
+	call ioctl
+	addl $0xC, %esp
+
+	testl %eax, %eax
+	js tune_device_error
+
+	movl first_param(%ebp), %eax
+	cmpl %eax, arg(%ebp)
+	jne tune_device_error
+
+	movl second_param(%ebp), %eax # chan
+	movl %eax, arg(%ebp)
+	leal arg(%ebp), %eax
+	pushl %eax
+	pushl $SOUND_PCM_WRITE_CHANNELS
+	pushl fourth_param(%ebp)
+	call ioctl
+	addl $0xC, %esp
+
+	testl %eax, %eax
+	js tune_device_error
+
+	movl second_param(%ebp), %eax
+	cmpl %eax, arg(%ebp)
+	jne tune_device_error
+
+	movl third_param(%ebp), %eax # rate
+	movl %eax, arg(%ebp)
+	leal arg(%ebp), %eax
+	pushl %eax
+	pushl $SOUND_PCM_WRITE_RATE
+	pushl fourth_param(%ebp)
+	call ioctl
+	addl $0xC, %esp
+
+	testl %eax, %eax
+	js tune_device_error
+
+	movl third_param(%ebp), %eax
+	cmpl %eax, arg(%ebp)
+	je tune_device_ok
+
+tune_device_error:
+	movl $-1, %eax
+
+	jmp tune_device_exit
+
+tune_device_ok:
+	# Returning value
+	xorl %eax, %eax
+
+tune_device_exit:
+	# Destroying function's stack frame
+	movl %ebp, %esp
+	popl %ebp
+	retl
+
+.globl get_proper_offset
+.type get_proper_offset, @function
+get_proper_offset:
+	# Initializing function's stack frame
+	pushl %ebp
+	movl %esp, %ebp
+
+	# Initializing variables
+
+	# Main part
+	pushl first_param(%ebp)
+	call atoi
+	addl $0x4, %esp
+
+	movl second_param(%ebp), %ecx
+	imull %ecx, %eax
+
+	# Destroying function's stack frame
+	movl %ebp, %esp
+	popl %ebp
+	retl
+
+.globl atoi
+.type atoi, @function
+atoi:
+	# Initializing function's stack frame
+	pushl %ebp
+	movl %esp, %ebp
+	.equ sign, -4
+	subl $0x4, %esp # Acquiring space in sign(%ebp) — minus sign
+
+	# Saving registers
+	pushl %esi
+	pushl %ebx
+
+	# Initializing variables
+	movl first_param(%ebp), %esi
+	xorl %ecx, %ecx # offset
+	xorl %ebx, %ebx # res
+	movl $0x1, sign(%ebp)
+
+	# Main part
+atoi_if:
+	xorl %eax, %eax
+	cld
+	lodsb
+
+	cmpb $'-', %al # if (d == '-')
+	jne atoi_if_2
+
+atoi_then:
+	movl $-1, sign(%ebp) # sign = -1
+	jmp atoi_main_loop
+
+atoi_if_2:
+	cmpb $'+', %al # if (d == '+')
+	je atoi_main_loop
+
+atoi_then_2:
+	decl %esi
+
+atoi_main_loop:
+	xorl %eax, %eax
+	cld
+	lodsb
+
+	testb %al, %al
+	jz atoi_main_loop_end
+
+	subb $'0', %al
+	imull $0xA, %ebx
+	addl %eax, %ebx
+
+	jmp atoi_main_loop
+
+atoi_main_loop_end:
+	movl sign(%ebp), %edx
+	imull %edx, %ebx
+
+	# Returning value
+	movl %ebx, %eax
+
+	# Restoring registers
+	popl %ebx
+	popl %esi
 
 	# Destroying function's stack frame
 	movl %ebp, %esp
