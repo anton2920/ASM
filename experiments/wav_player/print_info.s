@@ -7,6 +7,9 @@
 .equ second_param, first_param + sizeof_int
 .equ third_param, second_param + sizeof_int
 
+# Audio info
+.equ WAV_HEADER_SIZE, 44
+
 .section .rodata
 info_rate:
 	.asciz "\n| Device sampling rate: "
@@ -168,6 +171,7 @@ print_file_info:
 
 	# Main part
 	movl second_param(%ebp), %eax # file_size
+	subl $WAV_HEADER_SIZE, %eax
 	xorl %edx, %edx
 	idivl %ebx # duration in seconds
 

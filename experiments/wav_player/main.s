@@ -6,10 +6,6 @@
 .equ PERMS, 0644
 
 # Audio info
-.equ RATE, 44100 # The sampling rate
-.equ SIZE, 16 # Sample size: 8 or 16 bits
-.equ CHANNELS, 2 # 1 — Mono, 2 — Stereo
-
 .equ WAV_HEADER_SIZE, 44
 
 .section .rodata
@@ -19,13 +15,13 @@ error_msg:
 hello:
 	.asciz "| This is the simplest .wav player ever possible!\n| Enjoy your shitty music :)\n"
 	.equ len_hello, . - hello
-device:
-	.asciz "/dev/dsp2"
 un_err:
 	.asciz "\n| wavp: unexpected error occurs!\n"
 	.equ len_un_err, . - un_err
 presicion:
 	.byte 0x7F, 0x02
+device:
+	.asciz "/dev/dsp2"
 
 .section .text
 .globl _start
@@ -60,12 +56,11 @@ _start:
 	movl $0x0, size(%ebp)
 	movl $0x0, chan(%ebp)
 	movl $0x0, sec_off(%ebp)
-	movl (%ebp), %ecx
 	
-	cmpl $0x2, %ecx
+	cmpl $0x2, (%ebp)
 	jl arg_fault
 
-	cmpl $0x3, %ecx
+	cmpl $0x3, (%ebp)
 	jg arg_fault
 
 	# I/O flow
@@ -92,7 +87,7 @@ _start:
 
 	# Open .wav file
 	pushl $PERMS
-	pushl $0102
+	pushl $O_RDONLY
 	pushl 8(%ebp)
 	call open
 	addl $0xC, %esp
@@ -151,7 +146,7 @@ mmap_call:
 	addl $0xC, %esp
 
 	cmpl $0x2, (%ebp)
-	jz replay_cont
+	je replay_cont
 
 	movl file_map(%ebp), %eax
 	pushl 28(%eax) # const_product
