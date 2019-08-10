@@ -4,6 +4,34 @@
 		"selected_items":
 		[
 			[
+				"second",
+				"second_param\tabc"
+			],
+			[
+				"ge",
+				"get_proper_offset\tabc"
+			],
+			[
+				"sec",
+				"sec_off\tabc"
+			],
+			[
+				"arg",
+				"arg_fault\tabc"
+			],
+			[
+				"file",
+				"file_map\tabc"
+			],
+			[
+				"asc",
+				"ascii"
+			],
+			[
+				"err",
+				"errno.h\tstandard header"
+			],
+			[
 				"SOU",
 				"SOUND_PCM_WRITE_RATE\tabc"
 			],
@@ -14,10 +42,6 @@
 			[
 				"tune_device_e",
 				"tune_device_exit\tabc"
-			],
-			[
-				"file",
-				"file_map\tabc"
 			],
 			[
 				"fo",
@@ -74,10 +98,6 @@
 			[
 				"l",
 				"lputchar\tabc"
-			],
-			[
-				"sec",
-				"second_param\tabc"
 			],
 			[
 				"pro",
@@ -448,10 +468,6 @@
 				"close_and_back\tabc"
 			],
 			[
-				"asc",
-				"asciz"
-			],
-			[
 				"back_",
 				"back_sure"
 			],
@@ -498,45 +514,11 @@
 			[
 				"ha",
 				"hash_sum\tabc"
-			],
-			[
-				"ME",
-				"MENUBUF\tabc"
-			],
-			[
-				"en",
-				"enter_pass\tabc"
-			],
-			[
-				"Re",
-				"Restoring\tabc"
-			],
-			[
-				"re",
-				"registers\tabc"
 			]
 		]
 	},
 	"buffers":
 	[
-		{
-			"file": "experiments/wav_player/routines.s",
-			"settings":
-			{
-				"buffer_size": 9371,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "experiments/wav_player/main.s",
-			"settings":
-			{
-				"buffer_size": 4065,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		}
 	],
 	"build_system": "Packages/Makefile/Make.sublime-build",
 	"build_system_choices":
@@ -688,17 +670,20 @@
 	[
 		"/home/anton/ASM",
 		"/home/anton/ASM/experiments",
-		"/home/anton/ASM/experiments/wav_player"
+		"/home/anton/ASM/lab",
+		"/home/anton/ASM/lab/RGR"
 	],
 	"file_history":
 	[
+		"/home/anton/ASM/experiments/wav_player/routines.s",
 		"/home/anton/ASM/experiments/wav_player/print_info.s",
+		"/home/anton/ASM/experiments/wav_player/main.s",
+		"/home/anton/ASM/experiments/wav_player/test.c",
 		"/home/anton/ASM/experiments/fire/sdl_64.s",
 		"/home/anton/ASM/experiments/fire/test.c",
 		"/home/anton/ASM/experiments/fire/main_64.s",
 		"/home/anton/ASM/experiments/fire/test2.s",
 		"/home/anton/ASM/experiments/fire/test.s",
-		"/home/anton/ASM/experiments/wav_player/main.s",
 		"/home/anton/ASM/experiments/wav_player/Makefile",
 		"/home/anton/ASM/lab/lab_04/a1.s",
 		"/home/anton/ASM/lab/lab_04/Makefile",
@@ -726,11 +711,9 @@
 		"/home/anton/ASM/lab/RGR/test.dat",
 		"/home/anton/C/lab/lab_23/source.s",
 		"/home/anton/ASM/experiments/sse_strcpy/Makefile",
-		"/home/anton/ASM/experiments/wav_player/routines.s",
 		"/home/anton/ASM/lab/lab_06/routines.s",
 		"/home/anton/ASM/experiments/wav_player/info",
 		"/home/anton/ASM/experiments/wav_player/test",
-		"/home/anton/ASM/experiments/wav_player/test.c",
 		"/home/anton/ASM/experiments/wav_player/DNCE  -  Kissing Strangers.wav",
 		"/home/anton/ASM/experiments/fire/sdl.s",
 		"/home/anton/ASM/lab/lab_C/lab_10/a2.s",
@@ -823,7 +806,7 @@
 	],
 	"find":
 	{
-		"height": 27.0
+		"height": 26.0
 	},
 	"find_in_files":
 	{
@@ -953,73 +936,14 @@
 	"groups":
 	[
 		{
-			"selected": 0,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "experiments/wav_player/routines.s",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 9371,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								8553,
-								8553
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/GAS-x86 (or x64) highlighting scheme/Assembly x86 AT&T.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 8578.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "experiments/wav_player/main.s",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4065,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								153,
-								153
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/GAS-x86 (or x64) highlighting scheme/Assembly x86 AT&T.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 563.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				}
 			]
 		}
 	],
 	"incremental_find":
 	{
-		"height": 27.0
+		"height": 26.0
 	},
 	"input":
 	{
@@ -1064,7 +988,7 @@
 	"project": "asm.sublime-project",
 	"replace":
 	{
-		"height": 50.0
+		"height": 48.0
 	},
 	"save_all_on_build": true,
 	"select_file":
