@@ -570,9 +570,30 @@ lstrncpy:
 	movl third_arg(%ebp), %ecx
 	movl %ecx, %edx # Save size
 
-	# Main part
-	sarl $0x2, %ecx # Shift length by two (div by 4)
+	subl %edi, %esi
 
+	# Main part. SSE (SSE2)
+	sarl $0x4, %ecx # Shift length by four (div by 16)
+
+sse2_strncpy_while:
+	test %ecx, %ecx
+	jz sse2_strncpy_while_end
+
+	movdqu (%esi, %edi), %xmm0
+	movdqu %xmm0, (%edi)
+
+	addl $0x10, %edi
+
+	decl %ecx
+
+	jmp sse2_strncpy_while
+
+sse2_strncpy_while_end:
+	addl %edi, %esi
+
+	movl %edx, %ecx
+	andl $0xF, %ecx
+	
 	cld
 	rep movsl
 

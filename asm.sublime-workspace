@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"sse",
+				"sse4_strcmp\t(routines.s)"
+			],
+			[
+				"ss",
+				"sse4_strcmp_diff\tabc"
+			],
+			[
 				"second",
 				"second_param\tabc"
 			],
@@ -506,27 +514,11 @@
 			[
 				"ope",
 				"open_database_exit\tabc"
-			],
-			[
-				"has",
-				"hash_sum\tabc"
-			],
-			[
-				"ha",
-				"hash_sum\tabc"
 			]
 		]
 	},
 	"buffers":
 	[
-		{
-			"file": "experiments/fire/sdl_64.s",
-			"settings":
-			{
-				"buffer_size": 2220,
-				"line_ending": "Unix"
-			}
-		}
 	],
 	"build_system": "Packages/Makefile/Make.sublime-build",
 	"build_system_choices":
@@ -676,14 +668,15 @@
 	},
 	"expanded_folders":
 	[
-		"/home/anton/ASM",
-		"/home/anton/ASM/experiments",
-		"/home/anton/ASM/experiments/fire",
-		"/home/anton/ASM/lab",
-		"/home/anton/ASM/lab/RGR"
+		"/home/anton/ASM"
 	],
 	"file_history":
 	[
+		"/home/anton/ASM/training/string/main.s",
+		"/home/anton/ASM/lab/RGR/routines.s",
+		"/home/anton/ASM/lab/RGR/db.s",
+		"/home/anton/ASM/training/string/routines.s",
+		"/home/anton/ASM/experiments/sse_strcpy/main.s",
 		"/home/anton/ASM/experiments/wav_player/routines.s",
 		"/home/anton/ASM/experiments/wav_player/print_info.s",
 		"/home/anton/ASM/experiments/wav_player/main.s",
@@ -696,21 +689,16 @@
 		"/home/anton/ASM/experiments/wav_player/Makefile",
 		"/home/anton/ASM/lab/lab_04/a1.s",
 		"/home/anton/ASM/lab/lab_04/Makefile",
-		"/home/anton/ASM/training/string/routines.s",
 		"/home/anton/ASM/experiments/fire/Makefile",
 		"/home/anton/ASM/experiments/sse.s",
-		"/home/anton/ASM/training/string/main.s",
 		"/home/anton/ASM/training/string/Makefile",
 		"/home/anton/ASM/lab/RGR/Makefile",
 		"/home/anton/ASM/lab/RGR/constants.s",
 		"/home/anton/ASM/lab/RGR/main.s",
-		"/home/anton/ASM/lab/RGR/routines.s",
 		"/home/anton/ASM/lab/RGR/menu.s",
 		"/home/anton/ASM/lab/RGR/test1.dat",
-		"/home/anton/ASM/lab/RGR/db.s",
 		"/home/anton/ASM/lab/RGR/test3.dat",
 		"/home/anton/ASM/lab/RGR/test.c",
-		"/home/anton/ASM/experiments/sse_strcpy/main.s",
 		"/home/anton/ASM/experiments/fire/main.s",
 		"/home/anton/ASM/lab/RGR/test.s",
 		"/home/anton/ProCalc/src/libs/Combinatorics_menu.cpp",
@@ -815,7 +803,7 @@
 	],
 	"find":
 	{
-		"height": 31.0
+		"height": 44.0
 	},
 	"find_in_files":
 	{
@@ -829,6 +817,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"lstrcm",
+			"lstrle",
 			":\n",
 			"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
 			"###########                   ",
@@ -945,38 +935,8 @@
 	"groups":
 	[
 		{
-			"selected": 0,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "experiments/fire/sdl_64.s",
-					"semi_transient": true,
-					"settings":
-					{
-						"buffer_size": 2220,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								476,
-								476
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/GAS-x86 (or x64) highlighting scheme/Assembly x86 AT&T.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 396.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				}
 			]
 		}
 	],
