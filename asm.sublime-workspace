@@ -519,6 +519,14 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "experiments/fire/sdl_64.s",
+			"settings":
+			{
+				"buffer_size": 2220,
+				"line_ending": "Unix"
+			}
+		}
 	],
 	"build_system": "Packages/Makefile/Make.sublime-build",
 	"build_system_choices":
@@ -670,6 +678,7 @@
 	[
 		"/home/anton/ASM",
 		"/home/anton/ASM/experiments",
+		"/home/anton/ASM/experiments/fire",
 		"/home/anton/ASM/lab",
 		"/home/anton/ASM/lab/RGR"
 	],
@@ -806,7 +815,7 @@
 	],
 	"find":
 	{
-		"height": 26.0
+		"height": 31.0
 	},
 	"find_in_files":
 	{
@@ -936,14 +945,44 @@
 	"groups":
 	[
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "experiments/fire/sdl_64.s",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 2220,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								476,
+								476
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/GAS-x86 (or x64) highlighting scheme/Assembly x86 AT&T.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 396.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
 			]
 		}
 	],
 	"incremental_find":
 	{
-		"height": 26.0
+		"height": 31.0
 	},
 	"input":
 	{
@@ -988,7 +1027,7 @@
 	"project": "asm.sublime-project",
 	"replace":
 	{
-		"height": 48.0
+		"height": 58.0
 	},
 	"save_all_on_build": true,
 	"select_file":

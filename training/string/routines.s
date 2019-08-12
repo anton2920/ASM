@@ -174,3 +174,31 @@ lstrcpy:
 	movl %ebp, %esp
 	popl %ebp
 	retl
+
+.globl sse4_strlen
+.type sse4_strlen, @function
+sse4_strlen:
+	# Initializing function's stack frame
+	pushl %ebp
+	movl %esp, %ebp
+
+	# Initializing variables
+	pxor %xmm0, %xmm0
+	movl first_arg(%ebp), %edx
+	movl $-16, %eax
+
+	# Main part
+sse4_strlen_loop:
+	addl $0x10, %eax
+
+	pcmpistri $0b0001000, (%edx, %eax), %xmm0
+
+	jnz sse4_strlen_loop
+
+sse4_strlen_loop_end:
+	addl %ecx, %eax
+
+	# Destroying function's stack frame
+	movl %ebp, %esp
+	popl %ebp
+	retl

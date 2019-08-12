@@ -166,40 +166,27 @@ lstrlen:
 	pushl %ebp
 	movl %esp, %ebp
 
-	# Saving registers
-	pushl %esi
-	pushl %edi
-
 	# Initializing variables
-	movl first_param(%ebp), %edi
-	xorl %eax, %eax
-	movl $0xFFFF, %ecx
+	pxor %xmm0, %xmm0
+	movl first_arg(%ebp), %edx
+	movl $-16, %eax
 
 	# Main part
-	cld
-	repnz scasb
-	jne notfound
+sse4_strlen_loop:
+	addl $0x10, %eax
 
-	subw $0xFFFF, %cx
-	negw %cx
-	decw %cx
+	pcmpistri $0b0001000, (%edx, %eax), %xmm0
 
-	movl %ecx, %eax
+	jnz sse4_strlen_loop
 
-	jmp lstrlen_fin
-
-notfound:
-	movl $-1, %eax
-
-lstrlen_fin:
-	# Restoring registers
-	popl %edi
-	popl %esi
+sse4_strlen_loop_end:
+	addl %ecx, %eax
 
 	# Destroying function's stack frame
 	movl %ebp, %esp
 	popl %ebp
 	retl
+
 
 .globl lputchar
 .type lputchar, @function
