@@ -18,7 +18,7 @@ format_length_1:
 format_length_2:
 	.asciz "Length of the second string: %d. SSE: %d (correct: %d)\n"
 format_result_of_cmp:
-	.asciz "\nResult of strings comparison: %d\n\n"
+	.asciz "\nResult of strings comparison: %d. SSE: %d\n\n"
 format_third_buf:
 	.asciz "The third buffer contents: %s\n"
 
@@ -130,9 +130,19 @@ _start:
 	addl $0x8, %esp
 
 	pushl %eax
+
+	pushl $buf2
+	pushl $buf1
+	call sse4_strcmp
+	addl $0x8, %esp
+
+	popl %edx
+
+	pushl %eax
+	pushl %edx
 	pushl $format_result_of_cmp
 	call printf
-	addl $0x8, %esp
+	addl $0xC, %esp
 
 	# Strcpy test
 	pushl $buf1

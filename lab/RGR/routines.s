@@ -178,30 +178,33 @@ lstrcmp:
 
 	# Initializing variables
 	movl first_arg(%ebp), %eax
-	movl second_arg(%ebp), %ebx
+	movl second_arg(%ebp), %edx
+	subl %edx, %eax
+	subl $0x10, %edx
 
 	# Main part
-lstrcmp_loop:
-	xorl %ecx, %ecx
-	xorl %edx, %edx
+sse4_strcmp_loop:
+	addl $0x10, %edx
+	movdqu (%edx), %xmm0
 
-	movb (%eax), %cl
-	movb (%ebx), %dl
+	pcmpistri $0b0011000, (%edx, %eax), %xmm0
 
-	cmpb %cl, %dl
-	jne lstrcmp_end_loop
+	ja sse4_strlen_loop
 
-	testb %cl, %cl
-	jz lstrcmp_end_loop
+	jc sse4_strcmp_diff
 
-	incl %eax
-	incl %ebx
-	jmp lstrcmp_loop
-	
-lstrcmp_end_loop:
-	subl %edx, %ecx
-	movl %ecx, %eax
+	xorl %eax, %eax # Strings are equal
+	jmp sse4_strcmp_exit
 
+sse4_strcmp_diff:
+	addl %edx, %eax
+
+	movzx (%eax, %ecx), %eax
+	movzx (%edx, %ecx), %edx
+
+	subl %edx, %eax
+
+sse4_strcmp_exit:
 	# Destroying function's stack frame
 	movl %ebp, %esp
 	popl %ebp

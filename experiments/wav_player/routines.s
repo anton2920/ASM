@@ -187,7 +187,6 @@ sse4_strlen_loop_end:
 	popl %ebp
 	retl
 
-
 .globl lputchar
 .type lputchar, @function
 lputchar:

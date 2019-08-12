@@ -202,3 +202,44 @@ sse4_strlen_loop_end:
 	movl %ebp, %esp
 	popl %ebp
 	retl
+
+.globl sse4_strcmp
+.type sse4_strcmp, @function
+sse4_strcmp:
+	# Initializing function's stack frame
+	pushl %ebp
+	movl %esp, %ebp
+
+	# Initializing variables
+	movl first_arg(%ebp), %eax
+	movl second_arg(%ebp), %edx
+	subl %edx, %eax
+	subl $0x10, %edx
+
+	# Main part
+sse4_strcmp_loop:
+	addl $0x10, %edx
+	movdqu (%edx), %xmm0
+
+	pcmpistri $0b0011000, (%edx, %eax), %xmm0
+
+	ja sse4_strlen_loop
+
+	jc sse4_strcmp_diff
+
+	xorl %eax, %eax # Strings are equal
+	jmp sse4_strcmp_exit
+
+sse4_strcmp_diff:
+	addl %edx, %eax
+
+	movzx (%eax, %ecx), %eax
+	movzx (%edx, %ecx), %edx
+
+	subl %edx, %eax
+
+sse4_strcmp_exit:
+	# Destroying function's stack frame
+	movl %ebp, %esp
+	popl %ebp
+	retl
