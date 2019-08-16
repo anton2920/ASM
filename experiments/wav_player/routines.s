@@ -316,7 +316,7 @@ iprint:
 	movl %esp, %ebp
 
 	# Initializing variables
-	movl 8(%ebp), %eax # Number
+	movl first_param(%ebp), %eax # Number
 
 	# Main part
 iprint_if:
@@ -324,53 +324,63 @@ iprint_if:
 	jg iprint_else
 
 iprint_then:
-	cmpl $0x0, %eax
-	je iprint_print_0
-	
-	pushl %eax
-	movl $'-', %edx
-	pushl %edx
+	testl %eax, %eax
+	jnz iprint_print_not_0
+
+	pushl $'0'
 	call lputchar
 	addl $0x4, %esp
+
+	jmp iprint_fin
+	
+iprint_print_not_0:
+	# Saving registers
+	pushl %eax
+
+	pushl $'-'
+	call lputchar
+	addl $0x4, %esp
+
+	# Restoring registers
 	popl %eax
 
-	imull $-1, %eax
+	negl %eax
 
 iprint_else:
-	pushl %eax
+	# Saving registers
+	pushl %eax # Number
 
 	pushl %eax
 	call numlen
 	addl $0x4, %esp
 
-	popl %ebx
-	pushl %eax
+	# Restoring registers
+	popl %ecx # Number
 
-	pushl %eax
-	pushl %ebx
+	# Saving registers
+	pushl %eax # Length
+
+	pushl %eax # Length
+	pushl %ecx # Number
 	call reverse
 	addl $0x8, %esp
 
-	popl %eax
-	imull $0x4, %eax
+	# Restoring registers
+	popl %eax # Length
+
+	# sall $0x2, %eax
+
 	pushl %eax
 	pushl $NUM_BUF
 	pushl $STDOUT
 	call write
 	addl $0xC, %esp
-	jmp iprint_fin
-
-iprint_print_0:
-	movl $'0', %edx
-	pushl %edx
-	call lputchar
-	addl $0x4, %esp
 
 iprint_fin:
 	# Destroying function's stack frame
 	movl %ebp, %esp
 	popl %ebp
-	ret
+	retl
 
 .type reverse, @function # int and char *
 reverse:
@@ -378,32 +388,40 @@ reverse:
 	pushl %ebp
 	movl %esp, %ebp
 
+	# Saving registers
+	pushl %edi
+	pushl %ebx
+
 	# Initializing variables
-	movl 8(%ebp), %eax # Number
-	movl 12(%ebp), %ebx # Position
+	movl first_param(%ebp), %eax # Number
+	movl second_param(%ebp), %ebx # Position
 	decl %ebx
 	movl $0xA, %ecx
 	movl $NUM_BUF, %edi
 
 	# Main part
 reverse_main_loop:
-	cmpl $0x0, %ebx
-	jl reverse_main_loop_end
+	testl %ebx, %ebx
+	js reverse_main_loop_end
 
 	xorl %edx, %edx
 	idivl %ecx
 
-	addl $'0', %edx
-	movl %edx, (%edi, %ebx, 4)
+	addb $'0', %dl
+	movb %dl, (%edi, %ebx)
 	decl %ebx
 
 	jmp reverse_main_loop
 
 reverse_main_loop_end:
+	# Restoring registers
+	popl %ebx
+	popl %edi
+
 	# Destroying function's stack frame
 	movl %ebp, %esp
 	popl %ebp
-	ret
+	retl
 
 .globl find_size
 .type find_size, @function

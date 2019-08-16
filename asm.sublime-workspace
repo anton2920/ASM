@@ -580,6 +580,10 @@
 		"selected_items":
 		[
 			[
+				"pac",
+				"Package Control: List Packages"
+			],
+			[
 				"install",
 				"Package Control: Install Package"
 			],
