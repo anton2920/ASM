@@ -451,14 +451,18 @@ numlen:
 	pushl %ebp
 	movl %esp, %ebp
 
-	# Main part
-	movl 8(%ebp), %eax # Number
+	# Saving registers
+	pushl %ebx
+
+	# Initializing variables
+	movl first_param(%ebp), %eax # Number
 	xorl %ebx, %ebx # Len
 	movl $0xA, %ecx
 
+	# Main part
 numlen_loop:
-	cmpl $0x0, %eax
-	je numlen_loop_end
+	testl %eax, %eax
+	jz numlen_loop_end
 
 	xorl %edx, %edx
 	idivl %ecx
@@ -468,7 +472,11 @@ numlen_loop:
 	jmp numlen_loop
 
 numlen_loop_end:
+	# Returning value
 	movl %ebx, %eax
+
+	# Restoring registers
+	popl %ebx
 
 	# Destroying function's stack frame
 	movl %ebp, %esp
