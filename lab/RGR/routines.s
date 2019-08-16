@@ -178,30 +178,33 @@ lstrcmp:
 
 	# Initializing variables
 	movl first_arg(%ebp), %eax
-	movl second_arg(%ebp), %ebx
+	movl second_arg(%ebp), %edx
+	subl %edx, %eax
+	subl $0x10, %edx
 
 	# Main part
-lstrcmp_loop:
-	xorl %ecx, %ecx
-	xorl %edx, %edx
+sse4_strcmp_loop:
+	addl $0x10, %edx
+	movdqu (%edx), %xmm0
 
-	movb (%eax), %cl
-	movb (%ebx), %dl
+	pcmpistri $0b0011000, (%edx, %eax), %xmm0
 
-	cmpb %cl, %dl
-	jne lstrcmp_end_loop
+	ja sse4_strlen_loop
 
-	testb %cl, %cl
-	jz lstrcmp_end_loop
+	jc sse4_strcmp_diff
 
-	incl %eax
-	incl %ebx
-	jmp lstrcmp_loop
-	
-lstrcmp_end_loop:
-	subl %edx, %ecx
-	movl %ecx, %eax
+	xorl %eax, %eax # Strings are equal
+	jmp sse4_strcmp_exit
 
+sse4_strcmp_diff:
+	addl %edx, %eax
+
+	movzx (%eax, %ecx), %eax
+	movzx (%edx, %ecx), %edx
+
+	subl %edx, %eax
+
+sse4_strcmp_exit:
 	# Destroying function's stack frame
 	movl %ebp, %esp
 	popl %ebp
@@ -567,9 +570,30 @@ lstrncpy:
 	movl third_arg(%ebp), %ecx
 	movl %ecx, %edx # Save size
 
-	# Main part
-	sarl $0x2, %ecx # Shift length by two (div by 4)
+	subl %edi, %esi
 
+	# Main part. SSE (SSE2)
+	sarl $0x4, %ecx # Shift length by four (div by 16)
+
+sse2_strncpy_while:
+	test %ecx, %ecx
+	jz sse2_strncpy_while_end
+
+	movdqu (%esi, %edi), %xmm0
+	movdqu %xmm0, (%edi)
+
+	addl $0x10, %edi
+
+	decl %ecx
+
+	jmp sse2_strncpy_while
+
+sse2_strncpy_while_end:
+	addl %edi, %esi
+
+	movl %edx, %ecx
+	andl $0xF, %ecx
+	
 	cld
 	rep movsl
 
@@ -644,35 +668,21 @@ lstrlen:
 	pushl %ebp
 	movl %esp, %ebp
 
-	# Saving registers
-	pushl %esi
-	pushl %edi
-
 	# Initializing variables
-	movl first_arg(%ebp), %edi
-	xorl %eax, %eax
-	movl $0xFFFF, %ecx
+	pxor %xmm0, %xmm0
+	movl first_arg(%ebp), %edx
+	movl $-16, %eax
 
 	# Main part
-	cld
-	repnz scasb
-	jne notfound
+sse4_strlen_loop:
+	addl $0x10, %eax
 
-	subw $0xFFFF, %cx
-	negw %cx
-	decw %cx
+	pcmpistri $0b0001000, (%edx, %eax), %xmm0
 
-	movl %ecx, %eax
+	jnz sse4_strlen_loop
 
-	jmp lstrlen_fin
-
-notfound:
-	movl $-1, %eax
-
-lstrlen_fin:
-	# Restoring registers
-	popl %edi
-	popl %esi
+sse4_strlen_loop_end:
+	addl %ecx, %eax
 
 	# Destroying function's stack frame
 	movl %ebp, %esp

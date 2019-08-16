@@ -518,10 +518,17 @@ open_database_pass_read:
 	call djb2
 	addl $0x4, %esp
 
+	# Saving registers
+	pushl %eax
+
+	call prt_ln
+
+	# Restoring registers
+	popl %eax
+
 	cmpl %eax, hash_sum(%ebp)
 	je open_database_exit_2
 
-	call prt_ln
 
 	incl nattempts(%ebp)
 

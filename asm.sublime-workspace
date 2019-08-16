@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"sse",
+				"sse4_strcmp\t(routines.s)"
+			],
+			[
+				"ss",
+				"sse4_strcmp_diff\tabc"
+			],
+			[
 				"second",
 				"second_param\tabc"
 			],
@@ -506,14 +514,6 @@
 			[
 				"ope",
 				"open_database_exit\tabc"
-			],
-			[
-				"has",
-				"hash_sum\tabc"
-			],
-			[
-				"ha",
-				"hash_sum\tabc"
 			]
 		]
 	},
@@ -672,13 +672,15 @@
 	},
 	"expanded_folders":
 	[
-		"/home/anton/ASM",
-		"/home/anton/ASM/experiments",
-		"/home/anton/ASM/lab",
-		"/home/anton/ASM/lab/RGR"
+		"/home/anton/ASM"
 	],
 	"file_history":
 	[
+		"/home/anton/ASM/training/string/main.s",
+		"/home/anton/ASM/lab/RGR/routines.s",
+		"/home/anton/ASM/lab/RGR/db.s",
+		"/home/anton/ASM/training/string/routines.s",
+		"/home/anton/ASM/experiments/sse_strcpy/main.s",
 		"/home/anton/ASM/experiments/wav_player/routines.s",
 		"/home/anton/ASM/experiments/wav_player/print_info.s",
 		"/home/anton/ASM/experiments/wav_player/main.s",
@@ -691,21 +693,16 @@
 		"/home/anton/ASM/experiments/wav_player/Makefile",
 		"/home/anton/ASM/lab/lab_04/a1.s",
 		"/home/anton/ASM/lab/lab_04/Makefile",
-		"/home/anton/ASM/training/string/routines.s",
 		"/home/anton/ASM/experiments/fire/Makefile",
 		"/home/anton/ASM/experiments/sse.s",
-		"/home/anton/ASM/training/string/main.s",
 		"/home/anton/ASM/training/string/Makefile",
 		"/home/anton/ASM/lab/RGR/Makefile",
 		"/home/anton/ASM/lab/RGR/constants.s",
 		"/home/anton/ASM/lab/RGR/main.s",
-		"/home/anton/ASM/lab/RGR/routines.s",
 		"/home/anton/ASM/lab/RGR/menu.s",
 		"/home/anton/ASM/lab/RGR/test1.dat",
-		"/home/anton/ASM/lab/RGR/db.s",
 		"/home/anton/ASM/lab/RGR/test3.dat",
 		"/home/anton/ASM/lab/RGR/test.c",
-		"/home/anton/ASM/experiments/sse_strcpy/main.s",
 		"/home/anton/ASM/experiments/fire/main.s",
 		"/home/anton/ASM/lab/RGR/test.s",
 		"/home/anton/ProCalc/src/libs/Combinatorics_menu.cpp",
@@ -810,7 +807,7 @@
 	],
 	"find":
 	{
-		"height": 26.0
+		"height": 44.0
 	},
 	"find_in_files":
 	{
@@ -824,6 +821,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"lstrcm",
+			"lstrle",
 			":\n",
 			"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
 			"###########                   ",
@@ -947,7 +946,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 26.0
+		"height": 31.0
 	},
 	"input":
 	{
@@ -992,7 +991,7 @@
 	"project": "asm.sublime-project",
 	"replace":
 	{
-		"height": 48.0
+		"height": 58.0
 	},
 	"save_all_on_build": true,
 	"select_file":

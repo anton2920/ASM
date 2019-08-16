@@ -14,11 +14,11 @@ output_2:
 	.equ len_output_2, . - output_2
 
 format_length_1:
-	.asciz "\nLenght of the first string: %d (correct: %d)\n"
+	.asciz "\nLenght of the first string: %d. SSE: %d (correct: %d)\n"
 format_length_2:
-	.asciz "Length of the second string: %d (correct: %d)\n"
+	.asciz "Length of the second string: %d. SSE: %d (correct: %d)\n"
 format_result_of_cmp:
-	.asciz "\nResult of strings comparison: %d\n\n"
+	.asciz "\nResult of strings comparison: %d. SSE: %d\n\n"
 format_third_buf:
 	.asciz "The third buffer contents: %s\n"
 
@@ -64,6 +64,7 @@ _start:
 
 	movl %eax, len_buf1
 	leal buf1, %esi
+	movb $0x0, (%esi, %eax)
 
 	pushl $len_output_2
 	pushl $output_2
@@ -79,6 +80,7 @@ _start:
 
 	movl %eax, len_buf2
 	leal buf2, %esi
+	movb $0x0, (%esi, %eax)
 
 	# Main part
 
@@ -87,21 +89,39 @@ _start:
 	call lstrlen
 	addl $0x4, %esp
 
+	pushl %eax
+
+	pushl $buf1
+	call sse4_strlen
+	addl $0x4, %esp
+
+	popl %edx
+
 	pushl len_buf1
 	pushl %eax
+	pushl %edx
 	pushl $format_length_1
 	call printf
-	addl $0xC, %esp
+	addl $0x10, %esp
 
 	pushl $buf2
 	call lstrlen
 	addl $0x4, %esp
 
+	pushl %eax
+
+	pushl $buf2
+	call sse4_strlen
+	addl $0x4, %esp
+
+	popl %edx
+
 	pushl len_buf2
 	pushl %eax
+	pushl %edx
 	pushl $format_length_2
 	call printf
-	addl $0xC, %esp
+	addl $0x10, %esp
 
 	# Strcmp test
 	pushl $buf2
@@ -110,9 +130,19 @@ _start:
 	addl $0x8, %esp
 
 	pushl %eax
+
+	pushl $buf2
+	pushl $buf1
+	call sse4_strcmp
+	addl $0x8, %esp
+
+	popl %edx
+
+	pushl %eax
+	pushl %edx
 	pushl $format_result_of_cmp
 	call printf
-	addl $0x8, %esp
+	addl $0xC, %esp
 
 	# Strcpy test
 	pushl $buf1
