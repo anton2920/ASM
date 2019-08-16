@@ -21,7 +21,7 @@ un_err:
 presicion:
 	.byte 0x7F, 0x02
 device:
-	.asciz "/dev/dsp"
+	.asciz "/dev/dsp2"
 
 .section .text
 .globl _start

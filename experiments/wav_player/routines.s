@@ -168,7 +168,7 @@ lstrlen:
 
 	# Initializing variables
 	pxor %xmm0, %xmm0
-	movl first_arg(%ebp), %edx
+	movl first_param(%ebp), %edx
 	movl $-16, %eax
 
 	# Main part
