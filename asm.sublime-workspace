@@ -541,7 +541,8 @@
 			"file": "experiments/wav_player/print_info.s",
 			"settings":
 			{
-				"buffer_size": 6927,
+				"buffer_size": 6922,
+				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		}
@@ -838,7 +839,7 @@
 	],
 	"find":
 	{
-		"height": 40.0
+		"height": 26.0
 	},
 	"find_in_files":
 	{
@@ -984,8 +985,8 @@
 						"selection":
 						[
 							[
-								542,
-								542
+								2607,
+								2607
 							]
 						],
 						"settings":
@@ -994,7 +995,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 2652.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
@@ -1013,8 +1014,8 @@
 						"selection":
 						[
 							[
-								8388,
-								8388
+								8133,
+								8133
 							]
 						],
 						"settings":
@@ -1023,7 +1024,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 8930.0,
+						"translation.y": 8149.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -1035,15 +1036,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 6927,
+						"buffer_size": 6922,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								1957,
+								1957
 							]
 						],
 						"settings":
@@ -1052,7 +1053,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 918.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,

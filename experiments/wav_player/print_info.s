@@ -95,7 +95,7 @@ print_dev_info:
 	call write
 	addl $0xC, %esp
 
-	movl second_param + 2(%ebp), %eax
+	movl third_param(%ebp), %eax
 	cmpl $0x1, %eax
 	jnz stereo_chan
 
