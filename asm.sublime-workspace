@@ -702,12 +702,11 @@
 		"/home/anton/ASM",
 		"/home/anton/ASM/experiments",
 		"/home/anton/ASM/experiments/wav_player",
-		"/home/anton/ASM/home",
-		"/home/anton/ASM/lab",
-		"/home/anton/ASM/lab/RGR"
+		"/home/anton/ASM/experiments/wav_player/dos_ver"
 	],
 	"file_history":
 	[
+		"/home/anton/Music/Test.wav",
 		"/home/anton/ASM/lab/RGR/routines.s",
 		"/home/anton/ASM/experiments/wav_player/routines.s",
 		"/home/anton/ASM/experiments/wav_player/print_info.s",
@@ -834,8 +833,7 @@
 		"/home/anton/C/univer/study/MRecursion/a2.c",
 		"/home/anton/C/lab/lab_15/a1.c",
 		"/home/anton/C/lab/lab_15/a1.h",
-		"/home/anton/C/lab/lab_15/struct.c",
-		"/home/anton/C/training/8lowlevel/read.c"
+		"/home/anton/C/lab/lab_15/struct.c"
 	],
 	"find":
 	{
@@ -985,8 +983,8 @@
 						"selection":
 						[
 							[
-								2607,
-								2607
+								2674,
+								2674
 							]
 						],
 						"settings":
@@ -995,7 +993,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 2652.0,
+						"translation.y": 2346.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
@@ -1014,8 +1012,8 @@
 						"selection":
 						[
 							[
-								8133,
-								8133
+								6239,
+								6239
 							]
 						],
 						"settings":
@@ -1024,7 +1022,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 8149.0,
+						"translation.y": 8211.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -1043,8 +1041,8 @@
 						"selection":
 						[
 							[
-								1957,
-								1957
+								5206,
+								5206
 							]
 						],
 						"settings":
@@ -1053,7 +1051,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 918.0,
+						"translation.y": 4940.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
