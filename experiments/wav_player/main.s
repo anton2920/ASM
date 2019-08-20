@@ -32,7 +32,7 @@ _start:
 	.equ file, -8 # int
 	subl $0x8, %esp # Acquiring space for three variables
 
-	.equ sizeof_buf, 176400 # void *
+	# .equ sizeof_buf, 176400 # void *
 	# .equ buf, -176412
 	# subl $sizeof_buf, %esp
 
@@ -175,6 +175,7 @@ replay_cont:
 
 	subl $WAV_HEADER_SIZE, file_size(%ebp)
 
+
 play_loop:
 	cmpl %ecx, file_size(%ebp)
 	jl play_loop_end
@@ -182,7 +183,7 @@ play_loop:
 	# Saving registers
 	pushl %ecx
 
-	pushl $sizeof_buf
+	pushl rate(%ebp)
 	movl file_map(%ebp), %edx
 	leal WAV_HEADER_SIZE(%edx, %ecx), %eax
 	pushl %eax
@@ -204,7 +205,7 @@ play_loop:
 	# Restoring registers
 	popl %ecx
 
-	addl $sizeof_buf, %ecx
+	addl rate(%ebp), %ecx
 
 	jmp play_loop
 

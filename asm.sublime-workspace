@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"play_l",
+				"play_loop_end\tabc"
+			],
+			[
 				"Re",
 				"Returning\tabc"
 			],
@@ -510,10 +514,6 @@
 			[
 				"ope",
 				"open_database_exit\tabc"
-			],
-			[
-				"has",
-				"hash_sum\tabc"
 			]
 		]
 	},
@@ -523,7 +523,7 @@
 			"file": "experiments/wav_player/main.s",
 			"settings":
 			{
-				"buffer_size": 4246,
+				"buffer_size": 4247,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -967,7 +967,7 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
@@ -976,15 +976,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4246,
+						"buffer_size": 4247,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2674,
-								2674
+								2913,
+								2913
 							]
 						],
 						"settings":
@@ -993,10 +993,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 2346.0,
+						"translation.y": 2805.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
@@ -1025,7 +1025,7 @@
 						"translation.y": 8211.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
