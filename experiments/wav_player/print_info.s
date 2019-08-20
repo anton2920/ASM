@@ -168,11 +168,11 @@ print_file_info:
 	# Initializing variables
 	movl first_param(%ebp), %ebx
 	movl $0x0, hour_var(%ebp)
-
-	# Main part
 	movl second_param(%ebp), %eax # file_size
 	subl $WAV_HEADER_SIZE, %eax
 	xorl %edx, %edx
+
+	# Main part
 	idivl %ebx # duration in seconds
 
 	xorl %edx, %edx
@@ -281,7 +281,7 @@ print_file_info_cont_cont_cont:
 
 	pushl $'\n'
 	call lputchar
-	add $0x8, %esp
+	add $0xC, %esp
 
 	# Restoring registers
 	popl %ebx
