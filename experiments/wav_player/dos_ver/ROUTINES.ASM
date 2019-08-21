@@ -520,6 +520,9 @@ TUNE_DEVICE_ERR:
         MOV     AX, -1
 
 TUNE_DEVICE_EXIT:
+        ; Saving registers
+        PUSH    AX       
+
         PUSH    DWORD PTR [BP + FIRST_ARG]
         CALL    SET_TIME_CONST
         ADD     SP, 04H
@@ -528,6 +531,9 @@ TUNE_DEVICE_EXIT:
         PUSH    0D1H
         CALL    WRITE_DSP
         ADD     SP, 02H
+
+        ; Restoring registers
+        POP     AX
 
         ; Destroying function's stack frame
         MOV     SP, BP
@@ -542,16 +548,19 @@ SET_TIME_CONST  PROC
         MOV     EBP, ESP
 
         ; Initializing variables
-        MOV     EAX, 0F424000H
+        MOV     EAX, 1234DCH
         MOV     ECX, [EBP + EFIRST_ARG]
 
         ; Main part
         IDIV    ECX
 
-        SUB     EAX, 10000H
-        NEG     EAX              ; Correct time value
+       ;SUB     EAX, 10000H
+       ;NEG     EAX              ; Correct time value
 
         MOV     EDX, EAX
+
+        MOV     AL, 36H
+        OUT     43H, AL
 
         MOV     AL, DL
         OUT     40H, AL

@@ -12,6 +12,7 @@
         EXTRN   PRINT_FILE_INFO:PROC
         EXTRN   LPUTCHAR:PROC
         EXTRN   WRITE_DSP:PROC
+        EXTRN   READ_DSP:PROC
         EXTRN   IPRINT:PROC
         EXTRN   EIPRINT:PROC
         EXTRN   LSEEK:PROC
@@ -26,7 +27,7 @@ CODE	SEGMENT	para 'CODE' PUBLIC USE16
 START:
 	; Initializing .section .data
         MOV     AX, DATA
-	MOV	DS, AX
+	    MOV	    DS, AX
         MOV     ES, AX
         XOR     SI, SI
         XOR     DI, DI
@@ -99,11 +100,11 @@ WAVP:
         MOV     WORD PTR [BP + chan], AX
 
         PUSH    DWORD PTR [BP + rate]
-       ;CALL    TUNE_DEVICE
+        CALL    TUNE_DEVICE
         ADD     SP, 04H
 
         TEST    AX, AX
-       ;JS      WAVP_ERROR
+        JS      WAVP_ERROR
 
         PUSH    WORD PTR [BP + chan]
         PUSH    WORD PTR [BP + sizeb]
@@ -205,9 +206,9 @@ WAVP_ARG_F:
         ADD     SP, 06H
 
 WAVP_EXIT:
-	; Exiting
-	MOV	AH, 4CH
-	INT	21H
+    	; Exiting
+    	MOV	AH, 4CH
+    	INT	21H
 
 CODE	ENDS
 	END START

@@ -365,7 +365,7 @@ create_database_lookout:
 	addl $0x8, %esp
 
 	testl %eax, %eax
-	jnz create_database_exit_1
+	jnz create_database_exit_2
 
 create_database_exit_1:
 	call prt_ln
