@@ -316,7 +316,7 @@ menu2_loop:
 
 	# Main part
 	movl $MENUBUF, %ebx
-	movb $0x0, -1(%ebx, %eax, 1)
+	movb $0x0, -1(%ebx, %eax)
 
 	cmpl $0x5, %eax
 	je menu2_check_quit

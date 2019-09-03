@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"show_recs_loop_",
+				"show_recs_loop_print_spaces_id\tabc"
+			],
+			[
+				"nu",
+				"numlen\t(routines.s)"
+			],
+			[
 				"play_l",
 				"play_loop_end\tabc"
 			],
@@ -506,19 +514,38 @@
 			[
 				"len_error",
 				"len_error_pass\tabc"
-			],
-			[
-				"erro",
-				"error_pass\tabc"
-			],
-			[
-				"ope",
-				"open_database_exit\tabc"
 			]
 		]
 	},
 	"buffers":
 	[
+		{
+			"file": "lab/RGR/menu.s",
+			"settings":
+			{
+				"buffer_size": 7248,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "lab/RGR/db.s",
+			"settings":
+			{
+				"buffer_size": 29378,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "lab/RGR/routines.s",
+			"settings":
+			{
+				"buffer_size": 10702,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		}
 	],
 	"build_system": "Packages/Makefile/Make.sublime-build",
 	"build_system_choices":
@@ -672,7 +699,9 @@
 	},
 	"expanded_folders":
 	[
-		"/home/anton/ASM"
+		"/home/anton/ASM",
+		"/home/anton/ASM/lab",
+		"/home/anton/ASM/lab/RGR"
 	],
 	"file_history":
 	[
@@ -807,7 +836,7 @@
 	],
 	"find":
 	{
-		"height": 33.0
+		"height": 27.0
 	},
 	"find_in_files":
 	{
@@ -937,14 +966,115 @@
 	"groups":
 	[
 		{
+			"selected": 1,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "lab/RGR/menu.s",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 7248,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								6244,
+								6244
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/GAS-x86 (or x64) highlighting scheme/Assembly x86 AT&T.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 5253.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "lab/RGR/db.s",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 29378,
+						"regions":
+						{
+							"bookmarks":
+							{
+								"flags": 144,
+								"icon": "bookmark",
+								"regions":
+								[
+									[
+										11834,
+										11834
+									]
+								],
+								"scope": "bookmarks"
+							}
+						},
+						"selection":
+						[
+							[
+								11760,
+								11760
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/GAS-x86 (or x64) highlighting scheme/Assembly x86 AT&T.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 10767.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "lab/RGR/routines.s",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 10702,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								6701,
+								6701
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/GAS-x86 (or x64) highlighting scheme/Assembly x86 AT&T.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 6783.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				}
 			]
 		}
 	],
 	"incremental_find":
 	{
-		"height": 33.0
+		"height": 27.0
 	},
 	"input":
 	{
@@ -989,7 +1119,7 @@
 	"project": "asm.sublime-project",
 	"replace":
 	{
-		"height": 62.0
+		"height": 50.0
 	},
 	"save_all_on_build": true,
 	"select_file":
