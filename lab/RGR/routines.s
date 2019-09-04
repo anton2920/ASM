@@ -176,6 +176,9 @@ lstrcmp:
 	pushl %ebp
 	movl %esp, %ebp
 
+	# Saving registers
+	pushl %ebx
+
 	# Initializing variables
 	movl first_arg(%ebp), %eax
 	movl second_arg(%ebp), %edx
@@ -205,6 +208,9 @@ sse4_strcmp_diff:
 	subl %edx, %eax
 
 sse4_strcmp_exit:
+	# Restoring registers
+	popl %ebx
+
 	# Destroying function's stack frame
 	movl %ebp, %esp
 	popl %ebp
@@ -417,6 +423,7 @@ lputchar:
 	popl %ebp
 	retl
 
+.globl numlen
 .type numlen, @function
 numlen:
 	# Initializing function's stack frame

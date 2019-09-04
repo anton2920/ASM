@@ -4,12 +4,20 @@
 		"selected_items":
 		[
 			[
-				"sse",
-				"sse4_strcmp\t(routines.s)"
+				"show_recs_loop_",
+				"show_recs_loop_print_spaces_id\tabc"
 			],
 			[
-				"ss",
-				"sse4_strcmp_diff\tabc"
+				"nu",
+				"numlen\t(routines.s)"
+			],
+			[
+				"play_l",
+				"play_loop_end\tabc"
+			],
+			[
+				"Re",
+				"Returning\tabc"
 			],
 			[
 				"second",
@@ -506,19 +514,38 @@
 			[
 				"len_error",
 				"len_error_pass\tabc"
-			],
-			[
-				"erro",
-				"error_pass\tabc"
-			],
-			[
-				"ope",
-				"open_database_exit\tabc"
 			]
 		]
 	},
 	"buffers":
 	[
+		{
+			"file": "lab/RGR/menu.s",
+			"settings":
+			{
+				"buffer_size": 7248,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "lab/RGR/db.s",
+			"settings":
+			{
+				"buffer_size": 29378,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "lab/RGR/routines.s",
+			"settings":
+			{
+				"buffer_size": 10702,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		}
 	],
 	"build_system": "Packages/Makefile/Make.sublime-build",
 	"build_system_choices":
@@ -579,6 +606,10 @@
 		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"pac",
+				"Package Control: List Packages"
+			],
 			[
 				"install",
 				"Package Control: Install Package"
@@ -668,18 +699,20 @@
 	},
 	"expanded_folders":
 	[
-		"/home/anton/ASM"
+		"/home/anton/ASM",
+		"/home/anton/ASM/lab",
+		"/home/anton/ASM/lab/RGR"
 	],
 	"file_history":
 	[
-		"/home/anton/ASM/training/string/main.s",
-		"/home/anton/ASM/lab/RGR/routines.s",
+		"/home/anton/ASM/lab/RGR/main.s",
+		"/home/anton/ASM/lab/RGR/menu.s",
 		"/home/anton/ASM/lab/RGR/db.s",
-		"/home/anton/ASM/training/string/routines.s",
-		"/home/anton/ASM/experiments/sse_strcpy/main.s",
-		"/home/anton/ASM/experiments/wav_player/routines.s",
 		"/home/anton/ASM/experiments/wav_player/print_info.s",
+		"/home/anton/ASM/experiments/wav_player/routines.s",
 		"/home/anton/ASM/experiments/wav_player/main.s",
+		"/home/anton/Music/Test.wav",
+		"/home/anton/ASM/lab/RGR/routines.s",
 		"/home/anton/ASM/experiments/wav_player/test.c",
 		"/home/anton/ASM/experiments/fire/sdl_64.s",
 		"/home/anton/ASM/experiments/fire/test.c",
@@ -689,16 +722,17 @@
 		"/home/anton/ASM/experiments/wav_player/Makefile",
 		"/home/anton/ASM/lab/lab_04/a1.s",
 		"/home/anton/ASM/lab/lab_04/Makefile",
+		"/home/anton/ASM/training/string/routines.s",
 		"/home/anton/ASM/experiments/fire/Makefile",
 		"/home/anton/ASM/experiments/sse.s",
+		"/home/anton/ASM/training/string/main.s",
 		"/home/anton/ASM/training/string/Makefile",
 		"/home/anton/ASM/lab/RGR/Makefile",
 		"/home/anton/ASM/lab/RGR/constants.s",
-		"/home/anton/ASM/lab/RGR/main.s",
-		"/home/anton/ASM/lab/RGR/menu.s",
 		"/home/anton/ASM/lab/RGR/test1.dat",
 		"/home/anton/ASM/lab/RGR/test3.dat",
 		"/home/anton/ASM/lab/RGR/test.c",
+		"/home/anton/ASM/experiments/sse_strcpy/main.s",
 		"/home/anton/ASM/experiments/fire/main.s",
 		"/home/anton/ASM/lab/RGR/test.s",
 		"/home/anton/ProCalc/src/libs/Combinatorics_menu.cpp",
@@ -798,12 +832,11 @@
 		"/home/anton/C/univer/study/MRecursion/a2.c",
 		"/home/anton/C/lab/lab_15/a1.c",
 		"/home/anton/C/lab/lab_15/a1.h",
-		"/home/anton/C/lab/lab_15/struct.c",
-		"/home/anton/C/training/8lowlevel/read.c"
+		"/home/anton/C/lab/lab_15/struct.c"
 	],
 	"find":
 	{
-		"height": 31.0
+		"height": 44.0
 	},
 	"find_in_files":
 	{
@@ -817,8 +850,6 @@
 		"case_sensitive": false,
 		"find_history":
 		[
-			"lstrcm",
-			"lstrle",
 			":\n",
 			"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
 			"###########                   ",
@@ -935,14 +966,115 @@
 	"groups":
 	[
 		{
+			"selected": 1,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "lab/RGR/menu.s",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 7248,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								6244,
+								6244
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/GAS-x86 (or x64) highlighting scheme/Assembly x86 AT&T.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 5253.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "lab/RGR/db.s",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 29378,
+						"regions":
+						{
+							"bookmarks":
+							{
+								"flags": 144,
+								"icon": "bookmark",
+								"regions":
+								[
+									[
+										11834,
+										11834
+									]
+								],
+								"scope": "bookmarks"
+							}
+						},
+						"selection":
+						[
+							[
+								11760,
+								11760
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/GAS-x86 (or x64) highlighting scheme/Assembly x86 AT&T.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 10767.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "lab/RGR/routines.s",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 10702,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								6701,
+								6701
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/GAS-x86 (or x64) highlighting scheme/Assembly x86 AT&T.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 6783.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				}
 			]
 		}
 	],
 	"incremental_find":
 	{
-		"height": 31.0
+		"height": 27.0
 	},
 	"input":
 	{
@@ -987,7 +1119,7 @@
 	"project": "asm.sublime-project",
 	"replace":
 	{
-		"height": 58.0
+		"height": 50.0
 	},
 	"save_all_on_build": true,
 	"select_file":

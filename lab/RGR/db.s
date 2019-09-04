@@ -365,7 +365,7 @@ create_database_lookout:
 	addl $0x8, %esp
 
 	testl %eax, %eax
-	jnz create_database_exit_1
+	jnz create_database_exit_2
 
 create_database_exit_1:
 	call prt_ln
@@ -650,11 +650,34 @@ show_recs_loop:
 	# Printing values
 	pushl $'|'
 	call lputchar
+	addl $0x4, %esp
 
-	pushl $'\t'
+	pushl struct_1 + iD(%ebp)
+	call numlen
+	addl $0x4, %esp
+
+	subl $0x8, %eax
+	negl %eax
+
+show_recs_loop_print_spaces_id:
+	testl %eax, %eax
+	jz show_recs_loop_print_spaces_id_end
+
+	# Saving registers
+	pushl %eax
+
+	pushl $' '
 	call lputchar
-	addl $0x8, %esp
+	addl $0x4, %esp
 
+	# Restoring registers
+	popl %eax
+
+	decl %eax
+
+	jmp show_recs_loop_print_spaces_id
+
+show_recs_loop_print_spaces_id_end:
 	pushl struct_1 + iD(%ebp)
 	call iprint
 	addl $0x4, %esp
