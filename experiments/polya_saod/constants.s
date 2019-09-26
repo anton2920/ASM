@@ -5,6 +5,7 @@
 .equ O_RDONLY, 0
 .equ O_WRONLY, 1
 .equ O_RDWR, 2
+.equ O_WRTRUNC, 513
 
 .equ STDOUT, 1
 .equ STDIN, 0
