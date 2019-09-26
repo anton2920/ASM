@@ -3,6 +3,7 @@
 
 .equ STD_PERMS, 0666
 .equ O_RDONLY, 0
+.equ O_WRONLY, 1
 .equ O_RDWR, 2
 
 .equ STDOUT, 1

@@ -37,7 +37,7 @@ _start:
 	movl %eax, fd(%ebp)
 
 	pushl $STD_PERMS
-	pushl $O_RDWR
+	pushl $O_WRONLY
 	pushl $out_name
 	call open
 	addl $0xC, %esp
@@ -63,10 +63,11 @@ _start:
 	call write
 	addl $0xC, %esp
 
+	pushl $0x0
+	pushl $SEEK_SET
 	pushl fd_out(%ebp)
-	pushl $'\r'
-	call lputc
-	addl $0x8, %esp
+	call lseek
+	addl $0xC, %esp
 
 main_loop:
 	pushl fd(%ebp)
@@ -82,16 +83,11 @@ main_loop:
 	call lstrlen
 	addl $0x4, %esp
 
-	pushl fd_out(%ebp)
 	pushl %eax
 	pushl $BUF
+	pushl fd_out(%ebp)
 	call write
 	addl $0xC, %esp
-
-	pushl fd_out(%ebp)
-	pushl $'\n'
-	call lputc
-	addl $0x8, %esp
 
 	pushl $0x0
 	pushl $SEEK_SET
@@ -139,13 +135,22 @@ getline_main_loop:
 	cmpl second_arg(%ebp), %ecx
 	jg getline_main_loop_end
 
-	pushl $0x1
 	movl first_arg(%ebp), %edx # Buf
+
+	# Saving registers
+	pushl %ecx
+	pushl %edx
+
+	pushl $0x1
 	leal (%edx, %ecx), %eax
 	pushl %eax
 	pushl third_arg(%ebp)
 	call read
 	addl $0xC, %esp
+
+	# Restoring registers
+	popl %edx
+	popl %ecx
 
 	testl %eax, %eax
 	jz getline_main_loop_end
@@ -158,6 +163,8 @@ getline_main_loop:
 	jmp getline_main_loop
 
 getline_main_loop_end:
+	movb $0x0, 1(%edx, %ecx)
+
 	# Destroying function's stack frame
 	movl %ebp, %esp
 	popl %ebp
