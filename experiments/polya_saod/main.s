@@ -53,7 +53,11 @@ _start:
 	call getline
 	addl $0xC, %esp
 
-	pushl $BUFSIZE
+	pushl $BUF
+	call lstrlen
+	addl $0x4, %esp
+
+	pushl %eax
 	pushl $BUF
 	pushl fd_out(%ebp)
 	call write
