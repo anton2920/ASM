@@ -37,7 +37,7 @@ _start:
 	movl %eax, fd(%ebp)
 
 	pushl $STD_PERMS
-	pushl $O_WRONLY
+	pushl $O_WRTRUNC
 	pushl $out_name
 	call open
 	addl $0xC, %esp
@@ -53,23 +53,19 @@ _start:
 	call getline
 	addl $0xC, %esp
 
-	pushl $BUF
-	call lstrlen
-	addl $0x4, %esp
-
-	pushl %eax
+	pushl %edx
 	pushl $BUF
 	pushl fd_out(%ebp)
 	call write
 	addl $0xC, %esp
 
+main_loop:
 	pushl $0x0
 	pushl $SEEK_SET
 	pushl fd_out(%ebp)
 	call lseek
 	addl $0xC, %esp
 
-main_loop:
 	pushl fd(%ebp)
 	pushl $BUFSIZE
 	pushl $BUF
@@ -79,20 +75,10 @@ main_loop:
 	testl %eax, %eax
 	jz main_loop_end
 
-	pushl $BUF
-	call lstrlen
-	addl $0x4, %esp
-
-	pushl %eax
+	pushl %edx
 	pushl $BUF
 	pushl fd_out(%ebp)
 	call write
-	addl $0xC, %esp
-
-	pushl $0x0
-	pushl $SEEK_SET
-	pushl fd_out(%ebp)
-	call lseek
 	addl $0xC, %esp
 
 	jmp main_loop
@@ -163,7 +149,9 @@ getline_main_loop:
 	jmp getline_main_loop
 
 getline_main_loop_end:
-	movb $0x0, 1(%edx, %ecx)
+	movl $0x0, 1(%edx, %ecx)
+	movl %ecx, %edx
+	incl %edx
 
 	# Destroying function's stack frame
 	movl %ebp, %esp

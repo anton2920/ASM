@@ -607,7 +607,7 @@ sse4_strlen_loop:
 	addl $0x10, %eax
 
 	pcmpistri $0b0001000, (%edx, %eax), %xmm0
-
+	
 	jnz sse4_strlen_loop
 
 sse4_strlen_loop_end:

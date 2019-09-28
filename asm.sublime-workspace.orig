@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"O_",
+				"O_WRONLY\t(constants.s)"
+			],
+			[
 				"ge",
 				"getline_main_loop\tabc"
 			],
@@ -42,10 +46,6 @@
 			[
 				"out",
 				"out_name\tabc"
-			],
-			[
-				"O_",
-				"O_RDWR\t(constants.s)"
 			],
 			[
 				"STD",
@@ -519,6 +519,15 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "experiments/polya_saod/main.s",
+			"settings":
+			{
+				"buffer_size": 2540,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		}
 	],
 	"build_system": "Packages/Makefile/Make.sublime-build",
 	"build_system_choices":
@@ -674,18 +683,17 @@
 	[
 		"/home/anton/ASM",
 		"/home/anton/ASM/experiments",
-		"/home/anton/ASM/experiments/polya_saod",
-		"/home/anton/ASM/lab",
-		"/home/anton/ASM/lab/RGR"
+		"/home/anton/ASM/experiments/polya_saod"
 	],
 	"file_history":
 	[
-		"/home/anton/ASM/experiments/polya_saod/main.s",
-		"/home/anton/ASM/experiments/polya_saod/routines.s",
-		"/home/anton/ASM/experiments/polya_saod/constants.s",
-		"/home/anton/ASM/experiments/polya_saod/Makefile",
 		"/home/anton/ASM/experiments/polya_saod/out.txt",
 		"/home/anton/ASM/experiments/polya_saod/test.txt",
+		"/home/anton/ASM/experiments/polya_saod/routines.s",
+		"/home/anton/ASM/experiments/polya_saod/constants.s",
+		"/home/anton/ASM/experiments/polya_saod/test.c",
+		"/home/anton/ASM/experiments/polya_saod/main.s",
+		"/home/anton/ASM/experiments/polya_saod/Makefile",
 		"/home/anton/ASM/experiments/sse_fact/Makefile",
 		"/home/anton/ASM/experiments/sse_fact/main.s",
 		"/home/anton/ASM/lab/RGR/menu.s",
@@ -806,16 +814,11 @@
 		"/home/anton/C/lab/lab_15/rwr.c",
 		"/home/anton/C/home/Project/libs/menu2.c",
 		"/home/anton/C/home/Project/libs/menu.c",
-		"/home/anton/C/home/Project/main.c",
-		"/home/anton/C/home/Project/headers/project.h"
+		"/home/anton/C/home/Project/main.c"
 	],
 	"find":
 	{
-<<<<<<< HEAD
 		"height": 26.0
-=======
-		"height": 44.0
->>>>>>> d6273f7d954862297b9e71087ef27618b2a70c3a
 	},
 	"find_in_files":
 	{
@@ -945,8 +948,74 @@
 	"groups":
 	[
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "experiments/polya_saod/main.s",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2540,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+<<<<<<< HEAD
+								790,
+								790
+=======
+								1560,
+								1560
+>>>>>>> 15fc920d4a3b1ad4c537cca1befe4d7b77e9eb26
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/GAS-x86 (or x64) highlighting scheme/Assembly x86 AT&T.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+<<<<<<< HEAD
+						"translation.y": 881.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "experiments/polya_saod/test.txt",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 376,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+=======
+>>>>>>> 15fc920d4a3b1ad4c537cca1befe4d7b77e9eb26
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
 			]
 		}
 	],
