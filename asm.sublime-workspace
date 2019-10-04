@@ -519,15 +519,6 @@
 	},
 	"buffers":
 	[
-		{
-			"file": "experiments/polya_saod/main.s",
-			"settings":
-			{
-				"buffer_size": 2540,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		}
 	],
 	"build_system": "Packages/Makefile/Make.sublime-build",
 	"build_system_choices":
@@ -687,12 +678,12 @@
 	],
 	"file_history":
 	[
+		"/home/anton/ASM/experiments/polya_saod/main.s",
 		"/home/anton/ASM/experiments/polya_saod/out.txt",
 		"/home/anton/ASM/experiments/polya_saod/test.txt",
 		"/home/anton/ASM/experiments/polya_saod/routines.s",
 		"/home/anton/ASM/experiments/polya_saod/constants.s",
 		"/home/anton/ASM/experiments/polya_saod/test.c",
-		"/home/anton/ASM/experiments/polya_saod/main.s",
 		"/home/anton/ASM/experiments/polya_saod/Makefile",
 		"/home/anton/ASM/experiments/sse_fact/Makefile",
 		"/home/anton/ASM/experiments/sse_fact/main.s",
@@ -948,38 +939,8 @@
 	"groups":
 	[
 		{
-			"selected": 0,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "experiments/polya_saod/main.s",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2540,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1560,
-								1560
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/GAS-x86 (or x64) highlighting scheme/Assembly x86 AT&T.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				}
 			]
 		}
 	],
