@@ -4,10 +4,6 @@
 		"selected_items":
 		[
 			[
-				"O_",
-				"O_WRONLY\t(constants.s)"
-			],
-			[
 				"ge",
 				"getline_main_loop\tabc"
 			],
@@ -46,6 +42,10 @@
 			[
 				"out",
 				"out_name\tabc"
+			],
+			[
+				"O_",
+				"O_RDWR\t(constants.s)"
 			],
 			[
 				"STD",
@@ -519,15 +519,6 @@
 	},
 	"buffers":
 	[
-		{
-			"file": "experiments/polya_saod/main.s",
-			"settings":
-			{
-				"buffer_size": 2540,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		}
 	],
 	"build_system": "Packages/Makefile/Make.sublime-build",
 	"build_system_choices":
@@ -687,13 +678,12 @@
 	],
 	"file_history":
 	[
+		"/home/anton/ASM/experiments/polya_saod/constants.s",
+		"/home/anton/ASM/experiments/polya_saod/main.s",
+		"/home/anton/ASM/experiments/polya_saod/routines.s",
+		"/home/anton/ASM/experiments/polya_saod/Makefile",
 		"/home/anton/ASM/experiments/polya_saod/out.txt",
 		"/home/anton/ASM/experiments/polya_saod/test.txt",
-		"/home/anton/ASM/experiments/polya_saod/routines.s",
-		"/home/anton/ASM/experiments/polya_saod/constants.s",
-		"/home/anton/ASM/experiments/polya_saod/test.c",
-		"/home/anton/ASM/experiments/polya_saod/main.s",
-		"/home/anton/ASM/experiments/polya_saod/Makefile",
 		"/home/anton/ASM/experiments/sse_fact/Makefile",
 		"/home/anton/ASM/experiments/sse_fact/main.s",
 		"/home/anton/ASM/lab/RGR/menu.s",
@@ -814,11 +804,12 @@
 		"/home/anton/C/lab/lab_15/rwr.c",
 		"/home/anton/C/home/Project/libs/menu2.c",
 		"/home/anton/C/home/Project/libs/menu.c",
-		"/home/anton/C/home/Project/main.c"
+		"/home/anton/C/home/Project/main.c",
+		"/home/anton/C/home/Project/headers/project.h"
 	],
 	"find":
 	{
-		"height": 26.0
+		"height": 32.0
 	},
 	"find_in_files":
 	{
@@ -948,44 +939,14 @@
 	"groups":
 	[
 		{
-			"selected": 0,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "experiments/polya_saod/main.s",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2540,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1494,
-								1494
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/GAS-x86 (or x64) highlighting scheme/Assembly x86 AT&T.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 3466.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				}
 			]
 		}
 	],
 	"incremental_find":
 	{
-		"height": 26.0
+		"height": 32.0
 	},
 	"input":
 	{
@@ -1030,7 +991,7 @@
 	"project": "asm.sublime-project",
 	"replace":
 	{
-		"height": 48.0
+		"height": 60.0
 	},
 	"save_all_on_build": true,
 	"select_file":
