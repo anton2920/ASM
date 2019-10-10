@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"O_",
+				"O_WRONLY\t(constants.s)"
+			],
+			[
 				"ge",
 				"getline_main_loop\tabc"
 			],
@@ -42,10 +46,6 @@
 			[
 				"out",
 				"out_name\tabc"
-			],
-			[
-				"O_",
-				"O_RDWR\t(constants.s)"
 			],
 			[
 				"STD",
@@ -678,12 +678,13 @@
 	],
 	"file_history":
 	[
-		"/home/anton/ASM/experiments/polya_saod/constants.s",
 		"/home/anton/ASM/experiments/polya_saod/main.s",
-		"/home/anton/ASM/experiments/polya_saod/routines.s",
-		"/home/anton/ASM/experiments/polya_saod/Makefile",
 		"/home/anton/ASM/experiments/polya_saod/out.txt",
 		"/home/anton/ASM/experiments/polya_saod/test.txt",
+		"/home/anton/ASM/experiments/polya_saod/routines.s",
+		"/home/anton/ASM/experiments/polya_saod/constants.s",
+		"/home/anton/ASM/experiments/polya_saod/test.c",
+		"/home/anton/ASM/experiments/polya_saod/Makefile",
 		"/home/anton/ASM/experiments/sse_fact/Makefile",
 		"/home/anton/ASM/experiments/sse_fact/main.s",
 		"/home/anton/ASM/lab/RGR/menu.s",
@@ -804,12 +805,11 @@
 		"/home/anton/C/lab/lab_15/rwr.c",
 		"/home/anton/C/home/Project/libs/menu2.c",
 		"/home/anton/C/home/Project/libs/menu.c",
-		"/home/anton/C/home/Project/main.c",
-		"/home/anton/C/home/Project/headers/project.h"
+		"/home/anton/C/home/Project/main.c"
 	],
 	"find":
 	{
-		"height": 32.0
+		"height": 26.0
 	},
 	"find_in_files":
 	{
@@ -941,12 +941,41 @@
 		{
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "experiments/polya_saod/main.s",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2540,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1494,
+								1494
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/GAS-x86 (or x64) highlighting scheme/Assembly x86 AT&T.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 3466.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
 			]
 		}
 	],
 	"incremental_find":
 	{
-		"height": 32.0
+		"height": 26.0
 	},
 	"input":
 	{
@@ -991,7 +1020,7 @@
 	"project": "asm.sublime-project",
 	"replace":
 	{
-		"height": 60.0
+		"height": 48.0
 	},
 	"save_all_on_build": true,
 	"select_file":
