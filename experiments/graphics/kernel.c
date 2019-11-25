@@ -1,5 +1,3 @@
-#include <sys/nearptr.h>
-
 #define DELAY_VALUE 1000
 
 static int rand_seed = 12345;
@@ -23,8 +21,6 @@ void kernel_entry(void) {
 	int x, y;
 	char clr;
 	char key;
-
-	vga_buffer += 
 
 	/* Main part */
 	for ( ;; ) {

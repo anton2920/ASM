@@ -16,3 +16,4 @@ kernel.o: kernel.c
 
 clean:
 	rm -f *.o MyOS.bin MyOS.iso
+	rm -rf boot/
