@@ -541,7 +541,7 @@
 			"file": "experiments/graphics/Makefile",
 			"settings":
 			{
-				"buffer_size": 406,
+				"buffer_size": 430,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -566,7 +566,7 @@
 			"file": "experiments/graphics/kernel.c",
 			"settings":
 			{
-				"buffer_size": 1804,
+				"buffer_size": 1762,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -1079,15 +1079,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 406,
+						"buffer_size": 430,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								406,
-								406
+								0,
+								0
 							]
 						],
 						"settings":
@@ -1173,15 +1173,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1804,
+						"buffer_size": 1762,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1387,
-								1387
+								0,
+								0
 							]
 						],
 						"settings":

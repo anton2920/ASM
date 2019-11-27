@@ -15,5 +15,5 @@ kernel.o: kernel.c
 	#$(ASM) $(ASMFLAGS) kernel.s -o kernel.o	
 
 clean:
-	rm -f *.o MyOS.bin MyOS.iso
+	rm -f *.o MyOS.out MyOS.bin MyOS.iso
 	rm -rf boot/
