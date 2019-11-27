@@ -4,6 +4,154 @@
 		"selected_items":
 		[
 			[
+				"off",
+				"offsetof\tabc"
+			],
+			[
+				"inc",
+				"include\tabc"
+			],
+			[
+				"RE",
+				"REGS_VAR\tabc"
+			],
+			[
+				"REGS",
+				"REGS_VAR\tabc"
+			],
+			[
+				"pl",
+				"plot_pixel\tabc"
+			],
+			[
+				"functio",
+				"function\t(boot.s)"
+			],
+			[
+				"REG",
+				"REGS_VAR\tabc"
+			],
+			[
+				"kernel",
+				"kernel_entry\tabc"
+			],
+			[
+				"int",
+				"int32\tabc"
+			],
+			[
+				"vga",
+				"vga_mode_off\tabc"
+			],
+			[
+				"regs",
+				"regs16_t\tabc"
+			],
+			[
+				"o",
+				"o"
+			],
+			[
+				"__",
+				"__volatile__\tabc"
+			],
+			[
+				"TEST_MAI",
+				"TEST_MAIN_LOOP_DELAY\tabc"
+			],
+			[
+				"vga_m",
+				"vga_mode_off\tabc"
+			],
+			[
+				"rand",
+				"rand_seed\tabc"
+			],
+			[
+				"sta",
+				"stackTop"
+			],
+			[
+				"kerne",
+				"kernel_entry\t(boot-1.s)"
+			],
+			[
+				"vga_",
+				"vga_mode_on\tabc"
+			],
+			[
+				"vga_mo",
+				"vga_mode_on\tabc"
+			],
+			[
+				"ker",
+				"kernel_entry\tabc"
+			],
+			[
+				"ke",
+				"kernel-1\tabc"
+			],
+			[
+				"iso",
+				"isodir\tabc"
+			],
+			[
+				"My",
+				"MyOS.iso\t(run.sh)"
+			],
+			[
+				"test",
+				"test_main_loop\tabc"
+			],
+			[
+				"ASM",
+				"ASMFLAGS\tabc"
+			],
+			[
+				"MyOs",
+				"MyOS.bin\t(run.sh)"
+			],
+			[
+				"hl",
+				"hltloop\tabc"
+			],
+			[
+				"hlt",
+				"htlloop\tabc"
+			],
+			[
+				"stack",
+				"stackTop\tabc"
+			],
+			[
+				"f",
+				"function's\tabc"
+			],
+			[
+				"ran",
+				"rand_a\tabc"
+			],
+			[
+				"ra",
+				"rand_seed\tabc"
+			],
+			[
+				"tes",
+				"testb\tabc"
+			],
+			[
+				"vg",
+				"vga_wait_frame_wait_retrace\tabc"
+			],
+			[
+				"v",
+				"vga_wait_frame\tabc"
+			],
+			[
+				"O_",
+				"O_WRONLY\t(constants.s)"
+			],
+			[
 				"ge",
 				"getline_main_loop\tabc"
 			],
@@ -42,10 +190,6 @@
 			[
 				"out",
 				"out_name\tabc"
-			],
-			[
-				"O_",
-				"O_RDWR\t(constants.s)"
 			],
 			[
 				"STD",
@@ -304,10 +448,6 @@
 				"check_number\tabc"
 			],
 			[
-				"test",
-				"testb\tabc"
-			],
-			[
 				"NAME",
 				"NAME_SIZE\t(constants.s)"
 			],
@@ -374,151 +514,64 @@
 			[
 				"ST",
 				"STRUCT_SIZE\tabc"
-			],
-			[
-				"edi",
-				"edit_record_do_while_1_end\tabc"
-			],
-			[
-				"edit_",
-				"edit_record\tabc"
-			],
-			[
-				"len_edi",
-				"len_edit_type_number\tabc"
-			],
-			[
-				"YEA",
-				"YEAR_MAX_LEN\tabc"
-			],
-			[
-				"ve",
-				"vert_line_tab\tabc"
-			],
-			[
-				"str",
-				"struct_1\tabc"
-			],
-			[
-				"fir",
-				"first_arg\tabc"
-			],
-			[
-				"add_records_read_d",
-				"add_records_read_do_while_2_end\tabc"
-			],
-			[
-				"ad",
-				"add_records_read_do_while_1_end\tabc"
-			],
-			[
-				"ADD_RE",
-				"ADD_REC_BUF\tabc"
-			],
-			[
-				"len_add",
-				"len_add_invalid\tabc"
-			],
-			[
-				"ADD",
-				"ADD_REC_BUF\tabc"
-			],
-			[
-				"ADD_",
-				"ADD_REC_LEN\tabc"
-			],
-			[
-				"add_re",
-				"add_records_read\tabc"
-			],
-			[
-				"add_typ",
-				"add_type_number\tabc"
-			],
-			[
-				"len_add_t",
-				"len_add_type_number\tabc"
-			],
-			[
-				"new",
-				"new_lastID(%ebp\tabc"
-			],
-			[
-				"add_ty",
-				"add_type_year\tabc"
-			],
-			[
-				"len_add_ty",
-				"len_add_type_year\tabc"
-			],
-			[
-				"siez",
-				"sizeof_int\tabc"
-			],
-			[
-				"add_",
-				"add_type_year\tabc"
-			],
-			[
-				"PASS",
-				"PASSBUF1\tabc"
-			],
-			[
-				"PAS",
-				"PASSBUF_LEN\tabc"
-			],
-			[
-				"stt",
-				"stty_name\tabc"
-			],
-			[
-				"create_database_pass",
-				"create_database_pass\tabc"
-			],
-			[
-				"PA",
-				"PASSBUF_LEN\tabc"
-			],
-			[
-				"pass",
-				"password\tabc"
-			],
-			[
-				"tu",
-				"turn_echo_off\tabc"
-			],
-			[
-				"tur",
-				"turn_echo_do\tabc"
-			],
-			[
-				"st",
-				"stty_arg_on\tabc"
-			],
-			[
-				"back",
-				"back_line"
-			],
-			[
-				"menu",
-				"menu_l\tabc"
-			],
-			[
-				"clo",
-				"close_and_back\tabc"
-			],
-			[
-				"back_",
-				"back_sure"
-			],
-			[
-				"MENU",
-				"MENUBUF\tabc"
 			]
 		]
 	},
 	"buffers":
 	[
+		{
+			"file": "experiments/graphics/boot.s",
+			"settings":
+			{
+				"buffer_size": 4539,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "experiments/graphics/Makefile",
+			"settings":
+			{
+<<<<<<< HEAD
+				"buffer_size": 430,
+=======
+				"buffer_size": 491,
+>>>>>>> 4426df38ec67eefc03bbc6319457bc479b2dba58
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "experiments/graphics/kernel.s",
+			"settings":
+			{
+				"buffer_size": 3672,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "experiments/graphics/kernel.c",
+			"settings":
+			{
+<<<<<<< HEAD
+				"buffer_size": 1762,
+=======
+				"buffer_size": 2364,
+>>>>>>> 4426df38ec67eefc03bbc6319457bc479b2dba58
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "experiments/graphics/test.c",
+			"settings":
+			{
+				"buffer_size": 357,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		}
 	],
 	"build_system": "Packages/Makefile/Make.sublime-build",
 	"build_system_choices":
@@ -580,12 +633,12 @@
 		"selected_items":
 		[
 			[
-				"pac",
-				"Package Control: List Packages"
-			],
-			[
 				"install",
 				"Package Control: Install Package"
+			],
+			[
+				"pac",
+				"Package Control: List Packages"
 			],
 			[
 				"remo",
@@ -674,25 +727,34 @@
 	[
 		"/home/anton/ASM",
 		"/home/anton/ASM/experiments",
-		"/home/anton/ASM/experiments/polya_saod"
+		"/home/anton/ASM/experiments/graphics",
+		"/home/anton/ASM/experiments/graphics/isodir",
+		"/home/anton/ASM/experiments/graphics/isodir/boot",
+		"/home/anton/ASM/experiments/graphics/isodir/boot/grub"
 	],
 	"file_history":
 	[
-<<<<<<< HEAD
-		"/home/anton/ASM/experiments/polya_saod/constants.s",
-		"/home/anton/ASM/experiments/polya_saod/main.s",
-		"/home/anton/ASM/experiments/polya_saod/routines.s",
-=======
+		"/home/anton/ASM/experiments/graphics/kernel.h",
+		"/home/anton/ASM/experiments/graphics/kernel-2.c",
+		"/home/anton/ASM/experiments/graphics/int32.asm",
+		"/home/anton/ASM/experiments/graphics/TEST.ASM",
+		"/home/anton/ASM/experiments/graphics/int32.s",
+		"/home/anton/ASM/experiments/graphics/linker.ld",
+		"/home/anton/ASM/experiments/graphics/grub.cfg",
+		"/home/anton/ASM/experiments/graphics/run.sh",
+		"/home/anton/ASM/experiments/graphics/Makefile",
+		"/home/anton/ASM/experiments/graphics/boot.s",
+		"/home/anton/ASM/experiments/graphics/kernel.s",
+		"/home/anton/ASM/experiments/graphics/kernel.c",
+		"/home/anton/ASM/experiments/wav_player/dos_ver/WAVP.ASM",
+		"/home/anton/ASM/experiments/wav_player/dos_ver/ALL_D.ASM",
 		"/home/anton/ASM/experiments/polya_saod/main.s",
 		"/home/anton/ASM/experiments/polya_saod/out.txt",
 		"/home/anton/ASM/experiments/polya_saod/test.txt",
 		"/home/anton/ASM/experiments/polya_saod/routines.s",
 		"/home/anton/ASM/experiments/polya_saod/constants.s",
 		"/home/anton/ASM/experiments/polya_saod/test.c",
->>>>>>> 50f7c60f824707d914c94c0e24ba9299b0368cb0
 		"/home/anton/ASM/experiments/polya_saod/Makefile",
-		"/home/anton/ASM/experiments/polya_saod/out.txt",
-		"/home/anton/ASM/experiments/polya_saod/test.txt",
 		"/home/anton/ASM/experiments/sse_fact/Makefile",
 		"/home/anton/ASM/experiments/sse_fact/main.s",
 		"/home/anton/ASM/lab/RGR/menu.s",
@@ -799,26 +861,11 @@
 		"/home/anton/C/experiments/asm/c1.c",
 		"/home/anton/C/experiments/asm/asm1.asm",
 		"/home/anton/C/experiments/asm/c2.c",
-		"/home/anton/C/experiments/asm/asm2.asm",
-		"/home/anton/C/experiments/asm/c3.c",
-		"/home/anton/C/experiments/asm/asm3.asm",
-		"/home/anton/C/experiments/asm/c4.c",
-		"/home/anton/C/experiments/asm/asm4.asm",
-		"/home/anton/C/home/Max_lab_9/cmake-build-debug/rec.dat",
-		"/home/anton/C/lab/lab_13/a1out.bin",
-		"/home/anton/C/lab/lab_17/lab.h",
-		"/home/anton/C/lab/lab_17/rwr.c",
-		"/home/anton/C/lab/lab_17/task.c",
-		"/home/anton/C/lab/lab_17/main.c",
-		"/home/anton/C/lab/lab_15/rwr.c",
-		"/home/anton/C/home/Project/libs/menu2.c",
-		"/home/anton/C/home/Project/libs/menu.c",
-		"/home/anton/C/home/Project/main.c",
-		"/home/anton/C/home/Project/headers/project.h"
+		"/home/anton/C/experiments/asm/asm2.asm"
 	],
 	"find":
 	{
-		"height": 32.0
+		"height": 45.0
 	},
 	"find_in_files":
 	{
@@ -832,6 +879,11 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"memset",
+			"|",
+			"#",
+			"|",
+			"tst",
 			":\n",
 			"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
 			"###########                   ",
@@ -894,6 +946,10 @@
 		"regex": false,
 		"replace_history":
 		[
+			"#",
+			"$",
+			"#",
+			"kernel_entry",
 			"                              ",
 			"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
 			"PASSBUF2",
@@ -948,40 +1004,180 @@
 	"groups":
 	[
 		{
+			"selected": 1,
 			"sheets":
 			[
-<<<<<<< HEAD
-=======
 				{
 					"buffer": 0,
-					"file": "experiments/polya_saod/main.s",
+					"file": "experiments/graphics/boot.s",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2540,
+						"buffer_size": 4539,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1560,
-								1560
+								2040,
+								2040
 							]
 						],
 						"settings":
 						{
+							"open_with_edit": true,
 							"syntax": "Packages/GAS-x86 (or x64) highlighting scheme/Assembly x86 AT&T.tmLanguage",
 							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 612.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "experiments/graphics/Makefile",
+					"semi_transient": false,
+					"settings":
+					{
+<<<<<<< HEAD
+						"buffer_size": 430,
+=======
+						"buffer_size": 491,
+>>>>>>> 4426df38ec67eefc03bbc6319457bc479b2dba58
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+<<<<<<< HEAD
+								0,
+								0
+=======
+								491,
+								491
+>>>>>>> 4426df38ec67eefc03bbc6319457bc479b2dba58
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Makefile/Makefile.sublime-syntax"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 3,
 					"type": "text"
 				}
->>>>>>> 50f7c60f824707d914c94c0e24ba9299b0368cb0
+			]
+		},
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 2,
+					"file": "experiments/graphics/kernel.s",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3672,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								468,
+								468
+							]
+						],
+						"settings":
+						{
+							"open_with_edit": true,
+							"syntax": "Packages/GAS-x86 (or x64) highlighting scheme/Assembly x86 AT&T.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 4056.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "experiments/graphics/kernel.c",
+					"semi_transient": false,
+					"settings":
+					{
+<<<<<<< HEAD
+						"buffer_size": 1762,
+=======
+						"buffer_size": 2364,
+>>>>>>> 4426df38ec67eefc03bbc6319457bc479b2dba58
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+<<<<<<< HEAD
+								0,
+								0
+=======
+								1992,
+								1992
+>>>>>>> 4426df38ec67eefc03bbc6319457bc479b2dba58
+							]
+						],
+						"settings":
+						{
+							"auto_name": "",
+							"syntax": "Packages/C Improved/C Improved.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1998.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "experiments/graphics/test.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 357,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								197,
+								197
+							]
+						],
+						"settings":
+						{
+							"open_with_edit": true,
+							"syntax": "Packages/C Improved/C Improved.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 2.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				}
 			]
 		}
 	],
@@ -1002,11 +1198,18 @@
 				0,
 				1,
 				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
 			]
 		],
 		"cols":
 		[
 			0.0,
+			0.5,
 			1.0
 		],
 		"rows":
@@ -1066,7 +1269,7 @@
 		],
 		"width": 0.0
 	},
-	"selected_group": 0,
+	"selected_group": 1,
 	"settings":
 	{
 	},

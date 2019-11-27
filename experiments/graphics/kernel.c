@@ -1,28 +1,40 @@
-#define DELAY_VALUE 1000
+#define DELAY_VALUE 2000
 
 static int rand_seed = 12345;
 
+/* New datatypes */
 enum rand_consts {
 	a = 1103515245,
 	c = 12345,
 	m = 0x7FFFFFFF
 };
 
+typedef struct __attribute__ ((packed)) {
+    unsigned short di, si, bp, sp, bx, dx, cx, ax;
+    unsigned short gs, fs, es, ds, eflags;
+} regs16_t;
+
+/* Functions' declarations */
 void vga_mode_on(void);
 void vga_mode_off(void);
 int rand(void);
-void perform_delay(void);
+void perform_delay(int);
 void draw_dot(int, int, char);
 int get_next_key_code_if_ready(void);
+ 
+extern void int32(unsigned char intnum, regs16_t *regs);
 
 void kernel_entry(void) {
 
 	/* Initializing variables */
-	int x, y;
-	char clr;
-	char key;
+	auto int x, y;
+	auto char clr;
+	auto char key;
+	auto regs16_t r;
 
 	/* Main part */
+	vga_mode_on();
+
 	for ( ;; ) {
 		x = rand() % 320;
 		y = rand() % 240;
@@ -30,33 +42,47 @@ void kernel_entry(void) {
 
 		draw_dot(x, y, clr);
 
-		perform_delay();
+		perform_delay(DELAY_VALUE);
 		
 		if ((key = get_next_key_code_if_ready()) == 0x39) {
 			break;
 		}
 	}
+
+	vga_mode_off();
 }
 
-/*void vga_mode_on(void) {
+void vga_mode_on(void) {
 
-	Main part
-	__asm__ __volatile__ (
+	/* Initializing variables */
+	auto regs16_t r;
+	r.ax = 0x0013;
+
+	/* Main part */
+	/*__asm__ __volatile__ (
 		"xorl %eax, %eax\n\t"
 		"movb $0x13, %al\n\t"
 		"int $0x10"
-	);
-}*/
+	);*/
 
-/*void vga_mode_off(void) {
+	int32(0x10, &r);
+}
 
-	Main part 
-	__asm__ __volatile__ (
+void vga_mode_off(void) {
+
+	/* Initializing variables */
+	auto regs16_t r;
+	r.ax = 0x0003;
+
+	/* Main part */
+	/*__asm__ __volatile__ (
 		"xorl %eax, %eax\n\t"
 		"movb $0x03, %al\n\t"
 		"int $0x10\n"
-	);
-}*/
+	);*/
+
+	int32(0x10, &r);
+}
 
 int rand(void) {
 
@@ -70,13 +96,13 @@ int rand(void) {
 	return rand_seed;
 }
 
-void perform_delay(void) {
+void perform_delay(int val) {
 
 	/* Initializing variables */
-	int delay;
+	auto int delay;
 
 	/* Main part */
-	for (delay = DELAY_VALUE; delay > 0; --delay) {
+	for (delay = val; delay > 0; --delay) {
 		__asm__ __volatile__ ("nop");
 	}
 }
@@ -85,7 +111,7 @@ void draw_dot(int x, int y, char clr) {
 
 	/* Initializing variables */
 	static unsigned char *vga_buffer = (unsigned char *) 0xA0000;
-	int offset = (y << 8) + (y << 6) + x;
+	auto int offset = (y << 8) + (y << 6) + x;
 
 	/* Main part */
 	/*__asm__ __volatile__ (
@@ -99,16 +125,21 @@ void draw_dot(int x, int y, char clr) {
 int get_next_key_code_if_ready(void) {
 
 	/* Initializing variables */
-	int key;
+	/* int key; */
+	auto regs16_t r;
+	r.ax = 0x0100;
 
 	/* Main part */
-	__asm__ __volatile__ (
+	/*__asm__ __volatile__ (
 		"xorl %%eax, %%eax\n\t"
 		"movb $0x1, %%ah\n\t"
 		"int $0x16\n\t"
 		: "=a" (key)
-	);
+	);*/
+
+	int32(0x16, &r);
 
 	/* Returning value */
-	return key;
+	/* return key; */
+	return r.ax;
 }
