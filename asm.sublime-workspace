@@ -541,7 +541,7 @@
 			"file": "experiments/graphics/kernel.s",
 			"settings":
 			{
-				"buffer_size": 3672,
+				"buffer_size": 406,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -550,7 +550,7 @@
 			"file": "experiments/graphics/kernel.c",
 			"settings":
 			{
-				"buffer_size": 2364,
+				"buffer_size": 1804,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -1035,15 +1035,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 491,
+						"buffer_size": 406,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								491,
-								491
+								406,
+								406
 							]
 						],
 						"settings":
@@ -1099,15 +1099,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2364,
+						"buffer_size": 1804,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1992,
-								1992
+								1387,
+								1387
 							]
 						],
 						"settings":

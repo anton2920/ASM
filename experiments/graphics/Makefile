@@ -18,5 +18,5 @@ int32.o: int32.asm
 	nasm -f elf int32.asm	
 
 clean:
-	rm -f *.o MyOS.bin MyOS.iso
+	rm -f *.o MyOS.out MyOS.bin MyOS.iso
 	rm -rf boot/
