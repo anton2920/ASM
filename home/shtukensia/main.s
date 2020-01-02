@@ -37,6 +37,7 @@ _start:
 
 	# Main part
 	movl VAR_N(%ebp), %ecx
+	xorl %ebx, %ebx
 
 main_loop:
 	testl %ecx, %ecx
@@ -61,10 +62,18 @@ main_loop:
 	decl %ecx
 
 	movl VAR_CURR(%ebp), %eax
+
+	testl %ebx, %ebx
+	jz main_loop_over
+
 	addl %eax, VAR_NEW_S(%ebp)
+
+main_loop_over:
 
 	testl %eax, %eax
 	jnz main_loop
+
+	incl %ebx
 
 	movl VAR_NEW_S(%ebp), %eax
 	movl %eax, VAR_OLD_S(%ebp)
