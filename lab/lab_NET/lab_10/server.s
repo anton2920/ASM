@@ -29,9 +29,93 @@ error_write:
 	.asciz "server: can't write to the socket\n"
 .equ len_error_write, . - error_write
 
-write_msg:
-	.asciz "server: your message is "
-.equ len_write_msg, . - write_msg
+entry_message:
+	.asciz "┌─────────────────────────────────────────────────────────────┐\n"
+	.asciz "│ <=== Welcome to the Tushino Datacenter Advanced Server ===> │\n"
+	.asciz "├─────────────────────────────────────────────────────────────┤\n"
+	.asciz "│ Type \"help\" to list all commands                            │\n"
+	.asciz "└─────────────────────────────────────────────────────────────┘\n\n"
+.equ len_entry_message, . - entry_message
+
+prompt:
+	.asciz "tushino$> "
+.equ len_prompt, . - prompt
+
+command_help:
+	.asciz "help"
+.equ len_command_help, . - command_help
+
+command_help_result:
+	.asciz "┌───────────┬───────────────────────────────────────────────┐\n"
+	.asciz "│  Command  │                  Description                  │\n"
+	.asciz "├───────────┼───────────────────────────────────────────────┤\n"
+	.asciz "│ creat     │ Creates file with a given name                │\n"
+	.asciz "├───────────┼───────────────────────────────────────────────┤\n"
+	.asciz "│ info      │ Prints information about creator              │\n"
+	.asciz "├───────────┼───────────────────────────────────────────────┤\n"
+	.asciz "│ help      │ Prints detailed info about existing commands  │\n"
+	.asciz "├───────────┼───────────────────────────────────────────────┤\n"
+	.asciz "│ shutdown  │ Shuts the server down                         │\n"
+	.asciz "├───────────┼───────────────────────────────────────────────┤\n"
+	.asciz "│ task      │ Prints information about server's destiny     │\n"
+	.asciz "├───────────┼───────────────────────────────────────────────┤\n"
+	.asciz "│ time      │ Prints server local time                      │\n"
+	.asciz "├───────────┼───────────────────────────────────────────────┤\n"
+	.asciz "│ quit      │ Closes connection with server                 │\n"
+	.asciz "└───────────┴───────────────────────────────────────────────┘\n"
+.equ len_command_help_result, . - command_help_result
+
+command_info:
+	.asciz "info"
+.equ len_command_info, . - command_info
+
+command_info_result:
+	.asciz "© Pavlovsky Anton, 2020"
+.equ len_command_info_result, . - command_info_result
+
+command_time:
+	.asciz "time"
+.equ len_command_time, . - command_time
+
+command_time_result:
+	.asciz "Server time: "
+.equ len_command_time_result, . - command_time_result
+
+command_task:
+	.asciz "task"
+.equ len_command_task, . - command_task
+
+command_task_result:
+	.asciz "┌──────────────────────────────────────────────────────────┐\n"
+	.asciz "│                         Task #15                         │\n"
+	.asciz "├──────────────────────────────────────────────────────────┤\n"
+	.asciz "│ Add to the server's services support for an additional   │\n"
+	.asciz "│ command for creating a file on the server                │\n"
+	.asciz "├──────────────────────────────────────────────────────────┤\n"
+	.asciz "│ - Input parameter: name of the file                      │\n"
+	.asciz "│ - Server response: command's status                      │\n"
+	.asciz "└──────────────────────────────────────────────────────────┘\n"
+.equ len_command_task_result, . - command_task_result
+
+command_creat:
+	.asciz "creat"
+.equ len_command_creat, . - command_creat
+
+command_quit:
+	.asciz "quit"
+.equ len_command_creat, . - command_creat
+
+command_quit_result:
+	.asciz "Bye!\n"
+.equ len_command_quit_result, . - command_quit_result
+
+command_shutdown:
+	.asciz "shutdown"
+.equ len_command_shutdown, . - command_shutdown
+
+command_shutdown_result:
+	.asciz "Server is shutting down...\n"
+.equ len_command_shutdown_result, . - command_shutdown_result
 
 .section .data
 var_n:
@@ -143,6 +227,7 @@ bind_check_ok:
 
 	movl $sizeof_sockaddr_in, clilen(%ebp)
 
+while_not_shutdown:
 	leal clilen(%ebp), %eax
 	pushl %eax
 	pushl $cli_addr
@@ -164,53 +249,198 @@ bind_check_ok:
 accept_check_ok:
 	movl %eax, newsockfd(%ebp)
 
-	pushl $sizeof_buffer
-	pushl $buffer
-	pushl newsockfd(%ebp)
-	calll read
-	addl $0xC, %esp
-
-	cmpl $0x0, %eax
-	jge read_check_ok
-
-	pushl $len_error_read
-	pushl $error_read
-	pushl $STDERR
-	calll write
-	addl $0xC, %esp
-
-	jmp exit
-
-read_check_ok:
-	movl %eax, var_n
-
-	pushl $len_write_msg
-	pushl $write_msg
+	pushl $len_entry_message
+	pushl $entry_message
 	pushl newsockfd(%ebp)
 	calll write
 	addl $0xC, %esp
 
 	cmpl $0x0, %eax
-	jl write_check_fail
+	jge write_entry_check_ok
 
-	pushl var_n
-	pushl $buffer
-	pushl newsockfd(%ebp)
-	calll write
-	addl $0xC, %esp
-
-	cmpl $0x0, %eax
-	jge exit
-
-write_check_fail:
 	pushl $len_error_write
 	pushl $error_write
 	pushl $STDERR
 	calll write
 	addl $0xC, %esp
 
+write_entry_check_ok:
+	pushl newsockfd(%ebp)
+	calll performator
+	addl $0x4, %esp
+
+	testl %eax, %eax
+	jnz while_not_shutdown
+
+	pushl newsockfd(%ebp)
+	calll closesocket
+	addl $0x4, %esp
+
+while_not_shutdown_end:
+	pushl sockfd(%ebp)
+	calll closesocket
+	addl $0x4, %esp
+
 exit:
 	# Exitting
 	movl $0x1, %eax
 	xorl %ebx, %ebx
 	int $0x80 # 0x80's interrupt
+
+.type performator, @function
+.equ SHUTDOWN_COMMAND, 0
+.equ QUIT_COMMAND, 1
+performator:
+	# Initializing function's stack frame
+	pushl %ebp
+	movl %esp, %ebp
+
+	# Main part
+while_true:
+	pushl $len_prompt
+	pushl $prompt
+	pushl first_arg(%ebp)
+	calll write
+	addl $0xC, %esp
+
+	pushl $sizeof_buffer
+	pushl $buffer
+	pushl first_arg(%ebp)
+	calll read
+	addl $0xC, %esp
+
+	movb $0x0, buffer - 1(%eax)
+
+	movl %eax, var_n
+
+	pushl $buffer
+	pushl $command_help
+	calll lstrcmp
+	addl $0x8, %esp
+
+	testl %eax, %eax
+	jnz help_check_fail
+
+	pushl $len_command_help_result
+	pushl $command_help_result
+	pushl first_arg(%ebp)
+	calll write
+	addl $0xC, %esp
+
+	jmp while_true
+
+help_check_fail:
+	pushl $buffer
+	pushl $command_quit
+	calll lstrcmp
+	addl $0x8, %esp
+
+	testl %eax, %eax
+	jnz quit_check_fail
+
+	pushl $len_command_quit_result
+	pushl $command_quit_result
+	pushl first_arg(%ebp)
+	calll write
+	addl $0xC, %esp
+
+	movl $QUIT_COMMAND, %eax
+
+	jmp while_true_end
+
+quit_check_fail:
+	pushl $buffer
+	pushl $command_shutdown
+	calll lstrcmp
+	addl $0x8, %esp
+
+	testl %eax, %eax
+	jnz shutdown_check_fail
+
+	pushl $len_command_shutdown_result
+	pushl $command_shutdown_result
+	pushl first_arg(%ebp)
+	calll write
+	addl $0xC, %esp
+
+	movl $SHUTDOWN_COMMAND, %eax
+
+	jmp while_true_end
+
+shutdown_check_fail:
+	pushl $buffer
+	pushl $command_info
+	calll lstrcmp
+	addl $0x8, %esp
+
+	testl %eax, %eax
+	jnz info_check_fail
+
+	pushl $len_command_info_result
+	pushl $command_info_result
+	pushl first_arg(%ebp)
+	calll write
+	addl $0xC, %esp
+
+	jmp while_true
+
+info_check_fail:
+	pushl $buffer
+	pushl $command_task
+	calll lstrcmp
+	addl $0x8, %esp
+
+	testl %eax, %eax
+	jnz task_check_fail
+
+	pushl $len_command_task_result
+	pushl $command_task_result
+	pushl first_arg(%ebp)
+	calll write
+	addl $0xC, %esp
+
+	jmp while_true
+
+task_check_fail:
+	jmp while_true
+
+while_true_end:
+
+	# Destroying function's stack frame
+	movl %ebp, %esp
+	popl %ebp
+	retl
+
+.type closesocket, @function
+closesocket:
+	# Initializing function's stack frame
+	pushl %ebp
+	movl %esp, %ebp
+	subl $0x4, %esp # Acquiring space for one variable
+
+	# Initializing variables
+	movl $0x1, -4(%ebp)
+
+	# Main part
+	# pushl $SHUT_WR
+	# pushl first_arg(%ebp)
+	# calll shutdown
+	# addl $0x8, %esp
+
+	pushl $sizeof_int
+	leal -4(%ebp), %eax
+	pushl %eax
+	pushl $SO_REUSEADDR
+	pushl $SOL_SOCKET
+	pushl first_arg(%ebp)
+	calll setsockopt
+	addl $0x14, %esp
+
+	# pushl sockfd(%ebp)
+	# calll close
+	# addl $0x4, %esp
+
+	# Destroying function's stack frame
+	movl %ebp, %esp
+	popl %ebp
+	retl

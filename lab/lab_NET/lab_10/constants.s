@@ -11,6 +11,8 @@
 .equ first_arg, sizeof_int + sizeof_int
 .equ second_arg, first_arg + sizeof_int
 .equ third_arg, second_arg + sizeof_int
+.equ fourth_arg, third_arg + sizeof_int
+.equ fifth_arg, fourth_arg + sizeof_int
 
 .equ SEEK_SET, 0
 .equ SEEK_CUR, 1
@@ -42,3 +44,12 @@
 .equ PROTOCOL, 0x0
 
 .equ INADDR_ANY, 0x0
+
+# shutdown(2) arguments
+.equ SHUT_RD, 0
+.equ SHUT_WR, SHUT_RD + 1
+.equ SHUT_RDWR, SHUT_WR + 1
+
+# setsockopt(2) arguments
+.equ SOL_SOCKET, 1
+.equ SO_REUSEADDR, 2

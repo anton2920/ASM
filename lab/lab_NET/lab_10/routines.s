@@ -633,6 +633,7 @@ accept:
 	int $0x80 # 0x80's interrupt
 
 	# Restoring registers
+	popl %ebx
 	popl %esi
 
 	# Destroying function's stack frame
@@ -655,6 +656,63 @@ htons:
 
 	# Returning value
 	movw -2(%ebp), %ax
+
+	# Destroying function's stack frame
+	movl %ebp, %esp
+	popl %ebp
+	retl
+
+.globl shutdown
+.equ SYS_SHUTDOWN, 373
+.type shutdown, @function
+shutdown:
+	# Initializing function's stack frame
+	pushl %ebp
+	movl %esp, %ebp
+
+	# Saving registers
+	pushl %ebx
+
+	# Syscall
+	movl $SYS_SHUTDOWN, %eax
+	movl first_arg(%ebp), %ebx
+	movl second_arg(%ebp), %ecx
+	int $0x80 # 0x80's interrupt
+
+	# Restoring registers
+	popl %ebx
+
+	# Destroying function's stack frame
+	movl %ebp, %esp
+	popl %ebp
+	retl
+
+.globl setsockopt
+.equ SYS_SETSOCKOPT, 366
+.type setsockopt, @function
+setsockopt:
+	# Initializing function's stack frame
+	pushl %ebp
+	movl %esp, %ebp
+
+	# Saving registers
+	pushl %esi
+	pushl %edi
+	pushl %ebx
+
+	# Syscall
+	movl $SYS_SETSOCKOPT, %eax
+	movl first_arg(%ebp), %ebx
+	movl second_arg(%ebp), %ecx
+	movl third_arg(%ebp), %edx
+	movl fourth_arg(%ebp), %esi
+	movl fifth_arg(%ebp), %edi
+	int $0x80 # 0x80's interrupt
+
+	# Restoring registers
+	popl %ebx
+	popl %edi
+	popl %esi
 
 	# Destroying function's stack frame
 	movl %ebp, %esp

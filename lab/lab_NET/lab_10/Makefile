@@ -3,7 +3,7 @@ ASM = as
 LINKER = ld
 ASFLAGS = --32 -g
 LIBSTDC = -lc -dynamic-linker /lib/ld-linux.so.2
-LDFLAGS = -m elf_i386 -g $(LIBSTDC)
+LDFLAGS = -m elf_i386 -g # $(LIBSTDC)
 
 # Main part
 all: server client routines
