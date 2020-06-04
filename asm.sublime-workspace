@@ -4,6 +4,326 @@
 		"selected_items":
 		[
 			[
+				"command_mkd",
+				"command_mkdir_result\tabc"
+			],
+			[
+				"SYS",
+				"SYS_MKDIR\tabc"
+			],
+			[
+				"error",
+				"error_code\tabc"
+			],
+			[
+				"pro",
+				"proceed_creat_while_creat_ok\tabc"
+			],
+			[
+				"get",
+				"get_next_word_while_end\tabc"
+			],
+			[
+				"make",
+				"make_us_daemon\tabc"
+			],
+			[
+				"ls",
+				"lstrlen\t(routines.s)"
+			],
+			[
+				"size",
+				"sizeof_buffer\tabc"
+			],
+			[
+				"p",
+				"proceed_creat_while_end\tabc"
+			],
+			[
+				"wor",
+				"word_buffer\tabc"
+			],
+			[
+				"va",
+				"variable\tabc"
+			],
+			[
+				"ge",
+				"get_next_word_while\tabc"
+			],
+			[
+				"Re",
+				"Restoring\tabc"
+			],
+			[
+				"check",
+				"check_whitespace\tabc"
+			],
+			[
+				"pr",
+				"proceed_creat_while_end\tabc"
+			],
+			[
+				"ma",
+				"make_us_daemon_exit\tabc"
+			],
+			[
+				"SIG",
+				"SIG_IGN\t(constants.s)"
+			],
+			[
+				"set",
+				"setsid\tabc"
+			],
+			[
+				"was",
+				"was_not_caught\tabc"
+			],
+			[
+				"caugh",
+				"was_caught"
+			],
+			[
+				"while",
+				"while_not_shutdown_end\tabc"
+			],
+			[
+				"whi",
+				"while_not_shutdown\tabc"
+			],
+			[
+				"sig",
+				"signal_goes_here\tabc"
+			],
+			[
+				"cm",
+				"cmpb\t(routines.s)"
+			],
+			[
+				"lencomman",
+				"len_command_time\tabc"
+			],
+			[
+				"comma",
+				"command_time_result\tabc"
+			],
+			[
+				"itoa",
+				"itoa_while_end\tabc"
+			],
+			[
+				"tm_",
+				"tm_min\tabc"
+			],
+			[
+				"tm",
+				"tm_hour\tabc"
+			],
+			[
+				"SECS",
+				"SECS_PER_DAY\tabc"
+			],
+			[
+				"ret",
+				"registers\t(routines.s)"
+			],
+			[
+				"var",
+				"variables\tabc"
+			],
+			[
+				"SE",
+				"SECS_PER_HOUR\tabc"
+			],
+			[
+				"SECS_PE",
+				"SECS_PER_DAY\tabc"
+			],
+			[
+				"fi",
+				"first_arg\tabc"
+			],
+			[
+				"eror",
+				"error_no_such_command\tabc"
+			],
+			[
+				"len_error_no",
+				"len_error_no_such_command\tabc"
+			],
+			[
+				"creat",
+				"command_creat"
+			],
+			[
+				"len_crea",
+				"len_command_creat_result\tabc"
+			],
+			[
+				"lst",
+				"lstrcmp\tabc"
+			],
+			[
+				"ta",
+				"task_check_fail\tabc"
+			],
+			[
+				"info",
+				"info_check_fail\tabc"
+			],
+			[
+				"close",
+				"closesocket\tabc"
+			],
+			[
+				"fou",
+				"fourth_arg\t(constants.s)"
+			],
+			[
+				"wh",
+				"while_true_end\tabc"
+			],
+			[
+				"shut",
+				"shutdown\t(routines.s)"
+			],
+			[
+				"SHU",
+				"SHUT_RDWR\t(constants.s)"
+			],
+			[
+				"ar",
+				"arguments\tabc"
+			],
+			[
+				"quit",
+				"quit_check_fail\tabc"
+			],
+			[
+				"comman",
+				"command_quit_result\tabc"
+			],
+			[
+				"len",
+				"len_command_help_result\tabc"
+			],
+			[
+				"he",
+				"help_check_fail\tabc"
+			],
+			[
+				"command_task",
+				"command_task_result\tabc"
+			],
+			[
+				"co",
+				"command_help\tabc"
+			],
+			[
+				"n",
+				"newsockfd\tabc"
+			],
+			[
+				"en",
+				"entry_message\tabc"
+			],
+			[
+				"f",
+				"function's\t(routines.s)"
+			],
+			[
+				"err",
+				"error_write\tabc"
+			],
+			[
+				"asc",
+				"asciz"
+			],
+			[
+				"er",
+				"error_bind\tabc"
+			],
+			[
+				"so",
+				"sockaddr_in_sin_port\tabc"
+			],
+			[
+				"wri",
+				"write\tabc"
+			],
+			[
+				"eq",
+				"equ"
+			],
+			[
+				"sizeo",
+				"sizeof_buffer\tabc"
+			],
+			[
+				"cli",
+				"cli_addr\tabc"
+			],
+			[
+				"socf",
+				"sockfd\tabc"
+			],
+			[
+				"bind",
+				"bind_check_ok\tabc"
+			],
+			[
+				"sockar",
+				"sockaddr_in_sin_addr\t(constants.s)"
+			],
+			[
+				"sock",
+				"sockaddr_in_sin_family\t(constants.s)"
+			],
+			[
+				"LI",
+				"LIBSTDC\tabc"
+			],
+			[
+				"soc",
+				"socket_check_ok\tabc"
+			],
+			[
+				"socke",
+				"socketcall\tabc"
+			],
+			[
+				"int",
+				"interrupt\t(routines.s)"
+			],
+			[
+				"sta",
+				"start_check_ok\tabc"
+			],
+			[
+				"ser",
+				"serv_addr\tabc"
+			],
+			[
+				"sizeof",
+				"sizeof_sockaddr_in\t(constants.s)"
+			],
+			[
+				"new",
+				"newsockfd\tabc"
+			],
+			[
+				"rou",
+				"routines.o\tabc"
+			],
+			[
+				"AS",
+				"ASFLAGS\tabc"
+			],
+			[
+				"L",
+				"LINKER\tabc"
+			],
+			[
 				"VAR",
 				"VAR_NEW_S\tabc"
 			],
@@ -56,10 +376,6 @@
 				"kernel_entry\tabc"
 			],
 			[
-				"int",
-				"int32\tabc"
-			],
-			[
 				"vga",
 				"vga_mode_off\tabc"
 			],
@@ -86,10 +402,6 @@
 			[
 				"rand",
 				"rand_seed\tabc"
-			],
-			[
-				"sta",
-				"stackTop"
 			],
 			[
 				"kerne",
@@ -144,10 +456,6 @@
 				"stackTop\tabc"
 			],
 			[
-				"f",
-				"function's\tabc"
-			],
-			[
 				"ran",
 				"rand_a\tabc"
 			],
@@ -172,10 +480,6 @@
 				"O_WRONLY\t(constants.s)"
 			],
 			[
-				"ge",
-				"getline_main_loop\tabc"
-			],
-			[
 				"SEE",
 				"SEEK_CUR\t(constants.s)"
 			],
@@ -186,22 +490,6 @@
 			[
 				"lp",
 				"lputc\tabc"
-			],
-			[
-				"rou",
-				"routines.s\t(Makefile)"
-			],
-			[
-				"AS",
-				"ASMFLAGS\tabc"
-			],
-			[
-				"len",
-				"len_error_msg\tabc"
-			],
-			[
-				"err",
-				"error\tabc"
 			],
 			[
 				"out",
@@ -224,315 +512,45 @@
 				"play_loop_end\tabc"
 			],
 			[
-				"Re",
-				"Returning\tabc"
-			],
-			[
 				"second",
 				"second_param\tabc"
-			],
-			[
-				"sec",
-				"sec_off\tabc"
-			],
-			[
-				"arg",
-				"arg_fault\tabc"
-			],
-			[
-				"file",
-				"file_map\tabc"
-			],
-			[
-				"asc",
-				"ascii"
-			],
-			[
-				"SOU",
-				"SOUND_PCM_WRITE_RATE\tabc"
-			],
-			[
-				"tune",
-				"tune_device_ok\tabc"
-			],
-			[
-				"tune_device_e",
-				"tune_device_exit\tabc"
-			],
-			[
-				"fo",
-				"fourth_param\tabc"
-			],
-			[
-				"size",
-				"size\tabc"
-			],
-			[
-				"thi",
-				"third_param\tabc"
-			],
-			[
-				"De",
-				"Destroying\t(test2.s)"
-			],
-			[
-				"SDL_",
-				"SDL_INIT_EVERYTHING"
-			],
-			[
-				"rdi",
-				"rdi"
-			],
-			[
-				"SDL",
-				"SDL_init_all\tabc"
-			],
-			[
-				"seco",
-				"second_var\tabc"
-			],
-			[
-				"pri",
-				"print_file_info_cont\tabc"
-			],
-			[
-				"minu",
-				"minute_var\tabc"
-			],
-			[
-				"mu",
-				"minute_var\tabc"
-			],
-			[
-				"fr",
-				"frndint\tabc"
-			],
-			[
-				"fil",
-				"fild\tabc"
-			],
-			[
-				"l",
-				"lputchar\tabc"
-			],
-			[
-				"pro",
-				"prog_bar\tabc"
-			],
-			[
-				"sie",
-				"sizeof_buf\tabc"
-			],
-			[
-				"pla",
-				"play_loop\tabc"
-			],
-			[
-				"si",
-				"sizeof_buf\tabc"
-			],
-			[
-				"info",
-				"info_byte\tabc"
-			],
-			[
-				"len_in",
-				"len_info_byte\tabc"
-			],
-			[
-				"inf",
-				"info_byte\tabc"
-			],
-			[
-				"pr",
-				"proper_size\tabc"
-			],
-			[
-				"proper_size_gib",
-				"proper_size_gib_ok\tabc"
-			],
-			[
-				"prope",
-				"proper_size_mib\tabc"
-			],
-			[
-				"lst",
-				"lstrlen_exit\tabc"
-			],
-			[
-				"lsr",
-				"lstrlen\tabc"
-			],
-			[
-				"ans",
-				"answer1\tabc"
-			],
-			[
-				"len_ans",
-				"len_answer2\tabc"
-			],
-			[
-				"gre",
-				"greater_than\tabc"
-			],
-			[
-				"buff",
-				"buffer1\tabc"
-			],
-			[
-				"len_p",
-				"len_output1\tabc"
-			],
-			[
-				"delete_",
-				"delete_success\tabc"
-			],
-			[
-				"che",
-				"checking_integrity"
-			],
-			[
-				"check",
-				"checking_fix\tabc"
-			],
-			[
-				"len_che",
-				"len_checking_fix\tabc"
-			],
-			[
-				"fix",
-				"fix_last_id\tabc"
-			],
-			[
-				"chef",
-				"checking_fail\tabc"
-			],
-			[
-				"len_chec",
-				"len_checking_fail\tabc"
-			],
-			[
-				"checking",
-				"checking_integrity\tabc"
-			],
-			[
-				"chec",
-				"checking_integrity\tabc"
-			],
-			[
-				"checki",
-				"checking_ok\tabc"
-			],
-			[
-				"checkin",
-				"checking_check\tabc"
-			],
-			[
-				"SEEK",
-				"SEEK_END\t(constants.s)"
-			],
-			[
-				"va",
-				"variables\tabc"
-			],
-			[
-				"curr",
-				"curr_id\tabc"
-			],
-			[
-				"as",
-				"asciz"
-			],
-			[
-				"Check",
-				"checking_integrity"
-			],
-			[
-				"le",
-				"length\tabc"
-			],
-			[
-				"al",
-				"al"
-			],
-			[
-				"PROT",
-				"PROT_RDWR\t(constants.s)"
-			],
-			[
-				"check_num",
-				"check_number\tabc"
-			],
-			[
-				"NAME",
-				"NAME_SIZE\t(constants.s)"
-			],
-			[
-				"lstr",
-				"lstrlen\t(routines.s)"
-			],
-			[
-				"sho",
-				"show_recs_loop\tabc"
-			],
-			[
-				"show",
-				"show_recs_continue\tabc"
-			],
-			[
-				"edit_record_re",
-				"edit_records_read_do_while_1"
-			],
-			[
-				"add_records_read_do_while_1_e",
-				"add_records_read_do_while_1_err\tabc"
-			],
-			[
-				"add",
-				"add_records_read_do_while_1\tabc"
-			],
-			[
-				"R",
-				"Restoring\tabc"
-			],
-			[
-				"dele",
-				"delete_more_records\tabc"
-			],
-			[
-				"delete",
-				"delete_record\tabc"
-			],
-			[
-				"cur",
-				"curr_mfile_pos\tabc"
-			],
-			[
-				"edit",
-				"edit_record\t(db.s)"
-			],
-			[
-				"edit_recor",
-				"edit_record\tabc"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "home/shtukensia/Makefile",
+			"file": "lab/lab_NET/lab_10/server.s",
 			"settings":
 			{
-				"buffer_size": 250,
+				"buffer_size": 19087,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "home/shtukensia/main.s",
+			"file": "lab/lab_NET/lab_10/constants.s",
 			"settings":
 			{
-				"buffer_size": 1280,
+				"buffer_size": 1218,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "lab/lab_NET/lab_10/routines.s",
+			"settings":
+			{
+				"buffer_size": 13601,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "lab/lab_NET/lab_10/Makefile",
+			"settings":
+			{
+				"buffer_size": 508,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -691,11 +709,17 @@
 	"expanded_folders":
 	[
 		"/home/anton/ASM",
-		"/home/anton/ASM/home",
-		"/home/anton/ASM/home/shtukensia"
+		"/home/anton/ASM/lab",
+		"/home/anton/ASM/lab/lab_NET",
+		"/home/anton/ASM/lab/lab_NET/lab_10"
 	],
 	"file_history":
 	[
+		"/home/anton/ASM/lab/RGR/constants.s",
+		"/home/anton/ASM/lab/lab_NET/lab_10/client.s",
+		"/home/anton/ASM/lab/lab_NET/lab_10",
+		"/home/anton/ASM/home/shtukensia/Makefile",
+		"/home/anton/ASM/home/shtukensia/main.s",
 		"/home/anton/ASM/home/shtukennsia",
 		"/home/anton/ASM/experiments/graphics/boot.s",
 		"/home/anton/ASM/experiments/graphics/Makefile",
@@ -744,7 +768,6 @@
 		"/home/anton/ASM/training/string/main.s",
 		"/home/anton/ASM/training/string/Makefile",
 		"/home/anton/ASM/lab/RGR/Makefile",
-		"/home/anton/ASM/lab/RGR/constants.s",
 		"/home/anton/ASM/lab/RGR/test1.dat",
 		"/home/anton/ASM/lab/RGR/test3.dat",
 		"/home/anton/ASM/lab/RGR/test.c",
@@ -819,15 +842,11 @@
 		"/home/anton/ASM/lab/lab_C/lab_03/ac.s",
 		"/home/anton/ASM/lab/lab_C/lab_03/ad.s",
 		"/home/anton/ASM/lab/lab_C/lab_03/ae.s",
-		"/home/anton/C/experiments/asm/c5.c",
-		"/home/anton/C/experiments/asm/asm5.asm",
-		"/home/anton/C/experiments/asm/asm6.asm",
-		"/home/anton/C/experiments/asm/c1.c",
-		"/home/anton/C/experiments/asm/asm1.asm"
+		"/home/anton/C/experiments/asm/c5.c"
 	],
 	"find":
 	{
-		"height": 26.0
+		"height": 32.0
 	},
 	"find_in_files":
 	{
@@ -966,24 +985,110 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "home/shtukensia/Makefile",
+					"file": "lab/lab_NET/lab_10/server.s",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 250,
+						"buffer_size": 19087,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								118,
-								118
+								1767,
+								1767
+							]
+						],
+						"settings":
+						{
+							"open_with_edit": true,
+							"syntax": "Packages/GAS-x86 (or x64) highlighting scheme/Assembly x86 AT&T.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 345.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "lab/lab_NET/lab_10/constants.s",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1218,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								27,
+								27
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/GAS-x86 (or x64) highlighting scheme/Assembly x86 AT&T.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "lab/lab_NET/lab_10/routines.s",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 13601,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4,
+								4
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/GAS-x86 (or x64) highlighting scheme/Assembly x86 AT&T.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "lab/lab_NET/lab_10/Makefile",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 508,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								137,
+								137
 							]
 						],
 						"settings":
@@ -995,36 +1100,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "home/shtukensia/main.s",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1280,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1012,
-								1012
-							]
-						],
-						"settings":
-						{
-							"open_with_edit": true,
-							"syntax": "Packages/GAS-x86 (or x64) highlighting scheme/Assembly x86 AT&T.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 612.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
+					"stack_index": 3,
 					"type": "text"
 				}
 			]
@@ -1032,7 +1108,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 26.0
+		"height": 32.0
 	},
 	"input":
 	{
@@ -1077,7 +1153,7 @@
 	"project": "asm.sublime-project",
 	"replace":
 	{
-		"height": 48.0
+		"height": 60.0
 	},
 	"save_all_on_build": true,
 	"select_file":

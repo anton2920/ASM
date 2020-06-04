@@ -96,8 +96,33 @@ creat:
 	pushl second_arg(%ebp)
 	pushl %eax
 	pushl first_arg(%ebp)
-	call open
+	calll open
 	addl $0xC, %esp
+
+	# Destroying function's stack frame
+	movl %ebp, %esp
+	popl %ebp
+	retl
+
+.globl mkdir
+.equ SYS_MKDIR, 39
+.type mkdir, @function
+mkdir:
+	# Initializing function's stack frame
+	pushl %ebp
+	movl %esp, %ebp
+
+	# Saving registers
+	pushl %ebx
+
+	# Main part
+	movl $SYS_MKDIR, %eax
+	movl first_arg(%ebp), %ebx
+	movl second_arg(%ebp), %ecx
+	int $0x80 # 0x80's interrupt
+
+	# Restoring registers
+	popl %ebx
 
 	# Destroying function's stack frame
 	movl %ebp, %esp
@@ -445,7 +470,6 @@ numlen_loop_end:
 	popl %ebp
 	retl
 
-
 .globl lstrncpy
 .type lstrncpy, @function
 lstrncpy:
@@ -718,3 +742,123 @@ setsockopt:
 	movl %ebp, %esp
 	popl %ebp
 	retl
+
+.globl signal
+.equ SYS_SIGNAL, 48
+.type signal, @function
+signal:
+	# Initializing function's stack frame
+	pushl %ebp
+	movl %esp, %ebp
+
+	# Saving registers
+	pushl %ebx
+
+	# Syscall
+	movl $SYS_SIGNAL, %eax
+	movl first_arg(%ebp), %ebx
+	movl second_arg(%ebp), %ecx
+	int $0x80 # 0x80's interrupt
+
+	# Restoring registers
+	popl %ebx
+
+	# Destroying function's stack frame
+	movl %ebp, %esp
+	popl %ebp
+	retl
+
+.globl fork
+.equ SYS_FORK, 2
+.type fork, @function
+fork:
+	# Initializing function's stack frame
+	pushl %ebp
+	movl %esp, %ebp
+
+	# Syscall
+	movl $SYS_FORK, %eax
+	int $0x80 # 0x80's interrupt
+
+	# Destroying function's stack frame
+	movl %ebp, %esp
+	popl %ebp
+	retl
+
+.globl exit
+.equ SYS_EXIT, 1
+.type exit, @function
+exit:
+	# Initializing function's stack frame
+	pushl %ebp
+	movl %esp, %ebp
+
+	# Syscall
+	movl $SYS_EXIT, %eax
+	movl first_arg(%ebp), %ebx
+	int $0x80 # 0x80's interrupt
+
+.globl setsid
+.equ SYS_SETSID, 66
+.type setsid, @function
+setsid:
+	# Initializing function's stack frame
+	pushl %ebp
+	movl %esp, %ebp
+
+	# Syscall
+	movl $SYS_SETSID, %eax
+	int $0x80 # 0x80's interrupt
+
+	# Destroying function's stack frame
+	movl %ebp, %esp
+	popl %ebp
+	retl
+
+.globl umask
+.equ SYS_UMASK, 60
+.type umask, @function
+umask:
+	# Initializing function's stack frame
+	pushl %ebp
+	movl %esp, %ebp
+
+	# Saving registers
+	pushl %ebx
+
+	# Syscall
+	movl $SYS_UMASK, %eax
+	movl first_arg(%ebp), %ebx
+	int $0x80 # 0x80's interrupt
+
+	# Restoring registers
+	popl %ebx
+
+	# Destroying function's stack frame
+	movl %ebp, %esp
+	popl %ebp
+	retl
+
+.globl chdir
+.equ SYS_CHDIR, 12
+.type chdir, @function
+chdir:
+	# Initializing function's stack frame
+	pushl %ebp
+	movl %esp, %ebp
+
+	# Saving registers
+	pushl %ebx
+
+	# Syscall
+	movl $SYS_CHDIR, %eax
+	movl first_arg(%ebp), %ebx
+	int $0x80 # 0x80's interrupt
+
+	# Restoring registers
+	popl %ebx
+
+	# Destroying function's stack frame
+	movl %ebp, %esp
+	popl %ebp
+	retl	

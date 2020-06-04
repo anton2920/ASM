@@ -1,5 +1,5 @@
 # For constants definitions
-.equ STD_PERMS, 0666
+.equ STD_PERMS, 0755
 .equ O_RDONLY, 0
 .equ O_RDWR, 2
 
@@ -53,3 +53,13 @@
 # setsockopt(2) arguments
 .equ SOL_SOCKET, 1
 .equ SO_REUSEADDR, 2
+
+# exit(2) arguments
+.equ EXIT_SUCCESS, 0
+.equ EXIT_FAILURE, 1
+
+# signal(2) arguments
+.equ SIG_IGN, 1
+.equ SIGPIPE, 0xD
+.equ SIGCHLD, 0x11
+.equ SIGHUP, 0x1
