@@ -1,4 +1,6 @@
 # For constants definitions
+.equ LIBC, 0x1
+
 .equ STD_PERMS, 0755
 .equ O_RDONLY, 0
 .equ O_RDWR, 2
@@ -63,3 +65,12 @@
 .equ SIGPIPE, 0xD
 .equ SIGCHLD, 0x11
 .equ SIGHUP, 0x1
+
+.if LIBC == 1
+# openlog(3) arguments
+.equ LOG_PID, 0x1
+.equ LOG_DAEMON, 3 << 3
+
+# syslog(3) arguments
+.equ LOG_ERR, 0x3
+.endif

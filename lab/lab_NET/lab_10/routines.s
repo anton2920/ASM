@@ -93,6 +93,7 @@ creat:
 	movl $0x241, %eax
 
 	# Main part
+	andl $0666, second_arg(%ebp)
 	pushl second_arg(%ebp)
 	pushl %eax
 	pushl first_arg(%ebp)

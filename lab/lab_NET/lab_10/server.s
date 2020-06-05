@@ -30,10 +30,10 @@ error_write:
 .equ len_error_write, . - error_write
 
 entry_message:
-	.asciz "┌─────────────────────────────────────────────────────────────┐\n"
-	.asciz "│ <=== Welcome to the Tushino Datacenter Advanced Server ===> │\n"
-	.asciz "├─────────────────────────────────────────────────────────────┤\n"
-	.asciz "│ Type \"help\" to list all commands                            │\n"
+	.ascii "┌─────────────────────────────────────────────────────────────┐\n"
+	.ascii "│ <=== Welcome to the Tushino Datacenter Advanced Server ===> │\n"
+	.ascii "├─────────────────────────────────────────────────────────────┤\n"
+	.ascii "│ Type \"help\" to list all commands                            │\n"
 	.asciz "└─────────────────────────────────────────────────────────────┘\n\n"
 .equ len_entry_message, . - entry_message
 
@@ -46,24 +46,24 @@ command_help:
 .equ len_command_help, . - command_help
 
 command_help_result:
-	.asciz "┌───────────┬───────────────────────────────────────────────┐\n"
-	.asciz "│  Command  │                  Description                  │\n"
-	.asciz "├───────────┼───────────────────────────────────────────────┤\n"
-	.asciz "│ creat     │ Creates files with a given names              │\n"
-	.asciz "├───────────┼───────────────────────────────────────────────┤\n"
-	.asciz "│ info      │ Prints information about creator              │\n"
-	.asciz "├───────────┼───────────────────────────────────────────────┤\n"
-	.asciz "│ help      │ Prints detailed info about existing commands  │\n"
-	.asciz "├───────────┼───────────────────────────────────────────────┤\n"
-	.asciz "│ mkdir     │ Creates directories with a given names        │\n"
-	.asciz "├───────────┼───────────────────────────────────────────────┤\n"
-	.asciz "│ shutdown  │ Shuts the server down                         │\n"
-	.asciz "├───────────┼───────────────────────────────────────────────┤\n"
-	.asciz "│ task      │ Prints information about server's destiny     │\n"
-	.asciz "├───────────┼───────────────────────────────────────────────┤\n"
-	.asciz "│ time      │ Prints server local time                      │\n"
-	.asciz "├───────────┼───────────────────────────────────────────────┤\n"
-	.asciz "│ quit      │ Closes connection with server                 │\n"
+	.ascii "┌───────────┬───────────────────────────────────────────────┐\n"
+	.ascii "│  Command  │                  Description                  │\n"
+	.ascii "├───────────┼───────────────────────────────────────────────┤\n"
+	.ascii "│ creat     │ Creates files with a given names              │\n"
+	.ascii "├───────────┼───────────────────────────────────────────────┤\n"
+	.ascii "│ info      │ Prints information about creator              │\n"
+	.ascii "├───────────┼───────────────────────────────────────────────┤\n"
+	.ascii "│ help      │ Prints detailed info about existing commands  │\n"
+	.ascii "├───────────┼───────────────────────────────────────────────┤\n"
+	.ascii "│ mkdir     │ Creates directories with a given names        │\n"
+	.ascii "├───────────┼───────────────────────────────────────────────┤\n"
+	.ascii "│ shutdown  │ Shuts the server down                         │\n"
+	.ascii "├───────────┼───────────────────────────────────────────────┤\n"
+	.ascii "│ task      │ Prints information about server's destiny     │\n"
+	.ascii "├───────────┼───────────────────────────────────────────────┤\n"
+	.ascii "│ time      │ Prints server local time                      │\n"
+	.ascii "├───────────┼───────────────────────────────────────────────┤\n"
+	.ascii "│ quit      │ Closes connection with server                 │\n"
 	.asciz "└───────────┴───────────────────────────────────────────────┘\n"
 .equ len_command_help_result, . - command_help_result
 
@@ -84,14 +84,14 @@ command_task:
 .equ len_command_task, . - command_task
 
 command_task_result:
-	.asciz "┌──────────────────────────────────────────────────────────┐\n"
-	.asciz "│                         Task #15                         │\n"
-	.asciz "├──────────────────────────────────────────────────────────┤\n"
-	.asciz "│ Add to the server's services support for an additional   │\n"
-	.asciz "│ command for creating a file on the server                │\n"
-	.asciz "├──────────────────────────────────────────────────────────┤\n"
-	.asciz "│ - Input  parameters: names of files                      │\n"
-	.asciz "│ - Server's response: command's status                    │\n"
+	.ascii "┌──────────────────────────────────────────────────────────┐\n"
+	.ascii "│                         Task #15                         │\n"
+	.ascii "├──────────────────────────────────────────────────────────┤\n"
+	.ascii "│ Add to the server's services support for an additional   │\n"
+	.ascii "│ command for creating a file on the server                │\n"
+	.ascii "├──────────────────────────────────────────────────────────┤\n"
+	.ascii "│ - Input  parameters: names of files                      │\n"
+	.ascii "│ - Server's response: command's status                    │\n"
 	.asciz "└──────────────────────────────────────────────────────────┘\n"
 .equ len_command_task_result, . - command_task_result
 
@@ -110,6 +110,14 @@ command_mkdir:
 command_mkdir_result:
 	.asciz "Creating directories... \n\n"
 .equ len_command_mkdir_result, . - command_mkdir_result
+
+creat_success:
+	.asciz "Success"
+.equ len_creat_success, . - creat_success
+
+creat_failed:
+	.asciz "Failed"
+.equ len_creat_failed, . - creat_failed
 
 command_quit:
 	.asciz "quit"
@@ -142,6 +150,10 @@ line_feed:
 slash:
 	.asciz "/"
 
+tserver_log:
+	.asciz "tserver: "
+.equ len_tserver_log, . - tserver_log
+
 .section .data
 var_n:
 	.long 0
@@ -169,9 +181,18 @@ command_time_result:
 .globl _start
 _start:
 	# Daemonize!
+	.equ RUN_AS_DAEMON, 0x1
+
+.if RUN_AS_DAEMON == 0x1
 	calll make_us_daemon
 	testl %eax, %eax
 	js start_exit
+.endif
+
+.if RUN_AS_DAEMON == 0x1 && LIBC == 0x1
+	.equ ENABLE_LOGGING, 0x1
+	.equ LOGGING_OFFSET, 0x8
+.endif
 
 	# Initializing stack frame
 	movl %esp, %ebp
@@ -185,11 +206,19 @@ _start:
 	cmpl $0x2, (%ebp)
 	je start_check_ok
 
+.if ENABLE_LOGGING == 0x1
+	leal error_no_port + LOGGING_OFFSET, %eax
+	pushl %eax
+	pushl $LOG_ERR
+	calll syslog
+	addl $0x8, %esp
+.else
 	pushl $len_error_no_port
 	pushl $error_no_port
 	pushl $STDERR
 	calll write
 	addl $0xC, %esp
+.endif
 
 	jmp start_exit
 
@@ -207,11 +236,19 @@ start_check_ok:
 	cmpl $0xFFFF, %eax
 	jle port_check_ok
 
+.if ENABLE_LOGGING == 0x1
+	leal error_port_out + LOGGING_OFFSET, %eax
+	pushl %eax
+	pushl $LOG_ERR
+	calll syslog
+	addl $0x8, %esp
+.else
 	pushl $len_error_port_out
 	pushl $error_port_out
 	pushl $STDERR
 	calll write
 	addl $0xC, %esp
+.endif
 
 	jmp start_exit
 
@@ -228,11 +265,19 @@ port_check_ok:
 	cmpl $0x0, %eax
 	jge socket_check_ok
 
+.if ENABLE_LOGGING == 0x1
+	leal error_socket + LOGGING_OFFSET, %eax
+	pushl %eax
+	pushl $LOG_ERR
+	calll syslog
+	addl $0x8, %esp
+.else
 	pushl $len_error_socket
 	pushl $error_socket
 	pushl $STDERR
 	calll write
 	addl $0xC, %esp
+.endif
 
 	jmp start_exit
 
@@ -257,11 +302,19 @@ socket_check_ok:
 	cmpl $0x0, %eax
 	jge bind_check_ok
 
+.if ENABLE_LOGGING == 0x1
+	leal error_bind + LOGGING_OFFSET, %eax
+	pushl %eax
+	pushl $LOG_ERR
+	calll syslog
+	addl $0x8, %esp
+.else
 	pushl $len_error_bind
 	pushl $error_bind
 	pushl $STDERR
 	calll write
 	addl $0xC, %esp
+.endif
 
 	jmp start_exit
 
@@ -285,11 +338,19 @@ while_not_shutdown:
 	cmpl $0x0, %eax
 	jge accept_check_ok
 
+.if ENABLE_LOGGING == 0x1
+	leal error_accept + LOGGING_OFFSET, %eax
+	pushl %eax
+	pushl $LOG_ERR
+	calll syslog
+	addl $0x8, %esp
+.else
 	pushl $len_error_accept
 	pushl $error_accept
 	pushl $STDERR
 	calll write
 	addl $0xC, %esp
+.endif
 
 	jmp start_exit
 
@@ -304,6 +365,20 @@ accept_check_ok:
 
 	cmpl $0x0, %eax
 	jge write_entry_check_ok
+
+.if ENABLE_LOGGING == 0x1
+	leal error_write + LOGGING_OFFSET, %eax
+	pushl %eax
+	pushl $LOG_ERR
+	calll syslog
+	addl $0x8, %esp
+.else
+	pushl $len_error_write
+	pushl $error_write
+	pushl $STDERR
+	calll write
+	addl $0xC, %esp
+.endif
 
 	pushl $len_error_write
 	pushl $error_write
@@ -347,6 +422,8 @@ performator:
 
 	# Main part
 while_true:
+	movl $0x0, was_caught
+
 	pushl $len_prompt
 	pushl $prompt
 	pushl first_arg(%ebp)
@@ -517,7 +594,7 @@ creat_check_fail:
 
 error_with_commands:
 	cmpl $0x0, was_caught
-	jne was_not_caught
+	je was_not_caught
 
 	movl $CAUGHT_COMMAND, %eax
 	jmp while_true_end
@@ -571,6 +648,64 @@ closesocket:
 	popl %ebp
 	retl
 
+.if LIBC == 0x1
+.section .data
+time_string:
+	.asciz "Server time is %s"
+
+.section .bss
+.lcomm time_buf, 50
+
+.section .text
+.type print_time, @function
+print_time:
+	# Initializing function's stack frame
+	pushl %ebp
+	movl %esp, %ebp
+	subl $0x8, %esp # Acquiring space for two variables
+	.equ rawtime, -sizeof_int			# auto time_t (0x4 bytes)
+	.equ timeinfo, rawtime - sizeof_int	# auto struct tm * (0x4 bytes)
+
+	# Main part
+	pushl $0x0
+	calll time
+	addl $0x4, %esp
+
+	movl %eax, rawtime(%ebp)
+
+	leal rawtime(%ebp), %eax
+	pushl %eax
+	calll localtime
+	addl $0x4, %esp
+
+	movl %eax, timeinfo(%ebp)
+
+	pushl %eax
+	calll asctime
+	addl $0x4, %esp
+
+	pushl %eax
+	pushl $time_string
+	pushl $time_buf
+	calll sprintf
+	addl $0xC, %esp
+
+	pushl $time_buf
+	calll lstrlen
+	addl $0x4, %esp
+
+	pushl %eax
+	pushl $time_buf
+	pushl first_arg(%ebp)
+	calll write
+	addl $0xC, %esp
+
+	# Destroying function's stack frame
+	movl %ebp, %esp
+	popl %ebp
+	retl
+
+.else
 .type print_time, @function
 .equ SYS_TIME, 13
 .equ SECS_PER_HOUR, 60 * 60
@@ -713,11 +848,14 @@ itoa_while_end:
 	movl %ebp, %esp
 	popl %ebp
 	retl
+.endif
 
 .type sigpipe_handle, @function
 sigpipe_handle:
 	# Main part
 	movl $0x1, was_caught
+
+	retl
 
 .type make_us_daemon, @function
 .equ DAEMON_FAIL, -1
@@ -784,6 +922,14 @@ make_us_daemon_fork_ok_2:
 	calll close
 	addl $0x4, %esp
 
+.if ENABLE_LOGGING == 0x1
+	pushl $LOG_DAEMON
+	pushl $LOG_PID
+	pushl $tserver_log
+	calll openlog
+	addl $0xC, %esp
+.endif
+
 	xorl %eax, %eax
 
 	jmp make_us_daemon_exit
@@ -802,8 +948,6 @@ proceed_creat:
 	# Initializing function's stack frame
 	pushl %ebp
 	movl %esp, %ebp
-	# subl $0x4, %esp # Acquiring space for one variable
-	# .equ word_len, -sizeof_int	# auto int (0x4 bytes)
 
 	# Initializing variables
 	leal buffer + 0x6, %edx
@@ -877,10 +1021,7 @@ proceed_creat_while_creat_ok:
 	calll write
 	addl $0xC, %esp
 
-	# libc required
-	# calll __errno_location
-
-	# pushl (%eax)
+.if LIBC == 1
 	pushl error_code
 	calll strerror
 	addl $0x4, %esp
@@ -900,6 +1041,27 @@ proceed_creat_while_creat_ok:
 	pushl first_arg(%ebp)
 	calll write
 	addl $0xC, %esp
+.else
+	cmpl $0x0, error_code
+	je proceed_creat_while_no_error
+
+	pushl $len_creat_failed
+	pushl $creat_failed
+	pushl first_arg(%ebp)
+	calll write
+	addl $0xC, %esp
+
+	jmp proceed_creat_while_continue
+
+proceed_creat_while_no_error:
+	pushl $len_creat_success
+	pushl $creat_success
+	pushl first_arg(%ebp)
+	calll write
+	addl $0xC, %esp
+
+proceed_creat_while_continue:
+.endif
 
 	pushl $len_line_feed
 	pushl $line_feed
