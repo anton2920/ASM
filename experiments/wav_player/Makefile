@@ -2,12 +2,12 @@
 asm = as
 ASFLAGS = --32
 link = ld
-# LDFLAGS = -m elf_i386 -dynamic-linker /lib32/ld-linux.so.2 -lc
+LDFLAGS = -m elf_i386 -dynamic-linker /lib32/ld-linux.so.2 -lc -lasound
 DEBUG = -g
 
 # Main part
 all: main.o routines.o print_info.o
-	$(link) main.o routines.o print_info.o -o wavp $(DEBUG) -m elf_i386 # $(LDFLAGS)
+	$(link) main.o routines.o print_info.o -o wavp $(DEBUG) -m elf_i386 $(LDFLAGS)
 
 main.o: main.s
 	$(asm) main.s -o main.o $(DEBUG) $(ASFLAGS)

@@ -1,1 +1,5 @@
 /**/*.o
+.idea
+asm.sublime-project
+asm.sublime-workspace
+
