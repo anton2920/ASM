@@ -15,8 +15,15 @@ boot.o: boot.s
 dump: boot.bin
 	hexdump boot.bin
 
-qemu: boot.bin
-	qemu-system-x86_64 boot.bin
+objdump: boot.bin
+	objdump -D boot.bin
+
+run: boot.bin
+	killall qemu-kvm || exit 0
+	/usr/libexec/qemu-kvm boot.bin &
+	sleep 0.1
+	vncviewer localhost:5900
+	killall qemu-kvm || exit 0
 
 burn: boot.bin
 	./burn.sh
