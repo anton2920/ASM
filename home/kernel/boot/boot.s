@@ -22,7 +22,7 @@ _start_print_loop_end:
 
 # .section .rodata
 hello_str:
-	.asciz "Hello, world!\n"
+	.asciz "Hello, world!\r\n"
 
 # Zero padding
 .org 510
