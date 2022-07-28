@@ -1,31 +1,33 @@
-# Initializing variables
+FNAME = boot
+TXTSTART = 0x7c00
+
 ASM = as
 ASMFLAGS = --32
 LINK = ld
-LDFLAGS = -melf_i386 --oformat=binary -e _start -Ttext 0x7c00
+LDFLAGS = -melf_i386 --oformat=binary -e _start -Ttext $(TXTSTART)
 
-main: boot.bin
+main: $(FNAME).bin
 
-boot.bin: boot.o
-	$(LINK) $(LDFLAGS) -o boot.bin boot.o
+$(FNAME).bin: $(FNAME).o
+	$(LINK) $(LDFLAGS) -o $(FNAME).bin $(FNAME).o
 
-boot.o: boot.s
-	$(ASM) $(ASMFLAGS) -o boot.o boot.s
+$(FNAME).o: $(FNAME).s
+	$(ASM) $(ASMFLAGS) -o $(FNAME).o $(FNAME).s
 
-dump: boot.bin
-	hexdump boot.bin
+dump: $(FNAME).bin
+	hexdump $(FNAME).bin
 
-objdump: boot.bin
-	objdump -D boot.bin
+objdump: $(FNAME).bin
+	objdump -b binary --adjust-vma=$(TXTSTART) -D -m i386 $(FNAME).bin
 
-run: boot.bin
+run: $(FNAME).bin
 	killall qemu-kvm || exit 0
-	/usr/libexec/qemu-kvm boot.bin &
+	/usr/libexec/qemu-kvm $(FNAME).bin &
 	sleep 0.1
 	vncviewer localhost:5900
 	killall qemu-kvm || exit 0
 
-burn: boot.bin
+burn: $(FNAME).bin
 	./burn.sh
 
 clean:
