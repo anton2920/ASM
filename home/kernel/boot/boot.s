@@ -3,26 +3,41 @@
 .section .text
 .globl _start
 _start:
-	# Writing characters
-	movb $0xE, %ah # Teletype write to active page
-	leaw hello_str, %si # String buffer for 'lods'
-	cld
+	# Initialising stack frame
+	movw %sp, %bp
 
-_start_print_loop:
-	lodsb
-	testb %al, %al
-	jz _start_print_loop_end
+	# Main part
+	pushw $hello_str
+	callw prints
+	addw $0x2, %sp
 
-	int $0x10
+	pushw $0x1234
+	callw printw
+	addw $0x2, %sp
 
-	jmp _start_print_loop
+	pushw $newline_str
+	callw prints
+	addw $0x2, %sp
 
-_start_print_loop_end:
+	pushw $0xA
+	callw printw
+	addw $0x2, %sp
+
+	pushw $newline_str
+	callw prints
+	addw $0x2, %sp
+
+	# Exitting
 	hlt
+
+.include "ioroutines.s"
 
 # .section .rodata
 hello_str:
 	.asciz "Hello, world!\r\n"
+
+newline_str:
+	.asciz "\r\n"
 
 # Zero padding
 .org 510

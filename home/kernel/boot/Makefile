@@ -11,7 +11,7 @@ main: $(FNAME).bin
 $(FNAME).bin: $(FNAME).o
 	$(LINK) $(LDFLAGS) -o $(FNAME).bin $(FNAME).o
 
-$(FNAME).o: $(FNAME).s
+$(FNAME).o: $(FNAME).s ioroutines.s
 	$(ASM) $(ASMFLAGS) -o $(FNAME).o $(FNAME).s
 
 dump: $(FNAME).bin
