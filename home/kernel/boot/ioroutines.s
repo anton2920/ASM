@@ -18,46 +18,75 @@ prints_loop_end:
 
 # void printw(short);
 printw:
+	leaw printw_out_str, %si
+	movw $printw_out_str_len - 2, %dx
+	callw printw_generic
+	retw
+
+# void printwln(short);
+printwln:
+	leaw printwln_out_str, %si
+	movw $printwln_out_str_len - 4, %dx
+	callw printw_generic
+	retw
+
+# static void printw_generic(short, char *, short)
+printw_generic:
+	pushw %bp
+	movw %sp, %bp
+
+	pushw %bx
+
+	movw %dx, %bx
 	movw %di, %dx
-	leaw printw_out_str + printw_out_str_len - 2, %di
+
+	leaw (%bx, %si), %di
 	std
 
-	movb $'0', printw_out_str + 2
-	movb $'0', printw_out_str + 3
-	movb $'0', printw_out_str + 4
-	movb $'0', printw_out_str + 5
+	movb $'0', 2(%si)
+	movb $'0', 3(%si)
+	movb $'0', 4(%si)
+	movb $'0', 5(%si)
 
-printw_loop:
+printw_generic_loop:
 	testw %dx, %dx
-	jz printw_loop_end
+	jz printw_generic_loop_end
 
 	movw %dx, %ax
 	andw $0xF, %ax
 
 	cmpb $0xA, %al
-	jb printw_if_else
+	jb printw_generic_if_else
 
 	subb $0xA, %al
 	addb $'A', %al
 
-	jmp printw_if_fi
+	jmp printw_generic_if_fi
 
-printw_if_else:
+printw_generic_if_else:
 	addb $'0', %al
 
-printw_if_fi:
+printw_generic_if_fi:
 	stosb
 
 	shrw $0x4, %dx
-	jmp printw_loop
+	jmp printw_generic_loop
 
-printw_loop_end:
-	leaw printw_out_str, %di
+printw_generic_loop_end:
+	movw %si, %di
 	callw prints
 
+	popw %bx
+
+	movw %bp, %sp
+	popw %bp
 	retw
 
 # .section .data
 printw_out_str:
 	.asciz "0x0000"
 	.equ printw_out_str_len, . - printw_out_str
+
+printwln_out_str:
+	.asciz "0x0000\r\n"
+	.equ printwln_out_str_len, . - printwln_out_str
