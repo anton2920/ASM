@@ -3,32 +3,23 @@
 .section .text
 .globl _start
 _start:
-	# Initialising stack frame
-	movw %sp, %bp
-
-	# Main part
-	pushw $hello_str
+	leaw hello_str, %di
 	callw prints
-	addw $0x2, %sp
 
-	pushw $0x1234
+	movw $0x1234, %di
 	callw printw
-	addw $0x2, %sp
 
-	pushw $newline_str
+	leaw newline_str, %di
 	callw prints
-	addw $0x2, %sp
 
-	pushw $0xA
+	movw $0xA, %di
 	callw printw
-	addw $0x2, %sp
 
-	pushw $newline_str
+	leaw newline_str, %di
 	callw prints
-	addw $0x2, %sp
 
 	# Exitting
-	hlt
+	jmp .
 
 .include "ioroutines.s"
 

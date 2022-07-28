@@ -1,11 +1,7 @@
+# void prints(const char *);
 prints:
-	# Initializing function's stack frame
-	pushw %bp
-	movw %sp, %bp
-
-	# Initializing variables
 	movb $0xE, %ah # Teletype write to active page
-	movw 4(%bp), %si
+	movw %di, %si
 	cld
 
 prints_loop:
@@ -18,24 +14,18 @@ prints_loop:
 	jmp prints_loop
 
 prints_loop_end:
-	movw %bp, %sp
-	popw %bp
 	retw
 
+# void printw(short);
 printw:
-	# Initializing function's stack frame
-	pushw %bp
-	movw %sp, %bp
-
-	# Initializing variables
-	movw 4(%bp), %dx
-	leaw printw_out + printw_out_len - 2, %di
+	movw %di, %dx
+	leaw printw_out_str + printw_out_str_len - 2, %di
 	std
 
-	movb $'0', printw_out + 2
-	movb $'0', printw_out + 3
-	movb $'0', printw_out + 4
-	movb $'0', printw_out + 5
+	movb $'0', printw_out_str + 2
+	movb $'0', printw_out_str + 3
+	movb $'0', printw_out_str + 4
+	movb $'0', printw_out_str + 5
 
 printw_loop:
 	testw %dx, %dx
@@ -62,15 +52,12 @@ printw_if_fi:
 	jmp printw_loop
 
 printw_loop_end:
-	pushw $printw_out
+	leaw printw_out_str, %di
 	callw prints
-	# addw $0x2, %sp
 
-	movw %bp, %sp
-	popw %bp
 	retw
 
 # .section .data
-printw_out:
+printw_out_str:
 	.asciz "0x0000"
-	.equ printw_out_len, . - printw_out
+	.equ printw_out_str_len, . - printw_out_str
