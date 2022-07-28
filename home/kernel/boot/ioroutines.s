@@ -1,4 +1,8 @@
+.code16
+
 # void prints(const char *);
+.type prints, @function
+.globl prints
 prints:
 	movb $0xE, %ah # Teletype write to active page
 	movw %di, %si
@@ -17,6 +21,8 @@ prints_loop_end:
 	retw
 
 # void printw(short);
+.type printw, @function
+.globl printw
 printw:
 	leaw printw_out_str, %si
 	movw $printw_out_str_len - 2, %dx
@@ -24,6 +30,7 @@ printw:
 	retw
 
 # void printwln(short);
+.globl printwln
 printwln:
 	leaw printwln_out_str, %si
 	movw $printwln_out_str_len - 4, %dx
@@ -31,6 +38,7 @@ printwln:
 	retw
 
 # static void printw_generic(short, char *, short)
+.type printw_generic, @function
 printw_generic:
 	pushw %bp
 	movw %sp, %bp
@@ -90,3 +98,31 @@ printw_out_str:
 printwln_out_str:
 	.asciz "0x0000\r\n"
 	.equ printwln_out_str_len, . - printwln_out_str
+
+.code32
+.globl prints_s
+.type prints_s, @function
+.equ white_on_black, 0xF
+prints_s:
+	movl %edi, %esi
+
+prints_s_loop:
+	lodsb
+	testb %al, %al
+	jz prints_s_loop_end
+
+	movb $white_on_black, %ah
+
+	movl current_vga_offset, %edx
+	movw %ax, (%edx)
+	incl %edx
+	incl %edx
+	movl %edx, current_vga_offset
+
+	jmp prints_s_loop
+
+prints_s_loop_end:
+	retl
+
+current_vga_offset:
+	.long 0xB8516
