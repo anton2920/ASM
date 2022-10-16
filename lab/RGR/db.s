@@ -311,7 +311,7 @@ create_database_pass_ok:
 	cmpl $0x1, %eax
 	jne create_database_make_hash_sum
 
-	pushl $NO_PASS # 'buf' to further write
+	movl $NO_PASS, hash_sum(%ebp) # 'buf' to further write
 
 	jmp create_database_lookout
 
@@ -321,10 +321,10 @@ create_database_make_hash_sum:
 	addl $0x4, %esp
 
 	movl %eax, hash_sum(%ebp)
-	leal hash_sum(%ebp), %eax
-	pushl %eax # 'buf' to further write
 
 create_database_lookout:
+	leal hash_sum(%ebp), %eax
+	pushl %eax # 'buf'
 	pushl fd(%ebp)
 	calll write
 	addl $0xC, %esp
