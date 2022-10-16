@@ -1008,10 +1008,11 @@ fix_last_id:
 	addl $0xC, %esp
 
 	pushl $sizeof_int
-	pushl second_arg(%ebp)
+	leal second_arg(%ebp), %eax
+	pushl %eax
 	pushl first_arg(%ebp)
 	calll write
-	addl $0xC, %ebp
+	addl $0xC, %esp
 
 	# TODO: is this needed?
 	pushl first_arg(%ebp)
