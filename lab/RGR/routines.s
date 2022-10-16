@@ -545,10 +545,10 @@ turn_echo_do:
 	popl %ebp
 	retl
 
-.globl find_size
-.type find_size, @function
+.globl get_file_size
+.type get_file_size, @function
 .equ SYS_LLSEEK, 140
-find_size:
+get_file_size:
 	# Initializing function's stack frame
 	pushl %ebp
 	movl %esp, %ebp

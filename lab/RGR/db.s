@@ -549,7 +549,7 @@ show_recs:
 	pushl %ebp
 	movl %esp, %ebp
 	.equ struct_1, -STRUCT_SIZE
-	subl $STRUCT_SIZE, %esp # Acquiring space for struct group
+	subl $STRUCT_SIZE, %esp # Acquiring space for 'struct group'
 
 	# Saving registers
 	pushl %ebx
@@ -562,7 +562,7 @@ show_recs:
 	addl $0xC, %esp
 
 	pushl first_arg(%ebp)
-	calll find_size
+	calll get_file_size
 	addl $0x4, %esp
 
 	subl $HEADER_SIZE, %eax
@@ -1017,7 +1017,7 @@ fix_last_id:
 	
 	# Main part	
 	pushl first_arg(%ebp)
-	calll find_size
+	calll get_file_size
 	addl $0x4, %esp
 
 	movl %eax, file_size(%ebp)
@@ -1102,7 +1102,7 @@ edit_record:
 	
 	# Main part	
 	pushl first_arg(%ebp)
-	calll find_size
+	calll get_file_size
 	addl $0x4, %esp
 
 	movl %eax, file_size(%ebp)
@@ -1424,7 +1424,7 @@ delete_record:
 	
 	# Main part	
 	pushl first_arg(%ebp)
-	calll find_size
+	calll get_file_size
 	addl $0x4, %esp
 
 	movl %eax, file_size(%ebp)
