@@ -97,27 +97,30 @@ open:
     popl %ebp
     retl
 
-.globl creat
-.type creat, @function
-creat:
-	# Initializing function's stack frame
-	pushl %ebp
-	movl %esp, %ebp
+.globl access
+.type access, @function
+.equ SYS_ACCESS, 33
+access:
+    # Initializing function's stack frame
+    pushl %ebp
+    movl %esp, %ebp
 
-	# Initializing variables
-	movl $0x241, %eax
+    # Saving registers
+    pushl %ebx
 
-	# Main part
-	pushl second_arg(%ebp)
-	pushl %eax
-	pushl first_arg(%ebp)
-	call open
-	addl $0xC, %esp
+    # Syscall
+    movl $SYS_ACCESS, %eax # Access syscall
+    movl first_arg(%ebp), %ebx # File path
+    movl second_arg(%ebp), %ecx # Access type
+    int $0x80 # 0x80's interrupt
 
-	# Destroying function's stack frame
-	movl %ebp, %esp
-	popl %ebp
-	retl
+    # Restoring registers
+    popl %ebx
+
+    # Destroying function's stack frame
+    movl %ebp, %esp
+    popl %ebp
+    retl
 
 .globl close
 .type close, @function
@@ -306,7 +309,7 @@ iprint_then:
 
 	movl $'0', %edx
 	pushl %edx
-	call lputchar
+	calll lputchar
 	addl $0x4, %esp
 
 	jmp iprint_fin
@@ -316,7 +319,7 @@ iprint_print_not_0:
 	pushl %eax
 
 	pushl $'-'
-	call lputchar
+	calll lputchar
 	addl $0x4, %esp
 
 	# Restoring registers
@@ -329,7 +332,7 @@ iprint_else:
 	pushl %eax # Number
 
 	pushl %eax
-	call numlen
+	calll numlen
 	addl $0x4, %esp
 
 	# Restoring registers
@@ -340,7 +343,7 @@ iprint_else:
 
 	pushl %eax # Length
 	pushl %ecx # Number
-	call reverse
+	calll reverse
 	addl $0x8, %esp
 
 	# Restoring registers
@@ -351,7 +354,7 @@ iprint_else:
 	pushl %eax
 	pushl $NUM_BUF
 	pushl $STDOUT
-	call write
+	calll write
 	addl $0xC, %esp
 
 iprint_fin:
@@ -415,7 +418,7 @@ lputchar:
 	pushl $0x1
 	pushl %eax # &a
 	pushl $STDOUT
-	call write
+	calll write
 	addl $0xC, %esp
 
 	# Destroying function's stack frame
@@ -489,7 +492,7 @@ turn_echo_off:
 	pushl $stty_arg_off
 
 turn_echo_do:
-	call system
+	calll system
 	addl $0x4, %esp
 #.else
 #	# Main part

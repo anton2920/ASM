@@ -61,6 +61,8 @@ back_sure:
 .lcomm MENUBUF, MENUBUF_LEN
 
 .section .text
+
+# void prt_ln(void);
 .globl prt_ln
 .type prt_ln, @function
 prt_ln:
@@ -72,7 +74,7 @@ prt_ln:
 	pushl $len_line
 	pushl $line
 	pushl $STDOUT
-	call write
+	calll write
 	addl $0xC, %esp
 
 	# Destroying function's stack frame
@@ -80,9 +82,12 @@ prt_ln:
 	popl %ebp
 	retl
 
-.globl quit
-.type quit, @function
-quit:
+# Returns 0 if NO, 1 if YES
+#
+# int prompt_yn(const char *buf, int buflen);
+.globl prompt_yn
+.type prompt_yn, @function
+prompt_yn:
 	# Initializing function's stack frame
 	pushl %ebp
 	movl %esp, %ebp
@@ -99,15 +104,15 @@ sure_quit:
 	pushl %ebx
 	pushl %eax
 	pushl $STDOUT
-	call write
+	calll write
 	addl $0xC, %esp
 
 	pushl $MENUBUF_LEN
 	pushl $MENUBUF
 	pushl $0x0
-	call read
+	calll read
 	addl $0xC, %esp
-	
+
 	movl $MENUBUF, %ebx
 
 	xorl %ecx, %ecx
@@ -149,15 +154,15 @@ ret_no:
 	jmp quit_exit
 
 ret_nocmd:
-	call prt_ln
+	calll prt_ln
 
 	pushl $len_quit_err
 	pushl $quit_err
 	pushl $STDOUT
-	call write
+	calll write
 	addl $0xC, %esp
 
-	call prt_ln
+	calll prt_ln
 
 	jmp sure_quit
 
@@ -185,25 +190,25 @@ menu_loop:
 	pushl $len_menu_line
 	pushl $menu_line
 	pushl $STDOUT
-	call write
+	calll write
 	addl $0xC, %esp
 
 	pushl $len_answer
 	pushl $answer
 	pushl $STDOUT
-	call write
+	calll write
 	addl $0xC, %esp
 
 	pushl $MENUBUF_LEN
 	pushl $MENUBUF
 	pushl $STDIN
-	call read
+	calll read
 	addl $0xC, %esp
 
 	# Saving registers
 	pushl %eax
 
-	call prt_ln
+	calll prt_ln
 
 	# Restoring registers
 	popl %eax
@@ -223,7 +228,7 @@ menu_loop:
 check_quit:
 	pushl $quit_line
 	pushl $MENUBUF
-	call lstrcmp
+	calll lstrcmp
 	addl $0x8, %esp
 
 	testl %eax, %eax
@@ -240,7 +245,7 @@ menu_error:
 	pushl $len_no_cmd
 	pushl $no_cmd
 	pushl $STDOUT
-	call write
+	calll write
 	addl $0xC, %esp
 
 	jmp menu_loop
@@ -248,13 +253,13 @@ menu_error:
 call_quit:
 	pushl $len_quit_sure
 	pushl $quit_sure
-	call quit
+	calll prompt_yn
 	addl $0x8, %esp
 
 	testl %eax, %eax
 	jz menu_loop
 
-	call prt_ln
+	calll prt_ln
 
 yes_quit:
 	xorl %eax, %eax
@@ -291,25 +296,25 @@ menu2_loop:
 	pushl $len_menu2_line
 	pushl $menu2_line
 	pushl $STDOUT
-	call write
+	calll write
 	addl $0xC, %esp
 
 	pushl $len_answer
 	pushl $answer
 	pushl $STDOUT
-	call write
+	calll write
 	addl $0xC, %esp
 
 	pushl $MENUBUF_LEN
 	pushl $MENUBUF
 	pushl $STDIN
-	call read
+	calll read
 	addl $0xC, %esp
 
 	# Saving registers
 	pushl %eax
 
-	call prt_ln
+	calll prt_ln
 
 	# Restoring registers
 	popl %eax
@@ -329,7 +334,7 @@ menu2_loop:
 menu2_check_quit:
 	pushl $quit_line
 	pushl $MENUBUF
-	call lstrcmp
+	calll lstrcmp
 	addl $0x8, %esp
 
 	testl %eax, %eax
@@ -337,7 +342,7 @@ menu2_check_quit:
 
 	pushl $back_line
 	pushl $MENUBUF
-	call lstrcmp
+	calll lstrcmp
 	addl $0x8, %esp
 
 	testl %eax, %eax
@@ -362,7 +367,7 @@ menu2_error:
 	pushl $len_no_cmd
 	pushl $no_cmd
 	pushl $STDOUT
-	call write
+	calll write
 	addl $0xC, %esp
 
 	jmp menu2_loop
@@ -370,13 +375,13 @@ menu2_error:
 menu2_call_quit:
 	pushl $len_quit_sure
 	pushl $quit_sure
-	call quit
+	calll prompt_yn
 	addl $0x8, %esp
 
 	testl %eax, %eax
 	jz menu2_loop
 
-	call prt_ln
+	calll prt_ln
 
 menu2_yes_quit:
 	xorl %eax, %eax
@@ -385,7 +390,7 @@ menu2_yes_quit:
 menu2_call_back:
 	pushl $len_back_sure
 	pushl $back_sure
-	call quit
+	calll prompt_yn
 	addl $0x8, %esp
 
 	testl %eax, %eax

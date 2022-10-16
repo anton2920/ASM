@@ -4,6 +4,8 @@
 .equ STD_PERMS, 0666
 .equ O_RDONLY, 0
 .equ O_RDWR, 2
+.equ O_CREAT, 0100
+.equ O_TRUNC, 01000
 
 .equ STDOUT, 1
 .equ STDIN, 0
@@ -65,3 +67,5 @@
 
 .equ MAP_SHARE, 0x1
 .equ MAP_PRIVATE, 0x2
+
+.equ PATH_MAX, 1024

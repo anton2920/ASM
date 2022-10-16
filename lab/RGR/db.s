@@ -118,7 +118,7 @@ checking_fix:
 	.equ len_checking_fix, . - checking_fix
 
 .section .bss
-.equ FILENAME_LEN, 500
+.equ FILENAME_LEN, PATH_MAX
 .lcomm FILENAME, FILENAME_LEN
 
 .equ PASSBUF_LEN, 500
@@ -129,6 +129,8 @@ checking_fix:
 .lcomm ADD_REC_BUF, ADD_REC_LEN
 
 .section .text
+
+# int create_database(void);
 .globl create_database
 .type create_database, @function
 create_database: 
@@ -137,84 +139,62 @@ create_database:
 	movl %esp, %ebp
 	.equ fd, -4
 	.equ hash_sum, -8
-	subl $0x8, %esp # Acquiring space in fd(%ebp)
-
-	# Saving registers
-	pushl %ebx
+	subl $0x8, %esp # Acquiring space for two variables
 
 create_database_loop:
 	# I/O flow
 	pushl $len_filename_line
 	pushl $filename_line
 	pushl $STDOUT
-	call write
+	calll write
 	addl $0xC, %esp
 
 	pushl $FILENAME_LEN
 	pushl $FILENAME
 	pushl $0x0
-	call read
+	calll read
 	addl $0xC, %esp
 
-	movl $FILENAME, %ebx
-	movb $0x0, -1(%ebx, %eax)
+	movb $0x0, FILENAME - 1(%eax)
 
-	call prt_ln
+	calll prt_ln
 
-	# Main part
-	pushl $STD_PERMS
-	pushl $O_RDONLY
+	# Check if the file exists
+	pushl $0x0
 	pushl $FILENAME
-	call open
-	addl $0xC, %esp
+	calll access
+	addl $0x8, %esp
 
 	testl %eax, %eax
-	js create_database_create
+	js create_database_create # access(2) fails -> file doesn't exist?
 
-	pushl %eax
-	call close
-	addl $0x4, %esp
-
-create_database_fileexists:
+	# File already exists
 	pushl $len_file_exists
 	pushl $file_exists
 	pushl $STDOUT
-	call write
+	calll write
 	addl $0xC, %esp
 
-	call prt_ln
+	calll prt_ln
 
 create_database_change_name:
 	pushl $len_change_name
 	pushl $change_name
-	call quit
+	calll prompt_yn
 	addl $0x8, %esp
 
 	testl %eax, %eax
 	jz create_database_exit_1
 
-	call prt_ln
+	calll prt_ln
 
 	jmp create_database_loop
 
 create_database_create:
 	pushl $STD_PERMS
+	pushl $O_RDWR|O_CREAT|O_TRUNC
 	pushl $FILENAME
-	call creat
-	addl $0x8, %esp
-
-	testl %eax, %eax
-	js create_database_err
-
-	# Saving registers
-	pushl %eax
-	call close
-	addl $0x4, %esp
-
-	pushl $STD_PERMS
-	pushl $O_RDWR
-	pushl $FILENAME
-	call open
+	calll open
 	addl $0xC, %esp
 
 	testl %eax, %eax
@@ -228,10 +208,10 @@ create_database_err:
 	pushl $len_error_creating
 	pushl $error_creating
 	pushl $STDOUT
-	call write
+	calll write
 	addl $0xC, %esp
 
-	call prt_ln
+	calll prt_ln
 
 	jmp create_database_change_name
 
@@ -240,34 +220,33 @@ create_database_pass:
 	pushl $len_enter_pass
 	pushl $enter_pass
 	pushl $STDOUT
-	call write
+	calll write
 	addl $0xC, %esp
 
 .if LIBC_ENABLED == 1
 	pushl $0x0
-	call turn_echo
+	calll turn_echo
 	addl $0x4, %esp
 .endif
 
 	pushl $PASSBUF_LEN
 	pushl $PASSBUF1
 	pushl $STDIN
-	call read
+	calll read
 	addl $0xC, %esp
 
-	movl $PASSBUF1, %ebx
-	movb $0x0, -1(%ebx, %eax)
+	movb $0x0, PASSBUF1 - 1(%eax)
 
 	# Saving registers
 	pushl %eax
 
 .if LIBC_ENABLED == 1
 	pushl $0x1
-	call turn_echo
+	calll turn_echo
 	addl $0x4, %esp
 
 	pushl $'\n'
-	call lputchar
+	calll lputchar
 	addl $0x4, %esp
 .endif
 
@@ -275,42 +254,41 @@ create_database_pass:
 	pushl $len_reenter_pass
 	pushl $reenter_pass
 	pushl $STDOUT
-	call write
+	calll write
 	addl $0xC, %esp
 
 .if LIBC_ENABLED == 1
 	pushl $0x0
-	call turn_echo
+	calll turn_echo
 	addl $0x4, %esp
 .endif
 
 	pushl $PASSBUF_LEN
 	pushl $PASSBUF2
 	pushl $STDIN
-	call read
+	calll read
 	addl $0xC, %esp
 
-	movl $PASSBUF2, %ebx
-	movb $0x0, -1(%ebx, %eax)
+	movb $0x0, PASSBUF2 - 1(%eax)
 
 	# Saving registers
 	pushl %eax
 
 .if LIBC_ENABLED == 1
 	pushl $0x1
-	call turn_echo
+	calll turn_echo
 	addl $0x4, %esp
 
 	pushl $'\n'
-	call lputchar
+	calll lputchar
 	addl $0x4, %esp
 .endif
 
-	call prt_ln
+	calll prt_ln
 
 	pushl $PASSBUF2
 	pushl $PASSBUF1
-	call lstrcmp
+	calll lstrcmp
 	addl $0x8, %esp
 
 	testl %eax, %eax
@@ -319,10 +297,10 @@ create_database_pass:
 	pushl $len_error_pass
 	pushl $error_pass
 	pushl $STDOUT
-	call write
+	calll write
 	addl $0xC, %esp
 
-	call prt_ln
+	calll prt_ln
 
 	jmp create_database_pass
 
@@ -330,67 +308,66 @@ create_database_pass_ok:
 	# Restoring registers
 	popl %eax
 
-	pushl $sizeof_int
+	pushl $sizeof_int # 'nbytes' to further write
 
 	cmpl $0x1, %eax
 	jne create_database_make_hash_sum
 
-	pushl $minus_one
+	pushl $minus_one # 'buf' to further write
 
 	jmp create_database_lookout
 
 create_database_make_hash_sum:
 	pushl $PASSBUF1
-	call djb2
+	calll djb2
 	addl $0x4, %esp
 
 	movl %eax, hash_sum(%ebp)
 	leal hash_sum(%ebp), %eax
-	pushl %eax
+	pushl %eax # 'buf' to further write
 
 create_database_lookout:
 	pushl fd(%ebp)
-	call write
+	calll write
 	addl $0xC, %esp
 
+	# Write autoincrement ID field
 	pushl $sizeof_int
 	pushl $int_zero
 	pushl fd(%ebp)
-	call write
+	calll write
 	addl $0xC, %esp
 
 	pushl $len_lookout_for_cr
 	pushl $lookout_for_cr
-	call quit
+	calll prompt_yn
 	addl $0x8, %esp
 
 	testl %eax, %eax
 	jnz create_database_exit_2
 
 create_database_exit_1:
-	call prt_ln
+	calll prt_ln
 
 	pushl fd(%ebp)
-	call close
+	calll close
 	addl $0x4, %esp
 
-	xorl %eax, %eax
+	# Returning value
+	xorl %eax, %eax # return 0 -> no file left opened
 	jmp create_database_exit
 
 create_database_exit_2:
 	pushl $SEEK_SET
 	pushl $0x0
 	pushl fd(%ebp)
-	call lseek
+	calll lseek
 	addl $0xC, %esp
 
 	# Returning value
 	movl fd(%ebp), %eax
 
 create_database_exit:
-	# Restoring registers
-	popl %ebx
-
 	# Destroying function's stack frame
 	movl %ebp, %esp
 	popl %ebp
@@ -419,13 +396,13 @@ open_database_loop:
 	pushl $len_filename_line
 	pushl $filename_line
 	pushl $STDOUT
-	call write
+	calll write
 	addl $0xC, %esp
 
 	pushl $FILENAME_LEN
 	pushl $FILENAME
 	pushl $0x0
-	call read
+	calll read
 	addl $0xC, %esp
 
 	movl $FILENAME, %ebx
@@ -436,7 +413,7 @@ open_database_open:
 	pushl $STD_PERMS
 	pushl $O_RDWR
 	pushl $FILENAME
-	call open
+	calll open
 	addl $0xC, %esp
 
 	# Saving registers
@@ -446,37 +423,37 @@ open_database_open:
 	jns open_database_pass
 
 open_database_err:
-	call prt_ln
+	calll prt_ln
 
 	pushl $len_error_open
 	pushl $error_open
 	pushl $STDOUT
-	call write
+	calll write
 	addl $0xC, %esp
 
-	call prt_ln
+	calll prt_ln
 
 open_database_change_name:
 	pushl $len_change_name
 	pushl $change_name
-	call quit
+	calll prompt_yn
 	addl $0x8, %esp
 
 	testl %eax, %eax
 	jz open_database_exit_1
 
-	call prt_ln
+	calll prt_ln
 
 	jmp open_database_loop
 
 open_database_pass:
-	call prt_ln
+	calll prt_ln
 
 	pushl $sizeof_int
 	leal hash_sum(%ebp), %eax
 	pushl %eax
 	pushl fd(%ebp)
-	call read
+	calll read
 	addl $0xC, %esp
 
 	cmpl $-1, hash_sum(%ebp)
@@ -486,19 +463,19 @@ open_database_pass_read:
 	pushl $len_enter_pass
 	pushl $enter_pass
 	pushl $STDOUT
-	call write
+	calll write
 	addl $0xC, %esp
 
 .if LIBC_ENABLED == 1
 	pushl $0x0
-	call turn_echo
+	calll turn_echo
 	addl $0x4, %esp
 .endif
 
 	pushl $PASSBUF_LEN
 	pushl $PASSBUF1
 	pushl $STDIN
-	call read
+	calll read
 	addl $0xC, %esp
 
 	movl $PASSBUF1, %ebx
@@ -506,22 +483,22 @@ open_database_pass_read:
 
 .if LIBC_ENABLED == 1
 	pushl $0x1
-	call turn_echo
+	calll turn_echo
 	addl $0x4, %esp
 
 	pushl $'\n'
-	call lputchar
+	calll lputchar
 	addl $0x4, %esp
 .endif
 
 	pushl $PASSBUF1
-	call djb2
+	calll djb2
 	addl $0x4, %esp
 
 	# Saving registers
 	pushl %eax
 
-	call prt_ln
+	calll prt_ln
 
 	# Restoring registers
 	popl %eax
@@ -538,10 +515,10 @@ open_database_pass_read:
 	pushl $len_error_pass
 	pushl $error_pass
 	pushl $STDOUT
-	call write
+	calll write
 	addl $0xC, %esp
 
-	call prt_ln
+	calll prt_ln
 
 	jmp open_database_pass_read
 
@@ -549,11 +526,11 @@ open_database_exit_error_pass:
 	pushl $len_pass_too_many
 	pushl $pass_too_many
 	pushl $STDOUT
-	call write
+	calll write
 	addl $0xC, %esp
 
 	pushl fd(%ebp)
-	call close
+	calll close
 	addl $0x4, %esp
 
 open_database_exit_1:
@@ -564,7 +541,7 @@ open_database_exit_2:
 	pushl $SEEK_SET
 	pushl $0x0
 	pushl fd(%ebp)
-	call lseek
+	calll lseek
 	addl $0xC, %esp
 
 	# Returning value
@@ -595,11 +572,11 @@ show_recs:
 	pushl $len_number_of_recs
 	pushl $number_of_recs
 	pushl $STDOUT
-	call write
+	calll write
 	addl $0xC, %esp
 
 	pushl first_arg(%ebp)
-	call find_size
+	calll find_size
 	addl $0x4, %esp
 
 	subl $HEADER_SIZE, %eax
@@ -610,28 +587,28 @@ show_recs:
 	idivl %ebx
 
 	pushl %eax
-	call iprint
+	calll iprint
 	addl $0x4, %esp
 
 	pushl $'\n'
-	call lputchar
+	calll lputchar
 	addl $0x4, %esp
 
-	call prt_ln
+	calll prt_ln
 
 	pushl $len_header
 	pushl $header
 	pushl $STDOUT
-	call write
+	calll write
 	addl $0xC, %esp
 
-	call prt_ln
+	calll prt_ln
 
 	# Main part
 	pushl $SEEK_SET
 	pushl $HEADER_SIZE
 	pushl first_arg(%ebp)
-	call lseek
+	calll lseek
 	addl $0xC, %esp
 
 show_recs_loop:
@@ -640,7 +617,7 @@ show_recs_loop:
 	leal struct_1(%ebp), %eax
 	pushl %eax
 	pushl first_arg(%ebp)
-	call read
+	calll read
 	addl $0xC, %esp
 
 	testl %eax, %eax
@@ -649,11 +626,11 @@ show_recs_loop:
 
 	# Printing values
 	pushl $'|'
-	call lputchar
+	calll lputchar
 	addl $0x4, %esp
 
 	pushl struct_1 + iD(%ebp)
-	call numlen
+	calll numlen
 	addl $0x4, %esp
 
 	subl $0x8, %eax
@@ -667,7 +644,7 @@ show_recs_loop_print_spaces_id:
 	pushl %eax
 
 	pushl $' '
-	call lputchar
+	calll lputchar
 	addl $0x4, %esp
 
 	# Restoring registers
@@ -679,22 +656,22 @@ show_recs_loop_print_spaces_id:
 
 show_recs_loop_print_spaces_id_end:
 	pushl struct_1 + iD(%ebp)
-	call iprint
+	calll iprint
 	addl $0x4, %esp
 
-	call print_vert_line
+	calll print_vert_line
 
 	pushl $NAME_SIZE
 	leal struct_1 + NAME(%ebp), %eax
 	pushl %eax
 	pushl $STDOUT
-	call write
+	calll write
 	addl $0xC, %esp
 
 show_recs_loop_check_letters:
 	leal struct_1 + NAME(%ebp), %eax
 	pushl %eax
-	call lstrlen
+	calll lstrlen
 	addl $0x4, %esp
 
 	subl $NAME_SIZE, %eax
@@ -709,7 +686,7 @@ show_recs_loop_print_spaces:
 	pushl %eax
 
 	pushl $' '
-	call lputchar
+	calll lputchar
 	addl $0x4, %esp
 
 	# Restoring registers
@@ -720,24 +697,24 @@ show_recs_loop_print_spaces:
 	jmp show_recs_loop_print_spaces
 
 show_recs_loop_print_spaces_end:
-	call print_vert_line
+	calll print_vert_line
 
 	pushl struct_1 + YEAR(%ebp)
-	call iprint
+	calll iprint
 	addl $0x4, %esp
 
-	call print_vert_line
+	calll print_vert_line
 
 	pushl $'\t'
-	call lputchar
+	calll lputchar
 	addl $0x4, %esp
 
 	pushl struct_1 + QUANT(%ebp)
-	call iprint
+	calll iprint
 	addl $0x4, %esp
 
 	pushl $' '
-	call lputchar
+	calll lputchar
 	addl $0x4, %esp
 
 show_recs_check_digits:
@@ -751,11 +728,11 @@ show_recs_check_digits:
 	jnz show_recs_continue
 
 	pushl $' '
-	call lputchar
+	calll lputchar
 	addl $0x4, %esp
 
 show_recs_continue:
-	call print_vert_line
+	calll print_vert_line
 
 	cmpb $0x0, struct_1 + FLAG(%ebp)
 	jne show_recs_print_yes
@@ -771,10 +748,10 @@ show_recs_print_yes:
 
 show_recs_print_fin:
 	pushl $STDOUT
-	call write
+	calll write
 	addl $0xC, %esp
 
-	call prt_ln
+	calll prt_ln
 
 	jmp show_recs_loop
 
@@ -850,20 +827,20 @@ add_records:
 	pushl $SEEK_SET
 	pushl $sizeof_int
 	pushl first_arg(%ebp)
-	call lseek
+	calll lseek
 	addl $0xC, %esp
 
 	pushl $sizeof_int
 	leal st_gr + iD(%ebp), %eax
 	pushl %eax
 	pushl first_arg(%ebp)
-	call read
+	calll read
 	addl $0xC, %esp
 
 	pushl $SEEK_END
 	pushl $0x0
 	pushl first_arg(%ebp)
-	call lseek
+	calll lseek
 	addl $0xC, %esp
 
 add_records_read:
@@ -873,28 +850,28 @@ add_records_read_do_while_0:
 	pushl $len_add_type_name
 	pushl $add_type_name
 	pushl $STDOUT
-	call write
+	calll write
 	addl $0xC, %esp
 
 	pushl $NAME_SIZE
 	leal st_gr + NAME(%ebp), %eax
 	pushl %eax
 	pushl $STDIN
-	call read
+	calll read
 	addl $0xC, %esp
 
 	cmpl $NAME_SIZE - 1, %eax
 	jle add_records_read_do_while_0_end
 
-	call prt_ln
+	calll prt_ln
 
 	pushl $len_add_invalid
 	pushl $add_invalid
 	pushl $STDOUT
-	call write
+	calll write
 	addl $0xC, %esp
 
-	call prt_ln
+	calll prt_ln
 
 	jmp add_records_read_do_while_0
 
@@ -905,13 +882,13 @@ add_records_read_do_while_1:
 	pushl $len_add_type_year
 	pushl $add_type_year
 	pushl $STDOUT
-	call write
+	calll write
 	addl $0xC, %esp
 
 	pushl $ADD_REC_LEN
 	pushl $ADD_REC_BUF
 	pushl $STDIN
-	call read
+	calll read
 	addl $0xC, %esp
 
 	movl $ADD_REC_BUF, %edx
@@ -921,28 +898,28 @@ add_records_read_do_while_1:
 	jnz add_records_read_do_while_1_err
 
 	pushl $ADD_REC_BUF
-	call check_number
+	calll check_number
 	addl $0x4, %esp
 
 	testl %eax, %eax
 	jnz add_records_read_do_while_1_end
 
 add_records_read_do_while_1_err:
-	call prt_ln
+	calll prt_ln
 
 	pushl $len_add_invalid
 	pushl $add_invalid
 	pushl $STDOUT
-	call write
+	calll write
 	addl $0xC, %esp
 
-	call prt_ln
+	calll prt_ln
 
 	jmp add_records_read_do_while_1
 
 add_records_read_do_while_1_end:
 	pushl $ADD_REC_BUF
-	call atoi
+	calll atoi
 	addl $0x4, %esp
 
 	testl %eax, %eax
@@ -955,13 +932,13 @@ add_records_read_do_while_2:
 	pushl $len_add_type_number
 	pushl $add_type_number
 	pushl $STDOUT
-	call write
+	calll write
 	addl $0xC, %esp
 
 	pushl $ADD_REC_LEN
 	pushl $ADD_REC_BUF
 	pushl $STDIN
-	call read
+	calll read
 	addl $0xC, %esp
 
 	movl $ADD_REC_BUF, %edx
@@ -971,28 +948,28 @@ add_records_read_do_while_2:
 	jg add_records_read_do_while_2_err
 
 	pushl $ADD_REC_BUF
-	call check_number
+	calll check_number
 	addl $0x4, %esp
 
 	testl %eax, %eax
 	jnz add_records_read_do_while_2_end
 
 add_records_read_do_while_2_err:
-	call prt_ln
+	calll prt_ln
 
 	pushl $len_add_invalid
 	pushl $add_invalid
 	pushl $STDOUT
-	call write
+	calll write
 	addl $0xC, %esp
 
-	call prt_ln
+	calll prt_ln
 
 	jmp add_records_read_do_while_2
 
 add_records_read_do_while_2_end:
 	pushl $ADD_REC_BUF
-	call atoi
+	calll atoi
 	addl $0x4, %esp
 
 	testl %eax, %eax
@@ -1003,7 +980,7 @@ add_records_read_do_while_2_end:
 
 	pushl $len_add_type_grad
 	pushl $add_type_grad
-	call quit
+	calll prompt_yn
 	addl $0x8, %esp
 
 	movb %al, st_gr + FLAG(%ebp)
@@ -1012,27 +989,27 @@ add_records_read_do_while_2_end:
 	leal st_gr(%ebp), %eax
 	pushl %eax
 	pushl first_arg(%ebp)
-	call write
+	calll write
 	addl $0xC, %esp
 
-	call prt_ln
+	calll prt_ln
 
 	pushl $len_add_more_records
 	pushl $add_more_records
-	call quit
+	calll prompt_yn
 	addl $0x8, %esp
 
 	testl %eax, %eax
 	jz add_records_read_end
 
-	call prt_ln
+	calll prt_ln
 
 	jmp add_records_read
 
 add_records_read_end:
 	pushl st_gr + iD(%ebp)
 	pushl first_arg(%ebp)
-	call fix_last_id
+	calll fix_last_id
 	addl $0x8, %esp
 
 	# Destroying function's stack frame
@@ -1054,7 +1031,7 @@ fix_last_id:
 	
 	# Main part	
 	pushl first_arg(%ebp)
-	call find_size
+	calll find_size
 	addl $0x4, %esp
 
 	movl %eax, file_size(%ebp)
@@ -1086,7 +1063,7 @@ fix_last_id:
 	pushl $SEEK_SET
 	pushl $0x0
 	pushl first_arg(%ebp)
-	call lseek
+	calll lseek
 	addl $0xC, %esp
 
 	# Restoring registers
@@ -1107,7 +1084,7 @@ print_vert_line:
 	pushl $len_vert_line
 	pushl $vert_line
 	pushl $STDOUT
-	call write
+	calll write
 	addl $0xC, %esp
 
 	# Destroying function's stack frame
@@ -1141,7 +1118,7 @@ edit_record:
 	
 	# Main part	
 	pushl first_arg(%ebp)
-	call find_size
+	calll find_size
 	addl $0x4, %esp
 
 	movl %eax, file_size(%ebp)
@@ -1165,13 +1142,13 @@ edit_record_do_while_1:
 	pushl $len_edit_type_number
 	pushl $edit_type_number
 	pushl $STDOUT
-	call write
+	calll write
 	addl $0xC, %esp
 
 	pushl $ADD_REC_LEN
 	pushl $ADD_REC_BUF
 	pushl $STDIN
-	call read
+	calll read
 	addl $0xC, %esp
 
 	movl $ADD_REC_BUF, %edx
@@ -1180,23 +1157,23 @@ edit_record_do_while_1:
 	cmpl $INT_MAX_LEN, %eax
 	jle edit_record_do_while_1_end
 
-	call prt_ln
+	calll prt_ln
 
 	pushl $len_edit_invalid_id
 	pushl $edit_invalid_id
 	pushl $STDOUT
-	call write
+	calll write
 	addl $0xC, %esp
 
-	call prt_ln
+	calll prt_ln
 
 	jmp edit_record_do_while_1
 
 edit_record_do_while_1_end:
-	call prt_ln
+	calll prt_ln
 
 	pushl $ADD_REC_BUF
-	call atoi
+	calll atoi
 	addl $0x4, %esp
 
 	movl %eax, curr_id(%ebp)
@@ -1226,20 +1203,20 @@ edit_record_search_for_id_error:
 	pushl $len_edit_invalid_id
 	pushl $edit_invalid_id
 	pushl $STDOUT
-	call write
+	calll write
 	addl $0xC, %esp
 
-	call prt_ln
+	calll prt_ln
 
 	pushl $len_edit_retype_number
 	pushl $edit_retype_number
-	call quit
+	calll prompt_yn
 	addl $0x8, %esp
 
 	# Saving registers
 	pushl %eax
 
-	call prt_ln
+	calll prt_ln
 
 	# Restoring registers
 	popl %eax
@@ -1258,28 +1235,28 @@ edit_records_read_do_while_0:
 	pushl $len_add_type_name
 	pushl $add_type_name
 	pushl $STDOUT
-	call write
+	calll write
 	addl $0xC, %esp
 
 	pushl $NAME_SIZE
 	leal ed_stGr + NAME(%ebp), %eax
 	pushl %eax
 	pushl $STDIN
-	call read
+	calll read
 	addl $0xC, %esp
 
 	cmpl $NAME_SIZE - 1, %eax
 	jle edit_records_read_do_while_0_end
 
-	call prt_ln
+	calll prt_ln
 
 	pushl $len_add_invalid
 	pushl $add_invalid
 	pushl $STDOUT
-	call write
+	calll write
 	addl $0xC, %esp
 
-	call prt_ln
+	calll prt_ln
 
 	jmp edit_records_read_do_while_0
 
@@ -1290,13 +1267,13 @@ edit_records_read_do_while_1:
 	pushl $len_add_type_year
 	pushl $add_type_year
 	pushl $STDOUT
-	call write
+	calll write
 	addl $0xC, %esp
 
 	pushl $ADD_REC_LEN
 	pushl $ADD_REC_BUF
 	pushl $STDIN
-	call read
+	calll read
 	addl $0xC, %esp
 
 	movl $ADD_REC_BUF, %edx
@@ -1306,28 +1283,28 @@ edit_records_read_do_while_1:
 	jnz edit_records_read_do_while_1_err
 
 	pushl $ADD_REC_BUF
-	call check_number
+	calll check_number
 	addl $0x4, %esp
 
 	testl %eax, %eax
 	jnz edit_records_read_do_while_1_end
 
 edit_records_read_do_while_1_err:
-	call prt_ln
+	calll prt_ln
 
 	pushl $len_add_invalid
 	pushl $add_invalid
 	pushl $STDOUT
-	call write
+	calll write
 	addl $0xC, %esp
 
-	call prt_ln
+	calll prt_ln
 
 	jmp edit_records_read_do_while_1
 
 edit_records_read_do_while_1_end:
 	pushl $ADD_REC_BUF
-	call atoi
+	calll atoi
 	addl $0x4, %esp
 
 	testl %eax, %eax
@@ -1340,13 +1317,13 @@ edit_records_read_do_while_2:
 	pushl $len_add_type_number
 	pushl $add_type_number
 	pushl $STDOUT
-	call write
+	calll write
 	addl $0xC, %esp
 
 	pushl $ADD_REC_LEN
 	pushl $ADD_REC_BUF
 	pushl $STDIN
-	call read
+	calll read
 	addl $0xC, %esp
 
 	movl $ADD_REC_BUF, %edx
@@ -1356,28 +1333,28 @@ edit_records_read_do_while_2:
 	jg edit_records_read_do_while_2_err
 
 	pushl $ADD_REC_BUF
-	call check_number
+	calll check_number
 	addl $0x4, %esp
 
 	testl %eax, %eax
 	jnz edit_records_read_do_while_2_end
 
 edit_records_read_do_while_2_err:
-	call prt_ln
+	calll prt_ln
 
 	pushl $len_add_invalid
 	pushl $add_invalid
 	pushl $STDOUT
-	call write
+	calll write
 	addl $0xC, %esp
 
-	call prt_ln
+	calll prt_ln
 
 	jmp edit_records_read_do_while_2
 
 edit_records_read_do_while_2_end:
 	pushl $ADD_REC_BUF
-	call atoi
+	calll atoi
 	addl $0x4, %esp
 
 	testl %eax, %eax
@@ -1388,22 +1365,22 @@ edit_records_read_do_while_2_end:
 
 	pushl $len_add_type_grad
 	pushl $add_type_grad
-	call quit
+	calll prompt_yn
 	addl $0x8, %esp
 
 	movb %al, ed_stGr + FLAG(%ebp)
 
-	call prt_ln
+	calll prt_ln
 
 	pushl $len_edit_more_records
 	pushl $edit_more_records
-	call quit
+	calll prompt_yn
 	addl $0x8, %esp
 
 	testl %eax, %eax
 	jz edit_record_exit
 
-	call prt_ln
+	calll prt_ln
 
 	jmp edit_record_start
 
@@ -1412,7 +1389,7 @@ edit_record_exit:
 	leal ed_stGr(%ebp), %eax
 	pushl %eax
 	pushl curr_mfile_pos(%ebp)
-	call lstrncpy
+	calll lstrncpy
 	addl $0xC, %esp
 
 	# Syscall
@@ -1424,7 +1401,7 @@ edit_record_exit:
 	pushl $SEEK_SET
 	pushl $0x0
 	pushl first_arg(%ebp)
-	call lseek
+	calll lseek
 	addl $0xC, %esp
 
 	# Restoring registers
@@ -1466,7 +1443,7 @@ delete_record:
 	
 	# Main part	
 	pushl first_arg(%ebp)
-	call find_size
+	calll find_size
 	addl $0x4, %esp
 
 	movl %eax, file_size(%ebp)
@@ -1490,13 +1467,13 @@ delete_record_do_while_1:
 	pushl $len_delete_type_number
 	pushl $delete_type_number
 	pushl $STDOUT
-	call write
+	calll write
 	addl $0xC, %esp
 
 	pushl $ADD_REC_LEN
 	pushl $ADD_REC_BUF
 	pushl $STDIN
-	call read
+	calll read
 	addl $0xC, %esp
 
 	movl $ADD_REC_BUF, %edx
@@ -1505,23 +1482,23 @@ delete_record_do_while_1:
 	cmpl $INT_MAX_LEN, %eax
 	jle delete_record_do_while_1_end
 
-	call prt_ln
+	calll prt_ln
 
 	pushl $len_edit_invalid_id
 	pushl $edit_invalid_id
 	pushl $STDOUT
-	call write
+	calll write
 	addl $0xC, %esp
 
-	call prt_ln
+	calll prt_ln
 
 	jmp delete_record_do_while_1
 
 delete_record_do_while_1_end:
-	call prt_ln
+	calll prt_ln
 
 	pushl $ADD_REC_BUF
-	call atoi
+	calll atoi
 	addl $0x4, %esp
 
 	movl %eax, curr_id(%ebp)
@@ -1551,20 +1528,20 @@ delete_record_search_for_id_error:
 	pushl $len_edit_invalid_id
 	pushl $edit_invalid_id
 	pushl $STDOUT
-	call write
+	calll write
 	addl $0xC, %esp
 
-	call prt_ln
+	calll prt_ln
 
 	pushl $len_edit_retype_number
 	pushl $edit_retype_number
-	call quit
+	calll prompt_yn
 	addl $0x8, %esp
 
 	# Saving registers
 	pushl %eax
 
-	call prt_ln
+	calll prt_ln
 
 	# Restoring registers
 	popl %eax
@@ -1593,7 +1570,7 @@ delete_record_move_data:
 	pushl curr_mfile_pos(%ebp)
 	subl $STRUCT_SIZE, curr_mfile_pos(%ebp)
 	pushl curr_mfile_pos(%ebp)
-	call lstrncpy
+	calll lstrncpy
 	addl $0xC, %esp
 
 delete_record_ask:
@@ -1602,20 +1579,20 @@ delete_record_ask:
 	pushl $len_delete_success
 	pushl $delete_success
 	pushl $STDOUT
-	call write
+	calll write
 	addl $0xC, %esp
 
-	call prt_ln
+	calll prt_ln
 
 	pushl $len_delete_more_records
 	pushl $delete_more_records
-	call quit
+	calll prompt_yn
 	addl $0x8, %esp
 
 	# Saving registers
 	pushl %eax
 
-	call prt_ln
+	calll prt_ln
 	
 	# Restoring registers
 	popl %eax
@@ -1633,7 +1610,7 @@ delete_record_exit:
 	pushl $SEEK_SET
 	pushl $0x0
 	pushl first_arg(%ebp)
-	call lseek
+	calll lseek
 	addl $0xC, %esp
 
 delete_record_if:
@@ -1674,33 +1651,33 @@ checking_integrity:
 	pushl $len_checking_check
 	pushl $checking_check
 	pushl $STDOUT
-	call write
+	calll write
 	addl $0xC, %esp
 
 	pushl $SEEK_SET
 	pushl $sizeof_int
 	pushl first_arg(%ebp)
-	call lseek
+	calll lseek
 	addl $0xC, %esp
 
 	pushl $sizeof_int
 	leal auto_id(%ebp), %eax
 	pushl %eax
 	pushl first_arg(%ebp)
-	call read
+	calll read
 	addl $0xC, %esp
 
 	pushl $SEEK_END
 	pushl $-STRUCT_SIZE
 	pushl first_arg(%ebp)
-	call lseek
+	calll lseek
 	addl $0xC, %esp
 
 	pushl $sizeof_int
 	leal llast_id(%ebp), %eax
 	pushl %eax
 	pushl first_arg(%ebp)
-	call read
+	calll read
 	addl $0xC, %esp
 
 	movl auto_id(%ebp), %eax
@@ -1712,20 +1689,20 @@ checking_integrity_fail:
 	pushl $len_checking_fail
 	pushl $checking_fail
 	pushl $STDOUT
-	call write
+	calll write
 	addl $0xC, %esp
 
-	call prt_ln
+	calll prt_ln
 
 	pushl llast_id(%ebp)
 	pushl first_arg(%ebp)
-	call fix_last_id
+	calll fix_last_id
 	addl $0x8, %esp
 
 	pushl $len_checking_fix
 	pushl $checking_fix
 	pushl $STDOUT
-	call write
+	calll write
 	addl $0xC, %esp
 
 	jmp checking_integrity_exit
@@ -1734,16 +1711,16 @@ checking_integrity_ok:
 	pushl $len_checking_ok
 	pushl $checking_ok
 	pushl $STDOUT
-	call write
+	calll write
 	addl $0xC, %esp
 
 checking_integrity_exit:
-	call prt_ln
+	calll prt_ln
 
 	pushl $SEEK_SET
 	pushl $0x0
 	pushl first_arg(%ebp)
-	call lseek
+	calll lseek
 	addl $0xC, %esp
 
 	# Destroying function's stack frame

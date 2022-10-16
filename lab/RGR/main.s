@@ -13,7 +13,7 @@ _start:
 
 	# I/O flow
 menu_l:
-	call menu
+	calll menu
 
 	testl %eax, %eax
 	jz exit
@@ -25,7 +25,7 @@ menu_l:
 
 	# Main part
 create_new:
-	call create_database
+	calll create_database
 
 	test %eax, %eax
 	jz menu_l
@@ -34,7 +34,7 @@ create_new:
 	jmp menu2_l
 
 open_exist:
-	call open_database
+	calll open_database
 
 	test %eax, %eax
 	jz menu_l
@@ -42,11 +42,11 @@ open_exist:
 	movl %eax, fd(%ebp)
 
 	pushl %eax
-	call checking_integrity
+	calll checking_integrity
 	addl $0x4, %esp
 
 menu2_l:
-	call menu2
+	calll menu2
 
 	test %eax, %eax
 	jz close_l
@@ -68,28 +68,28 @@ menu2_l:
 
 menu2_1:
 	pushl fd(%ebp)
-	call show_recs
+	calll show_recs
 	addl $0x4, %esp
 
 	jmp menu2_ret_back
 
 menu2_2:
 	pushl fd(%ebp)
-	call add_records
+	calll add_records
 	addl $0x4, %esp
 	
 	jmp menu2_ret_back
 
 menu2_3:
 	pushl fd(%ebp)
-	call delete_record
+	calll delete_record
 	addl $0x4, %esp
 
 	jmp menu2_ret_back
 
 menu2_4:
 	pushl fd(%ebp)
-	call edit_record
+	calll edit_record
 	addl $0x4, %esp
 
 	jmp menu2_ret_back
@@ -99,14 +99,14 @@ menu2_ret_back:
 
 close_and_back:
 	pushl fd(%ebp)
-	call close
+	calll close
 	addl $0x4, %esp
 
 	jmp menu_l
 
 close_l:
 	pushl fd(%ebp)
-	call close
+	calll close
 	addl $0x4, %esp
 
 exit:
