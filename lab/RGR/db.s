@@ -356,11 +356,9 @@ create_database_exit_1:
 	jmp create_database_exit
 
 create_database_exit_2:
-	pushl $SEEK_SET
-	pushl $0x0
 	pushl fd(%ebp)
-	calll lseek
-	addl $0xC, %esp
+	calll lrewind
+	addl $0x4, %esp
 
 	# Returning value
 	movl fd(%ebp), %eax
@@ -382,9 +380,6 @@ open_database:
 	.equ nattempts, -8
 	.equ hash_sum, -12
 	subl $0xC, %esp # Acquiring space for three variables
-
-	# Saving registers
-	pushl %ebx
 
 	# Initializing variables
 	movl $0x0, nattempts(%ebp)
@@ -475,8 +470,7 @@ open_database_pass_read:
 	calll read
 	addl $0xC, %esp
 
-	movl $PASSBUF1, %ebx
-	movb $0x0, -1(%ebx, %eax)
+	movb $0x0, PASSBUF1 - 1(%eax)
 
 .if LIBC_ENABLED == 1
 	pushl $0x1
@@ -535,19 +529,14 @@ open_database_exit_1:
 	jmp open_database_exit
 
 open_database_exit_2:
-	pushl $SEEK_SET
-	pushl $0x0
 	pushl fd(%ebp)
-	calll lseek
-	addl $0xC, %esp
+	calll lrewind
+	addl $0x4, %esp
 
 	# Returning value
 	movl fd(%ebp), %eax
 
 open_database_exit:
-	# Restoring registers
-	popl %ebx
-
 	# Destroying function's stack frame
 	movl %ebp, %esp
 	popl %ebp
@@ -1057,11 +1046,9 @@ fix_last_id:
 	movl $SYS_MUNMAP, %eax
 	int $0x80 # 0x80's interrupt
 
-	pushl $SEEK_SET
-	pushl $0x0
 	pushl first_arg(%ebp)
-	calll lseek
-	addl $0xC, %esp
+	calll lrewind
+	addl $0x4, %esp
 
 	# Restoring registers
 	popl %ebx
@@ -1395,12 +1382,9 @@ edit_record_exit:
 	movl $SYS_MUNMAP, %eax
 	int $0x80 # 0x80's interrupt
 
-	pushl $SEEK_SET
-	pushl $0x0
 	pushl first_arg(%ebp)
-	calll lseek
-	addl $0xC, %esp
-
+	calll lrewind
+	addl $0x4, %esp
 	# Restoring registers
 	popl %ebx
 
@@ -1604,11 +1588,9 @@ delete_record_exit:
 	movl $SYS_MUNMAP, %eax
 	int $0x80 # 0x80's interrupt
 
-	pushl $SEEK_SET
-	pushl $0x0
 	pushl first_arg(%ebp)
-	calll lseek
-	addl $0xC, %esp
+	calll lrewind
+	addl $0x4, %esp
 
 delete_record_if:
 	cmpl $0x0, nrecs_del(%ebp)
@@ -1714,11 +1696,9 @@ checking_integrity_ok:
 checking_integrity_exit:
 	calll prt_ln
 
-	pushl $SEEK_SET
-	pushl $0x0
 	pushl first_arg(%ebp)
-	calll lseek
-	addl $0xC, %esp
+	calll lrewind
+	addl $0x4, %esp
 
 	# Destroying function's stack frame
 	movl %ebp, %esp

@@ -172,6 +172,25 @@ lseek:
 	popl %ebp
 	retl
 
+.globl lrewind
+.type lrewind, @function
+lrewind:
+	# Initializing function's stack frame
+	pushl %ebp
+	movl %esp, %ebp
+
+	pushl $SEEK_SET
+	pushl $0x0
+	movl first_arg(%ebp), %eax
+	pushl %eax
+	calll lseek
+	addl $0xC, %esp
+
+	# Destroying function's stack frame
+	movl %ebp, %esp
+	popl %ebp
+	retl
+
 .globl lstrcmp
 .type lstrcmp, @function
 lstrcmp:
