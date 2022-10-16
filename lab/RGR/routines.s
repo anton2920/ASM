@@ -181,8 +181,7 @@ lrewind:
 
 	pushl $SEEK_SET
 	pushl $0x0
-	movl first_arg(%ebp), %eax
-	pushl %eax
+	pushl first_arg(%ebp)
 	calll lseek
 	addl $0xC, %esp
 
@@ -307,9 +306,9 @@ atoi_main_loop_end:
 	popl %ebp
 	retl
 	
-.globl iprint
-.type iprint, @function
-iprint:
+.globl printl
+.type printl, @function
+printl:
 	# Initializing function's stack frame
 	pushl %ebp
 	movl %esp, %ebp
@@ -318,22 +317,22 @@ iprint:
 	movl first_arg(%ebp), %eax # Number
 
 	# Main part
-iprint_if:
+printl_if:
 	cmpl $0x0, %eax # if (a > 0)
-	jg iprint_else
+	jg printl_else
 
-iprint_then:
+printl_then:
 	testl %eax, %eax
-	jnz iprint_print_not_0
+	jnz printl_print_not_0
 
 	movl $'0', %edx
 	pushl %edx
 	calll lputchar
 	addl $0x4, %esp
 
-	jmp iprint_fin
+	jmp printl_fin
 	
-iprint_print_not_0:
+printl_print_not_0:
 	# Saving registers
 	pushl %eax
 
@@ -346,7 +345,7 @@ iprint_print_not_0:
 
 	negl %eax
 
-iprint_else:
+printl_else:
 	# Saving registers
 	pushl %eax # Number
 
@@ -376,7 +375,7 @@ iprint_else:
 	calll write
 	addl $0xC, %esp
 
-iprint_fin:
+printl_fin:
 	# Destroying function's stack frame
 	movl %ebp, %esp
 	popl %ebp
@@ -582,9 +581,9 @@ get_file_size:
 	popl %ebp
 	retl
 
-.globl lstrncpy
-.type lstrncpy, @function
-lstrncpy:
+.globl lmemcpy
+.type lmemcpy, @function
+lmemcpy:
 	# Initializing function's stack frame
 	pushl %ebp
 	movl %esp, %ebp

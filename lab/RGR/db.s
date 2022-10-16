@@ -551,9 +551,6 @@ show_recs:
 	.equ struct_1, -STRUCT_SIZE
 	subl $STRUCT_SIZE, %esp # Acquiring space for 'struct group'
 
-	# Saving registers
-	pushl %ebx
-
 	# I/O flow
 	pushl $len_number_of_recs
 	pushl $number_of_recs
@@ -568,12 +565,12 @@ show_recs:
 	subl $HEADER_SIZE, %eax
 
 	xorl %edx, %edx
-	movl $STRUCT_SIZE, %ebx
+	movl $STRUCT_SIZE, %ecx
 
-	idivl %ebx
+	idivl %ecx
 
 	pushl %eax
-	calll iprint
+	calll printl
 	addl $0x4, %esp
 
 	pushl $'\n'
@@ -642,7 +639,7 @@ show_recs_loop_print_spaces_id:
 
 show_recs_loop_print_spaces_id_end:
 	pushl struct_1 + iD(%ebp)
-	calll iprint
+	calll printl
 	addl $0x4, %esp
 
 	calll print_vert_line
@@ -686,7 +683,7 @@ show_recs_loop_print_spaces_end:
 	calll print_vert_line
 
 	pushl struct_1 + YEAR(%ebp)
-	calll iprint
+	calll printl
 	addl $0x4, %esp
 
 	calll print_vert_line
@@ -696,19 +693,18 @@ show_recs_loop_print_spaces_end:
 	addl $0x4, %esp
 
 	pushl struct_1 + QUANT(%ebp)
-	calll iprint
+	calll printl
 	addl $0x4, %esp
 
 	pushl $' '
 	calll lputchar
 	addl $0x4, %esp
 
-show_recs_check_digits:
 	movl struct_1 + QUANT(%ebp), %eax
 	xorl %edx, %edx
-	movl $0xA, %ebx
+	movl $0xA, %ecx
 
-	idivl %ebx
+	idivl %ecx
 
 	testl %eax, %eax
 	jnz show_recs_continue
@@ -742,9 +738,6 @@ show_recs_print_fin:
 	jmp show_recs_loop
 
 show_recs_loop_end:
-	# Restoring registers
-	popl %ebx
-
 	# Destroying function's stack frame
 	movl %ebp, %esp
 	popl %ebp
@@ -877,8 +870,7 @@ add_records_read_do_while_1:
 	calll read
 	addl $0xC, %esp
 
-	movl $ADD_REC_BUF, %edx
-	movb $0x0, -1(%edx, %eax)
+	movb $0x0, ADD_REC_BUF - 1(%eax)
 
 	cmpl $YEAR_MAX_LEN, %eax
 	jnz add_records_read_do_while_1_err
@@ -927,8 +919,7 @@ add_records_read_do_while_2:
 	calll read
 	addl $0xC, %esp
 
-	movl $ADD_REC_BUF, %edx
-	movb $0x0, -1(%edx, %eax)
+	movb $0x0, ADD_REC_BUF - 1(%eax)
 
 	cmpl $GR_SIZE_MAX_LEN, %eax
 	jg add_records_read_do_while_2_err
@@ -1003,55 +994,29 @@ add_records_read_end:
 	popl %ebp
 	retl
 
+# void fix_last_id(int fd, int id);
 .type fix_last_id, @function
 fix_last_id:
 	# Initializing function's stack frame
 	pushl %ebp
 	movl %esp, %ebp
-	.equ file_size, -4
-	.equ mappedfile, -8
-	subl $0x8, %esp # Acquiring space for two variables
 
-	# Saving registers
-	pushl %ebx
-	
-	# Main part	
+	pushl $SEEK_SET
+	pushl $sizeof_int
 	pushl first_arg(%ebp)
-	calll get_file_size
-	addl $0x4, %esp
+	calll lseek
+	addl $0xC, %esp
 
-	movl %eax, file_size(%ebp)
-
-	# Syscall
-	pushl $0x0
+	pushl $sizeof_int
+	pushl second_arg(%ebp)
 	pushl first_arg(%ebp)
-	pushl $MAP_SHARE
-	pushl $PROT_RDWR
-	pushl file_size(%ebp)
-	pushl $0x0
-	movl %esp, %ebx
-	movl $SYS_MMAP, %eax
-	int $0x80 # 0x80's interrupt
-	addl $0x18, %esp
+	calll write
+	addl $0xC, %ebp
 
-	movl %eax, mappedfile(%ebp)
-
-	movl second_arg(%ebp), %ecx
-	movl mappedfile(%ebp), %edx
-	movl %ecx, sizeof_int(%edx)
-
-	# Syscall
-	movl file_size(%ebp), %ecx
-	movl mappedfile(%ebp), %ebx
-	movl $SYS_MUNMAP, %eax
-	int $0x80 # 0x80's interrupt
-
+	# TODO: is this needed?
 	pushl first_arg(%ebp)
 	calll lrewind
 	addl $0x4, %esp
-
-	# Restoring registers
-	popl %ebx
 
 	# Destroying function's stack frame
 	movl %ebp, %esp
@@ -1084,8 +1049,8 @@ edit_record:
 	movl %esp, %ebp
 	.equ file_size, -4
 	.equ mappedfile, -8
-	.equ curr_id, -12
-	.equ last_id, -16
+	.equ curr_id, -12 # ID that user typed in
+	.equ last_id, -16 # Last possible ID in this file
 	.equ ed_stGr, -STRUCT_SIZE + last_id
 	addl $ed_stGr, %esp
 
@@ -1121,7 +1086,6 @@ edit_record:
 
 	movl %eax, mappedfile(%ebp)
 
-edit_record_start:
 edit_record_do_while_1:
 	pushl $len_edit_type_number
 	pushl $edit_type_number
@@ -1135,8 +1099,7 @@ edit_record_do_while_1:
 	calll read
 	addl $0xC, %esp
 
-	movl $ADD_REC_BUF, %edx
-	movb $0x0, -1(%eax, %edx)
+	movb $0x0, ADD_REC_BUF - 1(%eax)
 
 	cmpl $INT_MAX_LEN, %eax
 	jle edit_record_do_while_1_end
@@ -1163,21 +1126,22 @@ edit_record_do_while_1_end:
 	movl %eax, curr_id(%ebp)
 
 	movl mappedfile(%ebp), %ebx
-	addl $HEADER_SIZE, %ebx
-	movl -sizeof_int(%ebx), %ecx
+	addl $sizeof_int, %ebx
+	movl (%ebx), %ecx
 	movl %ecx, last_id(%ebp)
 
 	cmpl %ecx, curr_id(%ebp)
 	jg edit_record_search_for_id_error
 
-edit_record_search_for_id:
 	movl curr_id(%ebp), %ecx
+	movl last_id(%ebp), %edx
+
+edit_record_search_for_id:
 	cmpl %ecx, iD(%ebx)
 	je edit_record_search_for_id_found
 
-	movl last_id(%ebp), %ecx
-	cmpl %ecx, iD(%ebx)
-	jz edit_record_search_for_id_error
+	cmpl %edx, iD(%ebx)
+	je edit_record_search_for_id_error
 
 	addl $STRUCT_SIZE, %ebx
 
@@ -1260,8 +1224,7 @@ edit_records_read_do_while_1:
 	calll read
 	addl $0xC, %esp
 
-	movl $ADD_REC_BUF, %edx
-	movb $0x0, -1(%edx, %eax)
+	movb $0x0, ADD_REC_BUF - 1(%eax)
 
 	cmpl $YEAR_MAX_LEN, %eax
 	jnz edit_records_read_do_while_1_err
@@ -1310,8 +1273,7 @@ edit_records_read_do_while_2:
 	calll read
 	addl $0xC, %esp
 
-	movl $ADD_REC_BUF, %edx
-	movb $0x0, -1(%edx, %eax)
+	movb $0x0, ADD_REC_BUF - 1(%eax)
 
 	cmpl $GR_SIZE_MAX_LEN, %eax
 	jg edit_records_read_do_while_2_err
@@ -1366,14 +1328,14 @@ edit_records_read_do_while_2_end:
 
 	calll prt_ln
 
-	jmp edit_record_start
+	jmp edit_record_do_while_1
 
 edit_record_exit:
 	pushl $STRUCT_SIZE
 	leal ed_stGr(%ebp), %eax
 	pushl %eax
 	pushl curr_mfile_pos(%ebp)
-	calll lstrncpy
+	calll lmemcpy
 	addl $0xC, %esp
 
 	# Syscall
@@ -1382,9 +1344,11 @@ edit_record_exit:
 	movl $SYS_MUNMAP, %eax
 	int $0x80 # 0x80's interrupt
 
+	# TODO: is that needed?
 	pushl first_arg(%ebp)
 	calll lrewind
 	addl $0x4, %esp
+
 	# Restoring registers
 	popl %ebx
 
@@ -1443,7 +1407,6 @@ delete_record:
 
 	movl %eax, mappedfile(%ebp)
 
-delete_record_start:
 delete_record_do_while_1:
 	pushl $len_delete_type_number
 	pushl $delete_type_number
@@ -1457,8 +1420,7 @@ delete_record_do_while_1:
 	calll read
 	addl $0xC, %esp
 
-	movl $ADD_REC_BUF, %edx
-	movb $0x0, -1(%eax, %edx)
+	movb $0x0, ADD_REC_BUF - 1(%eax)
 
 	cmpl $INT_MAX_LEN, %eax
 	jle delete_record_do_while_1_end
@@ -1492,13 +1454,14 @@ delete_record_do_while_1_end:
 	cmpl %ecx, curr_id(%ebp)
 	jg delete_record_search_for_id_error
 
-delete_record_search_for_id:
 	movl curr_id(%ebp), %ecx
+	movl last_id(%ebp), %edx
+
+delete_record_search_for_id:
 	cmpl %ecx, iD(%ebx)
 	jz delete_record_search_for_id_found
 
-	movl last_id(%ebp), %ecx
-	cmpl %ecx, iD(%ebx)
+	cmpl %edx, iD(%ebx)
 	jz delete_record_search_for_id_error
 
 	addl $STRUCT_SIZE, %ebx
@@ -1534,24 +1497,23 @@ delete_record_search_for_id_error:
 
 delete_record_search_for_id_found:
 	# Deleting record
-
-delete_record_move_data:
 	movl curr_id(%ebp), %ecx
 	cmpl %ecx, last_id(%ebp)
-	jz delete_record_ask
+	je delete_record_ask
 
 	addl $STRUCT_SIZE, %ebx
-	movl %ebx, curr_mfile_pos(%ebp)	
+	movl %ebx, curr_mfile_pos(%ebp) # store current position in file (i.e. address in mmaped file)
 
-	subl mappedfile(%ebp), %ebx
-	subl file_size(%ebp), %ebx
+	subl mappedfile(%ebp), %ebx # get length of chunk that is before removed record
+	subl file_size(%ebp), %ebx # get negative length of chunk that is after the record
 	negl %ebx
 
+	# Remove one record (by overwriting it)
 	pushl %ebx
 	pushl curr_mfile_pos(%ebp)
 	subl $STRUCT_SIZE, curr_mfile_pos(%ebp)
 	pushl curr_mfile_pos(%ebp)
-	calll lstrncpy
+	calll lmemcpy
 	addl $0xC, %esp
 
 delete_record_ask:
@@ -1579,7 +1541,7 @@ delete_record_ask:
 	popl %eax
 
 	testl %eax, %eax
-	jnz delete_record_start
+	jnz delete_record_do_while_1
 
 delete_record_exit:
 	# Syscall
@@ -1597,6 +1559,7 @@ delete_record_if:
 	je delete_record_exit_2
 
 delete_record_exit_1:
+	# We need to truncate the file, after records were removed
 	movl nrecs_del(%ebp), %eax
 	imull $STRUCT_SIZE, %eax
 	subl %eax, file_size(%ebp)
@@ -1616,6 +1579,7 @@ delete_record_exit_2:
 	popl %ebp
 	retl
 
+# Checks and fixes the autoincrement ID
 .globl checking_integrity
 .type checking_integrity, @function
 checking_integrity:
