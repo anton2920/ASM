@@ -26,8 +26,6 @@ enter_pass:
 reenter_pass:
 	.asciz "| Retype password: "
 	.equ len_reenter_pass, . - reenter_pass
-minus_one:
-	.long -1
 error_pass:
 	.asciz "| database: paswords mismatch                                |\n"
 	.equ len_error_pass, . - error_pass
@@ -313,7 +311,7 @@ create_database_pass_ok:
 	cmpl $0x1, %eax
 	jne create_database_make_hash_sum
 
-	pushl $minus_one # 'buf' to further write
+	pushl $NO_PASS # 'buf' to further write
 
 	jmp create_database_lookout
 
@@ -405,8 +403,7 @@ open_database_loop:
 	calll read
 	addl $0xC, %esp
 
-	movl $FILENAME, %ebx
-	movb $0x0, -1(%ebx, %eax, 1)
+	movb $0x0, FILENAME - 1(%eax)
 
 open_database_open:
 	# Main part
@@ -456,7 +453,7 @@ open_database_pass:
 	calll read
 	addl $0xC, %esp
 
-	cmpl $-1, hash_sum(%ebp)
+	cmpl $NO_PASS, hash_sum(%ebp)
 	je open_database_exit_2
 
 open_database_pass_read:

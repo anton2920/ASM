@@ -69,3 +69,5 @@
 .equ MAP_PRIVATE, 0x2
 
 .equ PATH_MAX, 1024
+
+.equ NO_PASS, 0
